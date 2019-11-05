@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     public function index()
     {
         return $this->render('home/index.html.twig', [
-            'someVariable' => 'Krepšinio podcastai ! ??? ES test 2',
+            'someVariable' => 'Krepšinio podcastai',
         ]);
     }
 }
