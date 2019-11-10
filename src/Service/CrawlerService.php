@@ -4,58 +4,83 @@
 namespace App\Service;
 
 
+use App\Entity\Podcast;
+use App\Entity\Source;
+use App\Repository\PodcastRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 class CrawlerService
 {
-    public function scrapSite(?array $sources)
+    private $entityManager;
+
+    private $podcastRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, PodcastRepository $podcastRepository)
+    {
+        $this->entityManager = $entityManager;
+        $this->podcastRepository = $podcastRepository;
+    }
+
+    public function scrapSites(?array $sources)
     {
         $podcasts = [];
 
-//        $elementSelector = '.playlist-item';
-//        $imageSelector = null;
-//        $titleSelector = '.player-title';
-//        $descriptionSelector = null;
-//        $audioSelector = '.playlist-item';
-//        $publicationDateSelector = '.player-date';
-//        $streamAttribute = 'data-src';
+        /** @var Source $source */
+        foreach ($sources as $source) {
 
-        $elementSelector = '.entry';
-        $imageSelector = 'img';
-        $titleSelector = 'h2';
-        $descriptionSelector = 'p';
-        $audioSelector = '.theme1';
-        $publicationDateSelector = '.date';
-        $streamAttribute = 'data-uri';
+            $url = $source->getUrl();
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $html = curl_exec($ch);
+            //        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
 
-        $url = 'https://basketnews.podbean.com';
-//        $url = 'https://www.delfi.lt/klausyk/krepsinio-zonoje/';
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $html = curl_exec($ch);
-//        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+            $crawler = new Crawler($html);
 
-//            dd($html);
+            $crawler->filter($source->getMainElementSelector())->each(function (Crawler $node) use (&$podcasts, $source) {
 
-        $crawler = new Crawler($html);
+                $podcast = new Podcast();
 
-        $crawler->filter($elementSelector)->each(function (Crawler $node)
-        use (&$podcasts, $imageSelector, $titleSelector, $descriptionSelector,
-            $audioSelector, $publicationDateSelector, $streamAttribute)
-        {
-            if ($imageSelector) $podcast['image'] = $node->filter($imageSelector)->attr('src');
-            if ($titleSelector) $podcast['title'] = $node->filter($titleSelector)->text();
-            if ($descriptionSelector) $podcast['description'] = $node->filter($descriptionSelector)->text();
-            if ($audioSelector) $podcast['audio'] = $node->filter($audioSelector)->attr($streamAttribute);
-            if($publicationDateSelector) $podcast['publication_date'] = $node->filter($publicationDateSelector)->text();
-            $podcasts[] = $podcast;
-        });
+                if ($source->getImageSelector()) {
+//                    $podcast['image'] = $node->filter($source->getImageSelector())->attr($source->getImageSourceAttribute());
+                    $podcast->setImage($node->filter($source->getImageSelector())->attr($source->getImageSourceAttribute()));
+                }
+                if ($source->getTitleSelector()) {
+//                    $podcast['title'] = $node->filter($source->getTitleSelector())->text();
+                    $podcast->setTitle($node->filter($source->getTitleSelector())->text());
+                }
+                if ($source->getDescriptionSelector()) {
+//                    $podcast['description'] = $node->filter($source->getDescriptionSelector())->text();
+                    $podcast->setDescription($node->filter($source->getDescriptionSelector())->text());
+                }
+                if ($source->getAudioSelector()) {
+//                    $podcast['audio'] = $node->filter($source->getAudioSelector())->attr($source->getAudioSourceAttribute());
+                    $podcast->setAudio($node->filter($source->getAudioSelector())->attr($source->getAudioSourceAttribute()));
+                }
+                if ($source->getPublicationDateSelector()) {
+//                    $podcast['publication_date'] = $node->filter($source->getPublicationDateSelector())->text();
+//                    $podcast->setPublishedAt($node->filter($source->getPublicationDateSelector())->text());
+                }
 
-//        dd($podcasts);
+                if (null === $this->checkIfPodcastExists($podcast)) {
+                    $podcast->setCreatedAt(new \DateTime());
+                    $podcast->setPublishedAt(new \DateTime());
+                    $podcast->setSource($source);
+                    $this->entityManager->persist($podcast);
+                    $this->entityManager->flush();
+                }
+                $podcasts[] = $podcast;
+            });
+        }
 
-        $date = date('September 10 d., 2019');
-        dd($date);
+        return $podcasts;
+   }
 
-    }
+   private function checkIfPodcastExists(Podcast $podcast)
+   {
+        $podcast = $this->podcastRepository->findOneBy(['title' => $podcast->getTitle()]);
+
+        return $podcast;
+   }
 }
