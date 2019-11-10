@@ -35,7 +35,8 @@ class CrawlerService
 
             $crawler = new Crawler($html);
 
-            $crawler->filter($source->getMainElementSelector())->each(function (Crawler $node) use (&$podcasts, $source) {
+            $crawler->filter($source->getMainElementSelector())
+                ->each(function (Crawler $node) use (&$podcasts, $source) {
 
                 $podcast = new Podcast();
 
@@ -72,12 +73,12 @@ class CrawlerService
         }
 
         return $podcasts;
-   }
+    }
 
-   private function checkIfPodcastExists(Podcast $podcast)
-   {
+    private function checkIfPodcastExists(Podcast $podcast)
+    {
         $podcast = $this->podcastRepository->findOneBy(['title' => $podcast->getTitle()]);
 
         return $podcast;
-   }
+    }
 }
