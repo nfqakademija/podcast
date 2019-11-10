@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use App\Entity\Podcast;
 use App\Entity\Source;
@@ -28,7 +26,6 @@ class CrawlerService
 
         /** @var Source $source */
         foreach ($sources as $source) {
-
             $url = $source->getUrl();
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
