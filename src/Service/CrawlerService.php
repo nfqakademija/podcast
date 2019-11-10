@@ -49,7 +49,7 @@ class CrawlerService
                         $podcast->setTitle($node->filter($source->getTitleSelector())->text());
                     }
                     if ($source->getDescriptionSelector()) {
-                        $podcast->setDescription($node->filter($source->getDescriptionSelector())->text());
+                        $podcast->setDescription($node->filter($source->getDescriptionSelector())->last()->text());
                     }
                     if ($source->getAudioSelector()) {
                         $podcast->setAudio(
