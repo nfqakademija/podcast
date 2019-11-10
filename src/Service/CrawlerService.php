@@ -38,38 +38,37 @@ class CrawlerService
             $crawler->filter($source->getMainElementSelector())
                 ->each(function (Crawler $node) use (&$podcasts, $source) {
 
-                $podcast = new Podcast();
+                    $podcast = new Podcast();
 
-                if ($source->getImageSelector()) {
-//                    $podcast['image'] = $node->filter($source->getImageSelector())->attr($source->getImageSourceAttribute());
-                    $podcast->setImage($node->filter($source->getImageSelector())->attr($source->getImageSourceAttribute()));
-                }
-                if ($source->getTitleSelector()) {
-//                    $podcast['title'] = $node->filter($source->getTitleSelector())->text();
-                    $podcast->setTitle($node->filter($source->getTitleSelector())->text());
-                }
-                if ($source->getDescriptionSelector()) {
-//                    $podcast['description'] = $node->filter($source->getDescriptionSelector())->text();
-                    $podcast->setDescription($node->filter($source->getDescriptionSelector())->text());
-                }
-                if ($source->getAudioSelector()) {
-//                    $podcast['audio'] = $node->filter($source->getAudioSelector())->attr($source->getAudioSourceAttribute());
-                    $podcast->setAudio($node->filter($source->getAudioSelector())->attr($source->getAudioSourceAttribute()));
-                }
-                if ($source->getPublicationDateSelector()) {
-//                    $podcast['publication_date'] = $node->filter($source->getPublicationDateSelector())->text();
-//                    $podcast->setPublishedAt($node->filter($source->getPublicationDateSelector())->text());
-                }
+                    if ($source->getImageSelector()) {
+                        $podcast->setImage(
+                            $node->filter($source->getImageSelector())->attr($source->getImageSourceAttribute())
+                        );
+                    }
+                    if ($source->getTitleSelector()) {
+                        $podcast->setTitle($node->filter($source->getTitleSelector())->text());
+                    }
+                    if ($source->getDescriptionSelector()) {
+                        $podcast->setDescription($node->filter($source->getDescriptionSelector())->text());
+                    }
+                    if ($source->getAudioSelector()) {
+                        $podcast->setAudio(
+                            $node->filter($source->getAudioSelector())->attr($source->getAudioSourceAttribute())
+                        );
+                    }
+//                    if ($source->getPublicationDateSelector()) {
+//                        $podcast->setPublishedAt($node->filter($source->getPublicationDateSelector())->text());
+//                    }
 
-                if (null === $this->checkIfPodcastExists($podcast)) {
-                    $podcast->setCreatedAt(new \DateTime());
-                    $podcast->setPublishedAt(new \DateTime());
-                    $podcast->setSource($source);
-                    $this->entityManager->persist($podcast);
-                    $this->entityManager->flush();
-                }
-                $podcasts[] = $podcast;
-            });
+                    if (null === $this->checkIfPodcastExists($podcast)) {
+                        $podcast->setCreatedAt(new \DateTime());
+                        $podcast->setPublishedAt(new \DateTime());
+                        $podcast->setSource($source);
+                        $this->entityManager->persist($podcast);
+                        $this->entityManager->flush();
+                    }
+                    $podcasts[] = $podcast;
+                });
         }
 
         return $podcasts;
