@@ -22,7 +22,7 @@ class Podcast
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -172,5 +172,10 @@ class Podcast
         $this->publishedAt = $publishedAt;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }
