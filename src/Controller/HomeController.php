@@ -17,54 +17,64 @@ class HomeController extends AbstractController
             'someVariable' => 'Krepšinio podcastai',
         ]);
     }
-
+    //$publicationDateSelector
+//        string $url,
+//        string $elementSelector,
+//        string $imageSelector,
+//        string $titleSelector,
+//        string $descriptionSelector,
+//        string $audioSelector,
+//
     /**
      * @Route("/test")
      */
     public function scrapSite()
     {
-        $page = 1;
         $podcasts = [];
 
-        while (true) {
-            $url = 'https://basketnews.podbean.com/page/' . $page;
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $html = curl_exec($ch);
-            $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
+//        $elementSelector = '.playlist-item';
+//        $imageSelector = null;
+//        $titleSelector = '.player-title';
+//        $descriptionSelector = null;
+//        $audioSelector = '.playlist-item';
+//        $publicationDateSelector = '.player-date';
+//        $streamAttribute = 'data-src';
 
-            if ($statusCode == 404) {
-                break;
-            }
+        $elementSelector = '.entry';
+        $imageSelector = 'img';
+        $titleSelector = 'h2';
+        $descriptionSelector = 'p';
+        $audioSelector = '.theme1';
+        $publicationDateSelector = '.date';
+        $streamAttribute = 'data-uri';
 
-            $crawler = new Crawler($html);
+        $url = 'https://basketnews.podbean.com';
+//        $url = 'https://www.delfi.lt/klausyk/krepsinio-zonoje/';
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $html = curl_exec($ch);
+//        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-            $crawler->filter('.entry')->each(function (Crawler $node) use (&$podcasts) {
-                $podcast['image'] = $node->filter("img")->attr('data-src');
-                $podcast['title'] = $node->filter('h2')->text();
-                $podcast['description'] = $node->filter('p')->text();
-                $podcast['audio'] = $node->filter('.theme1')->attr('data-uri');
-                $podcast['publication_date'] = $node->filter('.date')->text();
-                $podcasts[] = $podcast;
-            });
+//            dd($html);
 
-            $page++;
-        };
+        $crawler = new Crawler($html);
 
+        $crawler->filter($elementSelector)->each(function (Crawler $node)
+        use (&$podcasts, $imageSelector, $titleSelector, $descriptionSelector,
+            $audioSelector, $publicationDateSelector, $streamAttribute)
+        {
+            if ($imageSelector) $podcast['image'] = $node->filter($imageSelector)->attr('src');
+            if ($titleSelector) $podcast['title'] = $node->filter($titleSelector)->text();
+            if ($descriptionSelector) $podcast['description'] = $node->filter($descriptionSelector)->text();
+            if ($audioSelector) $podcast['audio'] = $node->filter($audioSelector)->attr($streamAttribute);
+            if($publicationDateSelector) $podcast['publication_date'] = $node->filter($publicationDateSelector)->text();
+            $podcasts[] = $podcast;
+        });
 
+//        dd($podcasts);
 
-//        $crawler = new Crawler($html);
-//        $podcasts = [];
-//        $crawler->filter('.entry')->each(function (Crawler $node) use (&$podcasts) {
-//            $podcast['image'] = $node->filter("img")->attr('data-src');
-//            $podcast['title'] = $node->filter('h2')->text();
-//            $podcast['description'] = $node->filter('p')->text();
-//            $podcast['audio'] = $node->filter('.theme1')->attr('data-uri');
-//            $podcast['created_at'] = $node->filter('.date')->text();
-//            $podcasts[] = $podcast;
-//        });
-
-        dd($podcasts);
+        $date = date('September 10 d., 2019');
+        dd($date);
     }
 }
