@@ -16,14 +16,17 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="podcasts")
      */
-    public function front(Request $request, PaginatorInterface $paginator, SourceRepository $sourceRepository)
+    public function front(Request $request, PaginatorInterface $paginator, 
+    SourceRepository $sourceRepository,
+    PodcastRepository $podcastRepository)
     {
-        $allPodcasts = $this->getDoctrine()
-            ->getRepository(Podcast::class)
-            ->findAll();
+        // $allPodcasts = $this->getDoctrine()
+        //     ->getRepository(Podcast::class)
+        //     ->findAll();
+        $podcasts = $podcastRepository->findAll();
 
         $podcasts = $paginator->paginate(
-            $allPodcasts,
+            $podcasts,
             $request->query->getInt('page', 1),
             10
         );
