@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Podcast;
+use App\Repository\SourceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface; 
 
 class HomeController extends AbstractController
 {
@@ -20,17 +22,28 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/posts", name="posts")
+     * @Route("/posts", name="podcasts")
      */
-    public function front()
+    public function front(Request $request, PaginatorInterface $paginator, SourceRepository $sourceRepository)
     {
-        $podcasts = $this->getDoctrine()
+        $allPodcasts = $this->getDoctrine()
             ->getRepository(Podcast::class)
             ->findAll();
-        //dd($podcasts);
-
+      
+        $sources = 
+       // Paginate the results of the query
+       $podcasts = $paginator->paginate(
+            // Doctrine Query, not results
+            $allPodcasts,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            10
+        );
+         //dd(knp_pagination_render(podcasts)) ;
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $podcasts,
+            'sources' => $sourceRepository->findAll()
         ]);
     }
 }
