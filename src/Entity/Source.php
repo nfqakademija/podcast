@@ -78,6 +78,11 @@ class Source
      */
     private $imageSourceAttribute;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $sourceType;
+
     public function __construct()
     {
         $this->podcasts = new ArrayCollection();
@@ -252,6 +257,18 @@ class Source
     public function setImageSourceAttribute(?string $imageSourceAttribute): self
     {
         $this->imageSourceAttribute = $imageSourceAttribute;
+
+        return $this;
+    }
+
+    public function getSourceType(): ?string
+    {
+        return $this->sourceType;
+    }
+
+    public function setSourceType(?string $sourceType): self
+    {
+        $this->sourceType = $sourceType;
 
         return $this;
     }
