@@ -17,8 +17,8 @@ class HomeController extends AbstractController
      * @Route("/", name="podcasts")
      */
     public function front(
-        Request $request, 
-        PaginatorInterface $paginator, 
+        Request $request,
+        PaginatorInterface $paginator,
         SourceRepository $sourceRepository,
         PodcastRepository $podcastRepository
         ) {
