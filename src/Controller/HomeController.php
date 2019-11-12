@@ -21,7 +21,7 @@ class HomeController extends AbstractController
         PaginatorInterface $paginator,
         SourceRepository $sourceRepository,
         PodcastRepository $podcastRepository
-        ) {
+    ) {
         $podcasts = $podcastRepository->findAll();
 
         $podcasts = $paginator->paginate(
