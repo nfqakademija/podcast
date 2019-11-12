@@ -2,7 +2,9 @@
     <div class="sh-filter">
         {% for source in sources %}
         <span class="sh-filter-item">
-            <a href="#" class="sh-filter-item-content">{{ source.name}}</a>
+            <a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="sh-filter-item-content">
+                {{ source.name}}
+            </a>
         </span>
         {% endfor %}
 

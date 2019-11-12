@@ -36,7 +36,7 @@
                                 by <a href="{{ podcast.source.url}}" class="bypostauthor" target="_blank"> {{ podcast.source.name}} </a>
                             </span>
 
-                            <a href="#" class="post-meta-date sh-default-color">November 2, 2019</a>
+                            <a href="#" class="post-meta-date sh-default-color">{{ podcast.publishedAt|date("M d, Y") }}</a>
                 
                         </div>
 

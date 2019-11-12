@@ -56,13 +56,13 @@ class CrawlerService
                             $node->filter($source->getAudioSelector())->attr($source->getAudioSourceAttribute())
                         );
                     }
-//                    if ($source->getPublicationDateSelector()) {
-//                        $podcast->setPublishedAt($node->filter($source->getPublicationDateSelector())->text());
-//                    }
+                    if ($source->getPublicationDateSelector()) {
+                        $date = $this->formatDate($node->filter($source->getPublicationDateSelector())->text());
+                        $podcast->setPublishedAt($date);
+                    }
 
                     if (null === $this->checkIfPodcastExists($podcast)) {
                         $podcast->setCreatedAt(new \DateTime());
-                        $podcast->setPublishedAt(new \DateTime());
                         $podcast->setSource($source);
                         $this->entityManager->persist($podcast);
                         $this->entityManager->flush();
@@ -76,8 +76,33 @@ class CrawlerService
 
     private function checkIfPodcastExists(Podcast $podcast)
     {
-        $podcast = $this->podcastRepository->findOneBy(['title' => $podcast->getTitle()]);
+        $podcast = $this->podcastRepository->findOneBy([
+            'title' => $podcast->getTitle(),
+            'publishedAt' =>$podcast->getPublishedAt()
+        ]);
 
         return $podcast;
+    }
+
+    private function formatDate($date)
+    {
+        $lithuanianMonths = [
+            'Sausio', 'Vasario', 'Kovo', 'Balandžio', 'Gegužės', 'Birželio',
+            'Liepos', 'Rugpjūčio', 'Rugsėjo', 'Spalio', 'Lapkričio', 'Gruodžio'
+        ];
+        $englishMonths = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        $date = str_replace($lithuanianMonths, $englishMonths, $date);
+        $dateArray = date_parse($date);
+
+        if ($dateArray['year'] !== false && $dateArray['month'] !== false && $dateArray['day'] !== false) {
+            $newDate = new \DateTime($dateArray['year']. '/'.$dateArray['month']. '/' . $dateArray['day']);
+        } else {
+            $newDate = (new \DateTime(date('Y-m-d')));
+        }
+
+        return $newDate;
     }
 }
