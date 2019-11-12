@@ -74,18 +74,13 @@ var jevelin = {"page_loader":"0","notice":"","header_animation_dropdown_delay":"
 	<div id="wrapper">		
         <div class="content-container sh-page-layout-default">
 			<div class="container entry-content">
-				 {{ include('front/layout/_sources.html.twig') }}
 
 				 {% block main %}{% endblock %}
-
-                {# {{ include('design3/_partials/content22.html.twig') }} #}
-	
 	
                 {{ include('front/layout/sidebar.html.twig') }}
 
 			</div>
 		</div>
-				 {# {{ include('design3/_partials/subscribe.html.twig') }}	 #}
         {{ include('front/layout/footer.html.twig') }}
 
 	</div>
