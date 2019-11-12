@@ -12,25 +12,16 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class HomeController extends AbstractController
 {
-
     /**
-     * @Route("/", name="podcasts")
+     * @Route("/{page}", name="podcasts", defaults={"page":1}, requirements={"page"="\d+"})
      */
     public function front(
-        Request $request,
-        PaginatorInterface $paginator,
         SourceRepository $sourceRepository,
-        PodcastRepository $podcastRepository
+        PodcastRepository $podcastRepository,
+        $page
     ) {
-        $podcasts = $podcastRepository->findAll();
-
-        $podcasts = $paginator->paginate(
-            $podcasts,
-            $request->query->getInt('page', 1),
-            10
-        );
         return $this->render('front/pages/posts/index.html.twig', [
-            'podcasts' => $podcasts,
+            'podcasts' => $podcastRepository->getAllPodcastsPaginated($page),
             'sources' => $sourceRepository->findAll()
         ]);
     }
