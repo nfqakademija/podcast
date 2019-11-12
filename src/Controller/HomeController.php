@@ -2,13 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Source;
 use App\Repository\PodcastRepository;
 use App\Repository\SourceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Knp\Component\Pager\PaginatorInterface;
 
 class HomeController extends AbstractController
 {
@@ -22,6 +20,21 @@ class HomeController extends AbstractController
     ) {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $podcastRepository->getAllPodcastsPaginated($page),
+            'sources' => $sourceRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("podcasts/{source}/{page}", name="podcasts_by_source", defaults={"page":1})
+     */
+    public function showPodcastsBySource(
+        SourceRepository $sourceRepository,
+        PodcastRepository $podcastRepository,
+        Source $source,
+        $page
+    ) {
+        return $this->render('front/pages/posts/index.html.twig', [
+            'podcasts' => $podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
             'sources' => $sourceRepository->findAll()
         ]);
     }
