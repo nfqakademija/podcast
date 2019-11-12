@@ -30,7 +30,8 @@ class HomeController extends AbstractController
     public function showPodcastsBySource(
         SourceRepository $sourceRepository,
         PodcastRepository $podcastRepository,
-        Source $source, $page
+        Source $source,
+        $page
     ) {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
