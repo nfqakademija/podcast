@@ -10,6 +10,7 @@ use App\Repository\PodcastRepository;
 use App\Repository\SourceRepository;
 use DateTime;
 use Exception;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\HttpClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -24,6 +25,7 @@ class YoutubeService
     private $entityManager;
     private $podcastRepository;
     private $sourceRepository;
+    private $logger;
 
     private $requestUrl;
     private $apiCode;
@@ -32,6 +34,7 @@ class YoutubeService
         EntityManagerInterface $entityManager,
         PodcastRepository $podcastRepository,
         SourceRepository $sourceRepository,
+        LoggerInterface $logger,
         $requestUrl,
         $apiCode
     ) {
@@ -39,6 +42,7 @@ class YoutubeService
         $this->entityManager = $entityManager;
         $this->podcastRepository = $podcastRepository;
         $this->sourceRepository = $sourceRepository;
+        $this->logger = $logger;
         $this->requestUrl = $requestUrl;
         $this->apiCode = $apiCode;
     }
@@ -63,14 +67,13 @@ class YoutubeService
                     ]
                 ]);
             } catch (TransportExceptionInterface $e) {
-                dd($e);
-                // TODO Write Exception
+                $this->logger->error($e->getMessage());
+                return false;
             }
 
             try {
+                $content = $response->toArray();
                 if ($response->getStatusCode() === 200) {
-                    $content = $response->toArray();
-
                     foreach ($content['items'] as $video) {
                         if ($video['snippet']['liveBroadcastContent'] === 'none'
                             && !$this->isVideoExists($video['id']['videoId'])
@@ -88,30 +91,26 @@ class YoutubeService
                             $this->entityManager->flush();
                         }
                     }
+                } else {
+                    $this->logger->error($content['error']['message']);
                 }
             } catch (ClientExceptionInterface $e) {
-                dd($e);
-                // TODO Write Exception
+                $this->logger->error($e->getMessage());
                 return false;
             } catch (DecodingExceptionInterface $e) {
-                dd($e);
-                // TODO Write Exception
+                $this->logger->error($e->getMessage());
                 return false;
             } catch (RedirectionExceptionInterface $e) {
-                dd($e);
-                // TODO Write Exception
+                $this->logger->error($e->getMessage());
                 return false;
             } catch (ServerExceptionInterface $e) {
-                dd($e);
-                // TODO Write Exception
+                $this->logger->error($e->getMessage());
                 return false;
             } catch (TransportExceptionInterface $e) {
-                dd($e);
-                // TODO Write Exception
+                $this->logger->error($e->getMessage());
                 return false;
             } catch (Exception $e) {
-                dd($e);
-                // TODO Write Exception
+                $this->logger->error($e->getMessage());
                 return false;
             }
         }
@@ -160,8 +159,8 @@ class YoutubeService
                 ]
             ]);
         } catch (TransportExceptionInterface $e) {
-            dd($e);
-            // TODO Write Exception
+            $this->logger->error($e->getMessage());
+            return false;
         }
 
         try {
@@ -170,28 +169,22 @@ class YoutubeService
                 return $content['items'][0]['id'];
             }
         } catch (ClientExceptionInterface $e) {
-            dd($e);
-            // TODO Write Exception
+            $this->logger->error($e->getMessage());
             return false;
         } catch (DecodingExceptionInterface $e) {
-            dd($e);
-            // TODO Write Exception
+            $this->logger->error($e->getMessage());
             return false;
         } catch (RedirectionExceptionInterface $e) {
-            dd($e);
-            // TODO Write Exception
+            $this->logger->error($e->getMessage());
             return false;
         } catch (ServerExceptionInterface $e) {
-            dd($e);
-            // TODO Write Exception
+            $this->logger->error($e->getMessage());
             return false;
         } catch (TransportExceptionInterface $e) {
-            dd($e);
-            // TODO Write Exception
+            $this->logger->error($e->getMessage());
             return false;
         } catch (Exception $e) {
-            dd($e);
-            // TODO Write Exception
+            $this->logger->error($e->getMessage());
             return false;
         }
     }
