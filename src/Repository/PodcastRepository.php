@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Podcast;
+use App\Entity\Source;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Podcast|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,37 +16,33 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class PodcastRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Podcast::class);
+        $this->paginator = $paginator;
     }
 
-    // /**
-    //  * @return Podcast[] Returns an array of Podcast objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getAllPodcastsPaginated($page)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.source', 's')
+            ->addSelect('s')
+            ->orderBy('p.publishedAt', 'DESC')
+            ->getQuery();
 
-    /*
-    public function findOneBySomeField($value): ?Podcast
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->paginator->paginate($qb, $page, 10);
     }
-    */
+
+    public function findAllPaginatedPodcastsBySource(Source $source, $page)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->andWhere('p.source =:source')
+            ->setParameter('source', $source)
+            ->orderBy('p.publishedAt', 'DESC')
+            ->getQuery();
+
+        return $this->paginator->paginate($qb, $page, 10);
+    }
 }

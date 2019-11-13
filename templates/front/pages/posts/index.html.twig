@@ -1,69 +1,12 @@
 {% extends 'front/layout/main.html.twig' %}
 
 {% block main %}
+
+{{ include('front/pages/posts/_sources.html.twig') }}
+
     <div id="content" class="content-with-sidebar-right blog-page-list">
         
 		<div class="sh-group blog-list blog-style-small">
-        
-
-     <article class="post-item post type-post">
-                <div class="post-container sh-group">
-                    
-                    <div class="post-left-side">
-
-                        <div class="post-meta-thumb">
-
-                            					
-
-                        </div>
-
-                    </div>
-                    <div class="post-right-side">
-
-                        <a href="google.com" class="post-title">
-                            <h2>Iš pirmų lūpų: dramatiškas „Žalgirio“ laimėjimas Stambule</h2>
-                        </a>
-
-                        <div class="post-meta post-meta-one">
-                            
-                            <span class="post-meta-author">
-                                by <a href="#" class="bypostauthor"> basketnews </a>
-                            </span>
-
-                            <a href="#" class="post-meta-date sh-default-color">November 2, 2019</a>
-                
-                        </div>
-
-                        <div class="post-content">
-                             <iframe width="480" height="315" src="https://www.youtube.com/embed/zhUUyo18-tQ" 
-                            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                            </iframe>
-                            <p> <audio controls class="entry-read-more1">
-                                <source src="https://mcdn.podbean.com/mf/play/ibbhmd/20191102.mp3" type="audio/mp3">
-                                Your browser does not support the audio element.
-                                </audio>
-                            </p>
-                        </div>
-
-                        <div class="post-meta post-meta-two">
-                            
-                            <div class="sh-columns post-meta-comments">
-                                <span class="post-meta-categories">
-                                    <i class="icon-tag"></i>
-                                    <a href="https://jevelin.shufflehound.com/category/design/">Basketnews</a>, <a href="https://jevelin.shufflehound.com/category/travel/">Travel</a>            
-                                </span>
-                                    <a href="https://jevelin.shufflehound.com/searching-for-the-way-out/#comments" class="post-meta-comments">
-                                        <i class="icon-speech"></i>0 </a>
-                            </div>
-
-                            </div>
-
-                    </div>
-                </div>
-            </article>
-
-
-
 
         {% for podcast in podcasts %}
             <article class="post-item post type-post">
@@ -72,25 +15,28 @@
                     <div class="post-left-side">
 
                         <div class="post-meta-thumb">
-
-                            <img width="660" height="420" src="{{ podcast.image }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" />					
+                        {% if podcast.image == null %}
+                            <img width="660" height="420" src="{{ asset('images/podcast_default.jpg') }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" />
+                        {% else %}
+                            <img width="660" height="420" src="{{ podcast.image }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" />
+                        {% endif %}
 
                         </div>
 
                     </div>
                     <div class="post-right-side">
 
-                        <a href="https://jevelin.shufflehound.com/searching-for-the-way-out/" class="post-title">
+                        <a href="#" class="post-title">
                             <h2> {{ podcast.title }}</h2>
                         </a>
 
                         <div class="post-meta post-meta-one">
                             
                             <span class="post-meta-author">
-                                by <a href="https://jevelin.shufflehound.com/author/shufflehound/" class="bypostauthor"> basketnews </a>
+                                by <a href="{{ podcast.source.url}}" class="bypostauthor" target="_blank"> {{ podcast.source.name}} </a>
                             </span>
 
-                            <a href="https://jevelin.shufflehound.com/searching-for-the-way-out/" class="post-meta-date sh-default-color">November 2, 2019</a>
+                            <a href="#" class="post-meta-date sh-default-color">{{ podcast.publishedAt|date("M d, Y") }}</a>
                 
                         </div>
 
@@ -108,9 +54,9 @@
                             <div class="sh-columns post-meta-comments">
                                 <span class="post-meta-categories">
                                     <i class="icon-tag"></i>
-                                    <a href="https://jevelin.shufflehound.com/category/design/">Basketnews</a>, <a href="https://jevelin.shufflehound.com/category/travel/">Travel</a>            
+                                    <a href="#">Basketnews</a>, <a href="#">Travel</a>            
                                 </span>
-                                    <a href="https://jevelin.shufflehound.com/searching-for-the-way-out/#comments" class="post-meta-comments">
+                                    <a href="#" class="post-meta-comments">
                                         <i class="icon-speech"></i>0 </a>
                             </div>
 
@@ -120,6 +66,8 @@
                 </div>
             </article>
          {% endfor %}
+
+        {{ knp_pagination_render(podcasts) }}
     </div>
 </div>
 {% endblock %}
