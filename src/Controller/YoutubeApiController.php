@@ -22,6 +22,6 @@ class YoutubeApiController extends AbstractController
 
         $youtubeApiService->importDataFromYoutube($sources);
 
-        //dd($request);
+        dd(true);
     }
 }

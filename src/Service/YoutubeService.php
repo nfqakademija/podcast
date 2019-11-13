@@ -7,6 +7,7 @@ use App\Entity\Podcast;
 use App\Entity\Source;
 use App\Repository\PodcastRepository;
 
+use App\Repository\SourceRepository;
 use DateTime;
 use Exception;
 use Symfony\Component\HttpClient\HttpClient;
@@ -22,6 +23,7 @@ class YoutubeService
     private $httpClient;
     private $entityManager;
     private $podcastRepository;
+    private $sourceRepository;
 
     private $requestUrl;
     private $apiCode;
@@ -29,12 +31,14 @@ class YoutubeService
     public function __construct(
         EntityManagerInterface $entityManager,
         PodcastRepository $podcastRepository,
+        SourceRepository $sourceRepository,
         $requestUrl,
         $apiCode
     ) {
         $this->httpClient = HttpClient::create();
         $this->entityManager = $entityManager;
         $this->podcastRepository = $podcastRepository;
+        $this->sourceRepository = $sourceRepository;
         $this->requestUrl = $requestUrl;
         $this->apiCode = $apiCode;
     }
@@ -45,11 +49,12 @@ class YoutubeService
 
         /** @var Source $source */
         foreach ($listOfSources as $source) {
+            $channelId = $this->getChannelId($source);
             try {
                 $response = $this->httpClient->request('GET', $this->requestUrl . 'search', [
                     'query' => [
                         'part' => 'snippet',
-                        'channelId' => 'UC0jgtGY99WwWWixOhX4Vglw',
+                        'channelId' => $channelId,
                         'maxResults' => '5',
                         'order' => 'date',
                         'pageToken' => '',
@@ -83,10 +88,6 @@ class YoutubeService
                             $this->entityManager->flush();
                         }
                     }
-
-                    return true;
-                } else {
-                    return false;
                 }
             } catch (ClientExceptionInterface $e) {
                 dd($e);
@@ -124,6 +125,73 @@ class YoutubeService
         ]))) {
             return true;
         } else {
+            return false;
+        }
+    }
+
+    private function getChannelId(Source $source): string
+    {
+        $sourceExploded = explode('/', $source->getUrl());
+        if ($sourceExploded[count($sourceExploded)-2] === 'user') {
+            $channelId =  $this->getChannelIdByUser(end($sourceExploded));
+            if (!empty($channelId)) {
+                $source->setUrl('https://www.youtube.com/channel/'.$channelId);
+                $this->entityManager->merge($source);
+                $this->entityManager->flush();
+
+                return $channelId;
+            } else {
+                return '';
+            }
+        } else {
+            return end($sourceExploded);
+        }
+    }
+
+    private function getChannelIdByUser(string $username): string
+    {
+
+        try {
+            $response = $this->httpClient->request('GET', $this->requestUrl . 'channels', [
+                'query' => [
+                    'part' => 'contentDetails',
+                    'forUsername' => $username,
+                    'key' => $this->apiCode
+                ]
+            ]);
+        } catch (TransportExceptionInterface $e) {
+            dd($e);
+            // TODO Write Exception
+        }
+
+        try {
+            if ($response->getStatusCode() === 200) {
+                $content = $response->toArray();
+                return $content['items'][0]['id'];
+            }
+        } catch (ClientExceptionInterface $e) {
+            dd($e);
+            // TODO Write Exception
+            return false;
+        } catch (DecodingExceptionInterface $e) {
+            dd($e);
+            // TODO Write Exception
+            return false;
+        } catch (RedirectionExceptionInterface $e) {
+            dd($e);
+            // TODO Write Exception
+            return false;
+        } catch (ServerExceptionInterface $e) {
+            dd($e);
+            // TODO Write Exception
+            return false;
+        } catch (TransportExceptionInterface $e) {
+            dd($e);
+            // TODO Write Exception
+            return false;
+        } catch (Exception $e) {
+            dd($e);
+            // TODO Write Exception
             return false;
         }
     }
