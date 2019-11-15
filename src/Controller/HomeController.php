@@ -43,7 +43,10 @@ class HomeController extends AbstractController
      /**
      * @Route("podcast/{podcast}/", name="single_podcast")
      */
-    public function showPodcast(Podcast $podcast,  SourceRepository $sourceRepository) {
+    public function showPodcast(
+        Podcast $podcast, 
+        SourceRepository $sourceRepository
+    ) {
         return $this->render('front/pages/posts/show.html.twig', [
             'podcast' => $podcast,
             'sources' => $sourceRepository->findAll()
