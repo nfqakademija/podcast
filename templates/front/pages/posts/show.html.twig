@@ -1,0 +1,248 @@
+{% extends 'front/layout/main.html.twig' %}
+
+{% block main %}
+
+{{ include('front/pages/posts/_sources.html.twig') }}
+
+<div id="content" class="content-with-sidebar-right">
+    <div class="blog-single blog-style-large">
+
+        <article id="post-2460"
+            class="post-item post-item-single post-2460 post type-post status-publish format-standard has-post-thumbnail hentry category-design category-news">
+            <div class="post-container">
+                <div class="post-meta-thumb">
+                    <img width="1200" height="675"
+                        src="{{ podcast.image}}"
+                        class="attachment-jevelin-landscape-large size-jevelin-landscape-large wp-post-image" alt="" />
+
+                    {# <div class="sh-overlay-style1">
+                        <div class="sh-table-full">
+
+                            <a href="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Blog_4-1024x683.jpg"
+                                class="sh-overlay-item sh-table-cell" data-rel="lightcase">
+                                <div class="sh-overlay-item-container">
+                                    <i class="icon-magnifier-add"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div> #}
+
+                </div>
+
+               
+                    <h1>{{ podcast.title }}</h1>
+
+
+                <div class="post-meta-data sh-columns">
+                    <div class="post-meta post-meta-one">
+
+                         <span class="post-meta-author">
+                                by <a href="{{ podcast.source.url}}" class="bypostauthor" target="_blank"> {{ podcast.source.name}} </a>
+                            </span>
+
+                            <a href="#" class="post-meta-date sh-default-color">{{ podcast.publishedAt|date("M d, Y") }}</a>
+
+                    </div>
+                    <div class="post-meta post-meta-two">
+
+                        <div class="sh-columns post-meta-comments">
+                            <span class="post-meta-categories">
+                                
+                                <a href="#">Design</a>, <a
+                                    href="#">News</a> </span>
+
+                          
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="post-content">
+                    <p> {{ podcast.description }}</p>
+                            <p> <audio controls class="entry-read-more1">
+                                <source src="{{ podcast.audio}}" type="audio/mp3">
+                                Your browser does not support the audio element.
+                                </audio>
+                            </p>
+                    <p>&nbsp;</p>
+                
+                </div>
+
+            </div>
+        </article>
+
+
+
+        <div class="sh-clear"></div>
+
+
+        <div class="sh-page-links"></div>
+
+
+
+
+        <div class="sh-related-posts">
+            <div class="sh-related-posts-title">
+                <h3>Related Posts</h3>
+            </div>
+            <div class="blog-list blog-style-largeimage">
+
+                <article id="post-4269"
+                    class="post-item post-4269 post type-post status-publish format-standard has-post-thumbnail hentry category-design category-travel">
+                    <div class="post-container">
+
+
+                        <div class="post-meta-thumb">
+                            <img width="660" height="420"
+                                src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/02/Blog_2-660x420.jpg"
+                                class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" />
+                            <div class="sh-overlay-style1">
+                                <div class="sh-table-full">
+                                    <a href="https://jevelin.shufflehound.com/searching-for-the-way-out/"
+                                        class="sh-overlay-item sh-table-cell">
+                                        <div class="sh-overlay-item-container">
+                                            <i class="icon-link"></i>
+                                        </div>
+                                    </a>
+
+                                    <a href="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/02/Blog_2-1024x683.jpg"
+                                        class="sh-overlay-item sh-table-cell" data-rel="lightcase">
+                                        <div class="sh-overlay-item-container">
+                                            <i class="icon-magnifier-add"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a href="https://jevelin.shufflehound.com/searching-for-the-way-out/" class="post-title">
+                            <h2>Creative day off</h2>
+                        </a>
+
+
+                        <div class="post-meta post-meta-two">
+
+                            <div class="sh-columns post-meta-comments">
+                                <span class="post-meta-categories">
+                                    <i class="icon-tag"></i>
+                                    <a href="https://jevelin.shufflehound.com/category/design/">Design</a>, <a
+                                        href="https://jevelin.shufflehound.com/category/travel/">Travel</a> </span>
+
+                                <a href="https://jevelin.shufflehound.com/searching-for-the-way-out/#comments"
+                                    class="post-meta-comments">
+                                    <i class="icon-speech"></i>
+                                    0 </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </article>
+
+
+
+                <article id="post-2282"
+                    class="post-item post-2282 post type-post status-publish format-gallery has-post-thumbnail hentry category-design post_format-post-format-gallery">
+                    <div class="post-container">
+                        <span class="sh-popover-mini">Hot</span>
+
+                        <div class="sh-gallery">
+
+                            <div class="sh-gallery-item">
+                                <img src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Blog_10-660x420.jpg"
+                                    alt="" class="width-full" />
+                            </div>
+
+
+                            <div class="sh-gallery-item">
+                                <img src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Blog_12-660x420.jpg"
+                                    alt="" class="width-full" />
+                            </div>
+
+                        </div>
+                        <a href="https://jevelin.shufflehound.com/new-office-setup/" class="post-title">
+                            <h2>Time for some drinks</h2>
+                        </a>
+
+
+                        <div class="post-meta post-meta-two">
+
+                            <div class="sh-columns post-meta-comments">
+                                <span class="post-meta-categories">
+                                    <i class="icon-tag"></i>
+                                    <a href="https://jevelin.shufflehound.com/category/design/">Design</a> </span>
+
+                                <a href="https://jevelin.shufflehound.com/new-office-setup/#comments"
+                                    class="post-meta-comments">
+                                    <i class="icon-speech"></i>
+                                    2 </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </article>
+
+
+
+                <article id="post-2310"
+                    class="post-item post-2310 post type-post status-publish format-standard has-post-thumbnail hentry category-design category-news">
+                    <div class="post-container">
+
+
+                        <div class="post-meta-thumb">
+                            <img width="660" height="420"
+                                src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Blog_6-660x420.jpg"
+                                class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" />
+                            <div class="sh-overlay-style1">
+                                <div class="sh-table-full">
+                                    <a href="https://jevelin.shufflehound.com/new-delivery-system/"
+                                        class="sh-overlay-item sh-table-cell">
+                                        <div class="sh-overlay-item-container">
+                                            <i class="icon-link"></i>
+                                        </div>
+                                    </a>
+
+                                    <a href="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Blog_6-1024x683.jpg"
+                                        class="sh-overlay-item sh-table-cell" data-rel="lightcase">
+                                        <div class="sh-overlay-item-container">
+                                            <i class="icon-magnifier-add"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a href="https://jevelin.shufflehound.com/new-delivery-system/" class="post-title">
+                            <h2>New delivery system</h2>
+                        </a>
+
+
+                        <div class="post-meta post-meta-two">
+
+                            <div class="sh-columns post-meta-comments">
+                                <span class="post-meta-categories">
+                                    <i class="icon-tag"></i>
+                                    <a href="https://jevelin.shufflehound.com/category/design/">Design</a>, <a
+                                        href="https://jevelin.shufflehound.com/category/news/">News</a> </span>
+
+                                <a href="https://jevelin.shufflehound.com/new-delivery-system/#comments"
+                                    class="post-meta-comments">
+                                    <i class="icon-speech"></i>
+                                    0 </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </article>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}
