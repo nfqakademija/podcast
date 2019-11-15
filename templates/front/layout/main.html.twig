@@ -65,6 +65,10 @@ var jevelin = {"page_loader":"0","notice":"","header_animation_dropdown_delay":"
 		.sh-page-loader-style-spinner .object {
 			background-color: #47c9e5!important;
 		}
+
+		.custom-padding {
+			padding-bottom: 80px !important;
+		}
 	</style>
 
 
@@ -84,6 +88,8 @@ var jevelin = {"page_loader":"0","notice":"","header_animation_dropdown_delay":"
 
 			</div>
 		</div>
+		{{ include('front/layout/_subscribe.html.twig') }}
+
         {{ include('front/layout/footer.html.twig') }}
 
 	</div>
