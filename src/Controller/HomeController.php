@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Podcast;
 use App\Entity\Source;
 use App\Repository\PodcastRepository;
 use App\Repository\SourceRepository;
@@ -35,6 +36,19 @@ class HomeController extends AbstractController
     ) {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
+            'sources' => $sourceRepository->findAll()
+        ]);
+    }
+
+     /**
+     * @Route("podcast/{podcast}/", name="single_podcast")
+     */
+    public function showPodcast(
+        Podcast $podcast,
+        SourceRepository $sourceRepository
+    ) {
+        return $this->render('front/pages/posts/show.html.twig', [
+            'podcast' => $podcast,
             'sources' => $sourceRepository->findAll()
         ]);
     }

@@ -2232,13 +2232,13 @@ rs-sbg-px {
     direction: rtl
 }
 
-@font-face {
+/* @font-face {
     font-family: 'revicons';
     src: url(//jevelin.shufflehound.com/wp-content/plugins/revslider/public/assets/css/../fonts/revicons/revicons.eot?5510888);
     src: url(//jevelin.shufflehound.com/wp-content/plugins/revslider/public/assets/css/../fonts/revicons/revicons.eot?5510888#iefix) format('embedded-opentype'), url(//jevelin.shufflehound.com/wp-content/plugins/revslider/public/assets/css/../fonts/revicons/revicons.woff?5510888) format('woff'), url(//jevelin.shufflehound.com/wp-content/plugins/revslider/public/assets/css/../fonts/revicons/revicons.ttf?5510888) format('truetype'), url(//jevelin.shufflehound.com/wp-content/plugins/revslider/public/assets/css/../fonts/revicons/revicons.svg?5510888#revicons) format('svg');
     font-weight: 400;
     font-style: normal
-}
+} */
 
 [class^=revicon-]:before, [class*=" revicon-"]:before {
     font-family: "revicons";
@@ -5400,7 +5400,7 @@ rs-loader.spinner15 .rs-spinner-inner:last-child {
         transform: rotate(360deg)
     }
 }
-
+/* 
 @font-face {
     font-family: star;
     src: url(//jevelin.shufflehound.com/wp-content/plugins/woocommerce/assets/css/../fonts/star.eot);
@@ -5415,7 +5415,7 @@ rs-loader.spinner15 .rs-spinner-inner:last-child {
     src: url(//jevelin.shufflehound.com/wp-content/plugins/woocommerce/assets/css/../fonts/WooCommerce.eot?#iefix) format("embedded-opentype"), url(//jevelin.shufflehound.com/wp-content/plugins/woocommerce/assets/css/../fonts/WooCommerce.woff) format("woff"), url(//jevelin.shufflehound.com/wp-content/plugins/woocommerce/assets/css/../fonts/WooCommerce.ttf) format("truetype"), url(//jevelin.shufflehound.com/wp-content/plugins/woocommerce/assets/css/../fonts/WooCommerce.svg#WooCommerce) format("svg");
     font-weight: 400;
     font-style: normal
-}
+} */
 
 .woocommerce-store-notice, p.demo_store {
     position: absolute;
@@ -8951,13 +8951,13 @@ body.rtl .wrap-forms .field-columns-0 .options, body.rtl .wrap-forms .field-colu
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
-@font-face {
+/* @font-face {
     font-family: FontAwesome;
     src: url(//jevelin.shufflehound.com/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/../fonts/fontawesome-webfont.eot?v=4.7.0);
     src: url(//jevelin.shufflehound.com/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0) format('embedded-opentype'), url(//jevelin.shufflehound.com/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/../fonts/fontawesome-webfont.woff2?v=4.7.0) format('woff2'), url(//jevelin.shufflehound.com/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/../fonts/fontawesome-webfont.woff?v=4.7.0) format('woff'), url(//jevelin.shufflehound.com/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/../fonts/fontawesome-webfont.ttf?v=4.7.0) format('truetype'), url(//jevelin.shufflehound.com/wp-content/plugins/js_composer/assets/lib/bower/font-awesome/css/../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format('svg');
     font-weight: 400;
     font-style: normal
-}
+} */
 
 .fa {
     display: inline-block;
@@ -12139,11 +12139,11 @@ td, th {
     }
 }
 
-@font-face {
+/* @font-face {
     font-family: 'Glyphicons Halflings';
     src: url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/plugins/../fonts/glyphicons-halflings-regular.eot);
     src: url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/plugins/../fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/plugins/../fonts/glyphicons-halflings-regular.woff2) format('woff2'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/plugins/../fonts/glyphicons-halflings-regular.woff) format('woff'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/plugins/../fonts/glyphicons-halflings-regular.ttf) format('truetype'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/plugins/../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
-}
+} */
 
 .glyphicon {
     position: relative;
@@ -22524,13 +22524,13 @@ img.jssocials-share-logo {
  *
  * @version		2.4.0 (09/04/2017)
  */
-@font-face {
+/* @font-face {
     font-family: 'lightcase';
     src: url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/lightcase.eot?55356177);
     src: url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/lightcase.eot?55356177#iefix) format("embedded-opentype"), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/lightcase.woff?55356177) format("woff"), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/lightcase.ttf?55356177) format("truetype"), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/lightcase.svg?55356177#lightcase) format("svg");
     font-weight: 400;
     font-style: normal
-}
+} */
 
 [class*='lightcase-icon-']:before {
     font-family: 'lightcase', sans-serif;
@@ -23019,13 +23019,13 @@ a[class*='lightcase-icon-'].lightcase-icon-pause, a[class*='lightcase-icon-'].li
 
 
 /* Better Font Rendering =========== */
-@font-face {
+/* @font-face {
     font-family: 'Pe-icon-7-stroke';
     src: url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/Pe-icon-7-stroke.eot);
     src: url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/Pe-icon-7-stroke.eot) format('embedded-opentype'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/Pe-icon-7-stroke.woff) format('woff'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/Pe-icon-7-stroke.ttf) format('truetype'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/Pe-icon-7-stroke.svg) format('svg');
     font-weight: 400;
     font-style: normal
-}
+} */
 
 [class^="pe-7s-"], [class*=" pe-7s-"] {
     display: inline-block;
@@ -25480,15 +25480,15 @@ a[class*='lightcase-icon-'].lightcase-icon-pause, a[class*='lightcase-icon-'].li
 
 
 /* Better Font Rendering =========== */
-@font-face {
+/* @font-face {
     font-family: 'themify';
     src: url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/themify.eot);
     src: url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/themify.eot) format('embedded-opentype'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/themify.woff) format('woff'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/themify.ttf) format('truetype'), url(//jevelin.shufflehound.com/wp-content/themes/jevelin/css/../fonts/themify.svg) format('svg');
     font-weight: 400;
     font-style: normal
-}
+} */
 
-[class^="ti-"], [class*=" ti-"] {
+/* [class^="ti-"], [class*=" ti-"] {
     font-family: 'themify';
     speak: none;
     font-style: normal;
@@ -25498,7 +25498,7 @@ a[class*='lightcase-icon-'].lightcase-icon-pause, a[class*='lightcase-icon-'].li
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
-}
+} */
 
 .ti-wand:before {
     content: "\e600"
@@ -26336,7 +26336,7 @@ a[class*='lightcase-icon-'].lightcase-icon-pause, a[class*='lightcase-icon-'].li
     content: "\e6d0"
 }
 
-.ti-themify-logo:before {
+/* .ti-themify-logo:before {
     content: "\e6d1"
 }
 
@@ -26346,7 +26346,7 @@ a[class*='lightcase-icon-'].lightcase-icon-pause, a[class*='lightcase-icon-'].li
 
 .ti-themify-favicon-alt:before {
     content: "\e6d3"
-}
+} */
 
 .ti-support:before {
     content: "\e6d4"
@@ -29710,7 +29710,7 @@ body .ui-datepicker-title select {
     font-size: 14px
 }
 
-.sh-image-comparison .twentytwenty-right-arrow:before, .sh-image-comparison .twentytwenty-left-arrow:before {
+/* .sh-image-comparison .twentytwenty-right-arrow:before, .sh-image-comparison .twentytwenty-left-arrow:before {
     font-family: 'themify';
     speak: none;
     font-style: normal;
@@ -29723,7 +29723,7 @@ body .ui-datepicker-title select {
     display: inline-block;
     color: #fff;
     font-size: 30px
-}
+} */
 
 .sh-image-comparison .twentytwenty-left-arrow:before {
     content: "\e658"
@@ -32823,7 +32823,7 @@ a.sh-pricing-button-style8:hover span, a.sh-pricing-button-style9:hover span, a.
     padding-top: 17px
 }
 
-.sh-testimonials-style2 .sh-testimonials-quote:after, .sh-testimonials-style2 .sh-testimonials-quote:before {
+/* .sh-testimonials-style2 .sh-testimonials-quote:after, .sh-testimonials-style2 .sh-testimonials-quote:before {
     font-family: 'themify';
     speak: none;
     font-style: normal;
@@ -32837,7 +32837,7 @@ a.sh-pricing-button-style8:hover span, a.sh-pricing-button-style9:hover span, a.
     position: absolute;
     top: 50%;
     margin-top: -12px
-}
+} */
 
 .sh-testimonials-style2 .sh-testimonials-quote:before {
     left: 0;
@@ -34926,7 +34926,7 @@ blockquote {
     font-style: italic
 }
 
-blockquote:before {
+/* blockquote:before {
     font-family: 'themify';
     speak: none;
     font-style: normal;
@@ -34942,7 +34942,7 @@ blockquote:before {
     left: -45px;
     top: 50%;
     margin-top: -10.5px
-}
+} */
 
 blockquote.left {
     margin-right: 20px;
@@ -40041,7 +40041,7 @@ body:not(.sh-blog-style2) .sh-sidebar-search-active .search-submit i, body:not(.
     clear: both
 }
 
-.sh-recent-products .woocommerce .star-rating:before, .sh-recent-products .woocommerce .star-rating span:before, .woocommerce .woocomerce-styling .star-rating:before, .woocommerce .woocomerce-styling .star-rating span:before {
+/* .sh-recent-products .woocommerce .star-rating:before, .sh-recent-products .woocommerce .star-rating span:before, .woocommerce .woocomerce-styling .star-rating:before, .woocommerce .woocomerce-styling .star-rating span:before {
     font-family: 'themify';
     speak: none;
     font-style: normal;
@@ -40054,7 +40054,7 @@ body:not(.sh-blog-style2) .sh-sidebar-search-active .search-submit i, body:not(.
     content: "\e60a\e60a\e60a\e60a\e60a";
     font-size: 18px;
     letter-spacing: 4px
-}
+} */
 
 .woocommerce ul.products li.product .add_to_cart_button {
     background-color: transparent;
@@ -40323,7 +40323,7 @@ body:not(.sh-blog-style2) .sh-sidebar-search-active .search-submit i, body:not(.
     font-size: 0
 }
 
-.woocommerce a.remove:before {
+/* .woocommerce a.remove:before {
     font-family: 'themify';
     speak: none;
     font-style: normal;
@@ -40338,7 +40338,7 @@ body:not(.sh-blog-style2) .sh-sidebar-search-active .search-submit i, body:not(.
     font-size: 16px;
     color: #8d8d8d;
     top: 2px
-}
+} */
 
 .woocommerce .calculated_shipping a {
     font-weight: 700
@@ -41006,7 +41006,7 @@ body.woocommerce div.product .woocommerce-tabs ul.tabs:before {
     padding-right: 30px !important
 }
 
-.woocommerce .woocommerce-tabs .comment-form-rating span > a:before {
+/* .woocommerce .woocommerce-tabs .comment-form-rating span > a:before {
     font-family: 'themify' !important;
     speak: none;
     font-style: normal;
@@ -41017,7 +41017,7 @@ body.woocommerce div.product .woocommerce-tabs ul.tabs:before {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px
-}
+} */
 
 .woocommerce p.stars a:before {
     content: "\e60a" !important
@@ -41714,7 +41714,7 @@ body.admin-bar #lightcase-nav .lightcase-icon-close {
     z-index: 9999
 }
 
-#lightcase-nav .lightcase-icon-close:before {
+/* #lightcase-nav .lightcase-icon-close:before {
     content: "\e646";
     font-family: 'themify';
     speak: none;
@@ -41726,7 +41726,7 @@ body.admin-bar #lightcase-nav .lightcase-icon-close {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 24px
-}
+} */
 
 #lightcase-nav a[class*=lightcase-icon-]:hover {
     text-shadow: 0 0 15px #000
