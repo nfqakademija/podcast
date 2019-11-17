@@ -141,12 +141,11 @@ class CrawlerService
             $tagName = $tag->getTag();
 
             if (strlen($tagName) > 3) {
-                $tagName = (substr($tagName,0, strlen($tagName) -2));
+                $tagName = (substr($tagName,0, strlen($tagName) - 2));
             }
 
-            if (strpos($podcast->getTitle(),$tagName) !== false
+            if (strpos($podcast->getTitle(), $tagName) !== false
                 || strpos($podcast->getDescription(), $tagName) ==! false) {
-
                 $podcastTags[] = $tag;
             }
         }
