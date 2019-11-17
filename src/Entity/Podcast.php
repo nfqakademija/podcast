@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,6 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Podcast
 {
+    public const TYPES = [
+        'TYPE_AUDIO' => 'AUDIO',
+        'TYPE_VIDEO' => 'VIDEO'
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -47,19 +54,29 @@ class Podcast
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Source", inversedBy="podcasts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Source", inversedBy="podcasts", )
      */
     private $source;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="podcasts")
-     */
-    private $user;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $publishedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", mappedBy="podcasts")
+     */
+    private $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,18 +167,6 @@ class Podcast
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getPublishedAt(): ?\DateTimeInterface
     {
         return $this->publishedAt;
@@ -177,5 +182,45 @@ class Podcast
     public function __toString(): string
     {
         return $this->title;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+            $tag->addPodcast($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+            $tag->removePodcast($this);
+        }
+
+        return $this;
     }
 }

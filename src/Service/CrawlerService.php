@@ -4,7 +4,9 @@ namespace App\Service;
 
 use App\Entity\Podcast;
 use App\Entity\Source;
+use App\Entity\Tag;
 use App\Repository\PodcastRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -14,10 +16,16 @@ class CrawlerService
 
     private $podcastRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, PodcastRepository $podcastRepository)
-    {
+    private $tagRepository;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        PodcastRepository $podcastRepository,
+        TagRepository $tagRepository
+    ) {
         $this->entityManager = $entityManager;
         $this->podcastRepository = $podcastRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     public function scrapSites(?array $sources)
@@ -64,12 +72,24 @@ class CrawlerService
                     if (null === $this->checkIfPodcastExists($podcast)) {
                         $podcast->setCreatedAt(new \DateTime());
                         $podcast->setSource($source);
+                        $podcast->setType(Podcast::TYPES['TYPE_AUDIO']);
+                        $matchedTags = $this->findTagsInPodcast($podcast);
+
+                        if (count($matchedTags) > 0) {
+                            foreach ($matchedTags as $tag) {
+                                $podcast->addTag($tag);
+                            }
+                        }
+
                         $this->entityManager->persist($podcast);
-                        $this->entityManager->flush();
-                    }
-                    $podcasts[] = $podcast;
+
+                        $podcasts[] = $podcast;
+                    } else return;
+
                 });
         }
+
+        $this->entityManager->flush();
 
         return $podcasts;
     }
@@ -104,5 +124,32 @@ class CrawlerService
         }
 
         return $newDate;
+    }
+
+    /**
+     * @param Podcast $podcast
+     * @return Tag[]
+     */
+    private function findTagsInPodcast(Podcast $podcast)
+    {
+        $tags = $this->tagRepository->findAll();
+
+        $podcastTags = [];
+
+        foreach ($tags as $tag) {
+            $tagName = $tag->getTag();
+//            dd($tagName);
+            if (strlen($tagName) > 3) {
+                $tagName = (substr($tagName,0, strlen($tagName) -2));
+            }
+
+            if (strpos($podcast->getTitle(),$tagName) !== false
+                || strpos($podcast->getDescription(), $tagName) ==! false) {
+
+                $podcastTags[] = $tag;
+            }
+        }
+
+        return $podcastTags;
     }
 }

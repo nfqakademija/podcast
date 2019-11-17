@@ -4,3 +4,4 @@ easy_admin:
         - App\Entity\Podcast
         - App\Entity\Source
         - App\Entity\User
+        - App\Entity\Tag
