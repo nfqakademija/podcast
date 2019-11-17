@@ -84,8 +84,9 @@ class CrawlerService
                         $this->entityManager->persist($podcast);
 
                         $podcasts[] = $podcast;
-                    } else return;
-
+                    } else {
+                        return;
+                    }
                 });
         }
 
@@ -138,7 +139,7 @@ class CrawlerService
 
         foreach ($tags as $tag) {
             $tagName = $tag->getTag();
-//            dd($tagName);
+
             if (strlen($tagName) > 3) {
                 $tagName = (substr($tagName,0, strlen($tagName) -2));
             }

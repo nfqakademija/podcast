@@ -56,6 +56,4 @@ class PodcastRepository extends ServiceEntityRepository
 
         return $this->paginator->paginate($qb, $page, 10);
     }
-
-
 }
