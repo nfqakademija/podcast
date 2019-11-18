@@ -93,6 +93,7 @@ class CrawlerService
                         }
                     });
             } catch (\Exception $exception) {
+//                TODO: add monolog logger:
                 echo ($exception->getMessage() . ': something wrong with ' . $source->getName()) . '<br>';
             }
         }
