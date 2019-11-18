@@ -8,6 +8,7 @@ use App\Entity\Tag;
 use App\Repository\PodcastRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 class CrawlerService
@@ -18,14 +19,18 @@ class CrawlerService
 
     private $tagRepository;
 
+    private $logger;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         PodcastRepository $podcastRepository,
-        TagRepository $tagRepository
+        TagRepository $tagRepository,
+        LoggerInterface $logger
     ) {
         $this->entityManager = $entityManager;
         $this->podcastRepository = $podcastRepository;
         $this->tagRepository = $tagRepository;
+        $this->logger = $logger;
     }
 
     public function scrapSites(?array $sources)
@@ -43,51 +48,53 @@ class CrawlerService
 
             $crawler = new Crawler($html);
 
-            $crawler->filter($source->getMainElementSelector())
-                ->each(function (Crawler $node) use (&$podcasts, $source) {
+            try {
+                $crawler->filter($source->getMainElementSelector())
+                    ->each(function (Crawler $node) use (&$podcasts, $source) {
 
-                    $podcast = new Podcast();
+                        $podcast = new Podcast();
 
-                    if ($source->getImageSelector()) {
-                        $podcast->setImage(
-                            $node->filter($source->getImageSelector())->attr($source->getImageSourceAttribute())
-                        );
-                    }
-                    if ($source->getTitleSelector()) {
-                        $podcast->setTitle($node->filter($source->getTitleSelector())->text());
-                    }
-                    if ($source->getDescriptionSelector()) {
-                        $podcast->setDescription($node->filter($source->getDescriptionSelector())->last()->text());
-                    }
-                    if ($source->getAudioSelector()) {
-                        $podcast->setAudio(
-                            $node->filter($source->getAudioSelector())->attr($source->getAudioSourceAttribute())
-                        );
-                    }
-                    if ($source->getPublicationDateSelector()) {
-                        $date = $this->formatDate($node->filter($source->getPublicationDateSelector())->text());
-                        $podcast->setPublishedAt($date);
-                    }
-
-                    if (null === $this->checkIfPodcastExists($podcast)) {
-                        $podcast->setCreatedAt(new \DateTime());
-                        $podcast->setSource($source);
-                        $podcast->setType(Podcast::TYPES['TYPE_AUDIO']);
-                        $matchedTags = $this->findTagsInPodcast($podcast);
-
-                        if (count($matchedTags) > 0) {
-                            foreach ($matchedTags as $tag) {
-                                $podcast->addTag($tag);
-                            }
+                        if ($source->getImageSelector()) {
+                            $podcast->setImage(
+                                $node->filter($source->getImageSelector())->attr($source->getImageSourceAttribute())
+                            );
+                        }
+                        if ($source->getTitleSelector()) {
+                            $podcast->setTitle($node->filter($source->getTitleSelector())->text());
+                        }
+                        if ($source->getDescriptionSelector()) {
+                            $podcast->setDescription($node->filter($source->getDescriptionSelector())->last()->text());
+                        }
+                        if ($source->getAudioSelector()) {
+                            $podcast->setAudio(
+                                $node->filter($source->getAudioSelector())->attr($source->getAudioSourceAttribute())
+                            );
+                        }
+                        if ($source->getPublicationDateSelector()) {
+                            $date = $this->formatDate($node->filter($source->getPublicationDateSelector())->text());
+                            $podcast->setPublishedAt($date);
                         }
 
-                        $this->entityManager->persist($podcast);
+                        if (null === $this->checkIfPodcastExists($podcast)) {
+                            $podcast->setCreatedAt(new \DateTime());
+                            $podcast->setSource($source);
+                            $podcast->setType(Podcast::TYPES['TYPE_AUDIO']);
+                            $matchedTags = $this->findTagsInPodcast($podcast);
 
-                        $podcasts[] = $podcast;
-                    } else {
-                        return;
-                    }
-                });
+                            if (count($matchedTags) > 0) {
+                                foreach ($matchedTags as $tag) {
+                                    $podcast->addTag($tag);
+                                }
+                            }
+
+                            $this->entityManager->persist($podcast);
+
+                            $podcasts[] = $podcast;
+                        }
+                    });
+            } catch (\Exception $exception) {
+                echo ($exception->getMessage() . ': something wrong with ' . $source->getName()) . '<br>';
+            }
         }
 
         $this->entityManager->flush();
@@ -140,7 +147,7 @@ class CrawlerService
         foreach ($tags as $tag) {
             $tagName = $tag->getTag();
 
-            if (strlen($tagName) > 3) {
+            if (strlen($tagName) > 4) {
                 $tagName = (substr($tagName, 0, strlen($tagName) - 2));
             }
 
