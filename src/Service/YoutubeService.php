@@ -84,6 +84,7 @@ class YoutubeService
                             $podcast->setVideo($video['id']['videoId']);
                             $podcast->setPublishedAt(new DateTime($video['snippet']['publishedAt']));
                             $podcast->setTitle($video['snippet']['title']);
+                            $podcast->setDescription($video['snippet']['title']);
                             $podcast->setImage(($video['snippet']['thumbnails']['high']['url']));
                             $podcast->setCreatedAt(new DateTime('now'));
 
