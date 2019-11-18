@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Podcast;
 use App\Entity\Source;
+use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -27,8 +28,6 @@ class PodcastRepository extends ServiceEntityRepository
     public function getAllPodcastsPaginated($page)
     {
         $qb = $this->createQueryBuilder('p')
-            ->leftJoin('p.source', 's')
-            ->addSelect('s')
             ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
@@ -40,6 +39,18 @@ class PodcastRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.source =:source')
             ->setParameter('source', $source)
+            ->orderBy('p.publishedAt', 'DESC')
+            ->getQuery();
+
+        return $this->paginator->paginate($qb, $page, 10);
+    }
+
+    public function findAllPaginatedPodcastsByTag(Tag $tag, $page)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.tags', 't')
+            ->andWhere('t.tag = :tag')
+            ->setParameter('tag', $tag->getTag())
             ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
