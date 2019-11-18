@@ -1,13 +1,13 @@
 <div id="sidebar" class="sidebar-right">
 				
 	<div id="search-2" class="widget-item widget_search">
-            <form method="get" class="search-form" action="https://jevelin.shufflehound.com/">
+            <form method="get" class="search-form" action="#">
                 <div>
                     <label>
-                        <input type="search" class="sh-sidebar-search search-field" placeholder="Search here..." value="" name="s" title="Search text" required />
+                        <input type="search" class="sh-sidebar-search search-field" placeholder="Paieška" value="" name="s" title="Search text" required />
                     </label>
                     <button type="submit" class="search-submit">
-                        <i class="icon-magnifier"></i>
+
                     </button>
                 </div>
 			</form>
@@ -24,11 +24,11 @@
 	</div>
 			
 	<div id="tag_cloud-2" class="widget-item widget_tag_cloud">
-		<h3 class="widget-title">Šaltiniai</h3>
+		<h3 class="widget-title">Raktažodžiai</h3>
 		<div class="tagcloud">
-			{% for source in sources %}
-				<a href="https://jevelin.shufflehound.com/tag/boat/" class="tag-cloud-link tag-link-39 tag-link-position-1" 
-						style="font-size: 8pt;" aria-label="Boat (1 item)">{{ source.name}}</a>
+			{% for tag in tags %}
+				<a href="{{ path('podcasts_by_tag', {tag: tag.id}) }}" class="tag-cloud-link tag-link-39 tag-link-position-1"
+						style="font-size: 8pt;" aria-label="Boat (1 item)">{{ tag.tag}}</a>
 			{% endfor %}
 	</div>	
 

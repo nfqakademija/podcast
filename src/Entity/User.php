@@ -37,11 +37,6 @@ class User implements UserInterface
      */
     private $password;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Podcast", mappedBy="user")
-     */
-    private $podcasts;
-
     public function __construct()
     {
         $this->podcasts = new ArrayCollection();
@@ -118,37 +113,6 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    /**
-     * @return Collection|Podcast[]
-     */
-    public function getPodcasts(): Collection
-    {
-        return $this->podcasts;
-    }
-
-    public function addPodcast(Podcast $podcast): self
-    {
-        if (!$this->podcasts->contains($podcast)) {
-            $this->podcasts[] = $podcast;
-            $podcast->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removePodcast(Podcast $podcast): self
-    {
-        if ($this->podcasts->contains($podcast)) {
-            $this->podcasts->removeElement($podcast);
-            // set the owning side to null (unless already changed)
-            if ($podcast->getUser() === $this) {
-                $podcast->setUser(null);
-            }
-        }
-
-        return $this;
     }
 
     public function __toString(): string
