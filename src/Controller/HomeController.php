@@ -51,11 +51,13 @@ class HomeController extends AbstractController
      */
     public function showPodcast(
         Podcast $podcast,
+        TagRepository $tagRepository,
         SourceRepository $sourceRepository
     ) {
         return $this->render('front/pages/posts/show.html.twig', [
             'podcast' => $podcast,
-            'sources' => $sourceRepository->findAll()
+            'sources' => $sourceRepository->findAll(),
+            'tags' => $tagRepository->findAll()
         ]);
     }
 

@@ -42,11 +42,18 @@
 
                         <div class="post-content">
                             <p> {{ podcast.description }}</p>
-                            <p> <audio controls class="entry-read-more1">
-                                <source src="{{ podcast.audio}}" type="audio/mp3">
-                                Your browser does not support the audio element.
+                            {% if podcast.audio != null %}
+                            <p> 
+                                <audio controls class="entry-read-more1">
+                                    <source src="{{ podcast.audio}}" type="audio/mp3">
+                                    Your browser does not support the audio element.
                                 </audio>
                             </p>
+                            {% endif %}
+                            {% if podcast.video != null %}
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ podcast.video }}" frameborder="0" 
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            {% endif %}
                         </div>
 
                         <div class="post-meta post-meta-two">
