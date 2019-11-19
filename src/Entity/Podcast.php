@@ -12,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Podcast
 {
     public const TYPES = [
-        'TYPE_AUDIO' => 'AUDIO',
-        'TYPE_VIDEO' => 'VIDEO'
+        'TYPE_AUDIO' => 'Audio',
+        'TYPE_VIDEO' => 'Youtube'
     ];
 
     /**

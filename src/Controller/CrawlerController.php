@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Podcast;
 use App\Repository\SourceRepository;
 use App\Service\CrawlerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,8 +15,7 @@ class CrawlerController extends AbstractController
      */
     public function index(CrawlerService $crawlerService, SourceRepository $sourceRepository)
     {
-        $sources = $sourceRepository->findAll();
-
+        $sources = $sourceRepository->findBy(['sourceType' => Podcast::TYPES['TYPE_AUDIO']]);
         $podcasts = $crawlerService->scrapSites($sources);
 
         dd($podcasts);
