@@ -25,8 +25,8 @@ services:
         tags: ['controller.service_arguments']
 
     App\Service\YoutubeService:
-            $requestUrl: 'https://www.googleapis.com/youtube/v3/'
-            $apiCode: 'AIzaSyBGgyYQu3gPLhBaTwAzfPwSJ1YHkRDgxhY'
+            $requestUrl: '%env(YT_URL)%'
+            $apiCode: '%env(YT_API)%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

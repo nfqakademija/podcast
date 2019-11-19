@@ -49,45 +49,75 @@ class YoutubeService
 
     public function importDataFromYoutube(array &$listOfSources): bool
     {
-        // TODO create IF sentence if last import ended
-
         /** @var Source $source */
         foreach ($listOfSources as $source) {
-            $channelId = $this->getChannelId($source);
-            try {
-                $response = $this->httpClient->request('GET', $this->requestUrl . 'search', [
-                    'query' => [
-                        'part' => 'snippet',
-                        'channelId' => $channelId,
-                        'maxResults' => '5',
-                        'order' => 'date',
-                        'pageToken' => '',
-                        'type' => 'video',
-                        'key' => $this->apiCode
-                    ]
-                ]);
-            } catch (TransportExceptionInterface $e) {
-                $this->logger->error($e->getMessage());
-                return false;
+            $playlist = false;
+            if (preg_match('~playlist\?list=~', $source->getUrl())) {
+                $parts = parse_url($source->getUrl());
+                parse_str($parts['query'], $query);
+                try {
+                    $response = $this->httpClient->request('GET', $this->requestUrl . 'playlistItems', [
+                        'query' => [
+                            'part' => 'snippet',
+                            'playlistId' => $query['list'],
+                            'maxResults' => '10',
+                            'pageToken' => '',
+                            'key' => $this->apiCode
+                        ]
+                    ]);
+                    $playlist = true;
+                } catch (TransportExceptionInterface $e) {
+                    $this->logger->error($e->getMessage());
+                    return false;
+                }
+            } else {
+                $channelId = $this->getChannelId($source);
+                try {
+                    $response = $this->httpClient->request('GET', $this->requestUrl . 'search', [
+                        'query' => [
+                            'part' => 'snippet',
+                            'channelId' => $channelId,
+                            'maxResults' => '10',
+                            'order' => 'date',
+                            'pageToken' => '',
+                            'type' => 'video',
+                            'key' => $this->apiCode
+                        ]
+                    ]);
+                } catch (TransportExceptionInterface $e) {
+                    $this->logger->error($e->getMessage());
+                    return false;
+                }
             }
 
             try {
                 $content = $response->toArray();
                 if ($response->getStatusCode() === 200) {
                     foreach ($content['items'] as $video) {
-                        if ($video['snippet']['liveBroadcastContent'] === 'none'
-                            && !$this->isVideoExists($video['id']['videoId'])
+                        if ((empty($video['snippet']['liveBroadcastContent'])?
+                                true
+                                :
+                                $video['snippet']['liveBroadcastContent'] === 'none')
+                            && !$this->isVideoExists((
+                            empty($video['id']['videoId'])?
+                                $video['id']
+                                :
+                                $video['id']['videoId']))
                         ) {
                             $podcast = new Podcast();
 
                             $podcast->setSource($source);
-                            $podcast->setVideo($video['id']['videoId']);
                             $podcast->setPublishedAt(new DateTime($video['snippet']['publishedAt']));
-                            $podcast->setTitle($video['snippet']['title']);
                             $podcast->setDescription($video['snippet']['description']);
-                            $podcast->setImage(($video['snippet']['thumbnails']['high']['url']));
+                            $podcast->setTitle($video['snippet']['title']);
+                            $podcast->setImage(end($video['snippet']['thumbnails'])['url']);
                             $podcast->setCreatedAt(new DateTime('now'));
-
+                            if ($playlist) {
+                                $videoId = explode('/', end($video['snippet']['thumbnails'])['url']);
+                                $podcast->setVideo($videoId[sizeof($videoId)-2]);
+                            } else {
+                                $podcast->setVideo($video['id']['videoId']);
+                            }
                             $this->entityManager->persist($podcast);
                             $this->entityManager->flush();
                         }

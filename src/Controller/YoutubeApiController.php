@@ -11,8 +11,6 @@ class YoutubeApiController extends AbstractController
 {
     /**
      * @Route("/youtube", name="youtube")
-     * @param YoutubeService $youtubeApiService
-     * @param SourceRepository $sourceRepository
      */
     public function index(YoutubeService $youtubeApiService, SourceRepository $sourceRepository)
     {
@@ -22,6 +20,9 @@ class YoutubeApiController extends AbstractController
 
         $res = $youtubeApiService->importDataFromYoutube($sources);
 
-        dd($res);
+        var_dump($res);
+        return $this->render('home/index.html.twig', [
+            'someVariable' => ''
+        ]);
     }
 }
