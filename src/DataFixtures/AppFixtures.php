@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Podcast;
 use App\Entity\Source;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -19,7 +20,8 @@ class AppFixtures extends Fixture
             'audioSelector' => '.playlist-item',
             'audioSourceAttribute' => 'data-src',
             'publicationDateSelector' => '.player-date',
-            'imageSourceAttribute' => null
+            'imageSourceAttribute' => null,
+            'sourceType' => Podcast::TYPES['TYPE_AUDIO']
         ],
         [
             'name' => 'Delfi Iš viršaus',
@@ -31,7 +33,8 @@ class AppFixtures extends Fixture
             'audioSelector' => '.playlist-item',
             'audioSourceAttribute' => 'data-src',
             'publicationDateSelector' => '.player-date',
-            'imageSourceAttribute' => null
+            'imageSourceAttribute' => null,
+             'sourceType' => Podcast::TYPES['TYPE_AUDIO']
         ],
         [
             'name' => 'Basket News',
@@ -43,7 +46,8 @@ class AppFixtures extends Fixture
             'audioSelector' => '.theme1',
             'audioSourceAttribute' => 'data-uri',
             'publicationDateSelector' => '.date',
-            'imageSourceAttribute' => 'data-src'
+            'imageSourceAttribute' => 'data-src',
+            'sourceType' => Podcast::TYPES['TYPE_AUDIO']
         ],
         [
             'name' => 'Iš devinių metrų',
@@ -55,7 +59,8 @@ class AppFixtures extends Fixture
             'audioSelector' => '.theme1',
             'audioSourceAttribute' => 'data-uri',
             'publicationDateSelector' => '.day',
-            'imageSourceAttribute' => 'data-src'
+            'imageSourceAttribute' => 'data-src',
+            'sourceType' => Podcast::TYPES['TYPE_AUDIO']
         ],
         [
             'name' => 'Iš eilutės',
@@ -67,7 +72,8 @@ class AppFixtures extends Fixture
             'audioSelector' => '.theme1',
             'audioSourceAttribute' => 'data-uri',
             'publicationDateSelector' => '.day',
-            'imageSourceAttribute' => 'data-src'
+            'imageSourceAttribute' => 'data-src',
+            'sourceType' => Podcast::TYPES['TYPE_AUDIO']
         ],
         [
             'name' => 'Užkalti halės langai',
@@ -79,7 +85,8 @@ class AppFixtures extends Fixture
             'audioSelector' => '.theme1',
             'audioSourceAttribute' => 'data-uri',
             'publicationDateSelector' => '.date',
-            'imageSourceAttribute' => 'data-src'
+            'imageSourceAttribute' => 'data-src',
+            'sourceType' => Podcast::TYPES['TYPE_AUDIO']
         ],
         [
             'name' => 'urBONUSas',
@@ -91,7 +98,8 @@ class AppFixtures extends Fixture
             'audioSelector' => '.theme2',
             'audioSourceAttribute' => 'data-uri',
             'publicationDateSelector' => '.day',
-            'imageSourceAttribute' => 'data-src'
+            'imageSourceAttribute' => 'data-src',
+            'sourceType' => Podcast::TYPES['TYPE_AUDIO']
         ]
     ];
 
@@ -110,6 +118,7 @@ class AppFixtures extends Fixture
             $fixtureSource->setPublicationDateSelector($source['publicationDateSelector']);
             $fixtureSource->setImageSourceAttribute($source['imageSourceAttribute']);
             $fixtureSource->setCreatedAt(new \DateTime());
+            $fixtureSource->setSourceType($source['sourceType']);
 
             $manager->persist($fixtureSource);
         }
