@@ -1,0 +1,8 @@
+ <div class="isotope-filter button-group" data-target=".grid-1">
+    <ul>
+        <li><a class="button active" data-filter="*">All</a></li>
+            {% for source in sources %}
+            <li><a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="button">{{ source.name}}</a></li>
+             {% endfor %}
+    </ul>
+</div>

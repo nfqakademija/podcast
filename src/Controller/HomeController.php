@@ -22,7 +22,7 @@ class HomeController extends AbstractController
         TagRepository $tagRepository,
         $page
     ) {
-        return $this->render('front/pages/posts/index.html.twig', [
+        return $this->render('front/pages3/posts/index.html.twig', [
             'podcasts' => $podcastRepository->getAllPodcastsPaginated($page),
             'sources' => $sourceRepository->findAll(),
             'tags' => $tagRepository->findAll()
