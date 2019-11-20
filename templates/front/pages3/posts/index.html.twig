@@ -7,11 +7,26 @@
             <div class="post">
               <div class="row">
                 <div class="col-md-5">
-                  <figure class="overlay overlay1"><a href="#"></a><img src="{{ podcast.image }}" alt="" />
+                  {# <figure class="overlay overlay1"><a href="#"></a><img src="{{ podcast.image }}" alt="" />
                     <figcaption>
                       <h5 class="from-top mb-0">Read More</h5>
                     </figcaption>
-                  </figure>
+                  </figure> #}
+          <figure class="overlay">
+
+                {% if podcast.video != null %}
+                  <iframe width="330" height="215" src="https://www.youtube.com/embed/{{ podcast.video }}" frameborder="0" 
+                          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                  </iframe>
+                                
+                {% endif %}
+
+                 {% if podcast.audio != null %}
+                 <img src="{{ podcast.image }}" alt="" />
+                 {% elseif (podcast.video != null) and (podcast.audio == null) %}
+                <img src="{{ asset('images/podcast_default.jpg') }}"  />
+                 {% endif %}
+          </figure>
                 </div>
                 <!--/column -->                
                 <div class="space20 visible-sm clearfix"></div>
@@ -19,8 +34,6 @@
                   <div class="post-content">
                     <h3 class="post-title"><a href="blog-post.html">{{ podcast.title}}</a></h3>
                     <div class="meta"><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span><span class="comments"><a href="#">5 Comments</a></span></div>
-
-                    <p> {{ podcast.description }}</p>
                             {% if podcast.audio != null %}
                             <p> 
                                 <audio controls class="entry-read-more1">
@@ -28,11 +41,12 @@
                                     Your browser does not support the audio element.
                                 </audio>
                             </p>
+                            <p> {{ podcast.description }}</p>
                             {% endif %}
-                            {% if podcast.video != null %}
+                            {# {% if podcast.video != null %}
                                 <iframe width="460" height="315" src="https://www.youtube.com/embed/{{ podcast.video }}" frameborder="0" 
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            {% endif %}
+                            {% endif %} #}
                   </div>
                   <!-- /.post-content --> 
                 </div>
@@ -43,26 +57,11 @@
             </div>
             <!-- /.post -->
      {% endfor %}
-           
-            
-           
-            
-           
-            
-           
-            
+             
           </div>
           <!-- /.blog -->
-          <div class="pagination border">
-            <ul>
-              <li><a href="#"><i class="et-chevron-small-left"></i></a></li>
-              <li class="active"><a href="#"><span>1</span></a></li>
-              <li><a href="#"><span>2</span></a></li>
-              <li><a href="#"><span>3</span></a></li>
-              <li><a href="#"><i class="et-chevron-small-right"></i></a></li>
-            </ul>
-          </div>
-          <!-- /.pagination --> 
+
+           {{ knp_pagination_render(podcasts) }}
           
         </div>
 {% endblock %}
