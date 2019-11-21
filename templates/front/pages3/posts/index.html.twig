@@ -21,9 +21,9 @@
                                 
                 {% endif %}
 
-                 {% if podcast.audio != null %}
+                 {% if (podcast.image != null) and (podcast.video == null) %}
                  <img src="{{ podcast.image }}" alt="" />
-                 {% elseif (podcast.video != null) and (podcast.audio == null) %}
+                 {% elseif podcast.image == null %}
                 <img src="{{ asset('images/podcast_default.jpg') }}"  />
                  {% endif %}
           </figure>
@@ -32,7 +32,7 @@
                 <div class="space20 visible-sm clearfix"></div>
                 <div class="col-md-7"> <span class="category"> <a href="{{ podcast.source.url}}" class="" target="_blank"> {{ podcast.source.name}} </a></span>
                   <div class="post-content">
-                    <h3 class="post-title"><a href="blog-post.html">{{ podcast.title}}</a></h3>
+                    <h3 class="post-title"><a href="#">{{ podcast.title}}</a></h3>
                     <div class="meta"><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span><span class="comments"><a href="#">5 Comments</a></span></div>
                             {% if podcast.audio != null %}
                             <p> 

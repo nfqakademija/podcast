@@ -39,7 +39,7 @@ class HomeController extends AbstractController
         Source $source,
         $page
     ) {
-        return $this->render('front/pages/posts/index.html.twig', [
+        return $this->render('front/pages3/posts/index.html.twig', [
             'podcasts' => $podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
             'sources' => $sourceRepository->findAll(),
             'tags' => $tagRepository->findAll()
