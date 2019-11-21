@@ -20,6 +20,7 @@
         "symfony/monolog-bundle": "^3.5",
         "symfony/orm-pack": "^1.0",
         "symfony/profiler-pack": "^1.0",
+        "symfony/swiftmailer-bundle": "^3.4",
         "symfony/twig-pack": "^1.0",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "4.3.*"
