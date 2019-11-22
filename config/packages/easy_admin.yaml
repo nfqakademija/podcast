@@ -1,6 +1,9 @@
 easy_admin:
     site_name: Administratoriaus panelė
     design:
+        assets:
+            css:
+                - 'build/app.css'
         brand_color: '#000'
     list:
         actions: ['show']

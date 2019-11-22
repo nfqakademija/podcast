@@ -10,6 +10,7 @@ use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CrawlerService
 {
@@ -21,16 +22,20 @@ class CrawlerService
 
     private $logger;
 
+    private $client;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         PodcastRepository $podcastRepository,
         TagRepository $tagRepository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        HttpClientInterface $client
     ) {
         $this->entityManager = $entityManager;
         $this->podcastRepository = $podcastRepository;
         $this->tagRepository = $tagRepository;
         $this->logger = $logger;
+        $this->client = $client;
     }
 
     public function scrapSites(?array $sources)
@@ -40,11 +45,8 @@ class CrawlerService
         /** @var Source $source */
         foreach ($sources as $source) {
             $url = $source->getUrl();
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            $html = curl_exec($ch);
-            //        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close($ch);
+            $response = $this->client->request('GET', $url);
+            $html = $response->getContent();
 
             $crawler = new Crawler($html);
 
@@ -90,6 +92,8 @@ class CrawlerService
                             $this->entityManager->persist($podcast);
 
                             $podcasts[] = $podcast;
+                        } else {
+                            return;
                         }
                     });
             } catch (\Exception $exception) {
