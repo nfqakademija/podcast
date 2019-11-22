@@ -94,13 +94,16 @@ class YoutubeService
                 $content = $response->toArray();
                 if ($response->getStatusCode() === 200) {
                     foreach ($content['items'] as $video) {
+                        if ($playlist) {
+                            $videoId = explode('/', end($video['snippet']['thumbnails'])['url']);
+                        }
                         if ((empty($video['snippet']['liveBroadcastContent'])?
                                 true
                                 :
                                 $video['snippet']['liveBroadcastContent'] === 'none')
                             && !$this->isVideoExists((
-                            empty($video['id']['videoId'])?
-                                $video['id']
+                            $playlist?
+                                $videoId[sizeof($videoId)-2]
                                 :
                                 $video['id']['videoId']))
                         ) {
@@ -113,7 +116,6 @@ class YoutubeService
                             $podcast->setImage(end($video['snippet']['thumbnails'])['url']);
                             $podcast->setCreatedAt(new DateTime('now'));
                             if ($playlist) {
-                                $videoId = explode('/', end($video['snippet']['thumbnails'])['url']);
                                 $podcast->setVideo($videoId[sizeof($videoId)-2]);
                             } else {
                                 $podcast->setVideo($video['id']['videoId']);
