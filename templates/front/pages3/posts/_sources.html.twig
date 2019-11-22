@@ -1,0 +1,12 @@
+ <div class="row text-center">
+ {% for source in sources %}
+        <div class="col-sm-2">
+          <figure>
+   
+            <a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="btn btn-border btn-full-rounded">{{ source.name}}</a>
+         
+          </figure>
+        </div>
+ {% endfor %}
+</div>
+      <hr>

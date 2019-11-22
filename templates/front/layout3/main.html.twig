@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="text" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="style/images/favicon.png">
+<title>Krepšinio podcastai</title>
+<link rel="stylesheet" type="text/css" href="http://themes.iki-bir.com/creatink/style/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="http://themes.iki-bir.com/creatink/style/css/plugins.css">
+<link rel="stylesheet" type="text/css" href="http://themes.iki-bir.com/creatink/style/revolution/css/settings.css">
+<link rel="stylesheet" type="text/css" href="http://themes.iki-bir.com/creatink/style/revolution/css/layers.css">
+<link rel="stylesheet" type="text/css" href="http://themes.iki-bir.com/creatink/style/revolution/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="http://themes.iki-bir.com/creatink/style/type/icons.css">
+<link rel="stylesheet" type="text/css" href="http://themes.iki-bir.com/creatink/style.css">
+<link rel="stylesheet" type="text/css" href="http://themes.iki-bir.com/creatink/style/css/color/blue.css">
+<link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div class="content-wrapper">
+
+
+
+{{ include('front/layout3/navbar.html.twig') }}
+
+{# {{ include('front/layout3/header.html.twig') }} #}
+
+{% block header %}{% endblock %}
+ <div class="wrapper light-wrapper">
+    <div class="container inner">
+      <div class="row">
+
+             {% block content %}{% endblock %}
+
+              {{ include('front/layout3/sidebar.html.twig') }}
+      </div>
+    </div>
+</div>
+</div>
+<!-- /.content-wrapper -->
+ {{ include('front/layout3/footer.html.twig') }}
+
+ {{ include('front/layout3/_javascript.html.twig') }}
+</body>
+</html>
