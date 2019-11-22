@@ -1,7 +1,64 @@
 easy_admin:
+    site_name: Administratoriaus panelė
+    design:
+        brand_color: '#000'
+    list:
+        actions: ['show']
     entities:
         # List the entity class name you want to manage
-        - App\Entity\Podcast
-        - App\Entity\Source
-        - App\Entity\User
-        - App\Entity\Tag
+        Podcast:
+            class: App\Entity\Podcast
+            label: Podkastai
+            list:
+                title: Visi podkastai
+                fields:
+                    - id
+                    - { property: title, label: "Antraštė" }
+                    - { property: description, label: "Aprašymas" }
+                    - { property: image, label: "Paveikslėlis", type: image, sortable: false }
+                    - { property: publishedAt, label: "Publikuotas", type: date }
+                    - { property: createdAt, label: "Išasugotas", type: date }
+            edit:
+                fields:
+                    - { property: image, label: "Paveiksėlis"}
+#            search:
+#                title: Rasti rezultatai
+        Source:
+            class: App\Entity\Source
+            label: Šaltiniai
+            list:
+                title: Visi šaltiniai
+                fields:
+                    - id
+                    - { property: name, label: 'Pavadinimas' }
+                    - { property: url, label: "Svetainė", type: url }
+                    - { property: sourceType, label: "Tipas" }
+            form:
+                fields:
+                    - { property: name, label: 'Pavadinimas' }
+                    - { property: url, label: "Svetainė", type: url }
+                    - { property: mainElementSelector, label: "Pag. selektorius" }
+                    - { property: imageSelector, label: "Img selektorius"}
+                    - { property: titleSelector, label: "Antraštės selektorius" }
+                    - { property: descriptionSelector, label: "Aprašymo selektorius" }
+                    - { property: audioSelector, label: "Audio failo selektorius" }
+                    - { property: audioSourceAttribute, label: "Audio elemento atributas"}
+                    - { property: publicationDateSelector, label: "Datos selektorius" }
+                    - { property: imageSourceAttribute, label: "Img atributas" }
+                    -
+                        property: sourceType
+                        label: "Tipas"
+                        type: choice
+                        type_options:
+                            choices: {'Audio': 'Audio', 'Youtube': 'Youtube'}
+                            placeholder: 'Pasirinkite tipą'
+        User:
+            class: App\Entity\User
+            label: Vartotojai
+            edit:
+                fields:
+                    - { property: username, label: 'Vartotojas' }
+                    - { property: password, label: 'Slaptažodis', type: password, value: password }
+        Tag:
+            class: App\Entity\Tag
+            label: Raktažodžiai
