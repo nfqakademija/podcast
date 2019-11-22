@@ -60,7 +60,7 @@ class YoutubeService
                         'query' => [
                             'part' => 'snippet',
                             'playlistId' => $query['list'],
-                            'maxResults' => '10',
+                            'maxResults' => '50',
                             'pageToken' => '',
                             'key' => $this->apiCode
                         ]
@@ -77,7 +77,7 @@ class YoutubeService
                         'query' => [
                             'part' => 'snippet',
                             'channelId' => $channelId,
-                            'maxResults' => '10',
+                            'maxResults' => '50',
                             'order' => 'date',
                             'pageToken' => '',
                             'type' => 'video',
