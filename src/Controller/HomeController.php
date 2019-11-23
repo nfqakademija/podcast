@@ -47,7 +47,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("podcast/{podcast}/", name="single_podcast")
      */
     public function showPodcast(

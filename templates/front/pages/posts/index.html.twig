@@ -19,11 +19,6 @@
             <div class="post">
               <div class="row">
                 <div class="col-md-5">
-                  {# <figure class="overlay overlay1"><a href="#"></a><img src="{{ podcast.image }}" alt="" />
-                    <figcaption>
-                      <h5 class="from-top mb-0">Read More</h5>
-                    </figcaption>
-                  </figure> #}
           <figure class="overlay">
 
                 {% if podcast.video != null %}
@@ -73,4 +68,8 @@
            {{ knp_pagination_render(podcasts) }}
           
         </div>
+{% endblock %}
+
+{% block sidebar %}
+  {{ include('front/layout/sidebar.html.twig') }}
 {% endblock %}
