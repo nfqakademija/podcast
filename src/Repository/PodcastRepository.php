@@ -59,7 +59,7 @@ class PodcastRepository extends ServiceEntityRepository
 
     public function searchPodcasts($query, $page)
     {
-        $searchTerms = explode(' ', $query);
+        $searchTerms = explode(',', $query);
         $qb = $this->createQueryBuilder('p');
 
         foreach ($searchTerms as $key => $term) {
