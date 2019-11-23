@@ -9,6 +9,7 @@ use App\Repository\PodcastRepository;
 use App\Repository\SourceRepository;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -73,6 +74,26 @@ class HomeController extends AbstractController
     ) {
         return $this->render('front/pages3/posts/index.html.twig', [
             'podcasts' => $podcastRepository->findAllPaginatedPodcastsByTag($tag, $page),
+            'sources' => $sourceRepository->findAll(),
+            'tags' => $tagRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/search/{page}", name="search_podcasts", defaults={"page":1})
+     */
+    public function searchPodcasts(
+        Request $request,
+        PodcastRepository $podcastRepository,
+        TagRepository $tagRepository,
+        SourceRepository $sourceRepository,
+        $page
+    ) {
+        $query = $request->get('q');
+        $podcasts = $podcastRepository->searchPodcasts($query, $page);
+
+        return $this->render('front/pages3/posts/index.html.twig', [
+            'podcasts' => $podcasts,
             'sources' => $sourceRepository->findAll(),
             'tags' => $tagRepository->findAll()
         ]);
