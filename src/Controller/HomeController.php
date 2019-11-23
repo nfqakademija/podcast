@@ -23,7 +23,7 @@ class HomeController extends AbstractController
         TagRepository $tagRepository,
         $page
     ) {
-        return $this->render('front/pages3/posts/index.html.twig', [
+        return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $podcastRepository->getAllPodcastsPaginated($page),
             'sources' => $sourceRepository->findAll(),
             'tags' => $tagRepository->findAll()
@@ -40,7 +40,7 @@ class HomeController extends AbstractController
         Source $source,
         $page
     ) {
-        return $this->render('front/pages3/posts/index.html.twig', [
+        return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
             'sources' => $sourceRepository->findAll(),
             'tags' => $tagRepository->findAll()
@@ -55,7 +55,7 @@ class HomeController extends AbstractController
         TagRepository $tagRepository,
         SourceRepository $sourceRepository
     ) {
-        return $this->render('front/pages3/posts/show.html.twig', [
+        return $this->render('front/pages/posts/show.html.twig', [
             'podcast' => $podcast,
             'sources' => $sourceRepository->findAll(),
             'tags' => $tagRepository->findAll()
@@ -72,7 +72,7 @@ class HomeController extends AbstractController
         SourceRepository $sourceRepository,
         $page
     ) {
-        return $this->render('front/pages3/posts/index.html.twig', [
+        return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $podcastRepository->findAllPaginatedPodcastsByTag($tag, $page),
             'sources' => $sourceRepository->findAll(),
             'tags' => $tagRepository->findAll()
@@ -92,7 +92,7 @@ class HomeController extends AbstractController
         $query = $request->get('q');
         $podcasts = $podcastRepository->searchPodcasts($query, $page);
 
-        return $this->render('front/pages3/posts/index.html.twig', [
+        return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $podcasts,
             'sources' => $sourceRepository->findAll(),
             'tags' => $tagRepository->findAll(),

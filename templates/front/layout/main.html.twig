@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-{{ include('front/layout3/head.html.twig') }}
+{{ include('front/layout/head.html.twig') }}
 
 <body>
   <div class="content-wrapper">
 
-    {{ include('front/layout3/navbar.html.twig') }}
+    {{ include('front/layout/navbar.html.twig') }}
 
     {% block header %}{% endblock %}
     <div class="wrapper light-wrapper">
@@ -14,15 +14,15 @@
 
           {% block content %}{% endblock %}
 
-          {{ include('front/layout3/sidebar.html.twig') }}
+          {{ include('front/layout/sidebar.html.twig') }}
         </div>
       </div>
     </div>
   </div>
 
-  {{ include('front/layout3/footer.html.twig') }}
+  {{ include('front/layout/footer.html.twig') }}
 
-  {{ include('front/layout3/_javascript.html.twig') }}
+  {{ include('front/layout/_javascript.html.twig') }}
 </body>
 
 </html>
