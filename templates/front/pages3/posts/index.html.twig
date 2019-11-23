@@ -11,7 +11,7 @@
  <div class="col-sm-8">
     {% if app.request.get('q') != null %}
         <div class="alert bg alert-info">
-        Ieškojote: <strong>{{ app.request.get('q') }}</strong>. Rasta: <strong>{{ podcasts|length}}</strong>.
+        Ieškojote: <strong>{{ app.request.get('q') }}</strong>. Rasta: <strong>{{ podcastsCount }}</strong>.
         </div>
       {% endif %}
           <div class="blog list-view">

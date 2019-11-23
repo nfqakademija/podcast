@@ -7,6 +7,7 @@ use App\Entity\Source;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
@@ -57,21 +58,39 @@ class PodcastRepository extends ServiceEntityRepository
         return $this->paginator->paginate($qb, $page, 10);
     }
 
-    public function searchPodcasts($query, $page)
+    public function searchPodcasts($searchString, $page)
     {
-        $searchTerms = explode(',', $query);
-        $qb = $this->createQueryBuilder('p');
-
-        foreach ($searchTerms as $key => $term) {
-            $qb->orWhere('p.title LIKE :p' . $key)
-                ->orWhere('p.description LIKE :p' . $key)
-                ->setParameter('p'.$key, '%'.trim($term).'%');
-        }
+        $qb = $this->getSearchResultsQueryBuilder($searchString);
 
         $query = $qb
             ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
         return $this->paginator->paginate($query, $page, 10);
+    }
+
+    public function getSearchResultsCount(string $searchString)
+    {
+        return $this->getSearchResultsQueryBuilder($searchString)
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @param $searchString
+     * @return QueryBuilder
+     */
+    private function getSearchResultsQueryBuilder(string $searchString): QueryBuilder
+    {
+        $searchTerms = explode(',', $searchString);
+        $qb = $this->createQueryBuilder('p');
+
+        foreach ($searchTerms as $key => $term) {
+            $qb->orWhere('p.title LIKE :p' . $key)
+                ->orWhere('p.description LIKE :p' . $key)
+                ->setParameter('p' . $key, '%' . trim($term) . '%');
+        }
+        return $qb;
     }
 }
