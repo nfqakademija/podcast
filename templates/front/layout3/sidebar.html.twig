@@ -39,11 +39,11 @@
           </div>
           <!-- /.widget -->
           
-        <div class="sidebox widget">
+         <div class="sidebox widget">
             <h5 class="widget-title">Paieška</h5>
-            <form class="search-form">
+            <form class="search-form" action="{{ path('search_podcasts') }}">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Paieška">
+                <input type="text" name="q" class="form-control" placeholder="Paieška">
               </div>
               <!-- /.form-group -->
             </form>
