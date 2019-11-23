@@ -1,12 +1,14 @@
- <div class="row text-center">
- {% for source in sources %}
-        <div class="col-sm-2">
-          <figure>
-   
-            <a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="btn btn-border btn-full-rounded">{{ source.name}}</a>
-         
-          </figure>
-        </div>
- {% endfor %}
+<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+  <ul class="nav nav-tabs nav-tabs-lined nav-tabs-lined-bottom">
+    <li class="active">
+      <a href="{{ url('podcasts') }}" >
+        VISI
+      </a>
+    </li>
+    {% for source in sources %}
+    <li>
+      <a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="">{{ source.name}}</a>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
-      <hr>
