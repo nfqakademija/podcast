@@ -95,7 +95,8 @@ class HomeController extends AbstractController
         return $this->render('front/pages3/posts/index.html.twig', [
             'podcasts' => $podcasts,
             'sources' => $sourceRepository->findAll(),
-            'tags' => $tagRepository->findAll()
+            'tags' => $tagRepository->findAll(),
+            'search' => true
         ]);
     }
 }
