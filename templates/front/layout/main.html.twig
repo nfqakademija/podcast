@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-{{ include('front/layout3/head.html.twig') }}
+{{ include('front/layout/head.html.twig') }}
 
 <body>
   <div class="content-wrapper">
 
-    {{ include('front/layout3/navbar.html.twig') }}
+    {{ include('front/layout/navbar.html.twig') }}
 
     {% block header %}{% endblock %}
+
     <div class="wrapper light-wrapper">
       <div class="container inner">
         <div class="row">
 
           {% block content %}{% endblock %}
 
-          {{ include('front/layout3/sidebar.html.twig') }}
+          {% block sidebar %}{% endblock %}
+
         </div>
       </div>
     </div>
   </div>
 
-  {{ include('front/layout3/footer.html.twig') }}
+  {{ include('front/layout/footer.html.twig') }}
 
-  {{ include('front/layout3/_javascript.html.twig') }}
+  {{ include('front/layout/_javascript.html.twig') }}
 </body>
 
 </html>
