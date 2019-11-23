@@ -96,6 +96,7 @@ class HomeController extends AbstractController
             'podcasts' => $podcasts,
             'sources' => $sourceRepository->findAll(),
             'tags' => $tagRepository->findAll(),
+            'podcastsCount' => $podcastRepository->getSearchResultsCount($query),
             'search' => true
         ]);
     }
