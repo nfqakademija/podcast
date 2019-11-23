@@ -7,7 +7,13 @@
 {% block content %}
 {{ include('front/pages3/posts/_sources.html.twig') }}
 
+
  <div class="col-sm-8">
+    {% if app.request.get('q') != null %}
+        <div class="alert bg alert-info">
+        Ieškojote: <strong>{{ app.request.get('q') }}</strong>. Rasta: <strong>{{ podcasts|length}}</strong>.
+        </div>
+      {% endif %}
           <div class="blog list-view">
            {% for podcast in podcasts %}
             <div class="post">
@@ -47,12 +53,9 @@
                                     Your browser does not support the audio element.
                                 </audio>
                             </p>
-                            <p> {{ podcast.description }}</p>
+
                             {% endif %}
-                            {# {% if podcast.video != null %}
-                                <iframe width="460" height="315" src="https://www.youtube.com/embed/{{ podcast.video }}" frameborder="0" 
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            {% endif %} #}
+                              <p> {{ podcast.description }}</p>
                   </div>
                   <!-- /.post-content --> 
                 </div>
