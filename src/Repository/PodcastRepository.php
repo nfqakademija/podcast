@@ -59,16 +59,19 @@ class PodcastRepository extends ServiceEntityRepository
 
     public function searchPodcasts($query, $page)
     {
-        $qb = $this->createQueryBuilder('p')
-            ->andWhere('p.title = :query')
-            ->orWhere('p.description = :query')
-            ->setParameter('query', $query)
+        $searchTerms = explode(' ', $query);
+        $qb = $this->createQueryBuilder('p');
+
+        foreach ($searchTerms as $key => $term) {
+            $qb->orWhere('p.title LIKE :p' . $key)
+                ->orWhere('p.description LIKE :p' . $key)
+                ->setParameter('p'.$key, '%'.trim($term).'%');
+        }
+
+        $query = $qb
             ->orderBy('p.publishedAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
 
-        dd($qb);
-
-        return $this->paginator->paginate($qb, $page, 10);
+        return $this->paginator->paginate($query, $page, 10);
     }
 }
