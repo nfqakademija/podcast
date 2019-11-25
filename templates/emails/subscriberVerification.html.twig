@@ -42,9 +42,9 @@
             <div class="block">
                 <h1>Patvirtinkite prenumeratą</h1>
                 <p>Norint gauti prenumeratas prašome patvirtinti savo tapatybę.</p>
-                <a href="{{ url }}" class="verify">Patvirtinti prenumeratą</a>
+                <a href="{{ url('subscriber_veritify_email', {'email': email | urlencrypt}) }}" class="verify">Patvirtinti prenumeratą</a>
                 <p>Arba naršyklės lange atverkite šią nuorodą:</p>
-                <p class="url">{{url}}</p>
+                <p class="url">{{email}}</p>
             </div>
         </div>
     </body>

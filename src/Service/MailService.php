@@ -3,6 +3,9 @@
 
 namespace App\Service;
 
+use App\Entity\Subscriber;
+use App\Repository\SubscriberRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Swift_Mailer;
 use Twig\Environment;
@@ -15,15 +18,23 @@ class MailService
     private $mailer;
     private $templating;
     private $logger;
+    private $subscriberRepository;
 
-    public function __construct(Swift_Mailer $mailer, Environment $templating, LoggerInterface $logger)
-    {
+    public function __construct(
+        Swift_Mailer $mailer,
+        Environment $templating,
+        LoggerInterface $logger,
+        EntityManagerInterface $entityManager,
+        SubscriberRepository $subscriberRepository
+    ) {
         $this->mailer = $mailer;
         $this->templating = $templating;
         $this->logger = $logger;
+        $this->entityManager = $entityManager;
+        $this->subscriberRepository = $subscriberRepository;
     }
 
-    public function sendVertification($email)
+    public function sendVerification($email)
     {
         try {
             $message = (new \Swift_Message())
@@ -32,8 +43,8 @@ class MailService
                 ->setTo($email)
                 ->setBody(
                     $this->templating->render(
-                        'emails/subscriberVersification.html.twig',
-                        ['url' => 'kazis']
+                        'emails/subscriberVerification.html.twig',
+                        ['email' => $email]
                     ),
                     'text/html'
                 );
@@ -48,6 +59,16 @@ class MailService
             return false;
         }
 
-        $this->mailer->send($message);
+        if ($this->mailer->send($message) && $this->checkIfEmailExists($email)) {
+            $subscriber = new Subscriber();
+            $subscriber->setEmail($email);
+
+            $this->entityManager->persist($subscriber);
+            $this->entityManager->flush();
+        }
+    }
+    private function checkIfEmailExists($email): bool
+    {
+        return empty($this->subscriberRepository->findOneBy(['email' => $email]))?true:false;
     }
 }

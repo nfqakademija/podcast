@@ -124,6 +124,9 @@
     "nikic/php-parser": {
         "version": "v4.2.4"
     },
+    "nzo/url-encryptor-bundle": {
+        "version": "v4.2.3"
+    },
     "ocramius/package-versions": {
         "version": "1.5.1"
     },

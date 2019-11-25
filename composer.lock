@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce18eb594ad64be7a00902dd9b6e1ce9",
+    "content-hash": "de84d6a16c216e7f024719becfd550fd",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1638,6 +1638,62 @@
                 "psr-3"
             ],
             "time": "2019-11-13T10:00:05+00:00"
+        },
+        {
+            "name": "nzo/url-encryptor-bundle",
+            "version": "v4.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nayzo/NzoUrlEncryptorBundle.git",
+                "reference": "09659b0db63dc01fb7a85747e3c688f3ba110f0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nayzo/NzoUrlEncryptorBundle/zipball/09659b0db63dc01fb7a85747e3c688f3ba110f0e",
+                "reference": "09659b0db63dc01fb7a85747e3c688f3ba110f0e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "^2.3|^3.0|^4.0"
+            },
+            "conflict": {
+                "twig/twig": "<1.12"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8|^5.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Nzo\\UrlEncryptorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ala Eddine Khefifi",
+                    "email": "alakhefifi@gmail.com"
+                }
+            ],
+            "description": "The NzoUrlEncryptorBundle is a Symfony Bundle used to Encrypt and Decrypt data and variables in the Web application or passed through URL",
+            "keywords": [
+                "data",
+                "decrypt",
+                "decryption",
+                "encrypt",
+                "encryption",
+                "id",
+                "link",
+                "security",
+                "url",
+                "variable"
+            ],
+            "time": "2019-04-23T10:09:01+00:00"
         },
         {
             "name": "ocramius/package-versions",
