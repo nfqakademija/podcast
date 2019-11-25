@@ -1,37 +1,58 @@
-<div id="sidebar" class="sidebar-right">
-				
-	<div id="search-2" class="widget-item widget_search">
-            <form method="get" class="search-form" action="#">
-                <div>
-                    <label>
-                        <input type="search" class="sh-sidebar-search search-field" placeholder="Paieška" value="" name="s" title="Search text" required />
-                    </label>
-                    <button type="submit" class="search-submit">
-
-                    </button>
+  <aside class="col-sm-4 sidebar">
+        <div class="sidebox widget">
+          <h5 class="widget-title">Pranešimai apie naujus įrašus</h5>
+          <div class="newsletter-wrapper">
+            <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+              <div id="mc_embed_signup_scroll" class="form-group">
+                <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="El. paštas" required>
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-rounded mr-0">Užsisakyti</button>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  <input type="text" name="b_ddc180777a163e0f9f66ee014_056957de28" tabindex="-1" value="">
                 </div>
-			</form>
-	</div>
-			
-	<div id="categories-3" class="widget-item widget_categories">
-		<h3 class="widget-title">Podcastų tipas</h3>		
-		<ul>
-		<li class="cat-item cat-item-24"><a href="#">Audio</a> (1)
-		</li>
-			<li class="cat-item cat-item-21"><a href="#">Video</a> (5)
-		</li>
-	</ul>
-	</div>
-			
-	<div id="tag_cloud-2" class="widget-item widget_tag_cloud">
-		<h3 class="widget-title">Raktažodžiai</h3>
-		<div class="tagcloud">
-			{% for tag in tags %}
-				<a href="{{ path('podcasts_by_tag', {tag: tag.id}) }}" class="tag-cloud-link tag-link-39 tag-link-position-1"
-						style="font-size: 8pt;" aria-label="Boat (1 item)">{{ tag.tag}}</a>
-			{% endfor %}
-	</div>	
+                <div class="clearfix"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.widget -->
+          
+          <div class="sidebox widget">
+            <h5 class="widget-title">Podcastų tipai</h5>
+            <ul class="unordered-list">
+              <li><a href="#">Audio (21)</a></li>
+              <li><a href="#">Video (19)</a></li>
+            </ul>
+          </div>
+          <!-- /.widget -->
+          
+          <div class="sidebox widget">
+            <h5 class="widget-title">Raktažodžiai</h5>
+            <ul class="unordered-list">
+              {% for tag in tags %}
+              <li><a href="{{ path('podcasts_by_tag', {tag: tag.id}) }}" 
+                  style="font-size: 8pt;" aria-label="Boat (1 item)">{{ tag.tag}}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
+          <!-- /.widget -->
+          
+         <div class="sidebox widget">
+            <h5 class="widget-title">Paieška</h5>
+            <form class="search-form" action="{{ path('search_podcasts') }}">
+              <div class="form-group">
+                <input type="text" name="q" class="form-control" placeholder="Paieška">
+              </div>
+              <!-- /.form-group -->
+            </form>
+            <!-- /.search-form --> 
+          </div>
+          <!-- /.widget -->
 
-		
-	</div>
-</div>
+          <div class="sidebox widget">
+            <h5 class="widget-title">Apie projektą</h5>
+            <p>Krepšinio podcastai vienoje vietoje.</p>
+
+            <div class="clearfix"></div>
+          </div>
+        </aside>
