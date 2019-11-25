@@ -427,7 +427,7 @@ footer.footer-bg {
     background-repeat: no-repeat !important;
     background-position: center bottom !important;
 }
-footer.footer-bg1 {
+/* footer.footer-bg1 {
     background-image: url(style/images/art/footer.png) !important;
     padding-bottom: 312px;
 }
@@ -438,7 +438,7 @@ footer.footer-bg2 {
 footer.footer-bg3 {
     background-image: url(style/images/art/footer3.jpg) !important;
     padding-bottom: 369px;
-}
+} */
 .pattern-wrapper {
     background: transparent repeat center center;
 }
@@ -626,12 +626,12 @@ acronym[title] {
     background-size: cover !important;
     background-position: center center !important;
 }
-.image-block-wrapper .image-block .image-block-bg.bg1 {
+/* .image-block-wrapper .image-block .image-block-bg.bg1 {
     background-image: url(style/images/art/about3.jpg)
 }
 .image-block-wrapper .image-block .image-block-bg.bg2 {
     background-image: url(style/images/art/about4.jpg)
-}
+} */
 .row.gutter60 {
     margin-left: -15px;
     margin-right: -15px
@@ -646,12 +646,12 @@ acronym[title] {
 	background-position: center center;
 	background-size: cover;
 }
-.split-layout.bg1 .content-left {
+/* .split-layout.bg1 .content-left {
 	background-image: url(style/images/art/resume-bg.jpg);
 }
 .split-layout.bg2 .content-left {
 	background-image: url(style/images/art/uc-bg.jpg);
-}
+} */
 .split-layout .inner {
 	padding: 90px;
 }
@@ -1717,12 +1717,12 @@ a.has-submenu {
     max-width: 100%;
     width: auto;
 }
-.slick-list.draggable {
+/* .slick-list.draggable {
     cursor: url(style/images/openhand.cur), move;
 }
 .slick-list.draggable:active {
     cursor: url(style/images/closedhand.cur), move;
-}
+} */
 .slick-nav-container .slick-nav {
     text-align: center;
     display: -webkit-box;
@@ -6317,12 +6317,12 @@ figure.overlay img {
 	    position: relative;
 	    background: transparent repeat;	    
 	}
-	.box-layout.bg1 {
+	/* .box-layout.bg1 {
 	    background-image: url(style/images/art/pattern3.jpg);	    
 	}
 	.box-layout.bg2 {
 	    background-image: url(style/images/art/pattern4.jpg);	    
-	}
+	} */
 	.box-layout .content-wrapper {
 	    background: #f6f7f8;
 	}
