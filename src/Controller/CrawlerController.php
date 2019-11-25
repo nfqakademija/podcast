@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Podcast;
-use App\Repository\SourceRepository;
 use App\Service\CrawlerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CrawlerController extends AbstractController
@@ -13,11 +13,24 @@ class CrawlerController extends AbstractController
     /**
      * @Route("/crawler", name="crawler")
      */
-    public function index(CrawlerService $crawlerService, SourceRepository $sourceRepository)
+    public function index(CrawlerService $crawlerService)
     {
-        $sources = $sourceRepository->findBy(['sourceType' => Podcast::TYPES['TYPE_AUDIO']]);
-        $podcasts = $crawlerService->scrapSites($sources);
+        $podcasts = $crawlerService->scrapSites();
+            $html = "<table>";
+            foreach ($podcasts as $source => $sourcePodcasts) {
+                $html .= "<tr><th>$source</th></tr>";
+                if (is_array($sourcePodcasts)) {
+                    /** @var Podcast $podcast */
+                    foreach ($sourcePodcasts as $podcast) {
+                        $html .= "<tr><td>" . $podcast->getTitle() . "</td></tr>";
+                    }
+                } else {
+                    $html .= "<tr><td>Nauju podkastu siuo metu nera</td></tr>";
+                }
+            }
 
-        dd($podcasts);
+            $html.= "</table>";
+
+        return new Response($html);
     }
 }
