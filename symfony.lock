@@ -44,9 +44,6 @@
             "src/Repository/.gitignore"
         ]
     },
-    "doctrine/doctrine-cache-bundle": {
-        "version": "1.3.5"
-    },
     "doctrine/doctrine-fixtures-bundle": {
         "version": "3.0",
         "recipe": {
@@ -109,11 +106,11 @@
             "config/routes/easy_admin.yaml"
         ]
     },
-    "gedmo/doctrine-extensions": {
-        "version": "v2.4.37"
-    },
     "egulias/email-validator": {
         "version": "2.1.11"
+    },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.37"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"

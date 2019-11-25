@@ -44,7 +44,7 @@
                 <p>Norint gauti prenumeratas prašome patvirtinti savo tapatybę.</p>
                 <a href="{{ url('subscriber_veritify_email', {'email': email | urlencrypt}) }}" class="verify">Patvirtinti prenumeratą</a>
                 <p>Arba naršyklės lange atverkite šią nuorodą:</p>
-                <p class="url">{{email}}</p>
+                <p class="url">{{ url('subscriber_veritify_email', {'email': email | urlencrypt}) }}</p>
             </div>
         </div>
     </body>
