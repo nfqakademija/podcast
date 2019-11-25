@@ -358,4 +358,50 @@ You can turn off this feature to get a quicker startup with -A
 (B[0;1mBye
 (B[m]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ php[K[K[Kscripts/va[K[Kbackend.sh 
 Dependencies can be installed via: composer install
-Many Symfony tools can be acces
+Many Symfony tools can be accessed via: bin/console
+Type "exit" to get out of terminal
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ bin/console migrate-youtube
+Starts Migration...
+[32mMigration ended successfully[39m
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ exit
+exit
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git staut[K[Ktus
+On branch nerijus_crawler
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   src/Controller/CrawlerController.php[m
+	[31mmodified:   src/Entity/Podcast.php[m
+	[31mmodified:   src/Service/CrawlerService.php[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31msrc/Service/TaggingService.php[m
+	[31mtypescript[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git add 
+Nothing specified, nothing added.
+Maybe you wanted to say 'git add .'?
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git add ,[K.
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git commit -m "refo[Kactoring crawler e[Kservice:[K"
+[nerijus_crawler 9576a78] refactoring crawler service
+ 5 files changed, 622 insertions(+), 172 deletions(-)
+ rewrite src/Service/CrawlerService.php (62%)
+ create mode 100644 src/Service/TaggingService.php
+ create mode 100644 typescript
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git push origin crawler_[K[K[K[K[K[K[K[Knerijus_crawler 
+Username for 'https://github.com': nerijuspamerneckis
+Password for 'https://nerijuspamerneckis@github.com': 
+Enumerating objects: 19, done.
+Counting objects:   5% (1/19)   Counting objects:  10% (2/19)   Counting objects:  15% (3/19)   Counting objects:  21% (4/19)   Counting objects:  26% (5/19)   Counting objects:  31% (6/19)   Counting objects:  36% (7/19)   Counting objects:  42% (8/19)   Counting objects:  47% (9/19)   Counting objects:  52% (10/19)   Counting objects:  57% (11/19)   Counting objects:  63% (12/19)   Counting objects:  68% (13/19)   Counting objects:  73% (14/19)   Counting objects:  78% (15/19)   Counting objects:  84% (16/19)   Counting objects:  89% (17/19)   Counting objects:  94% (18/19)   Counting objects: 100% (19/19)   Counting objects: 100% (19/19), done.
+Delta compression using up to 8 threads
+Compressing objects:   9% (1/11)   Compressing objects:  18% (2/11)   Compressing objects:  27% (3/11)   Compressing objects:  36% (4/11)   Compressing objects:  45% (5/11)   Compressing objects:  54% (6/11)   Compressing objects:  63% (7/11)   Compressing objects:  72% (8/11)   Compressing objects:  81% (9/11)   Compressing objects:  90% (10/11)   Compressing objects: 100% (11/11)   Compressing objects: 100% (11/11), done.
+Writing objects:   9% (1/11)   Writing objects:  18% (2/11)   Writing objects:  27% (3/11)   Writing objects:  36% (4/11)   Writing objects:  45% (5/11)   Writing objects:  54% (6/11)   Writing objects:  63% (7/11)   Writing objects:  72% (8/11)   Writing objects:  81% (9/11)   Writing objects:  90% (10/11)   Writing objects: 100% (11/11)   Writing objects: 100% (11/11), 9.83 KiB | 4.91 MiB/s, done.
+Total 11 (delta 7), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/7)[Kremote: Resolving deltas:  14% (1/7)[Kremote: Resolving deltas:  28% (2/7)[Kremote: Resolving deltas:  42% (3/7)[Kremote: Resolving deltas:  57% (4/7)[Kremote: Resolving deltas:  71% (5/7)[Kremote: Resolving deltas: 100% (7/7)[Kremote: Resolving deltas: 100% (7/7), completed with 6 local objects.[K
+To https://github.com/nfqakademija/podcast.git
+   2c76148..9576a78  nerijus_crawler -> nerijus_crawler
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git push origin nerijus_crawler 

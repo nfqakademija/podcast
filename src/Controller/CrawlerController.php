@@ -16,20 +16,20 @@ class CrawlerController extends AbstractController
     public function index(CrawlerService $crawlerService)
     {
         $podcasts = $crawlerService->scrapSites();
-            $html = "<table>";
-            foreach ($podcasts as $source => $sourcePodcasts) {
-                $html .= "<tr><th>$source</th></tr>";
-                if (is_array($sourcePodcasts)) {
-                    /** @var Podcast $podcast */
-                    foreach ($sourcePodcasts as $podcast) {
-                        $html .= "<tr><td>" . $podcast->getTitle() . "</td></tr>";
-                    }
-                } else {
-                    $html .= "<tr><td>Nauju podkastu siuo metu nera</td></tr>";
+        $html = "<table>";
+        foreach ($podcasts as $source => $sourcePodcasts) {
+            $html .= "<tr><th>$source</th></tr>";
+            if (is_array($sourcePodcasts)) {
+                /** @var Podcast $podcast */
+                foreach ($sourcePodcasts as $podcast) {
+                    $html .= "<tr><td>" . $podcast->getTitle() . "</td></tr>";
                 }
+            } else {
+                $html .= "<tr><td>Nauju podkastu siuo metu nera</td></tr>";
             }
+        }
 
-            $html.= "</table>";
+        $html.= "</table>";
 
         return new Response($html);
     }
