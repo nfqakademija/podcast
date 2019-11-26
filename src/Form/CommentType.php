@@ -2,31 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Podcast;
+use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PodcastType extends AbstractType
+class CommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
-            ->add('image')
-            ->add('audio')
-            ->add('video')
-            ->add('createdAt')
-            ->add('source')
-            ->add('user')
+            ->add('body', TextareaType::class, [
+                'label' => 'Palikite komentarą'
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Podcast::class,
+            'data_class' => Comment::class,
         ]);
     }
 }

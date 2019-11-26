@@ -16,7 +16,7 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/registracija", name="app_register")
      */
     public function register(
         Request $request,
@@ -25,6 +25,10 @@ class RegistrationController extends AbstractController
         LoginFormAuthenticator $authenticator,
         EntityManagerInterface $entityManager
     ) {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('podcasts');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -51,8 +55,9 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('front/pages/users/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'title' => 'Susikurkite paskyrą'
         ]);
     }
 }

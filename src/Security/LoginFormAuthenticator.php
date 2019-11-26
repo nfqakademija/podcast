@@ -72,7 +72,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Username could not be found.');
+            throw new CustomUserMessageAuthenticationException('Vartotojas nerastas!');
         }
 
         return $user;
@@ -89,7 +89,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('easyadmin'));
+        return new RedirectResponse($this->urlGenerator->generate('podcasts'));
     }
 
     protected function getLoginUrl()

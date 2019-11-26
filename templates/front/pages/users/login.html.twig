@@ -1,0 +1,41 @@
+{% extends 'front/layout/main.html.twig' %}
+
+{% block content %}
+<div class="col-sm-6 offset-3">
+    <h3>Jeigu turite paskyrą prisijunkite</h3>
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <div class="form-group">
+            <input type="email" class="form-control" name="username" placeholder="El. paštas" value="{{ last_username }}">
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Slaptažodis" required>
+        </div>
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+        <!-- /.form-group -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="checkbox mt-0 mb-0">
+                        <label>
+                            <input type="checkbox">
+                            <span>
+                                <!-- fake checkbox --></span> <span class="wrapped-label">Prisiminti</span> </label>
+                    </div>
+                    <!-- /.checkbox -->
+                </div>
+                <!-- /.form-group -->
+            </div>
+            <!--/column -->
+            <div class="col-sm-6 text-right"><a class="hover" href="{{ path('app_register') }}">Registracija</a> <a href="#" class="hover">Pamiršai slaptažodį?</a> </div>
+            <!--/column -->
+        </div>
+        <button type="submit" class="btn btn-rounded">Prisijungti</button>
+    </form>
+</div>
+{% endblock %}
