@@ -4,7 +4,6 @@
  <div class="col-sm-8">
           <div class="blog classic-view single">
             <div class="post">
-              <figure><img src="style/images/art/bp1.jpg" alt="" /></figure>
               <span class="category"><a href="{{ podcast.source.url}}" class="label bg-lime" target="_blank">
                 {{ podcast.source.name}} </a></span>
               <div class="post-content">
@@ -24,7 +23,7 @@
                 {% endif %}
                 {% if podcast.video != null %}
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ podcast.video }}"
-                    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"
                     allowfullscreen></iframe>
                 {% endif %}
                 <p> {{ podcast.description }}</p>
