@@ -58,6 +58,7 @@ class CrawlerService
     public function scrapSites()
     {
         $sources = $this->sourceRepository->findBy(['sourceType' => Podcast::TYPES['TYPE_AUDIO']]);
+        $podcasts = [];
 
         foreach ($sources as $source) {
             $html = $this->getSourceHtmlCode($source);

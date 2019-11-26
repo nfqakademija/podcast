@@ -21,13 +21,24 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => "Elektroninis paštas"
+                'label' => false,
+                'attr' => ['placeholder' => 'Elektroninis paštas']
+            ])
+            ->add('fullName', TextType::class, [
+                'label' => false,
+                'attr' => ['placeholder' => 'Pilnas Vardas']
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Slaptažodžiai turi sutapti.',
-                'first_options'  => ['label' => 'Slaptažodis'],
-                'second_options' => ['label' => 'Pakartokite slaptažodį'],
+                'first_options'  => [
+                    'label' => false,
+                    'attr' => ['placeholder' => 'Slaptažodis']
+                    ],
+                'second_options' => [
+                    'label' => false,
+                    'attr' => ['placeholder' => 'Pakartokite slaptažodį']
+                ],
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -43,15 +54,15 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'Sutinku su sąlygomis',
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Turite sutinku su sąlygomis',
-                    ]),
-                ],
-            ])
+//            ->add('agreeTerms', CheckboxType::class, [
+//                'label' => 'Sutinku su sąlygomis',
+//                'mapped' => false,
+//                'constraints' => [
+//                    new IsTrue([
+//                        'message' => 'Turite sutinku su sąlygomis',
+//                    ]),
+//                ],
+//            ])
         ;
     }
 
