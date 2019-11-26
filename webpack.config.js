@@ -5,6 +5,7 @@ var Encore = require('@symfony/webpack-encore');
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
+// var webpack = require('webpack');
 
 Encore
     // directory where compiled assets will be stored
@@ -14,6 +15,13 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
+    .autoProvideVariables({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+    })
+
+    // .addPlugin(new webpack.TweenMax(/^\.\/locale$/, /gsap$/))
     /*
      * ENTRY CONFIG
      *
@@ -28,6 +36,12 @@ Encore
     .addEntry('icons', './assets/js/icons.js')
     .addEntry('custom', './assets/js/custom.js')
     .addEntry('bootstrap.min', './assets/js/bootstrap.js')
+    .addEntry('jquery.min', './assets/js/jquery.min.js')
+    .addEntry('bootstrap.minjs', './assets/js/bootstrap.min.js')
+    .addEntry('themepunch.tools.min', './assets/js/jquery.themepunch.tools.min.js')
+    .addEntry('jquery.themepunch.revolution.min', './assets/js/jquery.themepunch.revolution.min.js')
+    .addEntry('plugins', './assets/js/plugins.js')
+    .addEntry('scripts2', './assets/js/scripts2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
