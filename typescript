@@ -1,0 +1,407 @@
+Script started on 2019-11-25 22:40:21+02:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="150" LINES="18"]
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ php index.php s[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kscripts/mt[Kysql.sh 
+Login credentials to MySql server:
+User: root
+Password: p9iijKcfgENjBWDYgSH7
+Host: 127.0.0.1
+Port: 3307
+
+Type "exit" to get out of MySql terminal
+
+(B[0;1mWelcome to the MariaDB monitor.  Commands end with ; or \g.
+(B[m(B[0;1mYour MariaDB connection id is 130
+Server version: 10.3.13-MariaDB-1:10.3.13+maria~bionic mariadb.org binary distribution
+
+(B[m(B[0;1mCopyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+(B[m(B[0;1mType 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+(B[m[?1034hMariaDB [(none)]> [KMariaDB [(none)]> use symfony
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+(B[0;1mDatabase changed
+(B[mMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 296 rows affected (0.019 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> exit
+(B[0;1mBye
+(B[m]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ pp[Kg[Khp io[K[K[K[K[K[Kcsri[K[K[K[Kscripts/backend.sh 
+Dependencies can be installed via: composer install
+Many Symfony tools can be accessed via: bin/console
+Type "exit" to get out of terminal
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ php b     bin/console doctrine:migratios ns:diff
+Generated new migration class to "[32m/code/src/Migrations/Version20191125204440.php[39m"
+
+To run just this migration for testing purposes, you can use [32mmigrations:execute --up 20191125204440[39m
+
+To revert the migration you can use [32mmigrations:execute --down 20191125204440[39m
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [Kexit
+exit
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git pull org[Kigin master 
+remote: Enumerating objects: 76, done.[K
+remote: Counting objects:   1% (1/76)[Kremote: Counting objects:   2% (2/76)[Kremote: Counting objects:   3% (3/76)[Kremote: Counting objects:   5% (4/76)[Kremote: Counting objects:   6% (5/76)[Kremote: Counting objects:   7% (6/76)[Kremote: Counting objects:   9% (7/76)[Kremote: Counting objects:  10% (8/76)[Kremote: Counting objects:  11% (9/76)[Kremote: Counting objects:  13% (10/76)[Kremote: Counting objects:  14% (11/76)[Kremote: Counting objects:  15% (12/76)[Kremote: Counting objects:  17% (13/76)[Kremote: Counting objects:  18% (14/76)[Kremote: Counting objects:  19% (15/76)[Kremote: Counting objects:  21% (16/76)[Kremote: Counting objects:  22% (17/76)[Kremote: Counting objects:  23% (18/76)[Kremote: Counting objects:  25% (19/76)[Kremote: Counting objects:  26% (20/76)[Kremote: Counting objects:  27% (21/76)[Kremote: Counting objects:  28% (22/76)[Kremote: Counting objects:  30% (23/76)[Kremote: Counting objects:  31% (24/76)[Kremote: Counting objects:  32% (25/76)[Kremote: Counting objects:  34% (26/76)[Kremote: Counting objects:  35% (27/76)[Kremote: Counting objects:  36% (28/76)[Kremote: Counting objects:  38% (29/76)[Kremote: Counting objects:  39% (30/76)[Kremote: Counting objects:  40% (31/76)[Kremote: Counting objects:  42% (32/76)[Kremote: Counting objects:  43% (33/76)[Kremote: Counting objects:  44% (34/76)[Kremote: Counting objects:  46% (35/76)[Kremote: Counting objects:  47% (36/76)[Kremote: Counting objects:  48% (37/76)[Kremote: Counting objects:  50% (38/76)[Kremote: Counting objects:  51% (39/76)[Kremote: Counting objects:  52% (40/76)[Kremote: Counting objects:  53% (41/76)[Kremote: Counting objects:  55% (42/76)[Kremote: Counting objects:  56% (43/76)[Kremote: Counting objects:  57% (44/76)[Kremote: Counting objects:  59% (45/76)[Kremote: Counting objects:  60% (46/76)[Kremote: Counting objects:  61% (47/76)[Kremote: Counting objects:  63% (48/76)[Kremote: Counting objects:  64% (49/76)[Kremote: Counting objects:  65% (50/76)[Kremote: Counting objects:  67% (51/76)[Kremote: Counting objects:  68% (52/76)[Kremote: Counting objects:  69% (53/76)[Kremote: Counting objects:  71% (54/76)[Kremote: Counting objects:  72% (55/76)[Kremote: Counting objects:  73% (56/76)[Kremote: Counting objects:  75% (57/76)[Kremote: Counting objects:  76% (58/76)[Kremote: Counting objects:  77% (59/76)[Kremote: Counting objects:  78% (60/76)[Kremote: Counting objects:  80% (61/76)[Kremote: Counting objects:  81% (62/76)[Kremote: Counting objects:  82% (63/76)[Kremote: Counting objects:  84% (64/76)[Kremote: Counting objects:  85% (65/76)[Kremote: Counting objects:  86% (66/76)[Kremote: Counting objects:  88% (67/76)[Kremote: Counting objects:  89% (68/76)[Kremote: Counting objects:  90% (69/76)[Kremote: Counting objects:  92% (70/76)[Kremote: Counting objects:  93% (71/76)[Kremote: Counting objects:  94% (72/76)[Kremote: Counting objects:  96% (73/76)[Kremote: Counting objects:  97% (74/76)[Kremote: Counting objects:  98% (75/76)[Kremote: Counting objects: 100% (76/76)[Kremote: Counting objects: 100% (76/76), done.[K
+remote: Compressing objects:   3% (1/28)[Kremote: Compressing objects:   7% (2/28)[Kremote: Compressing objects:  10% (3/28)[Kremote: Compressing objects:  14% (4/28)[Kremote: Compressing objects:  17% (5/28)[Kremote: Compressing objects:  21% (6/28)[Kremote: Compressing objects:  25% (7/28)[Kremote: Compressing objects:  28% (8/28)[Kremote: Compressing objects:  32% (9/28)[Kremote: Compressing objects:  35% (10/28)[Kremote: Compressing objects:  39% (11/28)[Kremote: Compressing objects:  42% (12/28)[Kremote: Compressing objects:  46% (13/28)[Kremote: Compressing objects:  50% (14/28)[Kremote: Compressing objects:  53% (15/28)[Kremote: Compressing objects:  57% (16/28)[Kremote: Compressing objects:  60% (17/28)[Kremote: Compressing objects:  64% (18/28)[Kremote: Compressing objects:  67% (19/28)[Kremote: Compressing objects:  71% (20/28)[Kremote: Compressing objects:  75% (21/28)[Kremote: Compressing objects:  78% (22/28)[Kremote: Compressing objects:  82% (23/28)[Kremote: Compressing objects:  85% (24/28)[Kremote: Compressing objects:  89% (25/28)[Kremote: Compressing objects:  92% (26/28)[Kremote: Compressing objects:  96% (27/28)[Kremote: Compressing objects: 100% (28/28)[Kremote: Compressing objects: 100% (28/28), done.[K
+remote: Total 76 (delta 48), reused 71 (delta 47), pack-reused 0[K
+Unpacking objects:   1% (1/76)   Unpacking objects:   2% (2/76)   Unpacking objects:   3% (3/76)   Unpacking objects:   5% (4/76)   Unpacking objects:   6% (5/76)   Unpacking objects:   7% (6/76)   Unpacking objects:   9% (7/76)   Unpacking objects:  10% (8/76)   Unpacking objects:  11% (9/76)   Unpacking objects:  13% (10/76)   Unpacking objects:  14% (11/76)   Unpacking objects:  15% (12/76)   Unpacking objects:  17% (13/76)   Unpacking objects:  18% (14/76)   Unpacking objects:  19% (15/76)   Unpacking objects:  21% (16/76)   Unpacking objects:  22% (17/76)   Unpacking objects:  23% (18/76)   Unpacking objects:  25% (19/76)   Unpacking objects:  26% (20/76)   Unpacking objects:  27% (21/76)   Unpacking objects:  28% (22/76)   Unpacking objects:  30% (23/76)   Unpacking objects:  31% (24/76)   Unpacking objects:  32% (25/76)   Unpacking objects:  34% (26/76)   Unpacking objects:  35% (27/76)   Unpacking objects:  36% (28/76)   Unpacking objects:  38% (29/76)   Unpacking objects:  39% (30/76)   Unpacking objects:  40% (31/76)   Unpacking objects:  42% (32/76)   Unpacking objects:  43% (33/76)   Unpacking objects:  44% (34/76)   Unpacking objects:  46% (35/76)   Unpacking objects:  47% (36/76)   Unpacking objects:  48% (37/76)   Unpacking objects:  50% (38/76)   Unpacking objects:  51% (39/76)   Unpacking objects:  52% (40/76)   Unpacking objects:  53% (41/76)   Unpacking objects:  55% (42/76)   Unpacking objects:  56% (43/76)   Unpacking objects:  57% (44/76)   Unpacking objects:  59% (45/76)   Unpacking objects:  60% (46/76)   Unpacking objects:  61% (47/76)   Unpacking objects:  63% (48/76)   Unpacking objects:  64% (49/76)   Unpacking objects:  65% (50/76)   Unpacking objects:  67% (51/76)   Unpacking objects:  68% (52/76)   Unpacking objects:  69% (53/76)   Unpacking objects:  71% (54/76)   Unpacking objects:  72% (55/76)   Unpacking objects:  73% (56/76)   Unpacking objects:  75% (57/76)   Unpacking objects:  76% (58/76)   Unpacking objects:  77% (59/76)   Unpacking objects:  78% (60/76)   Unpacking objects:  80% (61/76)   Unpacking objects:  81% (62/76)   Unpacking objects:  82% (63/76)   Unpacking objects:  84% (64/76)   Unpacking objects:  85% (65/76)   Unpacking objects:  86% (66/76)   Unpacking objects:  88% (67/76)   Unpacking objects:  89% (68/76)   Unpacking objects:  90% (69/76)   Unpacking objects:  92% (70/76)   Unpacking objects:  93% (71/76)   Unpacking objects:  94% (72/76)   Unpacking objects:  96% (73/76)   Unpacking objects:  97% (74/76)   Unpacking objects:  98% (75/76)   Unpacking objects: 100% (76/76)   Unpacking objects: 100% (76/76), done.
+From https://github.com/nfqakademija/podcast
+ * branch            master     -> FETCH_HEAD
+   a20d880..1e33076  master     -> origin/master
+Updating a20d880..1e33076
+Fast-forward
+ composer.json                                                 |   2 [32m+[m
+ composer.lock                                                 | 475 [32m++++++++++++++++++++++++++++++++++++++++++++++++++++[m[31m----------------------------[m
+ config/bundles.php                                            |   3 [32m+[m[31m-[m
+ config/packages/dev/swiftmailer.yaml                          |   4 [32m+[m
+ config/packages/nzo_url_encryptor.yaml                        |   4 [32m+[m
+ config/packages/swiftmailer.yaml                              |   3 [32m+[m
+ config/packages/test/swiftmailer.yaml                         |   2 [32m+[m
+ src/Controller/SubscriberController.php                       |  85 [32m+++++++++++++++[m
+ src/Controller/YoutubeApiController.php                       |  28 [31m-----[m
+ src/Entity/Subscriber.php                                     |   2 [32m+[m[31m-[m
+ src/Migrations/Version20191121195235.php                      |  41 [32m+++++++[m
+ src/Service/MailService.php                                   | 115 [32m++++++++++++++++++++[m
+ symfony.lock                                                  |  26 [32m++++[m[31m-[m
+ templates/emails/subscriberNotification.html.twig             |  51 [32m+++++++++[m
+ templates/emails/subscriberVerification.html.twig             |  51 [32m+++++++++[m
+ templates/subscriber/subscriberCancelComplete.html.twig       |   1 [32m+[m
+ templates/subscriber/subscriberVerificationComplete.html.twig |   1 [32m+[m
+ 17 files changed, 698 insertions(+), 196 deletions(-)
+ create mode 100644 config/packages/dev/swiftmailer.yaml
+ create mode 100644 config/packages/nzo_url_encryptor.yaml
+ create mode 100644 config/packages/swiftmailer.yaml
+ create mode 100644 config/packages/test/swiftmailer.yaml
+ create mode 100644 src/Controller/SubscriberController.php
+ delete mode 100644 src/Controller/YoutubeApiController.php
+ create mode 100644 src/Migrations/Version20191121195235.php
+ create mode 100644 src/Service/MailService.php
+ create mode 100644 templates/emails/subscriberNotification.html.twig
+ create mode 100644 templates/emails/subscriberVerification.html.twig
+ create mode 100644 templates/subscriber/subscriberCancelComplete.html.twig
+ create mode 100644 templates/subscriber/subscriberVerificationComplete.html.twig
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ scripts/backend.sh 
+Dependencies can be installed via: composer install
+Many Symfony tools can be accessed via: bin/console
+Type "exit" to get out of terminal
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ composer install
+[32mLoading composer repositories with package information[39m
+[32mInstalling dependencies (including require-dev) from lock file[39m
+
+[32mPrefetching 10 packages[39m ðŸŽ¶ ðŸ’¨
+  - Downloading ([33m0%[39m) ([33m1%[39m) ([33m6%[39m) ([33m11%[39m) ([33m16%[39m) ([33m21%[39m) ([33m26%[39m) ([33m31%[39m) ([33m36%[39m) ([33m41%[39m) ([33m46%[39m) ([33m51%[39m) ([33m62%[39m) ([33m63%[39m) ([33m68%[39m) ([33m73%[39m) ([33m79%[39m) ([33m84%[39m) ([33m100%[39m)
+
+[32mPackage operations: 4 installs, 6 updates, 1 removal[39m
+  - Removing [32mdoctrine/doctrine-cache-bundle[39m ([33m1.3.5[39m)
+  - Updating [32msymfony/flex[39m ([33mv1.4.6[39m => [33mv1.4.8[39m): Loading from cache
+  - Updating [32mdoctrine/doctrine-bundle[39m ([33m1.11.2[39m => [33m2.0.0[39m): Loading from cache
+  - Updating [32mdoctrine/orm[39m ([33mv2.6.4[39m => [33mv2.7.0[39m): Loading from cache
+  - Updating [32mknplabs/knp-components[39m ([33mv2.2.1[39m => [33mv2.3.0[39m): Loading from cache
+  - Updating [32mknplabs/knp-paginator-bundle[39m ([33mv4.0.0[39m => [33mv4.1.0[39m): Loading from cache
+  - Updating [32mtwig/extra-bundle[39m ([33mv2.12.2[39m => [33mv3.0.0[39m): Loading from cache
+  - Installing [32megulias/email-validator[39m ([33m2.1.11[39m): Loading from cache
+  - Installing [32mnzo/url-encryptor-bundle[39m ([33mv4.3.0[39m): Loading from cache
+  - Installing [32mswiftmailer/swiftmailer[39m ([33mv6.2.3[39m): Loading from cache
+  - Installing [32msymfony/swiftmailer-bundle[39m ([33mv3.4.0[39m): Loading from cache
+swiftmailer/swiftmailer suggests installing true/punycode (Needed to support internationalized email addresses, if ext-intl is not installed)
+[32mGenerating autoload files[39m
+[32mocramius/package-versions:[39m Generating version class...
+[32mocramius/package-versions:[39m ...done generating version class
+Executing script cache:clear [32m[OK][39m
+Executing script assets:install public [32m[OK][39m
+
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ c bin/console doctrine:quety  t ry:sql "delete from podcast"
+int(87)
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K[K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ bin/console doctrine:query:sql "delete from podcast"
+int(87)
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K[K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ exit
+exit
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ se[K[Kscripts/n[Kmysql.sh 
+Login credentials to MySql server:
+User: root
+Password: p9iijKcfgENjBWDYgSH7
+Host: 127.0.0.1
+Port: 3307
+
+Type "exit" to get out of MySql terminal
+
+(B[0;1mWelcome to the MariaDB monitor.  Commands end with ; or \g.
+(B[m(B[0;1mYour MariaDB connection id is 150
+Server version: 10.3.13-MariaDB-1:10.3.13+maria~bionic mariadb.org binary distribution
+
+(B[m(B[0;1mCopyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+(B[m(B[0;1mType 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+(B[m[?1034hMariaDB [(none)]> [KMariaDB [(none)]> use symfony
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+(B[0;1mDatabase changed
+(B[mMariaDB [symfony]> select * from        tit  ti  tu  utke    ti  ite l. e. c   , created_at from podcast [1@ [1@t[1@y[1@p[1@e[1@.[1P[1@m[1P[1@, created_at from podcast' ;
++----------------------------------------------------------------------------------------------------------+-------+---------------------+
+| title                                                                                                    | type  | created_at          |
++----------------------------------------------------------------------------------------------------------+-------+---------------------+
+| Lietuvos triumfas FIBA b?stin?je ir „Žalgirio“ m?šiai su graikais                                        | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona su Milašiumi: apie treneriu tapus? Maskoli?n? ir Sabonio kadencijas                       | Audio | 2019-11-25 20:55:10 |
+| „Žalgirio“ korida su „Barcelona“ ir slaptos rinktin?s trenerio paieškos                                  | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona su Urbonu: apie vos neprigaut? „Žalgir?“ ir ?eponio klausimus Šarui                       | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona su Šerniumi: apie „Žalgir?“, bendravim? su Jasikevi?iumi ir ambicingus „dubleri?“ tikslus | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona su Šerniumi: apie „Žalgir?“ ir tai, kaip Prienai užima tre?i? viet? LKL                   | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona su Grigu: „Žalgirio“ supersavait? ir „Ryto“ sutemos                                       | Audio | 2019-11-25 20:55:10 |
+| K? pranašauja „Žalgiriui“ pergal? rungtyn?se su „Real“?                                                  | Audio | 2019-11-25 20:55:10 |
+| Kaip nuteik? „Žalgirio“ startas Eurolygoje?                                                              | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zonoje – Skaisgirys ir ?eponis: apie nauj?j? sezon? ir „Žalgirio“ svajones                     | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona su Radvila: kritika Lietuvos jaunimo rengimo sistemai – pagr?sta ar ne?                   | Audio | 2019-11-25 20:55:10 |
+| Pasaulio ?empionatas: neverk, Argentina ir Lietuva, „vamos“ Ispanija!                                    | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona su Jovaiša. Kas nutiko JAV bei Serbijai ir kod?l nenustebino Lietuva?                     | Audio | 2019-11-25 20:55:10 |
+| Lietuvos rinktin? atsisveikino su pasaulio ?empionatu. Koks jis buvo ir kas toliau?                      | Audio | 2019-11-25 20:55:10 |
+| Ar kar?i? piliul? nurij? lietuviai atsities prieš nepralaimin?ius pranc?zus?                             | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona su Kleiza. Kod?l neatsilaik?me prieš Australij??                                          | Audio | 2019-11-25 20:55:10 |
+| Apšilimas prieš Lietuvos ir Australijos ma??: komentarai ir prognoz?s                                    | Audio | 2019-11-25 20:55:10 |
+| K? parod? Lietuvos ?žuol? ir Kanados klev? kaktomuša?                                                    | Audio | 2019-11-25 20:55:10 |
+| Apšilimas prieš Lietuvos ir Kanados akistat?                                                             | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona. Koks scenarijus kiniškoje scenoje laukia Lietuvos rinktin?s?                             | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona. Apie riziking? rinktin?s dvyliktuk? ir vos išlaikyt? paskutin? egzamin?                  | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona. Liko paskutinis testas: ar Lietuvos rinktin? jau pasiruošusi šturmuoti Kinij??           | Audio | 2019-11-25 20:55:10 |
+| Krepšinio zona su Kemz?ra: serb? testas ir k? pasaulio ?empionate gali nuveikti Lietuvos rinktin??       | Audio | 2019-11-25 20:55:10 |
+| Apie pirmus Lietuvos rinktin?s ma?us ir tris atkabinimus                                                 | Audio | 2019-11-25 20:55:10 |
+| „Žalgirio“ ir „Ryto“ kaktomušos aptarimas su Steponu Babrausku                                           | Audio | 2019-11-25 20:55:10 |
+| Šeškus – apie begalin? nuovarg?, intriguojant? LKL final? ir savo ateit? Prienuose                       | Audio | 2019-11-25 20:55:10 |
+| „Žalgiriui“ priklausantis Gebenas – apie MVP titul?, m?š? su „Rytu“ ir rinktin?                          | Audio | 2019-11-25 20:55:10 |
+| LKL sost? karai ir Eurolygos finišas                                                                     | Audio | 2019-11-25 20:55:10 |
+| Kleiza – apie nelengv? sezon? ir „Ryto“ viltis atkrintamosiose                                           | Audio | 2019-11-25 20:55:10 |
+| LKL bosas Milašius – apie Jasikevi?iaus priekaištus ir s?myš? d?l teis?j?                                | Audio | 2019-11-25 20:55:10 |
+| ar Sabonis liks Indianoje bei kod?l „Pacers“ ir lietuvio derybos ?strigo?                                | Audio | 2019-11-25 20:55:10 |
+| Apie 90-?j? kepur?les, Brazdeikio akcijas ir australo paslaug? Lietuvai                                  | Audio | 2019-11-25 20:55:10 |
+| Apie beprotišk? NBA vasar? ir Valan?i?no bei Sabonio milijonus                                           | Audio | 2019-11-25 20:55:10 |
+| Auksinio „Raptors“ NBA sezono finišo aptarimas kartu su Linu Kleiza                                      | Audio | 2019-11-25 20:55:10 |
+| Kod?l „Raptors“ apakino NBA aukso žied? blizgesys?                                                       | Audio | 2019-11-25 20:55:10 |
+| Kokie Sabonio ir Motiej?no šansai NBA atkrintamosiose?                                                   | Audio | 2019-11-25 20:55:10 |
+| K? reiškia Valan?i?no trauma ir kod?l NBA teis?jai negerbia lietuvi??                                    | Audio | 2019-11-25 20:55:10 |
+| Kod?l Popovi?iui prireik? D-Mo ir kiek dar asmenini? rekord? pagerins JV?                                | Audio | 2019-11-25 20:55:10 |
+| Rikiuot?n sugr?ž?s „Ryto“ kapitonas Krameris – apie art?jan?i? dvikov? su ALBA ir krepšin? po traumos    | Audio | 2019-11-25 20:55:10 |
+| #Ketvirtadien?Penkt?: kitoks Sabonis, Don?i?iaus karštis ir MVP lenktyn?s                                | Audio | 2019-11-25 20:55:10 |
+| Art?ro Karnišovo suburtos „Nuggets“ išš?kiai: tikrasis išbandymas laukia dabar                           | Audio | 2019-11-25 20:55:10 |
+| Geriausias Jono Valan?i?no sezonas                                                                       | Audio | 2019-11-25 20:55:10 |
+| #Pirmadien?Penkt?: NBA aktualijos, Valan?i?no ir Sabonio pasirodymai                                     | Audio | 2019-11-25 20:55:10 |
+| ? kieno viet? atvyksta Riversas ir skandaliukas moter? krepšinyje                                        | Audio | 2019-11-25 20:55:10 |
+| Ketvirtas iš eil?s „Žalgirio“ pralaim?jimas: „š?d? audra“ ir vaikš?iojimas nuleista galva                | Audio | 2019-11-25 20:55:10 |
+| „Žalgirio“ pralaim?jimas „Panathinaikos“: ?domiausi komentarai po ma?o                                   | Audio | 2019-11-25 20:55:10 |
+| „Žalgirio“ pralaim?jimas Pir?juje ir šeši? komand? gr?stis virš?n?je                                     | Audio | 2019-11-25 20:55:10 |
+| Iš pirm? l?p?: antra iš eil?s „Ryto“ pergal? Europos taur?je                                             | Audio | 2019-11-25 20:55:10 |
+| Naujasis rinktin?s treneris ir kaip LKF tur?jo unikal? plan? su Šaru                                     | Audio | 2019-11-25 20:55:10 |
+| Iš pirm? l?p?: „Žalgirio“ pralaim?jimas „Barcelonai“                                                     | Audio | 2019-11-25 20:55:10 |
+| Iš pirm? l?p?: dramatiškas „Žalgirio“ laim?jimas Stambule                                                | Audio | 2019-11-25 20:55:10 |
+| Iš pirm? l?p?: „Žalgirio“ pralaim?jimas „Zenit“ komandai                                                 | Audio | 2019-11-25 20:55:10 |
+| Arno Veli?kos fenomenas ir kod?l stringa „Nept?nas“?                                                     | Audio | 2019-11-25 20:55:10 |
+| Pokalbis su Mindaugu Lukauskiu                                                                           | Audio | 2019-11-25 20:55:11 |
+| Pokalbis su Dalia Belickaite                                                                             | Audio | 2019-11-25 20:55:11 |
+| Pokalbis su Mindaugu Kuzminsku                                                                           | Audio | 2019-11-25 20:55:11 |
+| Pokalbis su Tadu Sedekerskiu                                                                             | Audio | 2019-11-25 20:55:11 |
+| Pokalbis su Edvinu Šeškumi                                                                               | Audio | 2019-11-25 20:55:11 |
+| Pokalbis su Žygimantu Janavi?iumi                                                                        | Audio | 2019-11-25 20:55:11 |
+| Lietuvis – Indonezijos ?empionas: kaip tai nutiko?                                                       | Audio | 2019-11-25 20:55:11 |
+| Pokalbis su Egidijumi Dimša                                                                              | Audio | 2019-11-25 20:55:11 |
+| Pokalbis su Vidu Ginevi?iumi                                                                             | Audio | 2019-11-25 20:55:11 |
+| Pokalbis su Mariumi Grigoniu                                                                             | Audio | 2019-11-25 20:55:11 |
+| „Iš eilut?s“ su Š.Mazalu                                                                                 | Audio | 2019-11-25 20:55:11 |
+| „Iš eilut?s“ su M.Užupiu                                                                                 | Audio | 2019-11-25 20:55:11 |
+| „Iš Eilut?s“ su Gustu Maskoli?nu                                                                         | Audio | 2019-11-25 20:55:11 |
+| „Iš Eilut?s“ su Edvinu Šeškum                                                                            | Audio | 2019-11-25 20:55:11 |
+| Savo lyg? pralaimintis „Žalgiris“ ir Željko keiksmai                                                     | Audio | 2019-11-25 20:55:12 |
+| Nustebin?s „Rytas“ ir pirmieji NBA sezono ?sp?džiai                                                      | Audio | 2019-11-25 20:55:12 |
+| „Užkalti hal?s langai“: šlov? Grigoniui ir dvigubos Eurolygos savait?s ?domyb?s                          | Audio | 2019-11-25 20:55:12 |
+| Ilgalaikio „Ryto“ projekto nebuvimas ir „Fenerbah?e“ strigimas                                           | Audio | 2019-11-25 20:55:12 |
+| „Ryto“ gr?žimas ? realyb? ir klausimas d?l „Žalgirio“ naujok?                                            | Audio | 2019-11-25 20:55:12 |
+| „Ryto“ ir „Žalgirio“ startai Europoje bei Šaro marškin?li? nukabinimas                                   | Audio | 2019-11-25 20:55:12 |
+| Eurolygos komand? apžvalga ir sp?jimas d?l aštuoneto                                                     | Audio | 2019-11-25 20:55:12 |
+| Didžiausios prasidedan?io sezono intrigos                                                                | Audio | 2019-11-25 20:55:12 |
+| Pasaulio ?empionato rezium?: ne?simintinas ir nepateisin?s vil?i?                                        | Audio | 2019-11-25 20:55:12 |
+| FIBA neorganizuotumas ir pirmo pasaulio ?empionato etapo apžvalga                                        | Audio | 2019-11-25 20:55:12 |
+| „urBONUSas“: Šaro pirkinys – ar tokio dabar labiausiai reik?jo „Žalgiriui“?                              | Audio | 2019-11-25 20:55:13 |
+| urBONUSas: D.Maskoli?nas – apie išg?sdinus? „Žalgirio“ pasi?lym?, Šaro unikalum? ir rinktin?s šans?      | Audio | 2019-11-25 20:55:13 |
+| urBONUSas: karštas žvilgsnis ? D.Maskoli?no pliusus, minusus ir ?domi? spaudos konferencij?              | Audio | 2019-11-25 20:55:13 |
+| „urBONUSas“: Š.Mar?iulionis ir jo prisiminimai apie M.Jordan? bei istorin? NBA debiut?                   | Audio | 2019-11-25 20:55:13 |
+| „urBONUSas“: kas negerai su A.Sabonio retorika, metodika ir trenerio rinkimais                           | Audio | 2019-11-25 20:55:13 |
+| urBONUSas: didžiausi Eurolygos nusivylimai bei siurprizai ir ?dom?s klausytoj? klausimai                 | Audio | 2019-11-25 20:55:13 |
+| „urBONUSas“: M.Kiltinavi?ius – Lietuvoje dar nesuprastas keistuolis treneris, kuris laužo mitus          | Audio | 2019-11-25 20:55:13 |
+| „urBONUSas“: „Žalgirio“ sensacijos medžiokl?, D.Adomai?io saugumas ir D.Sabonio milijonai                | Audio | 2019-11-25 20:55:13 |
+| „urBONUSas“: D.Sabonio ateitis, kritika apsaugai Vilniuje ir rinktin?s trenerio paieškoms                | Audio | 2019-11-25 20:55:13 |
+| „urBONUSas“: S.Babrauskas – nepasakotos „Žalgirio“ ir „Ryto“ aistros aikšt?je ir už jos rib?             | Audio | 2019-11-25 20:55:13 |
++----------------------------------------------------------------------------------------------------------+-------+---------------------+
+(B[0;1m87 rows in set (0.004 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> select title, type, created_at from podcast;MariaDB [symfony]> use symfony[Kdelete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.013 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.013 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.019 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.018 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.017 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.020 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.012 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.020 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.043 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.017 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> exit
+(B[0;1mBye
+(B[m]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git status
+On branch nerijus_crawler
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   src/Controller/CrawlerController.php[m
+	[31mmodified:   src/Entity/Podcast.php[m
+	[31mmodified:   src/Service/CrawlerService.php[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31msrc/Service/TaggingService.php[m
+	[31mtypescript[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git status
+On branch nerijus_crawler
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   src/Controller/CrawlerController.php[m
+	[31mmodified:   src/Entity/Podcast.php[m
+	[31mmodified:   src/Service/CrawlerService.php[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31msrc/Service/TaggingService.php[m
+	[31mtypescript[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git statusscripts/mysql.sh [2@backend[C[C[C[C[2Pmysql[C[C[C[C
+Login credentials to MySql server:
+User: root
+Password: p9iijKcfgENjBWDYgSH7
+Host: 127.0.0.1
+Port: 3307
+
+Type "exit" to get out of MySql terminal
+
+(B[0;1mWelcome to the MariaDB monitor.  Commands end with ; or \g.
+(B[m(B[0;1mYour MariaDB connection id is 168
+Server version: 10.3.13-MariaDB-1:10.3.13+maria~bionic mariadb.org binary distribution
+
+(B[m(B[0;1mCopyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+(B[m(B[0;1mType 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+(B[m[?1034hMariaDB [(none)]> [KMariaDB [(none)]> delete from podcast;MariaDB [(none)]> [24@select title, type, created_at from podcast;MariaDB [(none)]> [24Pdelete from podcast;MariaDB [(none)]> [24@select title, type, created_at from podcast;MariaDB [(none)]> [24Pdelete from podcast;
+ERROR 1046 (3D000): No database selected
+(B[0;7m(B[mMariaDB [(none)]> delete from podcast;MariaDB [(none)]> [24@select title, type, created_at from podcast;MariaDB [(none)]> use symfony[Kdelete from podcast;MariaDB [(none)]> [9Puse symfony
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+(B[0;1mDatabase changed
+(B[mMariaDB [symfony]> use symfonydelete from podcast;[24@select title, type, created_at from podcast;MariaDB [symfony]> [24Pdelete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.017 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.019 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.035 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.013 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.015 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.025 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.030 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.018 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.017 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.016 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> [KMariaDB [symfony]> delete from podcast;
+(B[0;1mQuery OK, 87 rows affected (0.020 sec)
+(B[m(B[0;1m
+(B[mMariaDB [symfony]> exit
+(B[0;1mBye
+(B[m]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ php[K[K[Kscripts/va[K[Kbackend.sh 
+Dependencies can be installed via: composer install
+Many Symfony tools can be accessed via: bin/console
+Type "exit" to get out of terminal
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ bin/console migrate-youtube
+Starts Migration...
+[32mMigration ended successfully[39m
+]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ [K]0;php@76ee88e261b9: /codephp@76ee88e261b9:/code$ exit
+exit
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git staut[K[Ktus
+On branch nerijus_crawler
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   src/Controller/CrawlerController.php[m
+	[31mmodified:   src/Entity/Podcast.php[m
+	[31mmodified:   src/Service/CrawlerService.php[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31msrc/Service/TaggingService.php[m
+	[31mtypescript[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git add 
+Nothing specified, nothing added.
+Maybe you wanted to say 'git add .'?
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git add ,[K.
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git commit -m "refo[Kactoring crawler e[Kservice:[K"
+[nerijus_crawler 9576a78] refactoring crawler service
+ 5 files changed, 622 insertions(+), 172 deletions(-)
+ rewrite src/Service/CrawlerService.php (62%)
+ create mode 100644 src/Service/TaggingService.php
+ create mode 100644 typescript
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git push origin crawler_[K[K[K[K[K[K[K[Knerijus_crawler 
+Username for 'https://github.com': nerijuspamerneckis
+Password for 'https://nerijuspamerneckis@github.com': 
+Enumerating objects: 19, done.
+Counting objects:   5% (1/19)   Counting objects:  10% (2/19)   Counting objects:  15% (3/19)   Counting objects:  21% (4/19)   Counting objects:  26% (5/19)   Counting objects:  31% (6/19)   Counting objects:  36% (7/19)   Counting objects:  42% (8/19)   Counting objects:  47% (9/19)   Counting objects:  52% (10/19)   Counting objects:  57% (11/19)   Counting objects:  63% (12/19)   Counting objects:  68% (13/19)   Counting objects:  73% (14/19)   Counting objects:  78% (15/19)   Counting objects:  84% (16/19)   Counting objects:  89% (17/19)   Counting objects:  94% (18/19)   Counting objects: 100% (19/19)   Counting objects: 100% (19/19), done.
+Delta compression using up to 8 threads
+Compressing objects:   9% (1/11)   Compressing objects:  18% (2/11)   Compressing objects:  27% (3/11)   Compressing objects:  36% (4/11)   Compressing objects:  45% (5/11)   Compressing objects:  54% (6/11)   Compressing objects:  63% (7/11)   Compressing objects:  72% (8/11)   Compressing objects:  81% (9/11)   Compressing objects:  90% (10/11)   Compressing objects: 100% (11/11)   Compressing objects: 100% (11/11), done.
+Writing objects:   9% (1/11)   Writing objects:  18% (2/11)   Writing objects:  27% (3/11)   Writing objects:  36% (4/11)   Writing objects:  45% (5/11)   Writing objects:  54% (6/11)   Writing objects:  63% (7/11)   Writing objects:  72% (8/11)   Writing objects:  81% (9/11)   Writing objects:  90% (10/11)   Writing objects: 100% (11/11)   Writing objects: 100% (11/11), 9.83 KiB | 4.91 MiB/s, done.
+Total 11 (delta 7), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/7)[Kremote: Resolving deltas:  14% (1/7)[Kremote: Resolving deltas:  28% (2/7)[Kremote: Resolving deltas:  42% (3/7)[Kremote: Resolving deltas:  57% (4/7)[Kremote: Resolving deltas:  71% (5/7)[Kremote: Resolving deltas: 100% (7/7)[Kremote: Resolving deltas: 100% (7/7), completed with 6 local objects.[K
+To https://github.com/nfqakademija/podcast.git
+   2c76148..9576a78  nerijus_crawler -> nerijus_crawler
+]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ [K]0;nerijus@nerijus-HP-ENVY-17-Notebook-PC: ~/Desktop/krepsinioPodcastai/podcast[01;32mnerijus@nerijus-HP-ENVY-17-Notebook-PC[00m:[01;34m~/Desktop/krepsinioPodcastai/podcast[00m$ git push origin nerijus_crawler 
