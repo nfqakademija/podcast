@@ -1,4 +1,4 @@
- {% extends 'front/layout/main.html.twig' %}
+{% extends 'front/layout/main.html.twig' %}
 
 {% block header %}
 {{ include('front/layout/header.html.twig') }}
@@ -40,7 +40,13 @@
                 <div class="col-md-7"> <span class="category"> <a href="{{ podcast.source.url}}" class="" target="_blank"> {{ podcast.source.name}} </a></span>
                   <div class="post-content">
                     <h3 class="post-title"><a href="{{ path('single_podcast', {podcast: podcast.id}) }}" >{{ podcast.title}}</a></h3>
-                    <div class="meta"><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span><span class="comments"><a href="#">5 Comments</a></span></div>
+                    <div class="meta1"><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span>
+                        {# <span class="comments"><a href="#">5 Comments</a></span> #}
+                        {% if app.user %}
+                        |  <span> <i class="et-beamed-note"> </i> </span> |
+                        <span> <i class="et-heart-outlined"> </i> </span>
+                        {% endif %}
+                        </div>
                             {% if podcast.audio != null %}
                             <p> 
                                 <audio controls class="entry-read-more1">

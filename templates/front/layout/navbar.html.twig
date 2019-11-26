@@ -2,7 +2,7 @@
     <div class="container">
       <div class="flex-it">
         <div class="navbar-header">
-          <div class="navbar-brand"><a href="{{ url('podcasts') }}">Krepšinio podcastai</a></div>
+          <div class="navbar-brand"><a href="{{ url('podcasts') }}">KP</a></div>
           <div class="nav-bars-wrapper">
             <div class="nav-bars-inner">
               <div class="nav-bars" data-toggle="collapse" data-target=".navbar-collapse"><span></span></div>
@@ -12,11 +12,18 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="mega-menu"><a href="{{ url('podcasts') }}">Podcastai</a>
+            <li class="mega-menu"><a href="{{ url('podcasts') }}">Podkastai</a>
  
             </li>
             <li><a href="{{ url('about_project') }}">Apie projektą</a>
               
+            </li>
+            <li>
+              <a href="{{ url('user_registration') }}">Prisijungti/Registruotis</a>
+            </li>
+
+             <li>
+              <a href="#"><i class="et-rss"> </i></a>
             </li>
            
           </ul>

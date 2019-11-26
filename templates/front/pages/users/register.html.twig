@@ -1,0 +1,70 @@
+{% extends 'front/layout/main.html.twig' %}
+
+{% block content %}
+<div class="col-sm-6">
+    <h3>Susikurkite paskyrą</h3>
+    <p>Registruotis apsimoka:</p>
+    <form>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Name">
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="El. paštas">
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Slaptažodis">
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Patvirtinkite slaptažodį">
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <div class="checkbox mt-0 mb-0">
+                <label>
+                    <input type="checkbox">
+                    <span>
+                        <!-- fake checkbox --></span> <span class="wrapped-label">Sutinku su sąlygomis.</span> </label>
+            </div>
+            <!-- /.checkbox -->
+        </div>
+        <!-- /.form-group -->
+        <button type="submit" class="btn btn-rounded">Registruotis</button>
+    </form>
+    <!-- /form -->
+</div>
+<!--/column -->
+<div class="col-sm-6">
+    <h3>Jeigu turite paskyrą prisijunkite</h3>
+    <form>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="El. paštas">
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Slaptažodis">
+        </div>
+        <!-- /.form-group -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="checkbox mt-0 mb-0">
+                        <label>
+                            <input type="checkbox">
+                            <span>
+                                <!-- fake checkbox --></span> <span class="wrapped-label">Prisiminti</span> </label>
+                    </div>
+                    <!-- /.checkbox -->
+                </div>
+                <!-- /.form-group -->
+            </div>
+            <!--/column -->
+            <div class="col-sm-6 text-right"> <a href="#" class="hover">Pamiršai slaptažodį?</a> </div>
+            <!--/column -->
+        </div>
+        <button type="submit" class="btn btn-rounded">Prisijungti</button>
+    </form>
+</div>
+{% endblock %}
