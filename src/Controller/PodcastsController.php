@@ -24,7 +24,7 @@ class PodcastsController extends AbstractController
 
     private $podcastRepository;
 
-    public function __construct(
+    public function __construct (
         SourceRepository $sourceRepository,
         TagRepository $tagRepository,
         PodcastRepository $podcastRepository
@@ -37,7 +37,8 @@ class PodcastsController extends AbstractController
     /**
      * @Route("/{page}", name="podcasts", defaults={"page":1}, requirements={"page"="\d+"})
      */
-    public function front($page) {
+    public function front($page)
+    {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->getAllPodcastsPaginated($page),
             'sources' => $this->sourceRepository->findAll(),
@@ -79,7 +80,7 @@ class PodcastsController extends AbstractController
 
             $this->addFlash('success', 'Naujas komentaras sukurtas');
 
-            return $this->redirectToRoute('single_podcast',[
+            return $this->redirectToRoute('single_podcast', [
                 'podcast' => $podcast->getId()
             ]);
         }
