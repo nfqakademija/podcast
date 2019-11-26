@@ -1,25 +1,25 @@
 @font-face {
     font-family: 'Slimicons';
-    src:  url('http://themes.iki-bir.com/creatink/style/type/slimicons/Slimicons.eot?ofrduu');
-    src:  url('http://themes.iki-bir.com/creatink/style/type/slimicons/Slimicons.eot?ofrduu#iefix') format('embedded-opentype'),
-      url('http://themes.iki-bir.com/creatink/style/type/slimicons/Slimicons.ttf?ofrduu') format('truetype'),
-      url('http://themes.iki-bir.com/creatink/style/type/slimicons/Slimicons.woff?ofrduu') format('woff'),
-      url('http://themes.iki-bir.com/creatink/style/type/slimicons/Slimicons.svg?ofrduu#Slimicons') format('svg');
+    src:  url('../fonts/Slimicons.eot?ofrduu');
+    src:  url('../fonts/Slimicons.eot?ofrduu#iefix') format('embedded-opentype'),
+      url('../fonts/Slimicons.ttf?ofrduu') format('truetype'),
+      url('../fonts/Slimicons.woff?ofrduu') format('woff'),
+      url('../fonts/Slimicons.svg?ofrduu#Slimicons') format('svg');
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'Entypo';
-    src:  url('http://themes.iki-bir.com/creatink/style/type/entypo/Entypo.eot?tonte3');
-    src:  url('http://themes.iki-bir.com/creatink/style/type/entypo/Entypo.eot?tonte3#iefix') format('embedded-opentype'),
-      url('../images/Entypo.ttf?tonte3') format('truetype'),
-      url('http://themes.iki-bir.com/creatink/style/type/entypo/Entypo.woff?tonte3') format('woff'),
-      url('http://themes.iki-bir.com/creatink/style/type/entypo/Entypo.svg?tonte3#Entypo') format('svg');
+    src:  url('../fonts/Entypo.eot?tonte3');
+    src:  url('../fonts/Entypo.eot?tonte3#iefix') format('embedded-opentype'),
+      url('../fonts/Entypo.ttf?tonte3') format('truetype'),
+      url('../fonts/Entypo.woff?tonte3') format('woff'),
+      url('../fonts/Entypo.svg?tonte3#Entypo') format('svg');
     font-weight: normal;
     font-style: normal;
   }
   @media screen and (-webkit-min-device-pixel-ratio:0) {@font-face {font-family: 'Entypo';
-  src: url('http://themes.iki-bir.com/creatink/style/type/entypo/Entypo.svg?tonte3#Entypo') format('svg');
+  src: url('../fonts/Entypo.svg?tonte3#Entypo') format('svg');
   }}
   [class^="si-"], [class*=" si-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
