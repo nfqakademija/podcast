@@ -38,8 +38,6 @@ Encore
     .addEntry('bootstrap.min', './assets/js/bootstrap.js')
     .addEntry('jquery.min', './assets/js/jquery.min.js')
     .addEntry('bootstrap.minjs', './assets/js/bootstrap.min.js')
-    .addEntry('themepunch.tools.min', './assets/js/jquery.themepunch.tools.min.js')
-    .addEntry('jquery.themepunch.revolution.min', './assets/js/jquery.themepunch.revolution.min.js')
     .addEntry('plugins', './assets/js/plugins.js')
     .addEntry('scripts2', './assets/js/scripts2.js')
 
