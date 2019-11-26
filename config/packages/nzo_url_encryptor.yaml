@@ -1,0 +1,4 @@
+nzo_url_encryptor:
+  secret_key: '%env(APP_SECRET)%'
+  secret_iv:
+  cipher_algorithm:
