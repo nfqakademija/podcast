@@ -23,7 +23,7 @@ class CommentRepository extends ServiceEntityRepository
     /**
     * @return Comment[] Returns an array of Comment objects
     */
-    public function  getAllCommentsByPodcast(Podcast $podcast)
+    public function getAllCommentsByPodcast(Podcast $podcast)
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.podcast = :val')

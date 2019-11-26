@@ -24,7 +24,7 @@ class PodcastsController extends AbstractController
 
     private $podcastRepository;
 
-    public function __construct (
+    public function __construct(
         SourceRepository $sourceRepository,
         TagRepository $tagRepository,
         PodcastRepository $podcastRepository
