@@ -73,11 +73,14 @@
             </div> -->
             <!-- .about-author -->
             <div class="clearfix"></div>
-            <hr />
+              {% if app.user %}
+                {{ include('front/pages/posts/_comment_box.html.twig') }}
+              {% endif %}
 
-            {# {{ include('front/pages/_comments.html.twig') }} #}
-            
-            {# {{ include('front/pages/_comment_box.html.twig') }} #}
+
+              <hr />
+            {{ include('front/pages/posts/_comments.html.twig') }}
+
             
           </div>
           <!-- /.blog --> 
