@@ -78,7 +78,6 @@ class YoutubeService
                         $this->entityManager->flush();
                     }
                 }
-
             } catch (Throwable $e) {
                 $this->logger->error($e);
                 return false;
@@ -187,7 +186,6 @@ class YoutubeService
                 throw new Exception($content['error']['message']);
             }
             return $content['items'][0]['id'];
-
         } catch (Throwable $e) {
             $this->logger->error($e);
             return false;
