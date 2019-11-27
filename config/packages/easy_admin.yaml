@@ -63,7 +63,7 @@ easy_admin:
                     - { property: username, label: 'El paštas' }
                     - { property: fullName, label: 'Pilnas Vardas' }
                     - { property: createdAt, label: 'Registracijos data', type: date }
-                    - { property: isConfirmed, label: 'Aktyvuotas vartotojas' }
+                    - { property: isConfirmed, label: 'Aktyvuotas vartotojas', type: boolean }
             show:
                 fields:
                     - { property: username, label: 'El paštas' }
