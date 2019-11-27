@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lt">
+<head>
 {{ include('front/layout/head.html.twig') }}
+{% block custom_css %}{% endblock %}
+</head>
 
 <body>
   <div class="content-wrapper">
@@ -34,6 +37,8 @@
   {{ include('front/layout/footer.html.twig') }}
 
   {{ include('front/layout/_javascript.html.twig') }}
+
+   {% block javascript %}{% endblock %}
 </body>
 
 </html>
