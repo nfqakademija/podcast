@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-
 class TokenGenerator
 {
     private const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

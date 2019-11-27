@@ -3,7 +3,6 @@
 
 namespace App\EventListener;
 
-
 use App\Interfaces\Confirmable;
 use App\Service\MailService;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;

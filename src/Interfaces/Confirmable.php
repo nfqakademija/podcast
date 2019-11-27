@@ -3,7 +3,6 @@
 
 namespace App\Interfaces;
 
-
 interface Confirmable
 {
     public function getEmail(): ?string;

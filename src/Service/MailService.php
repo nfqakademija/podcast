@@ -48,10 +48,12 @@ class MailService
         $subject = 'El. pašto patvirtinimas || Krepšinio Podkastai';
 
         $body = $this->twig->render(
-            'emails/subscriberVerification.html.twig', [
+            'emails/subscriberVerification.html.twig',
+            [
                 'token' => $confirmable->getConfirmationToken(),
                 'path' => $path
-        ]);
+            ]
+        );
 
         return $this->sendMessage($confirmable, $subject, $body);
     }
