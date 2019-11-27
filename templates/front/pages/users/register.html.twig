@@ -1,0 +1,16 @@
+{% extends 'front/layout/main.html.twig' %}
+
+{% block content %}
+<div class="col-sm-6">
+    <h3>Susikurkite paskyrą</h3>
+    <p>Registruotis apsimoka:</p>
+    {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.username) }}
+    {{ form_row(registrationForm.fullName) }}
+    {{ form_row(registrationForm.plainPassword) }}
+    <button class="btn btn-rounded">Registruotis</button>
+    Jau turite paskyrą? <a href="{{ path('app_login') }}" class="hover">Prisijungti</a>
+    {{ form_end(registrationForm) }}
+</div>
+<!--/column -->
+{% endblock %}

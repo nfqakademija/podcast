@@ -1,0 +1,40 @@
+{% extends 'front/layout/main.html.twig' %}
+
+{% block custom_css %}
+    {{ encore_entry_link_tags('select2_css') }}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+    <div class="tab-content text-center">
+        {{ include('front/pages/users/_panel_menu.html.twig') }}
+
+        <div class="tab-pane fade in active" id="tab3-1">
+            {{ include('front/pages/users/_panel_tags.html.twig') }}
+        </div>
+
+        <div class="tab-pane fade" id="tab3-2">
+            {{ include('front/pages/users/_panel_favorite_podcasts.html.twig') }}
+        </div>
+
+        <div class="tab-pane fade" id="tab3-3">
+            {{ include('front/pages/users/_panel_listen_later.html.twig') }}
+        </div>
+
+        <div class="tab-pane fade" id="tab3-4">
+            {{ include('front/pages/users/_panel_form.html.twig') }}
+        </div>
+
+    </div>
+
+    <div class="space10"></div>
+
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('select2') }}
+{{ encore_entry_script_tags('custom_js') }}
+{% endblock %}

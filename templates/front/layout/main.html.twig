@@ -1,126 +1,44 @@
-
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="lt">
 <head>
-	<meta charset="UTF-8">
+{{ include('front/layout/head.html.twig') }}
+{% block custom_css %}{% endblock %}
+</head>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-				
-	{# <link type="text/css" media="all" href="//cdn.jevelin.shufflehound.com/wp-content/cache/autoptimize/1/css/autoptimize_d1354b08e212adc6fc07a7074e216ce6.css" rel="stylesheet" />
-	 #}
-	<link type="text/css" media="all" href="{{ asset('front.css') }}" rel="stylesheet" />
+<body>
+  <div class="content-wrapper">
 
-    <link type="text/css" media="only screen and (max-width: 768px)" href="//cdn.jevelin.shufflehound.com/wp-content/cache/autoptimize/1/css/autoptimize_dcb2de333eec7ab4ae31385ed8d6a393.css" rel="stylesheet" />
-	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-	<title>Krepšinio podcastai</title>
+    {{ include('front/layout/navbar.html.twig') }}
 
-<style id='jevelin-responsive-inline-css' type='text/css'>
-.cf7-required:after,.woocommerce ul.products li.product a h3:hover,.woocommerce ul.products li.product ins,.post-title h2:hover,.sh-team:hover .sh-team-role,.sh-team-style4 .sh-team-role,.sh-team-style4 .sh-team-icon:hover i,.sh-header-search-submit,.woocommerce .woocommerce-tabs li.active a,.woocommerce .required,.sh-recent-products .woocommerce .star-rating span::before,.woocommerce .woocomerce-styling .star-rating span::before,.woocommerce div.product p.price,.woocomerce-styling li.product .amount,.post-format-icon,.sh-accent-color,.sh-blog-tag-item:hover h6,ul.page-numbers a:hover,.sh-portfolio-single-info-item i,.sh-filter-item.active,.sh-filter-item:hover,.sh-nav .sh-nav-cart li.menu-item-cart .mini_cart_item .amount,.sh-pricing-button-style3,#sidebar a:not(.sh-social-widgets-item):hover,.logged-in-as a:hover,.woocommerce table.shop_table.cart a:hover,.wrap-forms sup:before,.sh-comment-date a:hover,.reply a.comment-edit-link,.comment-respond #cancel-comment-reply-link,.sh-portfolio-title:hover,.sh-portfolio-single-related-mini h5:hover,.sh-header-top-10 .header-contacts-details-large-icon i,.sh-unyson-frontend-test.active {color: #47c9e5!important;}.woocommerce p.stars.selected a:not(.active),.woocommerce p.stars.selected a.active,.sh-dropcaps-full-square,.sh-dropcaps-full-square-border,.masonry2 .post-content-container a.post-meta-comments:hover,.sh-header-builder-edit:hover {background-color: #47c9e5;}.contact-form input[type="submit"],.sh-back-to-top:hover,.sh-dropcaps-full-square-tale,.sh-404-button,.woocommerce .wc-forward,.woocommerce .checkout-button,.woocommerce div.product form.cart button,.woocommerce .button:not(.add_to_cart_button),.sh-blog-tag-item,.sh-comments .submit,.sh-sidebar-search-active .search-field,.sh-nav .sh-nav-cart .buttons a.checkout,ul.page-numbers .current,ul.page-numbers .current:hover,.post-background,.post-item .post-category .post-category-list,.cart-icon span,.comment-input-required,.widget_tag_cloud a:hover,.widget_product_tag_cloud a:hover,.woocommerce #respond input#submit,.sh-portfolio-overlay1-bar,.sh-pricing-button-style4,.sh-pricing-button-style11,.sh-revslider-button2,.sh-portfolio-default2 .sh-portfolio-title,.sh-recent-posts-widgets-count,.sh-filter-item.active:after,.blog-style-largedate .post-comments,.sh-video-player-style1 .sh-video-player-image-play,.sh-video-player-style2 .sh-video-player-image-play:hover,.sh-video-player-style2 .sh-video-player-image-play:focus,.woocommerce .woocommerce-tabs li a:after,.sh-image-gallery .slick-dots li.slick-active button,.sh-recent-posts-carousel .slick-dots li.slick-active button,.sh-recent-products-carousel .slick-dots li.slick-active button,.sh-settings-container-bar .sh-progress-status-value,.post-password-form input[type="submit"],.wpcf7-form .wpcf7-submit,.sh-portfolio-filter-style3 .sh-filter-item.active .sh-filter-item-content,.sh-portfolio-filter-style4 .sh-filter-item:hover .sh-filter-item-content,.sh-woocommerce-categories-count,.sh-woocommerce-products-style2 .woocommerce ul.products li.product .add_to_cart_button:hover,.woocomerce-styling.sh-woocommerce-products-style2 ul.products li.product .add_to_cart_button:hover,.sh-icon-group-style2 .sh-icon-group-item:hover,.sh-text-background {background-color: #47c9e5!important;}.sh-cf7-style4 form input:not(.wpcf7-submit):focus {border-bottom-color: #47c9e5;}::selection {background-color: #47c9e5!important;color: #fff;}::-moz-selection {background-color: #47c9e5!important;color: #fff;}.woocommerce .woocommerce-tabs li.active a,/*.sh-header-8 .sh-nav > .current-menu-item a*/ {border-bottom-color: #47c9e5!important;}#header-quote,.sh-dropcaps-full-square-tale:after,.sh-blog-tag-item:after,.widget_tag_cloud a:hover:after,.widget_product_tag_cloud a:hover:after {border-left-color: #47c9e5!important;}.cart-icon .cart-icon-triangle-color {border-right-color: #47c9e5!important;}.sh-back-to-top:hover,.widget_price_filter .ui-slider .ui-slider-handle,.sh-sidebar-search-active .search-field:hover,.sh-sidebar-search-active .search-field:focus,.sh-cf7-style2 form p input:not(.wpcf7-submit):focus,.sh-cf7-style2 form p textarea:focus {border-color: #47c9e5!important;}.post-item .post-category .arrow-right {border-left-color: #47c9e5;}.woocommerce .wc-forward:hover,.woocommerce .button:not(.add_to_cart_button):hover,.woocommerce .checkout-button:hover,.woocommerce #respond input#submit:hover,.contact-form input[type="submit"]:hover,.wpcf7-form .wpcf7-submit:hover,.sh-video-player-image-play:hover,.sh-404-button:hover,.post-password-form input[type="submit"],.sh-pricing-button-style11:hover,.sh-revslider-button2.spacing-animation:not(.inverted):hover {background-color: #21bee2!important;}.sh-cf7-unyson form .wpcf7-submit {background-size: 200% auto;background-image: linear-gradient(to right, #47c9e5 , #21bee2, #21bee2);}.sh-mini-overlay-container,.sh-portfolio-overlay-info-box,.sh-portfolio-overlay-bottom .sh-portfolio-icon,.sh-portfolio-overlay-bottom .sh-portfolio-text,.sh-portfolio-overlay2-bar,.sh-portfolio-overlay2-data,.sh-portfolio-overlay3-data {background-color: rgba(71,201,229,0.75)!important;}.widget_price_filter .ui-slider .ui-slider-range {background-color: rgba(71,201,229,0.5)!important;}.sh-team-social-overlay2 .sh-team-image:hover .sh-team-overlay2,.sh-overlay-style1,.sh-portfolio-overlay4 {background-color: rgba(71,201,229,0.8)!important;}.sh-header .sh-nav > .current_page_item > a,.sh-header .sh-nav > .current-menu-ancestor > a,.sh-header-left-side .sh-nav > .current_page_item > a {color: #47c9e5!important;}.sh-popover-mini:not(.sh-popover-mini-dark) {background-color: #47c9e5;}.sh-popover-mini:not(.sh-popover-mini-dark):before {border-color: transparent transparent #47c9e5 #47c9e5!important;}.sh-footer .sh-footer-widgets a:hover,.sh-footer .sh-footer-widgets li a:hover,.sh-footer .sh-footer-widgets h6:hover {color: #47c9e5;}
-</style>
+    {% block header %}{% endblock %}
 
-<link rel='stylesheet' id='jevelin-theme-settings-css'  href='https://cdn.jevelin.shufflehound.com/wp-content/uploads/jevelin-dynamic-styles.css?ver=308297110' type='text/css' media='all' />
-<link rel='stylesheet' id='jevelin-fonts-css'  href='https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Kalam:300,400,700&#038;subset=latin' type='text/css' media='all' />
-<script type='text/javascript' src='//cdn.jevelin.shufflehound.com/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script>
+    <div class="wrapper light-wrapper">
+      <div class="container inner">
 
+          {% for label, messages in app.flashes() %}
+              {% for message in messages %}
+                  <div class="alert alert-{{ label }}">
+                      {{ message }}
+                  </div>
+              {% endfor %}
+          {% endfor %}
 
+        <div class="row">
 
-<script type='text/javascript'>
-/* <![CDATA[ */
-var jevelin_loadmore_posts = {"ajax_url":"https:\/\/jevelin.shufflehound.com\/wp-admin\/admin-ajax.php"};
-var jevelin = {"page_loader":"0","notice":"","header_animation_dropdown_delay":"700","header_animation_dropdown":"easeOutQuint","header_animation_dropdown_speed":"500","lightbox_opacity":"0.88","lightbox_transition":"elastic","lightbox_window_max_width":"1200","lightbox_window_max_height":"1200","lightbox_window_size":"0.8","page_numbers_prev":"Previous","page_numbers_next":"Next","rtl_support":"","footer_parallax":"1","one_pager":"1","wc_lightbox":"jevelin","quantity_button":"on"};
-/* ]]> */
-</script>
+          {% block content %}{% endblock %}
 
+          {% block sidebar %}{% endblock %}
 
-<link rel="icon" type="image/png" href="//cdn.jevelin.shufflehound.com/fav.png" />
-
-	<meta name="description" content="Krepšinio podcastai">
-    <meta name="keywords" content="Krepšinio podcastai">
-    
-
-	<div class="sh-page-loader sh-table sh-page-loader-style-spinner">
-		<div class="sh-table-cell">
-			<div id="loading-center-absolute">
-				<div class="object" id="object_one"></div>
-				<div class="object" id="object_two"></div>
-				<div class="object" id="object_three"></div>
-			</div>
-		</div>
-	</div>
-
-	<style type="text/css">
-		body {
-			overflow: hidden;
-		}
-
-		.sh-page-loader {
-			background-color: rgba(255,255,255,0.98);
-		}
-
-		.sk-cube-grid .sk-cube,
-		.sk-folding-cube .sk-cube:before,
-		.sk-spinner > div,
-		.sh-page-loader-style-spinner .object {
-			background-color: #47c9e5!important;
-		}
-
-		.custom-padding {
-			padding-bottom: 80px !important;
-		}
-	</style>
-
-
-<body class="page-template1 page-template-page-blog11">
-	
-	<div id="page-container" class="">					
-
-    {{ include('front/layout/header.html.twig') }}
-
-	<div id="wrapper">		
-        <div class="content-container sh-page-layout-default">
-			<div class="container entry-content">
-
-				 {% block main %}{% endblock %}
-	
-                {{ include('front/layout/sidebar.html.twig') }}
-
-			</div>
-		</div>
-		{{ include('front/layout/_subscribe.html.twig') }}
-
-        {{ include('front/layout/footer.html.twig') }}
-
-	</div>
-
-
-    <div class="sh-back-to-top sh-back-to-top3">
-        <i class="fa fa-angle-up" style="font-size:36px"></i>
+        </div>
+      </div>
     </div>
+  </div>
 
-	</div>
+  {{ include('front/layout/footer.html.twig') }}
 
+  {{ include('front/layout/_javascript.html.twig') }}
 
-<script type="text/javascript">
-
-	jQuery(document).ready(function ($) {
-	    "use strict";
-
-	    $(".sh-page-loader").fadeOut(500);
-	    $("body").css('overflow-y', 'visible').css('overflow-x', 'hidden');
-
-		$(window).bind('beforeunload', function(e){
-			$('.sh-page-loader').fadeIn();
-		});
-
-	});
-</script>
-
-{# {{ include('front/layout/_layout_style.html.twig') }} #}
-
-</div>
-
-{{ include('front/layout/_layout_javascript.html.twig') }}
+   {% block javascript %}{% endblock %}
 </body>
+
 </html>

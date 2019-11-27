@@ -1,6 +1,9 @@
 easy_admin:
     site_name: Administratoriaus panelė
     design:
+        assets:
+            css:
+                - 'build/app.css'
         brand_color: '#000'
     list:
         actions: ['show']
@@ -55,10 +58,40 @@ easy_admin:
         User:
             class: App\Entity\User
             label: Vartotojai
+            list:
+                fields:
+                    - { property: username, label: 'El paštas' }
+                    - { property: fullName, label: 'Pilnas Vardas' }
+                    - { property: createdAt, label: 'Registracijos data', type: date }
+                    - { property: isConfirmed, label: 'Aktyvuotas vartotojas' }
+            show:
+                fields:
+                    - { property: username, label: 'El paštas' }
+                    - { property: fullName, label: 'Pilnas Vardas' }
             edit:
                 fields:
-                    - { property: username, label: 'Vartotojas' }
+                    - { property: username, label: 'El paštas' }
                     - { property: password, label: 'Slaptažodis', type: password, value: password }
+                    - { property: fullName, label: 'Pilnas Vardas' }
         Tag:
             class: App\Entity\Tag
             label: Raktažodžiai
+        Subscriber:
+            class: App\Entity\Subscriber
+            label: Prenumeratoriai
+            list:
+                fields:
+                    - id
+                    - { property: email, type: email, label: "El. paštas"}
+                    - { property: isConfirmed, type: boolean, label: "Aktyvuotas" }
+                    - { property: createdAt, label: Sukurtas, type: date }
+
+        Comment:
+            class: App\Entity\Comment
+            label: Komentarai
+            list:
+                fields:
+                    - id
+                    - { property: body, label: 'Komentaras', type: text }
+                    - { property: user, label: 'Autorius' }
+                    - { property: podcast, label: 'Podkastas', type: string }

@@ -5,6 +5,7 @@ var Encore = require('@symfony/webpack-encore');
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
+// var webpack = require('webpack');
 
 Encore
     // directory where compiled assets will be stored
@@ -14,6 +15,13 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
+    .autoProvideVariables({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+    })
+
+    // .addPlugin(new webpack.TweenMax(/^\.\/locale$/, /gsap$/))
     /*
      * ENTRY CONFIG
      *
@@ -24,8 +32,17 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
+    .addEntry('style', './assets/js/style.js')
+    .addEntry('icons', './assets/js/icons.js')
+    .addEntry('custom', './assets/js/custom.js')
+    .addEntry('bootstrap.min', './assets/js/bootstrap.js')
+    .addEntry('jquery.min', './assets/js/jquery.min.js')
+    .addEntry('bootstrap.minjs', './assets/js/bootstrap.min.js')
+    .addEntry('plugins', './assets/js/plugins.js')
+    .addEntry('scripts2', './assets/js/scripts2.js')
+    .addEntry('select2_css', './assets/js/select2_css.js')
+    .addEntry('select2', './assets/js/select2.js')
+    .addEntry('custom_js', './assets/js/custom_js.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

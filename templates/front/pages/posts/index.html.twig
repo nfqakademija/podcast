@@ -1,47 +1,52 @@
 {% extends 'front/layout/main.html.twig' %}
 
-{% block main %}
+{% block header %}
+{{ include('front/layout/header.html.twig') }}
+{% endblock %}
 
+{% block content %}
 {{ include('front/pages/posts/_sources.html.twig') }}
 
-    <div id="content" class="content-with-sidebar-right blog-page-list">
-        
-		<div class="sh-group blog-list blog-style-small">
 
-        {% for podcast in podcasts %}
-            <article class="post-item post type-post">
-                <div class="post-container sh-group">
-                    
-                    <div class="post-left-side">
+ <div class="col-sm-8">
+    {% if app.request.get('q') != null %}
+        <div class="alert bg alert-info">
+        Ieškojote: <strong>{{ app.request.get('q') }}</strong>. Rasta: <strong>{{ podcastsCount }}</strong>.
+        </div>
+      {% endif %}
+          <div class="blog list-view">
+           {% for podcast in podcasts %}
+            <div class="post">
+              <div class="row">
+                <div class="col-md-5">
+          <figure class="overlay">
 
-                        <div class="post-meta-thumb">
-                        {% if podcast.image == null %}
-                            <img width="660" height="420" src="{{ asset('images/podcast_default.jpg') }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" />
-                        {% else %}
-                            <img width="660" height="420" src="{{ podcast.image }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" />
+                {% if podcast.video != null %}
+                  <iframe width="312" height="215" src="https://www.youtube.com/embed/{{ podcast.video }}" frameborder="0" 
+                          allow="accelerometer; autoplay; encrypted-media; gyroscope" allowfullscreen>
+                  </iframe>
+                                
+                {% endif %}
+
+                 {% if (podcast.image != null) and (podcast.video == null) %}
+                 <img src="{{ podcast.image }}" alt="" />
+                 {% elseif podcast.image == null %}
+                <img src="{{ asset('images/podcast_default.jpg') }}"  />
+                 {% endif %}
+          </figure>
+                </div>
+                <!--/column -->                
+                <div class="space20 visible-sm clearfix"></div>
+                <div class="col-md-7"> <span class="category"> <a href="{{ podcast.source.url}}" class="" target="_blank"> {{ podcast.source.name}} </a></span>
+                  <div class="post-content">
+                    <h3 class="post-title"><a href="{{ path('single_podcast', {podcast: podcast.id}) }}" >{{ podcast.title}}</a></h3>
+                    <div class="meta1"><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span>
+                        {# <span class="comments"><a href="#">5 Comments</a></span> #}
+                        {% if app.user %}
+                        |  <span> <i class="et-beamed-note"> </i> </span> |
+                        <span> <i class="et-heart-outlined"> </i> </span>
                         {% endif %}
-
                         </div>
-
-                    </div>
-                    <div class="post-right-side">
-
-                        <a href="{{ path('single_podcast', {podcast: podcast.id}) }}" class="post-title">
-                            <h2> {{ podcast.title }}</h2>
-                        </a>
-
-                        <div class="post-meta post-meta-one">
-                            
-                            <span class="post-meta-author">
-                                by <a href="{{ podcast.source.url}}" class="bypostauthor" target="_blank"> {{ podcast.source.name}} </a>
-                            </span>
-
-                            <a href="#" class="post-meta-date sh-default-color">{{ podcast.publishedAt|date("M d, Y") }}</a>
-                
-                        </div>
-
-                        <div class="post-content">
-                            <p> {{ podcast.description }}</p>
                             {% if podcast.audio != null %}
                             <p> 
                                 <audio controls class="entry-read-more1">
@@ -49,32 +54,28 @@
                                     Your browser does not support the audio element.
                                 </audio>
                             </p>
+
                             {% endif %}
-                            {% if podcast.video != null %}
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ podcast.video }}" frameborder="0" 
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            {% endif %}
-                        </div>
-
-                        <div class="post-meta post-meta-two">
-                            
-                            <div class="sh-columns post-meta-comments">
-                                <span class="post-meta-categories">
-                                    <i class="icon-tag"></i>
-                                    <a href="#">Basketnews</a>, <a href="#">Travel</a>            
-                                </span>
-                                    <a href="#" class="post-meta-comments">
-                                        <i class="icon-speech"></i>0 </a>
-                            </div>
-
-                            </div>
-
-                    </div>
+                              <p> {{ podcast.description }}</p>
+                  </div>
+                  <!-- /.post-content --> 
                 </div>
-            </article>
-         {% endfor %}
+                <!--/column --> 
+              </div>
+              <!--/.row --> 
+              
+            </div>
+            <!-- /.post -->
+     {% endfor %}
+             
+          </div>
+          <!-- /.blog -->
 
-        {{ knp_pagination_render(podcasts) }}
-    </div>
-</div>
+           {{ knp_pagination_render(podcasts) }}
+          
+        </div>
+{% endblock %}
+
+{% block sidebar %}
+  {{ include('front/layout/sidebar.html.twig') }}
 {% endblock %}
