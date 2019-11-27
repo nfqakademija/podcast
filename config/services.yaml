@@ -28,5 +28,11 @@ services:
             $requestUrl: '%env(YT_URL)%'
             $apiCode: '%env(YT_API)%'
 
+    App\EventListener\SendConfirmationEmailListener:
+        tags:
+            -
+                name: 'doctrine.event_listener'
+                event: 'postPersist'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
