@@ -14,4 +14,12 @@ class UsersController extends AbstractController
     {
         return $this->render('front/pages/users/register.html.twig');
     }
+
+    /**
+     * @Route("/vartotojo_panele", name="user_panel")
+     */
+    public function panel()
+    {
+        return $this->render('front/pages/users/panel.html.twig');
+    }
 }

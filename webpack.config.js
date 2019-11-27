@@ -40,6 +40,9 @@ Encore
     .addEntry('bootstrap.minjs', './assets/js/bootstrap.min.js')
     .addEntry('plugins', './assets/js/plugins.js')
     .addEntry('scripts2', './assets/js/scripts2.js')
+    .addEntry('select2_css', './assets/js/select2_css.js')
+    .addEntry('select2', './assets/js/select2.js')
+    .addEntry('custom_js', './assets/js/custom_js.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
