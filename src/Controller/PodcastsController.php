@@ -47,7 +47,7 @@ class PodcastsController extends AbstractController
     }
 
     /**
-     * @Route("podcasts/{source}/{page}", name="podcasts_by_source", defaults={"page":1})
+     * @Route("podkastai/{source}/{page}", name="podcasts_by_source", defaults={"page":1})
      */
     public function showPodcastsBySource(Source $source, $page)
     {
@@ -59,7 +59,7 @@ class PodcastsController extends AbstractController
     }
 
     /**
-     * @Route("podcast/{podcast}/", name="single_podcast")
+     * @Route("podkastas/{podcast}/", name="single_podcast")
      */
     public function showPodcast(
         Podcast $podcast,
@@ -107,7 +107,7 @@ class PodcastsController extends AbstractController
     }
 
     /**
-     * @Route("/search/{page}", name="search_podcasts", defaults={"page":1})
+     * @Route("/paieska/{page}", name="search_podcasts", defaults={"page":1})
      */
     public function searchPodcasts(Request $request, $page)
     {
