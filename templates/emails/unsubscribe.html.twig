@@ -40,16 +40,7 @@
 <body>
 <div class="backgorund">
     <div class="block">
-        {% if user is defined%}
-            <h1>El. paštas patvirtintas! Jūs aktyvavote savo paskyrą</h1>
-            <a href="{{ url('app_login') }}" class="verify">Galite prisijungti čia</a>
-        {% endif %}
-
-        {% if subscriber is defined %}
-            <h1>Jūsų el. paštas patvirtintas!</h1>
-            <p>Nuo šiol gausite naujienlaiškius su naujais krepšinio podcastais!</p>
-            <a href="{{ url('unsubscribe', {unsubscribeToken: subscriber.unsubscribeToken}) }}">Aatsisakyti prenumeratos</a>
-        {% endif %}
+        <h1>Jūs sėkmingai atsisakėte prenumeratos</h1>
     </div>
 </div>
 </body>

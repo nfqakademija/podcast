@@ -43,6 +43,11 @@ class Subscriber implements Confirmable
      */
     private $confirmationToken;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $unsubscribeToken;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +97,18 @@ class Subscriber implements Confirmable
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function getUnsubscribeToken(): ?string
+    {
+        return $this->unsubscribeToken;
+    }
+
+    public function setUnsubscribeToken(?string $unsubscribeToken): self
+    {
+        $this->unsubscribeToken = $unsubscribeToken;
 
         return $this;
     }
