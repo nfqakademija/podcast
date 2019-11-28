@@ -40,11 +40,11 @@
     <body>
         <div class="backgorund">
             <div class="block">
-                <h1>Patvirtinkite prenumeratą</h1>
-                <p>Norint gauti prenumeratas prašome patvirtinti savo tapatybę.</p>
-                <a href="{{ url('subscriber_veritify_email', {'email': email | urlencrypt}) }}" class="verify">Patvirtinti prenumeratą</a>
+                <h1>Patvirtinkite el paštą</h1>
+                <p>Norint gauti naujienlaiškius ar aktyvuoti paskyrą, prašome patvirtinti savo el. paštą</p>
+                <a href="{{ url(path, {'confirmationToken': token} ) }}" class="verify">Patvirtinti el. paštą</a>
                 <p>Arba naršyklės lange atverkite šią nuorodą:</p>
-                <p class="url">{{ url('subscriber_veritify_email', {'email': email | urlencrypt}) }}</p>
+                <p class="url">{{ url(path, {'confirmationToken': token}) }}</p>
             </div>
         </div>
     </body>
