@@ -86,9 +86,6 @@ class MailService
             $this->logger->error($exception->getMessage());
             return false;
         }
-
-
-
     }
 
     /*

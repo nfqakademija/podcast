@@ -34,8 +34,7 @@ class SubscriberController extends AbstractController
         ]);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && !$form->isValid())
-        {
+        if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('danger', 'Toks prenumeratorius jau egzistuoja!');
 
             return $this->redirectToRoute('podcasts');
