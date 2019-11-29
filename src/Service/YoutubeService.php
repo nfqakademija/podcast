@@ -57,7 +57,7 @@ class YoutubeService
 
             try {
                 foreach ($content['items'] as $video) {
-                    if ($playlist && !empty(end($video['snippet']['thumbnails'])['url'])) {
+                    if ($playlist && !empty($video['snippet']['thumbnails'])) {
                         $videoId = explode('/', end($video['snippet']['thumbnails'])['url']);
                         $videoId = $videoId[sizeof($videoId)-2];
                     } else {
