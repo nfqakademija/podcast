@@ -8,7 +8,9 @@ use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Exception;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @method Podcast|null find($id, $lockMode = null, $lockVersion = null)
@@ -75,6 +77,20 @@ class PodcastRepository extends ServiceEntityRepository
             ->select('count(p.id)')
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    /**
+     * @return Podcast[]|null
+     * @throws Exception
+     */
+    public function findAllTodaysNewPodcasts(): ?array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.createdAt >= :date')
+            ->setParameter('date', new \DateTime(date("Y-m-d")))
+            ->orderBy('p.title', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

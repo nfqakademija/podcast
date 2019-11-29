@@ -3,83 +3,103 @@
 namespace App\Controller;
 
 use App\Entity\Subscriber;
-use App\Repository\SubscriberRepository;
+use App\Form\SubscriberType;
+use App\Service\MailService;
+use App\Service\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
-use Nzo\UrlEncryptorBundle\Annotations\ParamDecryptor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SubscriberController extends AbstractController
 {
+    private $entityManager;
+
+    private $tokenGenerator;
+
+    public function __construct(EntityManagerInterface $entityManager, TokenGenerator $tokenGenerator)
+    {
+        $this->entityManager = $entityManager;
+        $this->tokenGenerator = $tokenGenerator;
+    }
+
     /**
-     * @Route("/subscriber/veritify/{email}", name="subscriber_veritify_email")
-     * @ParamDecryptor(params={"email"})
-     * @param SubscriberRepository $subscriberRepository
-     * @param EntityManagerInterface $entityManager
-     * @param $email
-     * @return Response
+     * @Route("subscribe", name="new_subscriber")
      */
-    public function veritify(
-        SubscriberRepository $subscriberRepository,
-        EntityManagerInterface $entityManager,
-        $email
-    ) {
-        /** @var Subscriber $subscriber */
-        $subscriber = $subscriberRepository->findOneBy([
-            'email' => $email
+    public function createSubscriber(Request $request)
+    {
+        $form = $this->createForm(SubscriberType::class, null, [
+            'action' => $this->generateUrl('new_subscriber')
         ]);
-        if (!empty($subscriber)) {
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('danger', 'Toks prenumeratorius jau egzistuoja!');
+
+            return $this->redirectToRoute('podcasts');
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Subscriber $subscriber */
+            $subscriber = $form->getData();
+            $subscriber->setConfirmationToken($this->tokenGenerator->getRandomSecureToken(100));
+
+            $this->entityManager->persist($subscriber);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'El. pašto patvirtinimo laiškas išsiūstas!');
+
+            return $this->redirectToRoute('podcasts');
+        }
+
+        return $this->render('front/layout/_subscribtion_form.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("subscriber/confirmation/{confirmationToken}", name="confirm_subscriber")
+     */
+    public function confirmUser(Subscriber $subscriber)
+    {
+        if ($subscriber) {
             $subscriber->setIsConfirmed(true);
-            $entityManager->merge($subscriber);
-            $entityManager->flush();
+            $subscriber->setConfirmationToken(null);
+            $subscriber->setUnsubscribeToken($this->tokenGenerator->getRandomSecureToken(100));
 
-            return $this->render(
-                'emails/subscriberVerificationComplete.html.twig',
-                ['email' => $email]
-            );
-        } else {
-            throw $this->createNotFoundException();
+            $this->entityManager->flush();
+
+            return $this->render('emails/confirm_email.html.twig', [
+                'subscriber' => $subscriber
+            ]);
         }
+
+        return $this->createNotFoundException();
     }
 
     /**
-     * @Route("/subscriber/cancel/{email}", name="subscriber_cancel")
-     * @ParamDecryptor(params={"email"})
-     * @param SubscriberRepository $subscriberRepository
-     * @param EntityManagerInterface $entityManager
-     * @param $email
-     * @return Response
+     * @Route("unsubscribe/{unsubscribeToken}", name="unsubscribe")
      */
-    public function cancel(
-        SubscriberRepository $subscriberRepository,
-        EntityManagerInterface $entityManager,
-        $email
-    ) {
-        /** @var Subscriber $subscriber */
-        $subscriber = $subscriberRepository->findOneBy([
-            'email' => $email
-        ]);
-        if (!empty($subscriber)) {
-            $entityManager->remove($subscriber);
-            $entityManager->flush();
+    public function deleteSubscriber(Subscriber $subscriber)
+    {
+        if ($subscriber) {
+            $this->entityManager->remove($subscriber);
+            $this->entityManager->flush();
 
-            return $this->render(
-                'emails/subscriberCancelComplete.html.twig',
-                ['email' => $email]
-            );
-        } else {
-            throw $this->createNotFoundException();
+            return $this->render('emails/unsubscribe.html.twig');
         }
+
+        return $this->createNotFoundException();
     }
 
-//    /**
-//     * @Route("/subscriber/add/{email}", methods={"POST"}, name="subscriber_add")
-//     *
-//     */
-//    public function add(
-//        $email
-//    ) {
-//        dd($email);
-//    }
+    /**
+     * @Route("daily-newsletter", name="daily_newsletter")
+     */
+    public function sendDailyNewsletter(MailService $mailService)
+    {
+        $mailService->sendDailyNewsletterToSubscribers();
+
+        return new Response('sent');
+    }
 }

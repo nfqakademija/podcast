@@ -1,0 +1,11 @@
+<img src="http://podcast.projektai.nfqakademija.lt/images/lulu-headphones.png">
+<h3>Sveikas, krepšinio aistruoli,</h3>
+<p>Naujausi podkastai ({{ podcasts|length}})</p>
+{% for podcast in podcasts %}
+    <div>
+        <b><a href="{{ url('single_podcast', {podcast: podcast.id}) }}" >{{ podcast.title}}</a></b>
+         <p> {{ podcast.description }}</p>
+    </div>
+{% endfor %}
+
+<a href="{{ url('unsubscribe', {unsubscribeToken: subscriber.unsubscribeToken}) }}">Atsisakyti prenumeratos</a>

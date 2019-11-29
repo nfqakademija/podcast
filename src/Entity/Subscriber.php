@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
+use App\Interfaces\Confirmable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SubscriberRepository")
+ * @UniqueEntity(fields={"email"}, message="Toks prenumeratorius jau egzistuoja")
  */
-class Subscriber
+class Subscriber implements Confirmable
 {
     /**
      * @ORM\Id()
@@ -19,6 +23,7 @@ class Subscriber
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\Email(message="Neteisingas el. pašto formatas")
      */
     private $email;
 
@@ -32,6 +37,16 @@ class Subscriber
      * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $confirmationToken;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $unsubscribeToken;
 
     public function getId(): ?int
     {
@@ -70,6 +85,30 @@ class Subscriber
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function getUnsubscribeToken(): ?string
+    {
+        return $this->unsubscribeToken;
+    }
+
+    public function setUnsubscribeToken(?string $unsubscribeToken): self
+    {
+        $this->unsubscribeToken = $unsubscribeToken;
 
         return $this;
     }

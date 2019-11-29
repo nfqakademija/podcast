@@ -5,6 +5,9 @@ namespace App\Service;
 
 use App\Entity\Podcast;
 use App\Entity\Subscriber;
+use App\Entity\User;
+use App\Interfaces\Confirmable;
+use App\Repository\PodcastRepository;
 use App\Repository\SubscriberRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -13,102 +16,98 @@ use Swift_Message;
 use Throwable;
 use Twig\Environment;
 
-const SENDERS_EMAIL = 'krepsinio.podcast@gmail.com';
-
-
 class MailService
 {
     private $mailer;
-    private $templating;
+    private $twig;
     private $logger;
     private $subscriberRepository;
     private $entityManager;
+    private $podcastRepository;
 
     public function __construct(
         Swift_Mailer $mailer,
-        Environment $templating,
+        Environment $twig,
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
-        SubscriberRepository $subscriberRepository
+        SubscriberRepository $subscriberRepository,
+        PodcastRepository $podcastRepository
     ) {
         $this->mailer = $mailer;
-        $this->templating = $templating;
+        $this->twig = $twig;
         $this->logger = $logger;
         $this->entityManager = $entityManager;
         $this->subscriberRepository = $subscriberRepository;
+        $this->podcastRepository = $podcastRepository;
     }
 
-    public function sendVerification($email): bool
+    public function sendVerification(Confirmable $confirmable): bool
     {
+        if ($confirmable instanceof User) {
+            $path = 'confirm_user';
+        } else {
+            $path = 'confirm_subscriber';
+        }
+
+        $subject = 'El. pašto patvirtinimas || Krepšinio Podcastai';
+
+        $body = $this->twig->render(
+            'emails/subscriber_verification.html.twig',
+            [
+                'token' => $confirmable->getConfirmationToken(),
+                'path' => $path
+            ]
+        );
+
+        return $this->sendMessage($confirmable, $subject, $body);
+    }
+
+    public function sendDailyNewsletterToSubscribers()
+    {
+        $subscribers = $this->subscriberRepository->findBy(['isConfirmed' => true]);
+        $newPodcasts = $this->podcastRepository->findAllTodaysNewPodcasts();
+
+        $today = date("Y-m-d");
+        $subjectLine = 'Nauji podkastai ' . $today;
+
         try {
-            $message = (new Swift_Message())
-                ->setSubject('Prenumeratos patvirtinimas || Krepšinio Podkastai')
-                ->setFrom(SENDERS_EMAIL)
-                ->setTo($email)
-                ->setBody(
-                    $this->templating->render(
-                        'emails/subscriberVerification.html.twig',
-                        ['email' => $email]
-                    ),
-                    'text/html'
+            foreach ($subscribers as $subscriber) {
+                $this->sendMessage(
+                    $subscriber,
+                    $subjectLine,
+                    $this->twig->render('emails/daily_podcasts.html.twig', [
+                        'podcasts' => $newPodcasts,
+                        'subscriber' => $subscriber
+                    ])
                 );
-        } catch (Throwable $e) {
-            $this->logger->error($e->getMessage());
+            }
+
+            return true;
+        } catch (Throwable $exception) {
+            $this->logger->error($exception->getMessage());
             return false;
         }
-
-        if ($this->mailer->send($message) && $this->checkIfEmailExists($email)) {
-            $subscriber = new Subscriber();
-            $subscriber->setEmail($email);
-
-            $this->entityManager->persist($subscriber);
-            $this->entityManager->flush();
-            return true;
-        }
-
-        return false;
     }
 
-    private function checkIfEmailExists($email): bool
-    {
-        return empty($this->subscriberRepository->findOneBy(['email' => $email]))?true:false;
-    }
-
-    /**
-     * @var Podcast $podcast
+    /*
+     * @param Confirmable $confirmable
+     * @param string $subject
+     * @param string $body
+     * @return bool
      */
-    public function sendNotification($podcast): bool
+    private function sendMessage(Confirmable $confirmable, string $subject, string $body): bool
     {
-        $subscribers = $this->subscriberRepository->findBy([
-            'isConfirmed' => true,
-        ]);
+        $message = (new Swift_Message())
+            ->setSubject($subject)
+            ->setFrom(['krepsinio.podcast@gmail.com' => 'Krepšinio podcastai'])
+            ->setTo($confirmable->getEmail())
+            ->setBody($body, 'text/html');
 
-        /** @var Subscriber $subscriber */
-        foreach ($subscribers as $subscriber) {
-            try {
-                $message = (new Swift_Message())
-                    ->setSubject('Naujas įrašas|| Krepšinio Podkastai')
-                    ->setFrom(SENDERS_EMAIL)
-                    ->setTo($subscriber->getEmail())
-                    ->setBody(
-                        $this->templating->render(
-                            'emails/subscriberNotification.html.twig',
-                            [
-                                'email' => $subscriber->getEmail(),
-                                'podcast' => $podcast,
-                            ]
-                        ),
-                        'text/html'
-                    );
-            } catch (Throwable $e) {
-                $this->logger->error($e);
-                return false;
-            }
-
-            if ($this->mailer->send($message)) {
-                return true;
-            }
-
+        try {
+            $this->mailer->send($message);
+            return true;
+        } catch (Throwable $e) {
+            $this->logger->error($e->getMessage());
             return false;
         }
     }
