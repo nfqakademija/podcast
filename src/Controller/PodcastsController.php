@@ -78,7 +78,7 @@ class PodcastsController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Naujas komentaras sukurtas');
+            $this->addFlash('success', 'Naujas komentaras pridėtas.');
 
             return $this->redirectToRoute('single_podcast', [
                 'podcast' => $podcast->getId()

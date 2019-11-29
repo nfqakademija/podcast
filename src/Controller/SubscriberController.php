@@ -25,7 +25,7 @@ class SubscriberController extends AbstractController
     }
 
     /**
-     * @Route("subscribe", name="new_subscriber")
+     * @Route("prenumeruoti", name="new_subscriber")
      */
     public function createSubscriber(Request $request)
     {
@@ -59,7 +59,7 @@ class SubscriberController extends AbstractController
     }
 
     /**
-     * @Route("subscriber/confirmation/{confirmationToken}", name="confirm_subscriber")
+     * @Route("prenumeratorius/patvirtinimas/{confirmationToken}", name="confirm_subscriber")
      */
     public function confirmUser(Subscriber $subscriber)
     {
@@ -79,7 +79,7 @@ class SubscriberController extends AbstractController
     }
 
     /**
-     * @Route("unsubscribe/{unsubscribeToken}", name="unsubscribe")
+     * @Route("prenumeracijos_atsisakymas/{unsubscribeToken}", name="unsubscribe")
      */
     public function deleteSubscriber(Subscriber $subscriber)
     {
