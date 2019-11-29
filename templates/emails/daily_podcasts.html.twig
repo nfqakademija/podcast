@@ -1,10 +1,11 @@
-<h3>Sveikas, krepšinio aistruoli</h3>
-<p>Šiandienos nauji podcastai yra tokie:</p>
+<img src="http://podcast.projektai.nfqakademija.lt/images/lulu-headphones.png">
+<h3>Sveikas, krepšinio aistruoli,</h3>
+<p>Naujausi podkastai ({{ podcasts|length}})</p>
 {% for podcast in podcasts %}
     <div>
-        <p>{{ podcast.title }}</p>
-        <p>https://www.youtube.com/{{ podcast.video }}</p>
-        <p>{{ podcast.audio }}</p>
+        <b><a href="{{ url('single_podcast', {podcast: podcast.id}) }}" >{{ podcast.title}}</a></b>
+         <p> {{ podcast.description }}</p>
     </div>
-    <a href="{{ url('unsubscribe', {unsubscribeToken: subscriber.unsubscribeToken}) }}">Atsisakyti prenumeratos</a>
 {% endfor %}
+
+<a href="{{ url('unsubscribe', {unsubscribeToken: subscriber.unsubscribeToken}) }}">Atsisakyti prenumeratos</a>
