@@ -58,17 +58,22 @@ class CrawlerService
     public function scrapSites()
     {
         $sources = $this->sourceRepository->findBy(['sourceType' => Podcast::TYPES['TYPE_AUDIO']]);
+        $tags = $this->tagRepository->findAll();
+        $existingPodcasts = $this->podcastRepository->findAll();
         $podcasts = [];
 
         foreach ($sources as $source) {
             $html = $this->getSourceHtmlCode($source);
 
             try {
-                $podcasts[$source->getName()] = $this->createNewPodcastsFromCrawler($html, $source);
+                $podcasts[$source->getName()] =
+                    $this->createNewPodcastsFromCrawler($html, $source, $existingPodcasts);
             } catch (Exception $e) {
                 $this->logger->error('Something wrong with '.$source->getName() .': '.$e->getMessage());
             }
         }
+
+        $this->addTagsToPodcasts($podcasts, $tags);
 
         $this->entityManager->flush();
 
@@ -93,9 +98,7 @@ class CrawlerService
         if (200 !== $response->getStatusCode()) {
             throw new Exception('Puslapis neveikia!');
         }
-        $html = $response->getContent();
-
-        return $html;
+        return $response->getContent();
     }
 
     /**
@@ -104,20 +107,21 @@ class CrawlerService
      *
      * @param string $html
      * @param Source $source
+     * @param array $existingPodcasts
      * @return mixed
      */
-    private function createNewPodcastsFromCrawler(string $html, Source $source)
+    private function createNewPodcastsFromCrawler(string $html, Source $source, array $existingPodcasts)
     {
         $crawler = new Crawler($html);
         $crawler->filter($source->getMainElementSelector())
-            ->each(function (Crawler $node) use (&$podcasts, $source) {
+            ->each(function (Crawler $node) use (&$podcasts, $source, $existingPodcasts) {
                 $podcast = new Podcast();
                 $podcast->setTitle($node->filter($source->getTitleSelector())->text());
                 $publicationDate = $this->formatDate($node->filter($source->getPublicationDateSelector())->text());
                 $podcast->setPublishedAt($publicationDate);
 
-                // if there is no podcast with the same title and date in DB, continues setting Podcast properties
-                if (null === $this->checkIfPodcastExists($podcast)) {
+                // if there is no podcasts with the same title and date in DB, continues setting Podcast properties
+                if ($this->checkIfPodcastDoNotExist($podcast, $existingPodcasts)) {
                     $podcast->setAudio(
                         $node->filter($source->getAudioSelector())->attr($source->getAudioSourceAttribute())
                     );
@@ -132,37 +136,33 @@ class CrawlerService
                     }
                     $podcast->setSource($source);
                     $podcast->setType(Podcast::TYPES['TYPE_AUDIO']);
-                    // Checks for tags in database and if there is a match in new podcast, adds to tag to it
-                    $matchedTags = $this->taggingService->findTagsInPodcast($podcast);
 
-                    if (count($matchedTags) > 0) {
-                        foreach ($matchedTags as $tag) {
-                            $podcast->addTag($tag);
-                        }
-                    }
                     $this->entityManager->persist($podcast);
                     $podcasts[] = $podcast;
                     $this->logger->info(sprintf('Added new podcast %s', $podcast->getTitle()));
                 }
             });
-
         return $podcasts;
     }
 
     /**
      * Checks if Podcast is already in database with same title and publication date
      *
-     * @param Podcast $podcast
-     * @return Podcast|null
+     * @param Podcast $newPodcast
+     * @param array $existingPodcasts
+     * @return bool
      */
-    private function checkIfPodcastExists(Podcast $podcast)
+    private function checkIfPodcastDoNotExist(Podcast $newPodcast, array $existingPodcasts): bool
     {
-        $podcast = $this->podcastRepository->findOneBy([
-            'title' => $podcast->getTitle(),
-            'publishedAt' =>$podcast->getPublishedAt()
-        ]);
-
-        return $podcast;
+        /** @var Podcast $existingPodcast */
+        foreach ($existingPodcasts as $existingPodcast) {
+            if ($existingPodcast->getTitle() === $newPodcast->getTitle() &&
+                $existingPodcast->getPublishedAt()->format('Y-m-d')
+                === $newPodcast->getPublishedAt()->format('Y-m-d')) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -191,7 +191,30 @@ class CrawlerService
         } else {
             $newDate = (new DateTime(date('Y-m-d')));
         }
-
         return $newDate;
+    }
+
+    /**
+     * Checks for tags in database and if there is a match in new podcast, adds tag to it
+     *
+     * @param Podcast $podcast
+     * @param array $tags
+     */
+    private function addTagsToPodcasts(array $newPodcasts, array $tags): void
+    {
+        foreach ($newPodcasts as $podcastsBySource) {
+
+            if (is_array($podcastsBySource)) {
+                foreach ($podcastsBySource as $podcast) {
+                    $matchedTags = $this->taggingService->findTagsInPodcast($podcast, $tags);
+
+                    if (count($matchedTags) > 0) {
+                        foreach ($matchedTags as $tag) {
+                            $podcast->addTag($tag);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

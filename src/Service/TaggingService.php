@@ -5,27 +5,19 @@ namespace App\Service;
 
 use App\Entity\Podcast;
 use App\Entity\Tag;
-use App\Repository\TagRepository;
 
 class TaggingService
 {
-    private $tagRepository;
-
-    public function __construct(TagRepository $tagRepository)
-    {
-        $this->tagRepository = $tagRepository;
-    }
-
     /**
      * @param Podcast $podcast
+     * @param array $tags
      * @return Tag[]
      */
-    public function findTagsInPodcast(Podcast $podcast)
+    public function findTagsInPodcast(Podcast $podcast, array $tags)
     {
-        $tags = $this->tagRepository->findAll();
-
         $podcastTags = [];
 
+        /** @var Tag $tag */
         foreach ($tags as $tag) {
             $tagName = $tag->getTag();
 

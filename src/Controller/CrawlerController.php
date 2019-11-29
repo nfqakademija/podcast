@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Podcast;
+use App\Repository\PodcastRepository;
 use App\Service\CrawlerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,6 +11,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CrawlerController extends AbstractController
 {
+    /**
+     * @var PodcastRepository
+     */
+    private $podcastRepository;
+
+    public function __construct(PodcastRepository $podcastRepository)
+    {
+        $this->podcastRepository = $podcastRepository;
+    }
+
     /**
      * @Route("/crawler", name="crawler")
      */
@@ -28,8 +39,7 @@ class CrawlerController extends AbstractController
                 $html .= "<tr><td>Nauju podkastu siuo metu nera</td></tr>";
             }
         }
-
-        $html.= "</table>";
+        $html .= "</table>";
 
         return new Response($html);
     }

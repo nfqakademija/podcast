@@ -14,6 +14,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"username"}, message="Toks vartotojas jau egzistuoja")
+ * @ORM\Table(
+ *     indexes={
+ *          @ORM\Index(name="idx_username", columns={"username"})
+ *     }
+ * )
  */
 class User implements UserInterface, Confirmable
 {
