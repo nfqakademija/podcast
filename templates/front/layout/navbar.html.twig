@@ -26,7 +26,13 @@
             {% endif %}
 
             {% if app.user %}
-            <li><a href="{{ url('user_registration') }}">{{ app.user.fullName }}</a></li>
+            <li><a href="{{ url('user_registration') }}">
+            {% if app.user.fullName is null or app.user.fullName is empty %}
+              {{ app.user.username }}
+            {% else %}
+              {{ app.user.fullName }}
+            {% endif %}
+            </a></li>
               <li><a href="{{ url('app_logout') }}">Atsijungti</a></li>
             {% else %}
               <li><a href="{{ url('app_login') }}">Prisijungti/Registruotis</a></li>
