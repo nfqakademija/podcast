@@ -66,11 +66,10 @@ class MailService
     {
         $subscribers = $this->subscriberRepository->findBy(['isConfirmed' => true]);
         $newPodcasts = $this->podcastRepository->findAllTodaysNewPodcasts();
-
         $today = date("Y-m-d");
         $subjectLine = 'Nauji podkastai ' . $today;
 
-        try {
+        if ($newPodcasts) {
             foreach ($subscribers as $subscriber) {
                 $this->sendMessage(
                     $subscriber,
@@ -81,15 +80,10 @@ class MailService
                     ])
                 );
             }
-
-            return true;
-        } catch (Throwable $exception) {
-            $this->logger->error($exception->getMessage());
-            return false;
         }
     }
 
-    /*
+    /**
      * @param Confirmable $confirmable
      * @param string $subject
      * @param string $body

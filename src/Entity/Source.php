@@ -9,6 +9,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SourceRepository")
+ * @ORM\Table(
+ *     indexes={
+ *          @ORM\Index(name="idx_name", columns={"name"})
+ *     }
+ * )
  */
 class Source
 {
