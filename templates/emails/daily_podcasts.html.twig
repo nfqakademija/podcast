@@ -6,6 +6,5 @@
         <p>https://www.youtube.com/{{ podcast.video }}</p>
         <p>{{ podcast.audio }}</p>
     </div>
-
-    <a href="{{ url('unsubscribe', {unsubscribeToken: subscriber.unsubscribeToken}) }}">Aatsisakyti prenumeratos</a>
+    <a href="{{ url('unsubscribe', {unsubscribeToken: subscriber.unsubscribeToken}) }}">Atsisakyti prenumeratos</a>
 {% endfor %}
