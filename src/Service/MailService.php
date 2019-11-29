@@ -64,11 +64,11 @@ class MailService
 
     public function sendDailyNewsletterToSubscribers()
     {
-        $subscribers = $this->subscriberRepository->findBy(['isConfirmed' => true ]);
+        $subscribers = $this->subscriberRepository->findBy(['isConfirmed' => true]);
         $newPodcasts = $this->podcastRepository->findAllTodaysNewPodcasts();
 
-        $today = date("Y-m-d"); 
-        $subjectLine = 'Nauji podkastai '.$today;
+        $today = date("Y-m-d");
+        $subjectLine = 'Nauji podkastai ' . $today;
 
         try {
             foreach ($subscribers as $subscriber) {
