@@ -203,7 +203,6 @@ class CrawlerService
     private function addTagsToPodcasts(array $newPodcasts, array $tags): void
     {
         foreach ($newPodcasts as $podcastsBySource) {
-
             if (is_array($podcastsBySource)) {
                 foreach ($podcastsBySource as $podcast) {
                     $matchedTags = $this->taggingService->findTagsInPodcast($podcast, $tags);
