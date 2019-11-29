@@ -1,0 +1,10 @@
+<h3>Sveikas, krepšinio aistruoli</h3>
+<p>Šiandienos nauji podcastai yra tokie:</p>
+{% for podcast in podcasts %}
+    <div>
+        <p>{{ podcast.title }}</p>
+        <p>https://www.youtube.com/{{ podcast.video }}</p>
+        <p>{{ podcast.audio }}</p>
+    </div>
+    <a href="{{ url('unsubscribe', {unsubscribeToken: subscriber.unsubscribeToken}) }}">Atsisakyti prenumeratos</a>
+{% endfor %}

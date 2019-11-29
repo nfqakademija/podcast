@@ -20,13 +20,11 @@
             </li>
 
             {% if is_granted('ROLE_ADMIN') %}
-            <li><a href="{{ url('easyadmin') }}">Administratoriui</a>
-
-            </li>
+              <li><a href="{{ url('easyadmin') }}">Administratoriui</a></li>
             {% endif %}
 
             {% if app.user %}
-            <li><a href="{{ url('user_registration') }}">
+            <li><a href="{{ url('user_panel') }}">
             {% if app.user.fullName is null or app.user.fullName is empty %}
               {{ app.user.username }}
             {% else %}
@@ -36,7 +34,7 @@
               <li><a href="{{ url('app_logout') }}">Atsijungti</a></li>
             {% else %}
               <li><a href="{{ url('app_login') }}">Prisijungti/Registruotis</a></li>
-              {% endif %}
+            {% endif %}
 
 
              <li>
