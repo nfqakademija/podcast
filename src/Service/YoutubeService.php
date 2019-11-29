@@ -57,9 +57,11 @@ class YoutubeService
 
             try {
                 foreach ($content['items'] as $video) {
-                    if ($playlist) {
+                    if ($playlist && !empty(end($video['snippet']['thumbnails'])['url'])) {
                         $videoId = explode('/', end($video['snippet']['thumbnails'])['url']);
                         $videoId = $videoId[sizeof($videoId)-2];
+                    } else {
+                        continue;
                     }
                     if (($video['snippet']['liveBroadcastContent']??'none') === 'none'
                         && !$this->isVideoExists($videoId??$video['id']['videoId'])
@@ -80,7 +82,7 @@ class YoutubeService
                 }
             } catch (Throwable $e) {
                 $this->logger->error($e);
-                return false;
+                continue;
             }
         }
         return true;
