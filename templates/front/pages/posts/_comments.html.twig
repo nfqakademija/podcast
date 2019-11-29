@@ -5,10 +5,16 @@
     {% for comment in comments %}
       <li>
         <div class="message">
-          <div class="user icon icon-round"><img alt="" src="style/images/art/u1.jpg" /></div>
+          <div class="user icon icon-round"><img alt="" src="{{asset('/images/user_default.png')}}" style="height:80px; width:80px;"/></div>
           <div class="message-inner">
             <div class="info">
-              <h5><a href="#">{{ comment.user.fullname }}</a></h5>
+              <h5><a href="#">
+              {% if app.user.fullName is null or app.user.fullName is empty %}
+               {{ app.user.username }}
+              {% else %}
+                {{ app.user.fullName }}
+              {% endif %}
+              </a></h5>
               <div class="meta"> <span class="date">{{ comment.createdAt|date}}</span></div>
             </div>
             <p>{{ comment.body }}</p>

@@ -71,7 +71,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("confirmation/{confirmationToken}", name="confirm_user")
+     * @Route("patvirtinimas/{confirmationToken}", name="confirm_user")
      */
     public function confirmUser(User $user)
     {
