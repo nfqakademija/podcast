@@ -22,9 +22,12 @@
                 </p>
                 {% endif %}
                 {% if podcast.video != null %}
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ podcast.video }}"
-                    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"
-                    allowfullscreen></iframe>
+                <div class="video-container">
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ podcast.video }}"
+                      frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"
+                      allowfullscreen>
+                  </iframe>
+                </div>
                 {% endif %}
                 <p> {{ podcast.description }}</p>
 
@@ -77,10 +80,10 @@
                 {{ include('front/pages/posts/_comment_box.html.twig') }}
               {% endif %}
 
-
+              {% if comments|length > 0 %}
               <hr />
-            {{ include('front/pages/posts/_comments.html.twig') }}
-
+                {{ include('front/pages/posts/_comments.html.twig') }}
+              {% endif %}
             
           </div>
           <!-- /.blog --> 
