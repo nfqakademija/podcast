@@ -28,8 +28,7 @@ class CrawlerController extends AbstractController
                 $html .= "<tr><td>Nauju podkastu siuo metu nera</td></tr>";
             }
         }
-
-        $html.= "</table>";
+        $html .= "</table>";
 
         return new Response($html);
     }

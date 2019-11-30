@@ -11,6 +11,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SubscriberRepository")
  * @UniqueEntity(fields={"email"}, message="Toks prenumeratorius jau egzistuoja")
+ * @ORM\Table(
+ *     indexes={
+ *          @ORM\Index(name="idx_email", columns={"email"})
+ *     }
+ * )
  */
 class Subscriber implements Confirmable
 {
