@@ -42,7 +42,9 @@ class PodcastsController extends AbstractController
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->getAllPodcastsPaginated($page),
             'sources' => $this->sourceRepository->findAll(),
-            'tags' => $this->tagRepository->findAll()
+            'tags' => $this->tagRepository->findAll(),
+            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
+            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
         ]);
     }
 
@@ -54,7 +56,9 @@ class PodcastsController extends AbstractController
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
             'sources' => $this->sourceRepository->findAll(),
-            'tags' => $this->tagRepository->findAll()
+            'tags' => $this->tagRepository->findAll(),
+            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
+            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
         ]);
     }
 
@@ -90,7 +94,9 @@ class PodcastsController extends AbstractController
             'comments' => $commentRepository->getAllCommentsByPodcast($podcast),
             'sources' => $this->sourceRepository->findAll(),
             'tags' => $this->tagRepository->findAll(),
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
+            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
         ]);
     }
 
@@ -102,7 +108,9 @@ class PodcastsController extends AbstractController
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByTag($tag, $page),
             'sources' => $this->sourceRepository->findAll(),
-            'tags' => $this->tagRepository->findAll()
+            'tags' => $this->tagRepository->findAll(),
+            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
+            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
         ]);
     }
 
@@ -119,7 +127,9 @@ class PodcastsController extends AbstractController
             'sources' => $this->sourceRepository->findAll(),
             'tags' => $this->tagRepository->findAll(),
             'podcastsCount' => $this->podcastRepository->getSearchResultsCount($query),
-            'search' => true
+            'search' => true,
+            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
+            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
         ]);
     }
 }

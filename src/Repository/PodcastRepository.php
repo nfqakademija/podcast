@@ -109,4 +109,24 @@ class PodcastRepository extends ServiceEntityRepository
         }
         return $qb;
     }
+
+    public function getPodcastsCountByVideoType(): int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->where('p.type = :youtube')
+            ->setParameter('youtube', 'Youtube')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getPodcastsCountByAudioType(): int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->where('p.type = :audio')
+            ->setParameter('audio', 'Audio')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
