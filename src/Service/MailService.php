@@ -80,7 +80,11 @@ class MailService
                     ])
                 );
             }
+
+            return true;
         }
+
+        return false;
     }
 
     /**

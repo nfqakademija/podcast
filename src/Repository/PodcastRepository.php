@@ -30,34 +30,35 @@ class PodcastRepository extends ServiceEntityRepository
 
     public function getAllPodcastsPaginated($page)
     {
-        $qb = $this->createQueryBuilder('p')
+        $query = $this->createQueryBuilder('p')
             ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
-        return $this->paginator->paginate($qb, $page, 10);
+        return $this->paginator->paginate($query, $page, 10);
     }
 
     public function findAllPaginatedPodcastsBySource(Source $source, $page)
     {
-        $qb = $this->createQueryBuilder('p')
+        $query = $this->createQueryBuilder('p')
             ->andWhere('p.source =:source')
             ->setParameter('source', $source)
             ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
-        return $this->paginator->paginate($qb, $page, 10);
+        return $this->paginator->paginate($query, $page, 10);
     }
 
     public function findAllPaginatedPodcastsByTag(Tag $tag, $page)
     {
-        $qb = $this->createQueryBuilder('p')
+        $query = $this->createQueryBuilder('p')
             ->leftJoin('p.tags', 't')
+            ->addSelect('t')
             ->andWhere('t.tag = :tag')
             ->setParameter('tag', $tag->getTag())
             ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
-        return $this->paginator->paginate($qb, $page, 10);
+        return $this->paginator->paginate($query, $page, 10);
     }
 
     public function searchPodcasts($searchString, $page)
