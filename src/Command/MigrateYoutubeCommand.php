@@ -13,7 +13,7 @@ class MigrateYoutubeCommand extends Command
 {
     use LockableTrait;
 
-    protected static $defaultName = 'migrate-youtube';
+    protected static $defaultName = 'add-video-from-youtube';
     /**
      * @var SourceRepository
      */

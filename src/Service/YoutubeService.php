@@ -75,6 +75,7 @@ class YoutubeService
                         $podcast->setImage(end($video['snippet']['thumbnails'])['url']);
                         $podcast->setCreatedAt(new DateTime('now'));
                         $podcast->setVideo($videoId??$video['id']['videoId']);
+                        $podcast->setType(Podcast::TYPES['TYPE_VIDEO']);
 
                         $this->entityManager->persist($podcast);
                         $this->entityManager->flush();
