@@ -129,4 +129,15 @@ class PodcastRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function findAllPaginatedPodcastsByType($type, $page)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.type = :type')
+            ->setParameter('type', $type)
+            ->orderBy('p.publishedAt', 'DESC')
+            ->getQuery();
+
+        return $this->paginator->paginate($qb, $page, 10);
+    }
 }
