@@ -49,6 +49,29 @@ class PodcastsController extends AbstractController
     }
 
     /**
+     * @Route("podkastai/tipas/{type}/{page}", name="podcasts_by_type", defaults={"page":1})
+     */
+    public function showPodcastsByType($type, $page)
+    {
+
+        if ($type == 'video' || $type == 'audio') {
+            if ($type == 'video') {
+                $type = 'Youtube';
+            }
+        } else {
+            throw new \Exception('Kažkas bandote rankom vesti reikšmę, reikia spausti tik nuorodas.');
+        }
+
+        return $this->render('front/pages/posts/index.html.twig', [
+            'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByType($type, $page),
+            'sources' => $this->sourceRepository->findAll(),
+            'tags' => $this->tagRepository->findAll(),
+            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
+            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
+        ]);
+    }
+
+    /**
      * @Route("podkastai/{source}/{page}", name="podcasts_by_source", defaults={"page":1})
      */
     public function showPodcastsBySource(Source $source, $page)
@@ -101,7 +124,7 @@ class PodcastsController extends AbstractController
     }
 
     /**
-     * @Route("tag/{tag}/{page}", name="podcasts_by_tag", defaults={"page":1})
+     * @Route("gaires/{tag}/{page}", name="podcasts_by_tag", defaults={"page":1})
      */
     public function showPodcastsByTag(Tag $tag, $page)
     {

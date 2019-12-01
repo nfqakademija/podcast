@@ -22,14 +22,14 @@
           <div class="sidebox widget">
             <h5 class="widget-title">Podkastų tipai</h5>
             <ul class="unordered-list">
-              <li><a href="#">Audio ({{ audioCount }})</a></li>
-              <li><a href="#">Video ({{ videoCount }})</a></li>
+              <li><a href="{{ path('podcasts_by_type', {type: 'audio'}) }}">Audio ({{ audioCount }})</a></li>
+              <li><a href="{{ path('podcasts_by_type', {type: 'video'}) }}">Video ({{ videoCount }})</a></li>
             </ul>
           </div>
           <!-- /.widget -->
           
           <div class="sidebox widget">
-            <h5 class="widget-title">Raktažodžiai</h5>
+            <h5 class="widget-title">Gairės</h5>
             <ul class="unordered-list">
               {% for tag in tags %}
               <li><a href="{{ path('podcasts_by_tag', {tag: tag.id}) }}" 
