@@ -3,17 +3,18 @@
 namespace App\Command;
 
 use App\Repository\SourceRepository;
+use App\Service\CrawlerService;
 use App\Service\YoutubeService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class MigrateYoutubeCommand extends Command
+class PodcastsCollectingCommand extends Command
 {
     use LockableTrait;
 
-    protected static $defaultName = 'add-video-from-youtube';
+    protected static $defaultName = 'collect-podcasts';
     /**
      * @var SourceRepository
      */
@@ -22,21 +23,27 @@ class MigrateYoutubeCommand extends Command
      * @var YoutubeService
      */
     private $youtubeApiService;
+    /**
+     * @var CrawlerService
+     */
+    private $crawlerService;
 
     public function __construct(
         YoutubeService $youtubeApiService,
-        SourceRepository $sourceRepository
+        SourceRepository $sourceRepository,
+        CrawlerService $crawlerService
     ) {
         $this->youtubeApiService = $youtubeApiService;
         $this->sourceRepository = $sourceRepository;
 
         parent::__construct();
+        $this->crawlerService = $crawlerService;
     }
 
     protected function configure()
     {
         $this
-            ->setDescription('Make data migration from Sources with type \'Youtube\'')
+            ->setDescription('Collect new podcasts from Youtube and various podcast sites')
         ;
     }
 
@@ -49,19 +56,20 @@ class MigrateYoutubeCommand extends Command
         }
 
         $output->writeln([
-            'Starts Migration...',
+            'Starts Collecting...',
         ]);
 
         $sources = $this->sourceRepository->findBy([
             'sourceType' => 'Youtube'
         ]);
 
-        $res = $this->youtubeApiService->importDataFromYoutube($sources);
+        $youtubeResults = $this->youtubeApiService->importDataFromYoutube($sources);
+        $crawlerResults = $this->crawlerService->scrapSites();
 
-        if ($res) {
-            $output->writeln('<fg=green>Migration ended successfully</>');
+        if ($youtubeResults && $crawlerResults) {
+            $output->writeln('<fg=green>Collecting ended successfully</>');
         } else {
-            $output->writeln('<fg=red>Migration ended with errors</>');
+            $output->writeln('<fg=red>Collecting ended with errors</>');
         }
 
         $this->release();
