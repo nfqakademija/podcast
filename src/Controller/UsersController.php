@@ -37,8 +37,7 @@ class UsersController extends AbstractController
             $email = $request->request->get('username');
             $user = $userRepository->findOneBy(['username' => $email]);
 
-            if ($user)
-            {
+            if ($user) {
                 $user->setPasswordResetToken($tokenGenerator->getRandomSecureToken(200));
                 $entityManager->flush();
                 $mailService->sendPasswordResetEmail($user);
