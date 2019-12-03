@@ -6,7 +6,7 @@ namespace App\Service;
 use App\Entity\Podcast;
 use App\Entity\Subscriber;
 use App\Entity\User;
-use App\Interfaces\Confirmable;
+use App\Interfaces\MailableEntity;
 use App\Repository\PodcastRepository;
 use App\Repository\SubscriberRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,6 +22,7 @@ class MailService
     private const FROM_NAME = 'Krepšinio podcastai';
     private const NEWSLETTER_SUBJECT_LINE = 'Nauji podkastai';
     private const CONFIRMATION_SUBJECT_LINE = 'El. pašto patvirtinimas';
+    private const RESET_PASSWORD_SUBJECT_LINE = 'Slaptažodžio atkūrimas';
     private $mailer;
     private $twig;
     private $logger;
@@ -45,9 +46,9 @@ class MailService
         $this->podcastRepository = $podcastRepository;
     }
 
-    public function sendVerification(Confirmable $confirmable): bool
+    public function sendVerification(MailableEntity $mailableEntity): bool
     {
-        if ($confirmable instanceof User) {
+        if ($mailableEntity instanceof User) {
             $path = 'confirm_user';
         } else {
             $path = 'confirm_subscriber';
@@ -56,12 +57,12 @@ class MailService
         $body = $this->twig->render(
             'emails/subscriber_verification.html.twig',
             [
-                'token' => $confirmable->getConfirmationToken(),
+                'token' => $mailableEntity->getConfirmationToken(),
                 'path' => $path
             ]
         );
 
-        return $this->sendMessage($confirmable, self::CONFIRMATION_SUBJECT_LINE, $body);
+        return $this->sendMessage($mailableEntity, self::CONFIRMATION_SUBJECT_LINE, $body);
     }
 
     public function sendDailyNewsletterToSubscribers()
@@ -71,7 +72,7 @@ class MailService
         $today = date("Y-m-d");
         $subjectLine = self::NEWSLETTER_SUBJECT_LINE .' ' . $today;
 
-        if ($newPodcasts) {
+        if ($newPodcasts && $subscribers) {
             foreach ($subscribers as $subscriber) {
                 $this->sendMessage(
                     $subscriber,
@@ -89,18 +90,29 @@ class MailService
         return false;
     }
 
+    public function sendPasswordResetEmail(User $user)
+    {
+        $this->sendMessage(
+            $user,
+            self::RESET_PASSWORD_SUBJECT_LINE,
+            $this->twig->render('emails/reset_password_email.html.twig', [
+                'user' => $user
+            ])
+        );
+    }
+
     /**
-     * @param Confirmable $confirmable
+     * @param MailableEntity $mailableEntity
      * @param string $subject
      * @param string $body
      * @return bool
      */
-    private function sendMessage(Confirmable $confirmable, string $subject, string $body): bool
+    private function sendMessage(MailableEntity $mailableEntity, string $subject, string $body): bool
     {
         $message = (new Swift_Message())
             ->setSubject($subject)
             ->setFrom([self::FROM_EMAIL => self::FROM_NAME])
-            ->setTo($confirmable->getEmail())
+            ->setTo($mailableEntity->getEmail())
             ->setBody($body, 'text/html');
 
         try {
