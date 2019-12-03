@@ -1,7 +1,7 @@
-<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 hidden-xs">
   <ul class="nav nav-tabs nav-tabs-lined nav-tabs-lined-bottom">
     <li class="active">
-      <a href="{{ url('podcasts') }}" >
+      <a href="{{ url('podcasts') }}">
         VISI
       </a>
     </li>
@@ -11,4 +11,28 @@
     </li>
     {% endfor %}
   </ul>
+</div>
+
+<div class="visible-xs-block">
+  {# <select >
+    {% for source in sources %}
+      <option value="">{{ source.name}}</option>
+    {% endfor %}
+  </select> #}
+  <div class="dropdown">
+    <button class="btn btn-border btn-full-rounded dropdown-toggle" type="button" data-toggle="dropdown">Šaltiniai
+      <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="{{ url('podcasts') }}">
+          VISI
+        </a>
+      </li>
+      {% for source in sources %}
+      <li>
+        <a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="">{{ source.name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
