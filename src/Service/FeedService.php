@@ -16,7 +16,6 @@ class FeedService
             <language>en-us</language>
             xml;
         foreach ($podcasts as $podcast) {
-
             $title = self::xmlEscape($podcast->getTitle());
             $url = 'podkastas/' . $podcast->getId();
             $description = self::xmlEscape($podcast->getDescription());
