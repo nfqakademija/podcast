@@ -18,6 +18,10 @@ use Twig\Environment;
 
 class MailService
 {
+    private const FROM_EMAIL = 'krepsinio.podcast@gmail.com';
+    private const FROM_NAME = 'Krepšinio podcastai';
+    private const NEWSLETTER_SUBJECT_LINE = 'Nauji podkastai';
+    private const CONFIRMATION_SUBJECT_LINE = 'El. pašto patvirtinimas';
     private $mailer;
     private $twig;
     private $logger;
@@ -49,8 +53,6 @@ class MailService
             $path = 'confirm_subscriber';
         }
 
-        $subject = 'El. pašto patvirtinimas || Krepšinio Podcastai';
-
         $body = $this->twig->render(
             'emails/subscriber_verification.html.twig',
             [
@@ -59,7 +61,7 @@ class MailService
             ]
         );
 
-        return $this->sendMessage($confirmable, $subject, $body);
+        return $this->sendMessage($confirmable, self::CONFIRMATION_SUBJECT_LINE, $body);
     }
 
     public function sendDailyNewsletterToSubscribers()
@@ -67,7 +69,7 @@ class MailService
         $subscribers = $this->subscriberRepository->findBy(['isConfirmed' => true]);
         $newPodcasts = $this->podcastRepository->findAllTodaysNewPodcasts();
         $today = date("Y-m-d");
-        $subjectLine = 'Nauji podkastai ' . $today;
+        $subjectLine = self::NEWSLETTER_SUBJECT_LINE .' ' . $today;
 
         if ($newPodcasts) {
             foreach ($subscribers as $subscriber) {
@@ -97,7 +99,7 @@ class MailService
     {
         $message = (new Swift_Message())
             ->setSubject($subject)
-            ->setFrom(['krepsinio.podcast@gmail.com' => 'Krepšinio podcastai'])
+            ->setFrom([self::FROM_EMAIL => self::FROM_NAME])
             ->setTo($confirmable->getEmail())
             ->setBody($body, 'text/html');
 
