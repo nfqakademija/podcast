@@ -6,7 +6,7 @@ use App\Repository\PodcastRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-use App\Service\FeedService;
+use App\Service\XmlService;
 
 class RssFeedController extends AbstractController
 {
@@ -20,7 +20,7 @@ class RssFeedController extends AbstractController
 
         $response = new Response();
         $response->headers->set("Content-type", "text/xml");
-        $response->setContent(FeedService::generate($podcasts));
+        $response->setContent(XmlService::generate($podcasts));
 
         return $response;
     }
