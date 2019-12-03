@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Interfaces\Confirmable;
+use App\Interfaces\MailableEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  */
-class Subscriber implements Confirmable
+class Subscriber implements MailableEntity
 {
     /**
      * @ORM\Id()

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Interfaces\Confirmable;
+use App\Interfaces\MailableEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  */
-class User implements UserInterface, Confirmable
+class User implements UserInterface, MailableEntity
 {
     /**
      * @ORM\Id()
@@ -71,6 +71,11 @@ class User implements UserInterface, Confirmable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $confirmationToken;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $passwordResetToken;
 
     public function __construct()
     {
@@ -235,6 +240,18 @@ class User implements UserInterface, Confirmable
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function getPasswordResetToken(): ?string
+    {
+        return $this->passwordResetToken;
+    }
+
+    public function setPasswordResetToken(?string $passwordResetToken): self
+    {
+        $this->passwordResetToken = $passwordResetToken;
 
         return $this;
     }
