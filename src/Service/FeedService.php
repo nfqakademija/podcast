@@ -2,34 +2,35 @@
 
 namespace App\Service;
 
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+
 class FeedService
 {
     public static function generate($podcasts)
     {
-        $xml = <<<xml
-            <?xml version='1.0' encoding='UTF-8'?>
-            <rss version='2.0'>
-            <channel>
-            <title>Krepšinio podcastai</title>
-            <link>http://podcast.projektai.nfqakademija.lt</link>
-            <description>Krepšinio podkastai, pokalbiai, diskusijos</description>
-            <language>en-us</language>
-            xml;
+        $xmlEncoder = new XmlEncoder();
+
+        $items = [];
         foreach ($podcasts as $podcast) {
             $title = self::xmlEscape($podcast->getTitle());
-            $url = 'podkastas/' . $podcast->getId();
+            $url = self::xmlEscape('podkastas/' . $podcast->getId());
             $description = self::xmlEscape($podcast->getDescription());
             $pubDate = $podcast->getPublishedAt()->format('D, d M Y H:i:s T');
-            $xml .= <<<xml
-            <item>
-            <title>{$title}</title>
-            <link>https://podcast.projektai.nfqakademija.lt/{$url}</link>
-            <description>{$description}</description>
-            <pubDate>$pubDate</pubDate>
-            </item>
-            xml;
+            $item = ['item' => ['title' => $title, 'link' => $url, 'description' => $description, 'pubDate' => $pubDate]];
+            $items[] = $item;
         }
-        $xml .= "</channel></rss>";
+
+        $array = ['channel' => [
+            'title' => ['Krepšinio podcastai'],
+            'link' => 'https://podcast.projektai.nfqakademija.lt',
+            'description' => 'Krepšinio podkastai, pokalbiai, diskusijos',
+            'language' => 'en-us',
+            $items
+        ]];
+
+        $context['xml_root_node_name'] = 'rss';
+        $context['remove_empty_tags'] = true;
+        $xml = $xmlEncoder->encode($array, 'xml', $context);
 
         return $xml;
     }
