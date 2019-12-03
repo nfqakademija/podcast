@@ -141,4 +141,14 @@ class PodcastRepository extends ServiceEntityRepository
 
         return $this->paginator->paginate($qb, $page, 10);
     }
+
+    public function findAllPodcastsByLimit($limit)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('p.publishedAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
