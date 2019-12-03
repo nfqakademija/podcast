@@ -4,7 +4,7 @@ namespace App\Service;
 
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 
-class FeedService
+class XmlService
 {
     public static function generate($podcasts)
     {
@@ -16,7 +16,8 @@ class FeedService
             $url = self::xmlEscape('podkastas/' . $podcast->getId());
             $description = self::xmlEscape($podcast->getDescription());
             $pubDate = $podcast->getPublishedAt()->format('D, d M Y H:i:s T');
-            $item = ['item' => ['title' => $title, 'link' => $url, 'description' => $description, 'pubDate' => $pubDate]];
+            $item = ['item' =>
+            ['title' => $title, 'link' => $url, 'description' => $description, 'pubDate' => $pubDate]];
             $items[] = $item;
         }
 
