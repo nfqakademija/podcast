@@ -3,7 +3,7 @@
 
 namespace App\EventListener;
 
-use App\Interfaces\Confirmable;
+use App\Interfaces\MailableEntity;
 use App\Service\MailService;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
@@ -20,7 +20,7 @@ class SendConfirmationEmailListener
     {
         $entity = $args->getObject();
 
-        if (!$entity instanceof Confirmable) {
+        if (!$entity instanceof MailableEntity) {
             return;
         }
 
