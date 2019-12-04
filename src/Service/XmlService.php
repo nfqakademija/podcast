@@ -13,7 +13,7 @@ class XmlService
         $items = [];
         foreach ($podcasts as $podcast) {
             $title = self::xmlEscape($podcast->getTitle());
-            $url = self::xmlEscape('podkastas/' . $podcast->getId());
+            $url = self::xmlEscape('https://podcast.projektai.nfqakademija.lt/podkastas/' . $podcast->getId());
             $description = self::xmlEscape($podcast->getDescription());
             $pubDate = $podcast->getPublishedAt()->format('D, d M Y H:i:s T');
             $item = ['item' =>

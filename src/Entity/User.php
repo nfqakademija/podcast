@@ -77,9 +77,16 @@ class User implements UserInterface, MailableEntity
      */
     private $passwordResetToken;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Podcast", inversedBy="users")
+     * @ORM\JoinTable(name="listen_later")
+     */
+    private $podcasts;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->podcasts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -252,6 +259,32 @@ class User implements UserInterface, MailableEntity
     public function setPasswordResetToken(?string $passwordResetToken): self
     {
         $this->passwordResetToken = $passwordResetToken;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Podcast[]
+     */
+    public function getPodcast(): Collection
+    {
+        return $this->podcasts;
+    }
+
+    public function addPodcast(Podcast $podcast): self
+    {
+        if (!$this->podcasts->contains($podcast)) {
+            $this->podcasts[] = $podcast;
+        }
+
+        return $this;
+    }
+
+    public function removePodcast(Podcast $podcast): self
+    {
+        if ($this->podcasts->contains($podcast)) {
+            $this->podcasts->removeElement($podcast);
+        }
 
         return $this;
     }
