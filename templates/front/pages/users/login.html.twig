@@ -8,11 +8,11 @@
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
         <div class="form-group">
-            <input type="email" class="form-control" name="username" placeholder="El. paštas" value="{{ last_username }}">
+            <input type="email" class="form-control" name="username" placeholder="El. paštas" value="admin@admin.com">
         </div>
         <!-- /.form-group -->
         <div class="form-group">
-            <input type="password" name="password" class="form-control" placeholder="Slaptažodis" required>
+            <input type="password" name="password" class="form-control" placeholder="Slaptažodis" required value="admin">
         </div>
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
