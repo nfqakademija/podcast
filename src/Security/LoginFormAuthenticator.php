@@ -89,7 +89,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('podcasts'));
+        return new RedirectResponse($this->urlGenerator->generate('user_panel'));
     }
 
     protected function getLoginUrl()
