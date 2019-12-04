@@ -31,6 +31,23 @@
                 {% endif %}
                 <p> {{ podcast.description }}</p>
 
+                <div class="pull-left">
+
+                        <button href="#" class="btn btn-rounded btn-icon btn-icon-left btn-like" id="like" onclick="toogle(this, document.getElementById('dislike'))">
+                            <span class="counter counter-left ">
+                                100
+                            </span>
+                            <i class="et-thumbs-up"></i>Patinka
+                        </button>
+
+                        <button href="#" class="btn btn-rounded btn-icon btn-icon-left btn-dislike" id="dislike" onclick="toogle(this, document.getElementById('like'))">
+                            <span><i class="et-thumbs-down"></i>Nepatinka</span>
+                            <span class="counter counter-right">
+                                100
+                            </span>
+                        </button>
+                </div>
+
 
                 <div class="space10"></div>
      
@@ -89,8 +106,24 @@
           <!-- /.blog --> 
           
         </div>
+
 {% endblock %}
 
 {% block sidebar %}
   {{ include('front/layout/sidebar.html.twig') }}
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        function toogle(item, other)
+        {
+            if (item.classList.contains('active')) {
+                item.classList.remove('active');
+            } else {
+                item.classList.add('active');
+                other.classList.remove('active');
+
+            }
+        }
+    </script>
 {% endblock %}
