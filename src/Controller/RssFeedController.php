@@ -13,14 +13,14 @@ class RssFeedController extends AbstractController
     /**
      * @Route("/rss", name="rss_feed")
      */
-    public function index(PodcastRepository $podcastRepository)
+    public function index(PodcastRepository $podcastRepository, XmlService $xmlService)
     {
         $limit = 20;
         $podcasts = $podcastRepository->findAllPodcastsByLimit($limit);
 
         $response = new Response();
         $response->headers->set("Content-type", "text/xml");
-        $response->setContent(XmlService::generate($podcasts));
+        $response->setContent($xmlService->generate($podcasts));
 
         return $response;
     }
