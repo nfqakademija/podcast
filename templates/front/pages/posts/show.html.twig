@@ -35,7 +35,7 @@
 
                         <button href="#" class="btn btn-rounded btn-icon btn-icon-left btn-like {% if app.user.isLike(podcast) %}active{% endif %}" onclick="toogle(this)">
                             <span class="counter counter-left ">
-                                {{ podcast.likesByUser|length }}
+                                {% if podcast.likesByUser is null %}0{% else %}{{ podcast.likesByUser|length }}{% endif %}
                             </span>
                             <i class="et-thumbs-up"></i>Patinka
                         </button>
