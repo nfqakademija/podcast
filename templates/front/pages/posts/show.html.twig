@@ -30,24 +30,17 @@
                 </div>
                 {% endif %}
                 <p> {{ podcast.description }}</p>
-
+                {% if app.user %}
                 <div class="pull-left">
 
-                        <button href="#" class="btn btn-rounded btn-icon btn-icon-left btn-like" id="like" onclick="toogle(this, document.getElementById('dislike'))">
+                        <button href="#" class="btn btn-rounded btn-icon btn-icon-left btn-like {% if app.user.isLike(podcast) %}active{% endif %}" onclick="toogle(this)">
                             <span class="counter counter-left ">
-                                100
+                                {{ podcast.likedPodcasts|length }}
                             </span>
                             <i class="et-thumbs-up"></i>Patinka
                         </button>
-
-                        <button href="#" class="btn btn-rounded btn-icon btn-icon-left btn-dislike" id="dislike" onclick="toogle(this, document.getElementById('like'))">
-                            <span><i class="et-thumbs-down"></i>Nepatinka</span>
-                            <span class="counter counter-right">
-                                100
-                            </span>
-                        </button>
                 </div>
-
+                {% endif %}
 
                 <div class="space10"></div>
      
@@ -114,16 +107,30 @@
 {% endblock %}
 
 {% block javascript %}
+{% if app.user %}
+<script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"
+    >
+</script>
     <script>
-        function toogle(item, other)
-        {
-            if (item.classList.contains('active')) {
-                item.classList.remove('active');
-            } else {
-                item.classList.add('active');
-                other.classList.remove('active');
 
-            }
+        function toogle(item)
+        {
+            $.get( "{{ path('like', {'podcast': podcast.id}) }}", function( data ) {
+
+
+                if (data.likes) {
+                    item.classList.add('active');
+                    $('.counter', item).html(data.countLikes);
+                } else {
+                    item.classList.remove('active');
+                    $('.counter', item).html(data.countLikes);
+                }
+
+            });
         }
     </script>
+{% endif %}
 {% endblock %}

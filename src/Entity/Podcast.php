@@ -91,11 +91,17 @@ class Podcast
      */
     private $users;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="likedPodcasts")
+     */
+    private $likedPodcasts;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->likedPodcasts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -301,5 +307,10 @@ class Podcast
         }
 
         return $this;
+    }
+
+    public function getLikedPodcasts(): Collection
+    {
+        return $this->likedPodcasts;
     }
 }
