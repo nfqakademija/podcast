@@ -77,11 +77,6 @@ class User implements UserInterface, MailableEntity
      */
     private $passwordResetToken;
 
-    /**
-     * @ORM\OneToMany(targetEntity="PodcastVote", mappedBy="user")
-     */
-    private $podcastVotes;
-
     public function __construct()
     {
         $this->comments = new ArrayCollection();
