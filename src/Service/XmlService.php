@@ -2,19 +2,24 @@
 
 namespace App\Service;
 
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class XmlService
 {
-    public static function generate($podcasts)
-    {
-        $xmlEncoder = new XmlEncoder();
+    private $serializer;
 
+    public function __construct(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
+    public function generate($podcasts)
+    {
         $items = [];
         foreach ($podcasts as $podcast) {
-            $title = self::xmlEscape($podcast->getTitle());
-            $url = self::xmlEscape('https://podcast.projektai.nfqakademija.lt/podkastas/' . $podcast->getId());
-            $description = self::xmlEscape($podcast->getDescription());
+            $title = $this->xmlEscape($podcast->getTitle());
+            $url = $this->xmlEscape('https://podcast.projektai.nfqakademija.lt/podkastas/' . $podcast->getId());
+            $description = $this->xmlEscape($podcast->getDescription());
             $pubDate = $podcast->getPublishedAt()->format('D, d M Y H:i:s T');
             $item = ['item' =>
             ['title' => $title, 'link' => $url, 'description' => $description, 'pubDate' => $pubDate]];
@@ -31,12 +36,12 @@ class XmlService
 
         $context['xml_root_node_name'] = 'rss';
         $context['remove_empty_tags'] = true;
-        $xml = $xmlEncoder->encode($array, 'xml', $context);
+        $xml = $this->serializer->encode($array, 'xml', $context);
 
         return $xml;
     }
 
-    private static function xmlEscape($string)
+    private function xmlEscape($string)
     {
         return str_replace(
             array('&', '<', '>', '\'', '"'),
