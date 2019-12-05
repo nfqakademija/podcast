@@ -87,7 +87,7 @@ class Podcast
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="podcast")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="podcasts")
      */
     private $users;
 
@@ -101,7 +101,6 @@ class Podcast
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->users = new ArrayCollection();
-        $this->likedPodcasts = new ArrayCollection();
         $this->likesByUser = new ArrayCollection();
     }
 

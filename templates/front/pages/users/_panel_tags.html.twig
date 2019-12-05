@@ -1,12 +1,17 @@
 <h3>Pasirink pagal kokius raktažodžius nori gauti pranešimus</h3>
-<form>
+<form method="post">
     <div class="form-group">
         <select class="form-control select2" multiple="multiple" name='tags[]'>
-            <option selected="selected">nba</option>
-            <option>zalgiris</option>
-            <option selected="selected">siauliai</option>
+            {% for tag in tags %}
+{#            <option selected="selected">nba</option>#}
+            <option selected="selected">{{ tag.tag }}</option>
+{#            <option selected="selected">siauliai</option>#}
+            {% endfor %}
         </select>
     </div>
+    <input type="hidden" name="token"
+           value="{{ csrf_token('add_tags') }}"
+    >
     <div class="form-group">
         <input type="email" class="form-control" placeholder="El. paštas kur norite gauti pranešimus">
     </div>
