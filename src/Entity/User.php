@@ -84,7 +84,7 @@ class User implements UserInterface, MailableEntity
     private $podcasts;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Podcast", inversedBy="likedPodcasts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Podcast", inversedBy="likesByUser")
      * @ORM\JoinTable(name="liked_podcasts")
      */
     private $likedPodcasts;

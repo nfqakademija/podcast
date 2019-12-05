@@ -94,7 +94,7 @@ class Podcast
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="likedPodcasts")
      */
-    private $likedPodcasts;
+    private $likesByUser;
 
     public function __construct()
     {
@@ -102,6 +102,7 @@ class Podcast
         $this->comments = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->likedPodcasts = new ArrayCollection();
+        $this->likesByUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -309,8 +310,8 @@ class Podcast
         return $this;
     }
 
-    public function getLikedPodcasts(): Collection
+    public function getLikesByUser(): ?Collection
     {
-        return $this->likedPodcasts;
+        return $this->likesByUser;
     }
 }
