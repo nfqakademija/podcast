@@ -44,7 +44,7 @@
                         {# <span class="comments"><a href="#">5 Comments</a></span> #}
                         {% if app.user %}
                         |  <span> <i class="et-beamed-note"> </i> </span> |
-                        <span> <i class="et-heart-outlined"> </i>  {{ podcast.likedPodcasts|length }}</span>
+                        <span> <i class="et-heart-outlined"> </i>  {{ podcast.likesByUser|length }}</span>
                         {% endif %}
                         </div>
                             {% if podcast.audio != null %}

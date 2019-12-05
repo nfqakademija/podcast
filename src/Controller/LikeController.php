@@ -29,7 +29,7 @@ class LikeController extends AbstractController
         $entityManager->flush();
 
         $isLike = $user->isLike($podcast);
-        $countLikes = count($podcast->getLikedPodcasts());
+        $countLikes = count($podcast->getLikesByUser()??[]);
 
         return $this->json(['likes' => $isLike, 'countLikes' => $countLikes]);
     }
