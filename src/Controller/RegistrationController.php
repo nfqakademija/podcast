@@ -34,7 +34,7 @@ class RegistrationController extends AbstractController
         TokenGenerator $tokenGenerator
     ) {
         if ($this->getUser()) {
-            return $this->redirectToRoute('podcasts');
+            return $this->redirectToRoute('user_panel');
         }
 
         $user = new User();
