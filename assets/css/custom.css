@@ -17,3 +17,56 @@
     width: 100%;
     height: 100%;
 }
+
+.counter{
+    display: inline-block;
+    color: black;
+    border: 1px solid black;
+    padding: 10px;
+    background: #ffffff;
+}
+.btn.btn-like .counter.counter-left{
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    border-right: none;
+    border-color: #0f9d58;
+    margin-right: 5px;
+}
+.btn.btn-dislike .counter.counter-right{
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-left: none;
+    border-color: #c9302c;
+    margin-left: 5px;
+}
+.btn.btn-like{
+    background: #0f9d58;
+    margin: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    border-left: none;
+}
+.btn.btn-dislike{
+    background: #c9302c;
+    margin: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+.btn.btn-dislike.active, .btn.btn-dislike:hover{
+    background: #a32723;
+}
+.btn.btn-like.active, .btn.btn-like:hover{
+    background: #0b7542;
+}
+.btn.btn-like.active .counter.counter-left, .btn.btn-like:hover .counter.counter-left{
+    border-color: #0b7542;
+}
+.btn.btn-dislike.active .counter.counter-right, .btn.btn-dislike:hover .counter.counter-right{
+    border-color: #a32723;
+}
+.btn-dislike:focus,.btn-dislike:active, .btn-like:focus,.btn-like:active {
+    outline: none !important;
+    box-shadow: none;
+}

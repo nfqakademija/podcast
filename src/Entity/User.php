@@ -84,6 +84,12 @@ class User implements UserInterface, MailableEntity
     private $podcasts;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Podcast", inversedBy="likedPodcasts")
+     * @ORM\JoinTable(name="liked_podcasts")
+     */
+    private $likedPodcasts;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="users")
      */
     private $tags;
@@ -93,6 +99,7 @@ class User implements UserInterface, MailableEntity
         $this->comments = new ArrayCollection();
         $this->podcasts = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->likedPodcasts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -319,5 +326,19 @@ class User implements UserInterface, MailableEntity
         }
 
         return $this;
+    }
+    public function toogleLike(Podcast $podcast): self
+    {
+        if ($this->likedPodcasts->contains($podcast)) {
+            $this->likedPodcasts->removeElement($podcast);
+        } else {
+            $this->likedPodcasts[] = $podcast;
+        }
+
+        return $this;
+    }
+    public function isLike(Podcast $podcast): bool
+    {
+        return $this->likedPodcasts->contains($podcast);
     }
 }

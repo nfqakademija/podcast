@@ -19,6 +19,7 @@ easy_admin:
                     - { property: title, label: "Antraštė" }
                     - { property: description, label: "Aprašymas" }
                     - { property: image, label: "Paveikslėlis", type: image, sortable: false }
+                    - { property: likedPodcasts, label: "Podkastas patiko", sortable: true }
                     - { property: publishedAt, label: "Publikuotas", type: date }
                     - { property: createdAt, label: "Išasugotas", type: date }
             edit:
