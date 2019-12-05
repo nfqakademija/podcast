@@ -31,8 +31,7 @@ class UsersController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($this->isCsrfTokenValid('add_tags',$token))
-        {
+        if ($this->isCsrfTokenValid('add_tags', $token)) {
             $submittedTags = $request->request->get('tags');
             if ($submittedTags) {
                 foreach ($submittedTags as $submittedTag) {
@@ -48,7 +47,7 @@ class UsersController extends AbstractController
                 }
 
                 foreach ($userTags as $userTag) {
-                    $tagExists = array_filter($submittedTags, function ($submittedTag) use ($userTag){
+                    $tagExists = array_filter($submittedTags, function ($submittedTag) use ($userTag) {
                         return $submittedTag === $userTag->getTag();
                     });
 
