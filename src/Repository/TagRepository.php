@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Tag;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -19,32 +20,19 @@ class TagRepository extends ServiceEntityRepository
         parent::__construct($registry, Tag::class);
     }
 
-    // /**
-    //  * @return Tag[] Returns an array of Tag objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Tag[] Returns an array of Tag objects
+     */
+    public function findTagsByUser(User $user)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
+            ->leftJoin('t.users', 'u')
+            ->addSelect('u')
+            ->andWhere('u = :user')
+            ->setParameter('user', $user)
             ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+//            ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Tag
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

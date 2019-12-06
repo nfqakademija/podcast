@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Tag;
+use App\Entity\User;
+use App\Form\RegistrationFormType;
+use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use App\Service\MailService;
+use App\Service\TaggingService;
 use App\Service\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -17,9 +22,28 @@ class UsersController extends AbstractController
      * @Route("/vartotojo_panele", name="user_panel")
      * @IsGranted("ROLE_USER")
      */
-    public function panel()
-    {
-        return $this->render('front/pages/users/panel.html.twig');
+    public function panel(
+        Request $request,
+        TagRepository $tagRepository,
+        TaggingService $taggingService
+    ) {
+//        $form = $this->createForm(RegistrationFormType::class);
+        /** @var User $user */
+        $user = $this->getUser();
+        $userTags = $tagRepository->findTagsByUser($user);
+        $token = $request->request->get('token');
+
+        if ($this->isCsrfTokenValid('add_tags', $token)) {
+            $submittedTags = $request->request->get('tags');
+            $taggingService->handleUserTags($submittedTags, $userTags);
+            $this->addFlash('success', 'Nauji parametrai išsaugoti!');
+
+            return $this->redirectToRoute('user_panel');
+        }
+        return $this->render('front/pages/users/panel.html.twig', [
+//            'form' => $form->createView()
+            'tags' => $userTags,
+        ]);
     }
 
     /**
