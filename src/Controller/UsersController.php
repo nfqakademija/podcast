@@ -8,8 +8,8 @@ use App\Form\RegistrationFormType;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use App\Service\MailService;
+use App\Service\TaggingService;
 use App\Service\TokenGenerator;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,52 +22,27 @@ class UsersController extends AbstractController
      * @Route("/vartotojo_panele", name="user_panel")
      * @IsGranted("ROLE_USER")
      */
-    public function panel(Request $request, TagRepository $tagRepository, EntityManagerInterface $entityManager)
-    {
+    public function panel(
+        Request $request,
+        TagRepository $tagRepository,
+        TaggingService $taggingService
+    ) {
 //        $form = $this->createForm(RegistrationFormType::class);
-        $token = $request->request->get('token');
-        $userTags = $tagRepository->findTagsByUser($this->getUser());
-        $allTags = $tagRepository->findAll();
         /** @var User $user */
         $user = $this->getUser();
+        $userTags = $tagRepository->findTagsByUser($user);
+        $token = $request->request->get('token');
 
         if ($this->isCsrfTokenValid('add_tags', $token)) {
             $submittedTags = $request->request->get('tags');
-            if ($submittedTags) {
-                foreach ($submittedTags as $submittedTag) {
-                    $existingTag = $tagRepository->findOneBy(['tag' => $submittedTag]);
-                    if (!$existingTag) {
-                        $tag = new Tag();
-                        $tag->setTag($submittedTag);
-                        $entityManager->persist($tag);
-                        $user->addTag($tag);
-                    } else {
-                        $user->addTag($existingTag);
-                    }
-                }
-
-                foreach ($userTags as $userTag) {
-                    $tagExists = array_filter($submittedTags, function ($submittedTag) use ($userTag) {
-                        return $submittedTag === $userTag->getTag();
-                    });
-
-                    if (!$tagExists) {
-                        $user->removeTag($userTag);
-                    }
-                }
-            } else {
-                foreach ($userTags as $userTag) {
-                    $user->removeTag($userTag);
-                }
-            }
-
-            $entityManager->flush();
+            $taggingService->handleUserTags($submittedTags, $userTags);
+            $this->addFlash('success', 'Nauji parametrai išsaugoti!');
 
             return $this->redirectToRoute('user_panel');
         }
         return $this->render('front/pages/users/panel.html.twig', [
 //            'form' => $form->createView()
-            'tags' => $userTags
+            'tags' => $userTags,
         ]);
     }
 
