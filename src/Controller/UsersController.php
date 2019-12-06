@@ -34,7 +34,7 @@ class UsersController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        $form = $this->createForm(RegistrationFormType::class , $user);
+        $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         $userTags = $tagRepository->findTagsByUser($user);
         $token = $request->request->get('token');

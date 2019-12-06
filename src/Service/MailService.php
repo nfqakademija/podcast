@@ -92,7 +92,6 @@ class MailService
                 );
             }
         }
-
     }
 
     public function sendDailyNewsletterToSubscribers()
