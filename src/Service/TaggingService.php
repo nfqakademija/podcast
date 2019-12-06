@@ -59,7 +59,7 @@ class TaggingService
      * @param array $submittedTags
      * @param array $existingUserTags
      */
-    public function handleUserTags(array $submittedTags, array $existingUserTags): void
+    public function handleUserTags(?array $submittedTags, ?array $existingUserTags): void
     {
         $user = $this->security->getUser();
 
