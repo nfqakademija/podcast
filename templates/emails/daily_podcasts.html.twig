@@ -8,4 +8,6 @@
     </div>
 {% endfor %}
 
-<a href="{{ url('unsubscribe', {unsubscribeToken: subscriber.unsubscribeToken}) }}">Atsisakyti prenumeratos</a>
+{% if subscriber is defined %}
+    <a href="{{ url('unsubscribe', {unsubscribeToken: subscriber.unsubscribeToken}) }}">Atsisakyti prenumeratos</a>
+{% endif %}

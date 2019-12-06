@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Interfaces\MailableEntity;
 use App\Repository\PodcastRepository;
 use App\Repository\SubscriberRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Swift_Mailer;
@@ -29,6 +30,7 @@ class MailService
     private $subscriberRepository;
     private $entityManager;
     private $podcastRepository;
+    private $userRepository;
 
     public function __construct(
         Swift_Mailer $mailer,
@@ -36,7 +38,8 @@ class MailService
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
         SubscriberRepository $subscriberRepository,
-        PodcastRepository $podcastRepository
+        PodcastRepository $podcastRepository,
+        UserRepository $userRepository
     ) {
         $this->mailer = $mailer;
         $this->twig = $twig;
@@ -44,6 +47,7 @@ class MailService
         $this->entityManager = $entityManager;
         $this->subscriberRepository = $subscriberRepository;
         $this->podcastRepository = $podcastRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function sendVerification(MailableEntity $mailableEntity): bool
@@ -63,6 +67,32 @@ class MailService
         );
 
         return $this->sendMessage($mailableEntity, self::CONFIRMATION_SUBJECT_LINE, $body);
+    }
+
+    public function sendDailyNewsletterBySelectedTagsToRegisteredUsers()
+    {
+        $matchingUsers = $this->userRepository->getAllUsersWithTagsAndDailyPodcasts();
+        $today = date("Y-m-d");
+        $subjectLine = self::NEWSLETTER_SUBJECT_LINE .' ' . $today;
+
+        if ($matchingUsers) {
+            foreach ($matchingUsers as $user) {
+                $podcasts = [];
+                foreach ($user->getTags() as $tag) {
+                    foreach ($tag->getPodcasts() as $podcast) {
+                        $podcasts[] = $podcast;
+                    }
+                }
+                $this->sendMessage(
+                    $user,
+                    $subjectLine,
+                    $this->twig->render('emails/daily_podcasts.html.twig', [
+                        'podcasts' => $podcasts,
+                    ])
+                );
+            }
+        }
+
     }
 
     public function sendDailyNewsletterToSubscribers()
