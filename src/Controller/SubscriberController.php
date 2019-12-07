@@ -61,7 +61,7 @@ class SubscriberController extends AbstractController
     /**
      * @Route("prenumeratorius/patvirtinimas/{confirmationToken}", name="confirm_subscriber")
      */
-    public function confirmUser(Subscriber $subscriber)
+    public function confirmSubscriber(Subscriber $subscriber)
     {
         if ($subscriber) {
             $subscriber->setIsConfirmed(true);

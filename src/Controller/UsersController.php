@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Tag;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\TagRepository;
@@ -18,18 +17,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UsersController extends AbstractController
 {
+    private $mailService;
+    private $entityManager;
+
+    public function __construct(MailService $mailService, EntityManagerInterface $entityManager)
+    {
+        $this->mailService = $mailService;
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/vartotojo_panele", name="user_panel")
      * @IsGranted("ROLE_USER")
      */
-    public function panel(
-        Request $request,
-        TagRepository $tagRepository,
-        TaggingService $taggingService
-    ) {
-//        $form = $this->createForm(RegistrationFormType::class);
+    public function panel(Request $request, TagRepository $tagRepository, TaggingService $taggingService)
+    {
         /** @var User $user */
         $user = $this->getUser();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
         $userTags = $tagRepository->findTagsByUser($user);
         $token = $request->request->get('token');
 
@@ -40,8 +46,17 @@ class UsersController extends AbstractController
 
             return $this->redirectToRoute('user_panel');
         }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+//            $user = $form->getData();
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Vartotojo duomenys atnaujinti');
+
+            return $this->redirectToRoute('user_panel');
+        }
+
         return $this->render('front/pages/users/panel.html.twig', [
-//            'form' => $form->createView()
+            'form' => $form->createView(),
             'tags' => $userTags,
         ]);
     }
@@ -51,8 +66,6 @@ class UsersController extends AbstractController
      */
     public function sendResetPasswordEmail(
         UserRepository $userRepository,
-        MailService $mailService,
-        EntityManagerInterface $entityManager,
         TokenGenerator $tokenGenerator,
         Request $request
     ) {
@@ -63,8 +76,8 @@ class UsersController extends AbstractController
 
             if ($user) {
                 $user->setPasswordResetToken($tokenGenerator->getRandomSecureToken(200));
-                $entityManager->flush();
-                $mailService->sendPasswordResetEmail($user);
+                $this->entityManager->flush();
+                $this->mailService->sendPasswordResetEmail($user);
                 $this->addFlash('success', 'Slaptažodžio atkūrimas pradėtas, patikrinkite el. paštą');
 
                 return $this->redirectToRoute('app_login');
@@ -76,5 +89,13 @@ class UsersController extends AbstractController
         }
 
         return $this->render('front/pages/users/request_reset_password.html.twig');
+    }
+
+    /**
+     * @Route("daily-newsletter-by-tags", name="newsletter_by_tags")
+     */
+    public function sendNewsletterOfDailyPodcastsByTags()
+    {
+        $this->mailService->sendDailyNewsletterBySelectedTagsToRegisteredUsers();
     }
 }
