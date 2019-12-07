@@ -44,7 +44,7 @@ class ListenLaterService
         $this->entityManager->flush();
     }
 
-    public function getPodcasts(): ArrayCollection
+    public function getPodcasts()
     {
         $user = $this->security->getUser();
 
