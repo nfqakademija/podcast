@@ -279,7 +279,7 @@ class User implements UserInterface, MailableEntity
     /**
      * @return Collection|Podcast[]
      */
-    public function getPodcast(): Collection
+    public function getPodcasts(): Collection
     {
         return $this->podcasts;
     }

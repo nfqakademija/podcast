@@ -1,5 +1,9 @@
 .heart-color {
-    color: red;
+    color: #ff0000;
+}
+
+.note-color {
+    color: #0000ff;
 }
 
 .video-container {

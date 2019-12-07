@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\ListenLaterService;
 
 class PodcastsController extends AbstractController
 {
@@ -27,11 +28,13 @@ class PodcastsController extends AbstractController
     public function __construct(
         SourceRepository $sourceRepository,
         TagRepository $tagRepository,
-        PodcastRepository $podcastRepository
+        PodcastRepository $podcastRepository,
+        ListenLaterService $listenLaterService
     ) {
         $this->sourceRepository = $sourceRepository;
         $this->tagRepository = $tagRepository;
         $this->podcastRepository = $podcastRepository;
+        $this->listenLaterService = $listenLaterService;
     }
 
     /**
@@ -44,7 +47,8 @@ class PodcastsController extends AbstractController
             'sources' => $this->sourceRepository->findAll(),
             'tags' => $this->tagRepository->findAll(),
             'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
-            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
+            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType(),
+            'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
     }
 

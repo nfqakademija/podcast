@@ -142,11 +142,21 @@ class PodcastRepository extends ServiceEntityRepository
         return $this->paginator->paginate($qb, $page, 10);
     }
 
-    public function findAllPodcastsByLimit($limit)
+    public function findAllPodcastsByLimit(int $limit): array
     {
         $query = $this->createQueryBuilder('p')
             ->orderBy('p.publishedAt', 'DESC')
             ->setMaxResults($limit)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function findPodcastById(int $podcast_id): array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.id = :podcast_id')
+            ->setParameter('podcast_id', $podcast_id)
             ->getQuery();
 
         return $query->getResult();
