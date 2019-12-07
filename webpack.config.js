@@ -43,6 +43,7 @@ Encore
     .addEntry('select2_css', './assets/js/select2_css.js')
     .addEntry('select2', './assets/js/select2.js')
     .addEntry('custom_js', './assets/js/custom_js.js')
+    .addEntry('listen_later', './assets/js/listen_later.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
