@@ -56,35 +56,7 @@
               <!-- /.post-content --> 
               
             </div>
-            <!-- /.post -->
-            
-            {# <hr />
-            <div class="post-nav-wrapper">
-              <div class="post-nav prev">
-                <div class="meta"><i class="et-chevron-small-left"></i> Previous Article</div>
-                <h4><a href="#">Cursus Quam Ullamcorper Cras Ornare Etiam Aenean</a></h4>
-              </div>
-              <div class="post-nav next">
-                <div class="meta">Next Article <i class="et-chevron-small-right"></i></div>
-                <h4><a href="#">Fringilla Ligula Consectetur Ridiculus Vulputate</a></h4>
-              </div>
-            </div> #}
-            <!-- /.post-nav -->
-            
-            <!-- <hr />
-            <div class="about-author">
-              <div class="author-image"> <img alt="" src="style/images/art/author.jpg" /> </div>
-              <h4>About the Author</h4>
-              <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas faucibus mollis interdum. Fusce dapibus, tellus ac.</p>
-              <ul class="social social-color social-s">
-                <li> <a href="#"><i class="et-facebook"></i></a> </li>
-                <li> <a href="#"><i class="et-twitter"></i></a> </li>
-                <li> <a href="#"><i class="et-instagram"></i></a> </li>
-                <li> <a href="#"><i class="et-vimeo"></i></a> </li>
-                <li> <a href="#"><i class="et-linkedin"></i></a> </li>
-              </ul>
-            </div> -->
-            <!-- .about-author -->
+
             <div class="clearfix"></div>
               {% if app.user %}
                 {{ include('front/pages/posts/_comment_box.html.twig') }}
@@ -103,7 +75,7 @@
 {% endblock %}
 
 {% block sidebar %}
-  {{ include('front/layout/sidebar.html.twig') }}
+    {{ render(controller('App\\Controller\\PublicController::getNavigationBar')) }}
 {% endblock %}
 
 {% block javascript %}
