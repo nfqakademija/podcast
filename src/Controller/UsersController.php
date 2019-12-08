@@ -14,16 +14,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\ListenLaterService;
 
 class UsersController extends AbstractController
 {
     private $mailService;
     private $entityManager;
 
-    public function __construct(MailService $mailService, EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        MailService $mailService,
+        EntityManagerInterface $entityManager,
+        ListenLaterService $listenLaterService
+    ) {
         $this->mailService = $mailService;
         $this->entityManager = $entityManager;
+        $this->listenLaterService = $listenLaterService;
     }
 
     /**
@@ -34,6 +39,9 @@ class UsersController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
+        $listenLaterPodcasts = $user->getPodcasts();
+        $likedPodcasts = $user->getLikedPodcasts();
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         $userTags = $tagRepository->findTagsByUser($user);
@@ -48,7 +56,7 @@ class UsersController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $user = $form->getData();
+            //            $user = $form->getData();
             $this->entityManager->flush();
             $this->addFlash('success', 'Vartotojo duomenys atnaujinti');
 
@@ -58,6 +66,9 @@ class UsersController extends AbstractController
         return $this->render('front/pages/users/panel.html.twig', [
             'form' => $form->createView(),
             'tags' => $userTags,
+            'listenLaterPodcasts' => $listenLaterPodcasts,
+            'likedPodcasts' => $likedPodcasts,
+            'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
     }
 

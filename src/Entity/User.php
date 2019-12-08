@@ -341,4 +341,12 @@ class User implements UserInterface, MailableEntity
     {
         return $this->likedPodcasts->contains($podcast);
     }
+
+    /**
+     * @return Collection|Podcast[]
+     */
+    public function getLikedPodcasts(): Collection
+    {
+        return $this->likedPodcasts;
+    }
 }
