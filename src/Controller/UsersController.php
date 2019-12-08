@@ -20,6 +20,7 @@ class UsersController extends AbstractController
 {
     private $mailService;
     private $entityManager;
+    private $listenLaterService;
 
     public function __construct(
         MailService $mailService,
@@ -35,7 +36,7 @@ class UsersController extends AbstractController
      * @Route("/vartotojo_panele", name="user_panel")
      * @IsGranted("ROLE_USER")
      */
-    public function panel(Request $request, TagRepository $tagRepository, TaggingService $taggingService)
+    public function showUserPanel(Request $request, TagRepository $tagRepository, TaggingService $taggingService)
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -56,7 +57,6 @@ class UsersController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //            $user = $form->getData();
             $this->entityManager->flush();
             $this->addFlash('success', 'Vartotojo duomenys atnaujinti');
 
@@ -92,11 +92,10 @@ class UsersController extends AbstractController
                 $this->addFlash('success', 'Slaptažodžio atkūrimas pradėtas, patikrinkite el. paštą');
 
                 return $this->redirectToRoute('app_login');
-            } else {
-                $this->addFlash('danger', 'Toks vartotojas neegzistuoja!');
-
-                return $this->redirectToRoute('recover_password');
             }
+            $this->addFlash('danger', 'Toks vartotojas neegzistuoja!');
+
+            return $this->redirectToRoute('recover_password');
         }
 
         return $this->render('front/pages/users/request_reset_password.html.twig');
