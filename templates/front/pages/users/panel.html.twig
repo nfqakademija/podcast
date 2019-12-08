@@ -1,12 +1,12 @@
 {% extends 'front/layout/main.html.twig' %}
 
 {% block custom_css %}
-    {{ encore_entry_link_tags('select2_css') }}
+{{ encore_entry_link_tags('select2_css') }}
 {% endblock %}
 
 {% block content %}
 <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-    <div class="tab-content text-center">
+    <div class="tab-content text-center listen-later">
         {{ include('front/pages/users/_panel_menu.html.twig') }}
 
         <div class="tab-pane fade in active" id="tab3-1">
@@ -37,4 +37,5 @@
 {% block javascript %}
 {{ encore_entry_script_tags('select2') }}
 {{ encore_entry_script_tags('custom_js') }}
+{{ encore_entry_script_tags('listen_later') }}
 {% endblock %}

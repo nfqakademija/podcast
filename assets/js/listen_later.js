@@ -1,4 +1,4 @@
-$('.blog').on("click", ".add", function () {
+$('.listen-later').on("click", ".add", function () {
     var user_id = $(this).data("user-id");
     var url = $(this).data("url");
     var podcast_id = $(this).data("podcast-id");
@@ -16,7 +16,7 @@ $('.blog').on("click", ".add", function () {
       });
   });
   
-  $('.blog').on("click", ".remove", function () {
+  $('.listen-later').on("click", ".remove", function () {
     var user_id = $(this).data("user-id");
     var url = $(this).data("url");
     var podcast_id = $(this).data("podcast-id");
