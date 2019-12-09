@@ -8,6 +8,7 @@ use App\Entity\Source;
 use App\Repository\PodcastRepository;
 
 use App\Repository\SourceRepository;
+use App\Repository\TagRepository;
 use DateTime;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -22,15 +23,19 @@ class YoutubeService
     private $podcastRepository;
     private $sourceRepository;
     private $logger;
+    private $taggingService;
 
     private $requestUrl;
     private $apiCode;
+    private $tagRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         PodcastRepository $podcastRepository,
         SourceRepository $sourceRepository,
         LoggerInterface $logger,
+        TaggingService $taggingService,
+        TagRepository $tagRepository,
         $requestUrl,
         $apiCode
     ) {
@@ -39,12 +44,16 @@ class YoutubeService
         $this->podcastRepository = $podcastRepository;
         $this->sourceRepository = $sourceRepository;
         $this->logger = $logger;
+        $this->taggingService = $taggingService;
+        $this->tagRepository = $tagRepository;
         $this->requestUrl = $requestUrl;
         $this->apiCode = $apiCode;
     }
 
     public function importDataFromYoutube(array $listOfSources): bool
     {
+
+        $tags = $this->tagRepository->findAll();
         /** @var Source $source */
         foreach ($listOfSources as $source) {
             $playlist = false;
@@ -57,13 +66,16 @@ class YoutubeService
 
             try {
                 foreach ($content['items'] as $video) {
-                    if ($playlist && !empty($video['snippet']['thumbnails'])) {
-                        $videoId = explode('/', end($video['snippet']['thumbnails'])['url']);
-                        $videoId = $videoId[sizeof($videoId)-2];
-                    } else {
-                        continue;
+                    $videoId = null;
+                    if ($playlist) {
+                        if (!empty($video['snippet']['thumbnails'])) {
+                            $videoId = explode('/', end($video['snippet']['thumbnails'])['url']);
+                            $videoId = $videoId[sizeof($videoId) - 2];
+                        } else {
+                            continue;
+                        }
                     }
-                    if (($video['snippet']['liveBroadcastContent']??'none') === 'none'
+                    if (($video['snippet']['liveBroadcastContent']??'none') == 'none'
                         && !$this->isVideoExists($videoId??$video['id']['videoId'])
                     ) {
                         $podcast = new Podcast();
@@ -76,6 +88,8 @@ class YoutubeService
                         $podcast->setCreatedAt(new DateTime('now'));
                         $podcast->setVideo($videoId??$video['id']['videoId']);
                         $podcast->setType(Podcast::TYPES['TYPE_VIDEO']);
+
+                        $this->addTags($podcast, $tags);
 
                         $this->entityManager->persist($podcast);
                         $this->entityManager->flush();
@@ -192,6 +206,18 @@ class YoutubeService
         } catch (Throwable $e) {
             $this->logger->error($e);
             return false;
+        }
+    }
+
+
+    private function addTags(Podcast $podcast, $tags): void
+    {
+        $matchedTags = $this->taggingService->findTagsInPodcast($podcast, $tags);
+
+        if (count($matchedTags) > 0) {
+            foreach ($matchedTags as $tag) {
+                $podcast->addTag($tag);
+            }
         }
     }
 }
