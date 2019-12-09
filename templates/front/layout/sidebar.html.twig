@@ -17,7 +17,7 @@
 
   <div class="sidebox widget">
     <h5 class="widget-title">Podkastų tipai</h5>
-    <ul class="unordered-list">
+    <ul class="list-inline">
       <li><a href="{{ path('podcasts_by_type', {type: 'audio'}) }}">Audio ({{ audioCount }})</a></li>
       <li><a href="{{ path('podcasts_by_type', {type: 'video'}) }}">Video ({{ videoCount }})</a></li>
     </ul>
@@ -32,7 +32,7 @@
 
   <div class="sidebox widget">
     <h5 class="widget-title">Tagai</h5>
-    <ul class="unordered-list">
+    <ul class="list-inline">
       {% for tag in tags %}
       <li><a href="{{ path('podcasts_by_tag', {tag: tag.id}) }}" style="font-size: 8pt;"
           aria-label="Boat (1 item)">{{ tag.tag}}</a></li>
