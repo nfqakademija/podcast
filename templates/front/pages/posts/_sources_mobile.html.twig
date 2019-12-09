@@ -1,0 +1,16 @@
+<div class="dropdown">
+  <button class="btn btn-border btn-full-rounded dropdown-toggle" type="button" data-toggle="dropdown">Šaltiniai
+    <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li>
+      <a href="{{ url('podcasts') }}">
+        Visi šaltiniai
+      </a>
+    </li>
+    {% for source in sources %}
+    <li>
+      <a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="">{{ source.name}}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
