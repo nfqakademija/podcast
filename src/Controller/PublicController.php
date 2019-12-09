@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Podcast;
 use App\Repository\PodcastRepository;
 use App\Repository\TagRepository;
 use App\Service\XmlService;
@@ -51,8 +52,8 @@ class PublicController extends AbstractController
     {
         return $this->render('front/layout/sidebar.html.twig', [
             'tags' => $tagRepository->findAll(),
-            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
-            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType(),
+            'audioCount' => $this->podcastRepository->getPodcastsCountByType(Podcast::TYPES['TYPE_AUDIO']),
+            'videoCount' => $this->podcastRepository->getPodcastsCountByType(Podcast::TYPES['TYPE_VIDEO']),
         ]);
     }
 
