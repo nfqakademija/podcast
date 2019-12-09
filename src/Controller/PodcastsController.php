@@ -9,8 +9,6 @@ use App\Entity\Tag;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\PodcastRepository;
-use App\Repository\SourceRepository;
-use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,22 +17,12 @@ use App\Service\ListenLaterService;
 
 class PodcastsController extends AbstractController
 {
-    private $sourceRepository;
-
-    private $tagRepository;
-
     private $podcastRepository;
 
     private $listenLaterService;
 
-    public function __construct(
-        SourceRepository $sourceRepository,
-        TagRepository $tagRepository,
-        PodcastRepository $podcastRepository,
-        ListenLaterService $listenLaterService
-    ) {
-        $this->sourceRepository = $sourceRepository;
-        $this->tagRepository = $tagRepository;
+    public function __construct(PodcastRepository $podcastRepository, ListenLaterService $listenLaterService)
+    {
         $this->podcastRepository = $podcastRepository;
         $this->listenLaterService = $listenLaterService;
     }
@@ -122,6 +110,7 @@ class PodcastsController extends AbstractController
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByTag($tag, $page),
+            'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
     }
 
@@ -137,6 +126,7 @@ class PodcastsController extends AbstractController
             'podcasts' => $podcasts,
             'podcastsCount' => $this->podcastRepository->getSearchResultsCount($query),
             'search' => true,
+            'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
     }
 }
