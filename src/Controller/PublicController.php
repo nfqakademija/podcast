@@ -59,7 +59,7 @@ class PublicController extends AbstractController
 
     public function getSourcesSection()
     {
-        return $this->render('front/pages/posts/_sources.html.twig', [
+        return $this->render('front/pages/posts/_sources_sidebar.html.twig', [
             'sources' => $this->sourceRepository->findAll()
         ]);
     }

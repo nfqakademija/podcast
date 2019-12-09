@@ -1,48 +1,57 @@
-  <aside class="col-sm-4 sidebar">
-        <div class="sidebox widget">
-          <h5 class="widget-title">Pranešimai apie naujus įrašus</h5>
-          <div class="newsletter-wrapper">
-              {{ render(controller('App\\Controller\\SubscriberController::createSubscriber')) }}
-          </div>
-        </div>
-        <!-- /.widget -->
-          
-          <div class="sidebox widget">
-            <h5 class="widget-title">Podkastų tipai</h5>
-            <ul class="unordered-list">
-              <li><a href="{{ path('podcasts_by_type', {type: 'audio'}) }}">Audio ({{ audioCount }})</a></li>
-              <li><a href="{{ path('podcasts_by_type', {type: 'video'}) }}">Video ({{ videoCount }})</a></li>
-            </ul>
-          </div>
-          <!-- /.widget -->
-          
-          <div class="sidebox widget">
-            <h5 class="widget-title">Gairės</h5>
-            <ul class="unordered-list">
-              {% for tag in tags %}
-              <li><a href="{{ path('podcasts_by_tag', {tag: tag.id}) }}" 
-                   style="font-size: 8pt;" aria-label="Boat (1 item)">{{ tag.tag}}</a></li>
-            {% endfor %}
-            </ul>
-          </div>
-          <!-- /.widget -->
-          
-         <div class="sidebox widget">
-            <h5 class="widget-title">Paieška</h5>
-            <form class="search-form" action="{{ path('search_podcasts') }}">
-              <div class="form-group">
-                <input type="text" name="q" class="form-control" placeholder="Paieška">
-              </div>
-              <!-- /.form-group -->
-            </form>
-            <!-- /.search-form --> 
-          </div>
-          <!-- /.widget -->
+<aside class="col-sm-4 sidebar">
 
-          <div class="sidebox widget">
-            <h5 class="widget-title">Apie projektą</h5>
-            <p>Krepšinio podkastai vienoje vietoje.</p>
+  <div class="sidebox widget">
+    <h5 class="widget-title">Paieška</h5>
+    <form class="search-form" action="{{ path('search_podcasts') }}">
+      <div class="form-group">
+        <input type="text" name="q" class="form-control" placeholder="Paieška">
+      </div>
+    </form>
+  </div>
 
-            <div class="clearfix"></div>
-          </div>
-        </aside>
+  <div class="sidebox widget">
+    <h5 class="widget-title">Šaltiniai</h5>
+    {{ render(controller('App\\Controller\\PublicController::getSourcesSection')) }}
+    {# <ul class="list-inline">
+
+      {% for source in sources %}
+      <li>
+        <a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="">{{ source.name}}</a>
+      </li>
+      {% endfor %}
+    </ul> #}
+  </div>
+
+  <div class="sidebox widget">
+    <h5 class="widget-title">Podkastų tipai</h5>
+    <ul class="unordered-list">
+      <li><a href="{{ path('podcasts_by_type', {type: 'audio'}) }}">Audio ({{ audioCount }})</a></li>
+      <li><a href="{{ path('podcasts_by_type', {type: 'video'}) }}">Video ({{ videoCount }})</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebox widget">
+    <h5 class="widget-title">Pranešimai apie naujus įrašus</h5>
+    <div class="newsletter-wrapper">
+      {{ render(controller('App\\Controller\\SubscriberController::createSubscriber')) }}
+    </div>
+  </div>
+
+  <div class="sidebox widget">
+    <h5 class="widget-title">Tagai</h5>
+    <ul class="unordered-list">
+      {% for tag in tags %}
+      <li><a href="{{ path('podcasts_by_tag', {tag: tag.id}) }}" style="font-size: 8pt;"
+          aria-label="Boat (1 item)">{{ tag.tag}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="sidebox widget">
+    <h5 class="widget-title">Apie projektą</h5>
+    <p>Dabar labai populiarūs podkastai. Apie krepšinį ne išimtis. Mūsų projektas surenka visus su krepšiniu susijusius
+      podkastus, diskusijas (iš Youtube) į vieną vietą.</p>
+
+    <div class="clearfix"></div>
+  </div>
+</aside>
