@@ -12,14 +12,7 @@
   <div class="sidebox widget">
     <h5 class="widget-title">Šaltiniai</h5>
     {{ render(controller('App\\Controller\\PublicController::getSourcesSection')) }}
-    {# <ul class="list-inline">
 
-      {% for source in sources %}
-      <li>
-        <a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="">{{ source.name}}</a>
-      </li>
-      {% endfor %}
-    </ul> #}
   </div>
 
   <div class="sidebox widget">

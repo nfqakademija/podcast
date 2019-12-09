@@ -63,4 +63,11 @@ class PublicController extends AbstractController
             'sources' => $this->sourceRepository->findAll()
         ]);
     }
+
+    public function getSourcesSectionForMobile()
+    {
+        return $this->render('front/pages/posts/_sources_mobile.html.twig', [
+            'sources' => $this->sourceRepository->findAll()
+        ]);
+    }
 }

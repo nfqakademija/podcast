@@ -104,7 +104,7 @@ class PodcastsController extends AbstractController
     }
 
     /**
-     * @Route("gaires/{tag}/{page}", name="podcasts_by_tag", defaults={"page":1})
+     * @Route("tagai/{tag}/{page}", name="podcasts_by_tag", defaults={"page":1})
      */
     public function showPodcastsByTag(Tag $tag, $page)
     {

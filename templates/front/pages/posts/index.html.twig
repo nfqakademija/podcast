@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block content %}
-{# {{ render(controller('App\\Controller\\PublicController::getSourcesSection')) }} #}
-
+{{ include('front/pages/posts/_mobile.html.twig') }}
 
  <div class="col-sm-8">
     {% if app.request.get('q') != null %}
