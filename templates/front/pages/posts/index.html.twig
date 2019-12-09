@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 {{ include('front/pages/posts/_mobile.html.twig') }}
+=======
+{# {{ render(controller('App\\Controller\\PublicController::getSourcesSection')) }}#}
+
+>>>>>>> master
 
  <div class="col-sm-8">
     {% if app.request.get('q') != null %}
