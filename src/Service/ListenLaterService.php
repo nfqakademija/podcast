@@ -27,12 +27,9 @@ class ListenLaterService
         $this->security = $security;
     }
 
-    public function manage(int $podcast_id, int $user_id, string $action): void
+    public function manage($podcast, string $action): void
     {
-        $podcast = $this->podcastRepository->findPodcastById($podcast_id);
-        $podcast = $podcast[0];
-
-        $user = $this->userRepository->findOneBy(['id' => $user_id]);
+        $user = $this->security->getUser();
 
         if ($action == 'add') {
             $user->addPodcast($podcast);
@@ -40,7 +37,6 @@ class ListenLaterService
             $user->removePodcast($podcast);
         }
 
-        $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
 
