@@ -80,7 +80,9 @@ class MailService
                 $podcasts = [];
                 foreach ($user->getTags() as $tag) {
                     foreach ($tag->getPodcasts() as $podcast) {
-                        $podcasts[] = $podcast;
+                        if (!in_array($podcast, $podcasts)) {
+                            $podcasts[] = $podcast;
+                        }
                     }
                 }
                 $this->sendMessage(
@@ -91,7 +93,11 @@ class MailService
                     ])
                 );
             }
+
+            return true;
         }
+
+        return false;
     }
 
     public function sendDailyNewsletterToSubscribers()
