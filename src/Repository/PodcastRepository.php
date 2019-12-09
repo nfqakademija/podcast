@@ -31,8 +31,9 @@ class PodcastRepository extends ServiceEntityRepository
     public function getAllPodcastsPaginated($page)
     {
         $query = $this->createQueryBuilder('p')
+            ->leftJoin('p.source', 's')
             ->leftJoin('p.likesByUser', 'l')
-            ->addSelect('l')
+            ->addSelect('s', 'l')
             ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
