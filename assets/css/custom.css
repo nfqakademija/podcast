@@ -6,6 +6,10 @@
     color: #0000ff;
 }
 
+.about-project li {
+    line-height: 32px;
+}
+
 .video-container {
     position: relative;
     padding-bottom: 56.25%;
