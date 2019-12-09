@@ -1,19 +1,28 @@
-<h3>Pasirink pagal kokius raktažodžius nori gauti pranešimus</h3>
-<form method="post">
-    <div class="form-group">
-        <select class="form-control select2" multiple="multiple" name='tags[]'>
-            {% for tag in tags %}
-{#            <option selected="selected">nba</option>#}
-            <option selected="selected">{{ tag.tag }}</option>
-{#            <option selected="selected">siauliai</option>#}
-            {% endfor %}
-        </select>
+{% if app.user.isConfirmed %}
+    {% if app.user.isSubscriber %}
+        <h3>Pasirink pagal kokius raktažodžius nori gauti pranešimus</h3>
+        <form method="post">
+            <div class="form-group">
+                <select class="form-control select2" multiple="multiple" name='tags[]'>
+                    {% for tag in tags %}
+        {#            <option selected="selected">nba</option>#}
+                    <option selected="selected">{{ tag.tag }}</option>
+        {#            <option selected="selected">siauliai</option>#}
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="hidden" name="token" value="{{ csrf_token('add_tags') }}">
+            <button type="submit" class="btn btn-info">Saugoti</button>
+        </form>
+        <a href="{{ path('disable_mailing_by_tags') }}">Išjungti pranešimus</a>
+    {% else %}
+        <div class="alert bg alert-info">
+            <h3>Jeigu norite gauti naujienlaiškius su jūsų pasirinkimus atitinkančiais podkastais, įjunkite pranešimus</h3>
+        </div>
+        <a href="{{ path('enable_mailing_by_tags') }}" class="btn btn-info">Įjungti pranešimus</a>
+    {% endif %}
+{% else %}
+    <div class="alert bg alert-info">
+        <h3>Patvirtink savo el. paštą, kad galėtum gauti naujienlaiškius pagal savo kriterijus</h3>
     </div>
-    <input type="hidden" name="token"
-           value="{{ csrf_token('add_tags') }}"
-    >
-    <div class="form-group">
-        <input type="email" class="form-control" placeholder="El. paštas kur norite gauti pranešimus">
-    </div>
-    <button type="submit" class="btn btn-info">Saugoti</button>
-</form>
+{% endif %}

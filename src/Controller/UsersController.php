@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
+use App\Form\UpdateProfileType;
 use App\Repository\TagRepository;
 use App\Repository\UserRepository;
 use App\Service\MailService;
@@ -15,21 +15,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ListenLaterService;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UsersController extends AbstractController
 {
     private $mailService;
     private $entityManager;
     private $listenLaterService;
+    private $tokenGenerator;
 
     public function __construct(
         MailService $mailService,
         EntityManagerInterface $entityManager,
-        ListenLaterService $listenLaterService
+        ListenLaterService $listenLaterService,
+        TokenGenerator $tokenGenerator
     ) {
         $this->mailService = $mailService;
         $this->entityManager = $entityManager;
         $this->listenLaterService = $listenLaterService;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     /**
@@ -42,11 +46,8 @@ class UsersController extends AbstractController
         $user = $this->getUser();
         $listenLaterPodcasts = $user->getPodcasts();
         $likedPodcasts = $user->getLikedPodcasts();
-
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-        $userTags = $tagRepository->findTagsByUser($user);
         $token = $request->request->get('token');
+        $userTags = $tagRepository->findTagsByUser($user);
 
         if ($this->isCsrfTokenValid('add_tags', $token)) {
             $submittedTags = $request->request->get('tags');
@@ -56,15 +57,7 @@ class UsersController extends AbstractController
             return $this->redirectToRoute('user_panel');
         }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->flush();
-            $this->addFlash('success', 'Vartotojo duomenys atnaujinti');
-
-            return $this->redirectToRoute('user_panel');
-        }
-
         return $this->render('front/pages/users/panel.html.twig', [
-            'form' => $form->createView(),
             'tags' => $userTags,
             'listenLaterPodcasts' => $listenLaterPodcasts,
             'likedPodcasts' => $likedPodcasts,
@@ -73,20 +66,52 @@ class UsersController extends AbstractController
     }
 
     /**
+     * @Route("atnaujinti_vartotoja", name="update_user_credentials")
+     */
+    public function updateUserProfile(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $oldEmail = $user->getEmail();
+        $form = $this->createForm(UpdateProfileType::class, $user, [
+            'action' => $this->generateUrl('update_user_credentials')
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if($form->get('plainPassword')->getData()) {
+                $user->setPassword($passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData()));
+            }
+            if ($oldEmail !== $user->getEmail()) {
+                $user->setIsConfirmed(false);
+                $user->setConfirmationToken($this->tokenGenerator->getRandomSecureToken(100));
+                $this->mailService->sendVerification($user);
+                $this->addFlash('info', 'Atnaujinus el. paštą būtinas patvirtinimas');
+            }
+
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Vartotojo duomenys atnaujinti');
+
+            return $this->redirectToRoute('user_panel');
+        }
+
+        return $this->render('front/pages/users/_panel_form.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("slaptazodzio-atkurimas", name="recover_password", methods={"GET", "POST"})
      */
-    public function sendResetPasswordEmail(
-        UserRepository $userRepository,
-        TokenGenerator $tokenGenerator,
-        Request $request
-    ) {
+    public function sendResetPasswordEmail(UserRepository $userRepository, Request $request)
+    {
         $submittedToken = $request->request->get('token');
         if ($this->isCsrfTokenValid('reset_password', $submittedToken)) {
             $email = $request->request->get('username');
             $user = $userRepository->findOneBy(['username' => $email]);
 
             if ($user) {
-                $user->setPasswordResetToken($tokenGenerator->getRandomSecureToken(200));
+                $user->setPasswordResetToken($this->tokenGenerator->getRandomSecureToken(200));
                 $this->entityManager->flush();
                 $this->mailService->sendPasswordResetEmail($user);
                 $this->addFlash('success', 'Slaptažodžio atkūrimas pradėtas, patikrinkite el. paštą');
@@ -99,6 +124,36 @@ class UsersController extends AbstractController
         }
 
         return $this->render('front/pages/users/request_reset_password.html.twig');
+    }
+
+    /**
+     * @Route("ijungti_pranesimus", name="enable_mailing_by_tags")
+     */
+    public function enableMailingByUserTags()
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $user->setIsSubscriber(true);
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'Nuo šiol galite susikurti suasmenintus naujienlaiškius');
+
+        return $this->redirectToRoute('user_panel');
+    }
+
+    /**
+     * @Route("isjungti_pranesimus", name="disable_mailing_by_tags")
+     */
+    public function disableMailingByUserTags()
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $user->setIsSubscriber(false);
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'Naujienlaiškių siuntimas jums išjungtas');
+
+        return $this->redirectToRoute('user_panel');
     }
 
     /**

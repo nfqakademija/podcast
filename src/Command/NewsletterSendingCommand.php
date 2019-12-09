@@ -41,13 +41,25 @@ class NewsletterSendingCommand extends Command
             'Starts sending...',
         ]);
 
-        $result = $this->mailService->sendDailyNewsletterToSubscribers();
+        $mailsForSubscribers = $this->mailService->sendDailyNewsletterToSubscribers();
+        $mailsForUsersByTags = $this->mailService->sendDailyNewsletterBySelectedTagsToRegisteredUsers();
 
-        if ($result) {
-            $output->writeln('<fg=green>Emails sent successfully</>');
+        if ($mailsForSubscribers) {
+            $output->writeln('<fg=green>Emails for subscribers sent successfully</>');
         } else {
-            $output->writeln('<fg=red>No new podcasts today, we dont spam people with empty newsletters</>');
+            $output->writeln(
+                '<fg=red>No subscribers in database or no new podcasts today</>'
+            );
         }
+
+        if ($mailsForUsersByTags) {
+            $output->writeln('<fg=green>Emails for users sent successfully</>');
+        } else {
+            $output->writeln(
+                '<fg=red>No new podcasts by tags today, or no registered users with subscription</>'
+            );
+        }
+
 
         $this->release();
 
