@@ -31,6 +31,8 @@ class PodcastRepository extends ServiceEntityRepository
     public function getAllPodcastsPaginated($page)
     {
         $query = $this->createQueryBuilder('p')
+            ->leftJoin('p.likesByUser', 'l')
+            ->addSelect('l')
             ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
@@ -40,6 +42,8 @@ class PodcastRepository extends ServiceEntityRepository
     public function findAllPaginatedPodcastsBySource(Source $source, $page)
     {
         $query = $this->createQueryBuilder('p')
+            ->leftJoin('p.likesByUser', 'l')
+            ->addSelect('l')
             ->andWhere('p.source =:source')
             ->setParameter('source', $source)
             ->orderBy('p.publishedAt', 'DESC')
@@ -66,6 +70,8 @@ class PodcastRepository extends ServiceEntityRepository
         $qb = $this->getSearchResultsQueryBuilder($searchString);
 
         $query = $qb
+            ->leftJoin('p.likesByUser', 'l')
+            ->addSelect('l')
             ->orderBy('p.publishedAt', 'DESC')
             ->getQuery();
 
@@ -111,22 +117,12 @@ class PodcastRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    public function getPodcastsCountByVideoType(): int
-    {
-        return $this->createQueryBuilder('p')
-            ->select('count(p.id)')
-            ->where('p.type = :youtube')
-            ->setParameter('youtube', 'Youtube')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    public function getPodcastsCountByAudioType(): int
+    public function getPodcastsCountByType(string $type): int
     {
         return $this->createQueryBuilder('p')
             ->select('count(p.id)')
             ->where('p.type = :audio')
-            ->setParameter('audio', 'Audio')
+            ->setParameter('audio', $type)
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -134,6 +130,8 @@ class PodcastRepository extends ServiceEntityRepository
     public function findAllPaginatedPodcastsByType($type, $page)
     {
         $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.likesByUser', 'l')
+            ->addSelect('l')
             ->where('p.type = :type')
             ->setParameter('type', $type)
             ->orderBy('p.publishedAt', 'DESC')

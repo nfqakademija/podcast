@@ -9,8 +9,6 @@ use App\Entity\Tag;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\PodcastRepository;
-use App\Repository\SourceRepository;
-use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,20 +17,12 @@ use App\Service\ListenLaterService;
 
 class PodcastsController extends AbstractController
 {
-    private $sourceRepository;
-
-    private $tagRepository;
-
     private $podcastRepository;
 
-    public function __construct(
-        SourceRepository $sourceRepository,
-        TagRepository $tagRepository,
-        PodcastRepository $podcastRepository,
-        ListenLaterService $listenLaterService
-    ) {
-        $this->sourceRepository = $sourceRepository;
-        $this->tagRepository = $tagRepository;
+    private $listenLaterService;
+
+    public function __construct(PodcastRepository $podcastRepository, ListenLaterService $listenLaterService)
+    {
         $this->podcastRepository = $podcastRepository;
         $this->listenLaterService = $listenLaterService;
     }
@@ -40,14 +30,10 @@ class PodcastsController extends AbstractController
     /**
      * @Route("/{page}", name="podcasts", defaults={"page":1}, requirements={"page"="\d+"})
      */
-    public function front($page)
+    public function frontPage($page)
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->getAllPodcastsPaginated($page),
-            'sources' => $this->sourceRepository->findAll(),
-            'tags' => $this->tagRepository->findAll(),
-            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
-            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType(),
             'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
     }
@@ -68,10 +54,7 @@ class PodcastsController extends AbstractController
 
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByType($type, $page),
-            'sources' => $this->sourceRepository->findAll(),
-            'tags' => $this->tagRepository->findAll(),
-            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
-            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
+            'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
     }
 
@@ -82,17 +65,14 @@ class PodcastsController extends AbstractController
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
-            'sources' => $this->sourceRepository->findAll(),
-            'tags' => $this->tagRepository->findAll(),
-            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
-            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
+            'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
     }
 
     /**
      * @Route("podkastas/{podcast}/", name="single_podcast")
      */
-    public function showPodcast(
+    public function showSinglePodcast(
         Podcast $podcast,
         EntityManagerInterface $entityManager,
         CommentRepository $commentRepository,
@@ -119,11 +99,7 @@ class PodcastsController extends AbstractController
         return $this->render('front/pages/posts/show.html.twig', [
             'podcast' => $podcast,
             'comments' => $commentRepository->getAllCommentsByPodcast($podcast),
-            'sources' => $this->sourceRepository->findAll(),
-            'tags' => $this->tagRepository->findAll(),
             'form' => $form->createView(),
-            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
-            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
         ]);
     }
 
@@ -134,10 +110,7 @@ class PodcastsController extends AbstractController
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByTag($tag, $page),
-            'sources' => $this->sourceRepository->findAll(),
-            'tags' => $this->tagRepository->findAll(),
-            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
-            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
+            'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
     }
 
@@ -151,12 +124,9 @@ class PodcastsController extends AbstractController
 
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $podcasts,
-            'sources' => $this->sourceRepository->findAll(),
-            'tags' => $this->tagRepository->findAll(),
             'podcastsCount' => $this->podcastRepository->getSearchResultsCount($query),
             'search' => true,
-            'audioCount' => $this->podcastRepository->getPodcastsCountByAudioType(),
-            'videoCount' => $this->podcastRepository->getPodcastsCountByVideoType()
+            'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
     }
 }

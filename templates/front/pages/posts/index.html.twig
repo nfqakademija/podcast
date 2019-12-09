@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-{# {{ include('front/pages/posts/_sources.html.twig') }} #}
+{# {{ render(controller('App\\Controller\\PublicController::getSourcesSection')) }} #}
 
 
  <div class="col-sm-8">
@@ -85,7 +85,7 @@
 {% endblock %}
 
 {% block sidebar %}
-  {{ include('front/layout/sidebar.html.twig') }}
+    {{ render(controller('App\\Controller\\PublicController::getNavigationBar')) }}
 {% endblock %}
 
 {% block javascript %}
