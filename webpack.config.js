@@ -45,6 +45,7 @@ Encore
     .addEntry('select22', './assets/js/select22.js')
     .addEntry('jquery', './assets/js/jquery.js')
     .addEntry('bootstrap', './assets/js/bootstrap.js')
+    .addEntry('bootstrap_css', './assets/js/bootstrap_css2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
