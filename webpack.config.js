@@ -31,19 +31,20 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/app.js')
+    //.addEntry('app', './assets/js/app.js')
     .addEntry('style', './assets/js/style.js')
     .addEntry('icons', './assets/js/icons.js')
     .addEntry('custom', './assets/js/custom.js')
-    .addEntry('bootstrap.min', './assets/js/bootstrap.js')
-    .addEntry('jquery.min', './assets/js/jquery.min.js')
-    .addEntry('bootstrap.minjs', './assets/js/bootstrap.min.js')
-    .addEntry('plugins', './assets/js/plugins.js')
-    .addEntry('scripts2', './assets/js/scripts2.js')
+    .addEntry('bootstrap.min', './assets/js/bootstrap_css.js')
+   // .addEntry('jquery.min', './assets/js/jquery.min.js')
+    //.addEntry('bootstrap.minjs', './assets/js/bootstrap.min.js')
     .addEntry('select2_css', './assets/js/select2_css.js')
-    .addEntry('select2', './assets/js/select2.js')
+    //.addEntry('select2', './assets/js/select2.js')
     .addEntry('custom_js', './assets/js/custom_js.js')
     .addEntry('listen_later', './assets/js/listen_later.js')
+    .addEntry('select22', './assets/js/select22.js')
+    .addEntry('jquery', './assets/js/jquery.js')
+    .addEntry('bootstrap', './assets/js/bootstrap.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
