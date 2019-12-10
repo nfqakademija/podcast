@@ -1,1 +1,1 @@
-require('../css/bootstrap.min.css');
+require('bootstrap');
