@@ -169,11 +169,11 @@ class CrawlerService
      *
      * Tries to properly format date from lithuanian language or incorrectly formatted date string from html
      *
-     * @param $date
+     * @param string $date
      * @return DateTime
      * @throws Exception
      */
-    private function formatDate($date)
+    private function formatDate(string $date)
     {
         $lithuanianMonths = [
             'Sausio', 'Vasario', 'Kovo', 'Balandžio', 'Gegužės', 'Birželio',

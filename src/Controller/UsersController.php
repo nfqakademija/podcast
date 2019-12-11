@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Podcast;
 use App\Entity\User;
 use App\Form\UpdateProfileType;
 use App\Repository\TagRepository;
@@ -11,7 +12,9 @@ use App\Service\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ListenLaterService;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -132,10 +135,33 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("daily-newsletter-by-tags", name="newsletter_by_tags")
+     * @Route("/like/{podcast}", name="like")
+     *
+     * @param Podcast $podcast
+     * @return JsonResponse
      */
-    public function sendNewsletterOfDailyPodcastsByTags()
+    public function toggleLike(Podcast $podcast)
     {
-        $this->mailService->sendDailyNewsletterBySelectedTagsToRegisteredUsers();
+        $user = $this->getUser();
+        $user->toogleLike($podcast);
+
+        $this->entityManager->flush();
+
+        $isLike = $user->isLike($podcast);
+        $countLikes = count($podcast->getLikesByUser()??[]);
+
+        return $this->json(['likes' => $isLike, 'countLikes' => $countLikes]);
+    }
+
+    /**
+     * @Route("/listen_later/{podcast}", name="listen_later",  methods={"POST"})
+     */
+    public function addPodcastToListenLaterPlaylist(Request $request, Podcast $podcast)
+    {
+        $action = $request->get('action');
+
+        $this->listenLaterService->manage($podcast, $action);
+
+        return new Response();
     }
 }

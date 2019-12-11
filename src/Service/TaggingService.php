@@ -5,18 +5,26 @@ namespace App\Service;
 
 use App\Entity\Podcast;
 use App\Entity\Tag;
+use App\Entity\User;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class TaggingService
 {
-
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
+    /**
+     * @var TagRepository
+     */
     private $tagRepository;
 
+    /**
+     * @var Security
+     */
     private $security;
 
     public function __construct(
@@ -61,6 +69,7 @@ class TaggingService
      */
     public function handleUserTags(?array $submittedTags, ?array $existingUserTags): void
     {
+        /** @var User $user */
         $user = $this->security->getUser();
 
         if ($submittedTags) {
@@ -77,9 +86,9 @@ class TaggingService
 
     /**
      * @param array $submittedTags
-     * @param UserInterface|null $user
+     * @param User|null $user
      */
-    private function addNewTagsToUser(array $submittedTags, ?UserInterface $user): void
+    private function addNewTagsToUser(array $submittedTags, ?User $user): void
     {
         foreach ($submittedTags as $submittedTag) {
             $existingTag = $this->tagRepository->findOneBy(['tag' => $submittedTag]);
@@ -97,9 +106,9 @@ class TaggingService
     /**
      * @param array $submittedTags
      * @param array $userTags
-     * @param UserInterface|null $user
+     * @param User|null $user
      */
-    private function removeTagsFromUser(array $submittedTags, array $userTags, ?UserInterface $user): void
+    private function removeTagsFromUser(array $submittedTags, array $userTags, ?User $user): void
     {
         foreach ($userTags as $userTag) {
             $tagExists = array_filter($submittedTags, function ($submittedTag) use ($userTag) {

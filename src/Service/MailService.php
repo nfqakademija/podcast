@@ -11,6 +11,7 @@ use App\Repository\PodcastRepository;
 use App\Repository\SubscriberRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Psr\Log\LoggerInterface;
 use Swift_Mailer;
 use Swift_Message;
@@ -19,17 +20,46 @@ use Twig\Environment;
 
 class MailService
 {
+
     private const FROM_EMAIL = 'krepsinio.podcast@gmail.com';
     private const FROM_NAME = 'Krepšinio podcastai';
     private const NEWSLETTER_SUBJECT_LINE = 'Nauji podkastai';
     private const CONFIRMATION_SUBJECT_LINE = 'El. pašto patvirtinimas';
     private const RESET_PASSWORD_SUBJECT_LINE = 'Slaptažodžio atkūrimas';
+
+    /**
+     * @var Swift_Mailer
+     */
     private $mailer;
+
+    /**
+     * @var Environment
+     */
     private $twig;
+
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
+
+    /**
+     * @var SubscriberRepository
+     */
     private $subscriberRepository;
+
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+
+    /**
+     * @var PodcastRepository
+     */
     private $podcastRepository;
+
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
 
     public function __construct(
@@ -69,7 +99,11 @@ class MailService
         return $this->sendMessage($mailableEntity, self::CONFIRMATION_SUBJECT_LINE, $body);
     }
 
-    public function sendDailyNewsletterBySelectedTagsToRegisteredUsers()
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function sendDailyNewsletterBySelectedTagsToRegisteredUsers(): bool
     {
         $matchingUsers = $this->userRepository->getAllUsersWithTagsAndDailyPodcasts();
         $today = date("Y-m-d");
@@ -100,7 +134,11 @@ class MailService
         return false;
     }
 
-    public function sendDailyNewsletterToSubscribers()
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function sendDailyNewsletterToSubscribers(): bool
     {
         $subscribers = $this->subscriberRepository->findBy(['isConfirmed' => true]);
         $newPodcasts = $this->podcastRepository->findAllTodaysNewPodcasts();
@@ -125,7 +163,13 @@ class MailService
         return false;
     }
 
-    public function sendPasswordResetEmail(User $user)
+    /**
+     * @param User $user
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function sendPasswordResetEmail(User $user): void
     {
         $this->sendMessage(
             $user,

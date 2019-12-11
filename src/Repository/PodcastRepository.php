@@ -102,7 +102,7 @@ class PodcastRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $searchString
+     * @param string $searchString
      * @return QueryBuilder
      */
     private function getSearchResultsQueryBuilder(string $searchString): QueryBuilder
