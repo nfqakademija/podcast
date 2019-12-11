@@ -21,15 +21,15 @@
                   <figure class="overlay">
 
                         {% if podcast.video != null %}
-                          <iframe width="312" height="215" src="https://www.youtube.com/embed/{{ podcast.video }}" frameborder="0" 
-                                  allow="accelerometer; autoplay; encrypted-media; gyroscope" allowfullscreen>
-                          </iframe>           
+                          <iframe width="312" height="215" data-src="https://www.youtube.com/embed/{{ podcast.video }}" frameborder="0"
+                                  allow="accelerometer; autoplay; encrypted-media; gyroscope" allowfullscreen class="lazy">
+                          </iframe>
                         {% endif %}
 
                         {% if (podcast.image != null) and (podcast.video == null) %}
-                        <img src="{{ podcast.image }}" alt="" />
+                        <img data-src="{{ podcast.image }}" alt="" class="lazy" />
                         {% elseif podcast.image == null %}
-                        <img src="{{ asset('images/podcast_default.jpg') }}"  />
+                        <img data-src="{{ asset('images/podcast_default.jpg') }}" class="lazy" />
                         {% endif %}
                   </figure>
                 </div>
@@ -44,10 +44,10 @@
                           |
                           {% if podcast.id in podcastsLater %}
                               <i class="et-beamed-note note-color remove" data-podcast-id = "{{ podcast.id }}" 
-                                 data-url ="{{ url('listen_later', {podcast: podcast.id}) }}"> </i> 
+                                 data-url ="{{ url('listen_later', {podcast: podcast.id}) }}"> </i>
                           {% else %}
                                 <i class="et-beamed-note add" data-podcast-id = "{{ podcast.id }}" 
-                                  data-url ="{{ url('listen_later', {podcast: podcast.id}) }}"> </i> 
+                                  data-url ="{{ url('listen_later', {podcast: podcast.id}) }}"> </i>
                           {% endif %}
                             |
                          <i class="et-heart-outlined"> </i>  {{ podcast.likesByUser|length }}
@@ -88,4 +88,5 @@
 
 {% block javascript %}
   {{ encore_entry_script_tags('listen_later') }}
+  {{ encore_entry_script_tags('recliner') }}
 {% endblock %}
