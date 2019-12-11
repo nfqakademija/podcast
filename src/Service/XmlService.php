@@ -13,7 +13,7 @@ class XmlService
         $this->serializer = $serializer;
     }
 
-    public function generate($podcasts)
+    public function generate(array $podcasts)
     {
         $items = [];
         foreach ($podcasts as $podcast) {
@@ -41,7 +41,7 @@ class XmlService
         return $xml;
     }
 
-    private function xmlEscape($string)
+    private function xmlEscape(?string $string): string
     {
         return str_replace(
             array('&', '<', '>', '\'', '"'),
