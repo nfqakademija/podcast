@@ -78,3 +78,10 @@
     outline: none !important;
     box-shadow: none;
 }
+.lazy{
+    opacity: 0 !important;
+    transition: opacity .333s ease-in !important;
+}
+.lazy.lazy-loaded {
+    opacity: 1 !important;
+}
