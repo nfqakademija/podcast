@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
+use App\Entity\Podcast;
 
 class ListenLaterService
 {
@@ -27,7 +28,7 @@ class ListenLaterService
         $this->security = $security;
     }
 
-    public function manage($podcast, string $action): void
+    public function manage(Podcast $podcast, string $action): void
     {
         $user = $this->security->getUser();
 
@@ -40,7 +41,10 @@ class ListenLaterService
         $this->entityManager->flush();
     }
 
-    public function getPodcasts()
+    /**
+     * @return iterable
+     */
+    public function getPodcasts(): iterable
     {
         $user = $this->security->getUser();
 

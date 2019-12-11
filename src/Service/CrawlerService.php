@@ -197,7 +197,7 @@ class CrawlerService
     /**
      * Checks for tags in database and if there is a match in new podcast, adds tag to it
      *
-     * @param Podcast $podcast
+     * @param array $newPodcasts
      * @param array $tags
      */
     private function addTagsToPodcasts(array $newPodcasts, array $tags): void
