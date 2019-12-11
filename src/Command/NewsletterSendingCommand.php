@@ -14,6 +14,9 @@ class NewsletterSendingCommand extends Command
 
     protected static $defaultName = 'send-newsletters';
 
+    /**
+     * @var MailService
+     */
     private $mailService;
 
     public function __construct(MailService $mailService)

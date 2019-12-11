@@ -31,6 +31,7 @@ class UserRepository extends ServiceEntityRepository
             ->innerJoin('u.tags', 't')
             ->innerJoin('t.podcasts', 'p')
             ->andWhere('p.createdAt >= :date')
+            ->andWhere('u.isSubscriber = true')
             ->setParameter('date', new DateTime(date("Y-m-d")))
             ->addSelect('t', 'p')
             ->orderBy('u.id')
