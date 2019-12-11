@@ -94,6 +94,11 @@ class User implements UserInterface, MailableEntity
      */
     private $tags;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isSubscriber = false;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -348,5 +353,17 @@ class User implements UserInterface, MailableEntity
     public function getLikedPodcasts(): Collection
     {
         return $this->likedPodcasts;
+    }
+
+    public function getIsSubscriber(): ?bool
+    {
+        return $this->isSubscriber;
+    }
+
+    public function setIsSubscriber(bool $isSubscriber): self
+    {
+        $this->isSubscriber = $isSubscriber;
+
+        return $this;
     }
 }

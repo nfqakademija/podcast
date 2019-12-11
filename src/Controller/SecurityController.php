@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ResetPasswordType;
+use App\Repository\UserRepository;
+use App\Service\MailService;
+use App\Service\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +17,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/prisijungimas", name="app_login")
      */
@@ -47,7 +57,6 @@ class SecurityController extends AbstractController
      */
     public function resetUserPassword(
         User $user,
-        EntityManagerInterface $entityManager,
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder
     ) {
@@ -64,7 +73,7 @@ class SecurityController extends AbstractController
                 );
 
                 $user->setPasswordResetToken(null);
-                $entityManager->flush();
+                $this->entityManager->flush();
 
                 $this->addFlash('success', 'Slaptažodis sėkmingai pakeistas, galite prisijungti!');
 
@@ -77,5 +86,35 @@ class SecurityController extends AbstractController
         }
 
         return $this->createNotFoundException();
+    }
+
+    /**
+     * @Route("slaptazodzio-atkurimas", name="recover_password", methods={"GET", "POST"})
+     */
+    public function sendResetPasswordEmail(
+        UserRepository $userRepository,
+        Request $request,
+        TokenGenerator $tokenGenerator,
+        MailService $mailService
+    ) {
+        $submittedToken = $request->request->get('token');
+        if ($this->isCsrfTokenValid('reset_password', $submittedToken)) {
+            $email = $request->request->get('username');
+            $user = $userRepository->findOneBy(['username' => $email]);
+
+            if ($user) {
+                $user->setPasswordResetToken($tokenGenerator->getRandomSecureToken(200));
+                $this->entityManager->flush();
+                $mailService->sendPasswordResetEmail($user);
+                $this->addFlash('success', 'Slaptažodžio atkūrimas pradėtas, patikrinkite el. paštą');
+
+                return $this->redirectToRoute('app_login');
+            }
+            $this->addFlash('danger', 'Toks vartotojas neegzistuoja!');
+
+            return $this->redirectToRoute('recover_password');
+        }
+
+        return $this->render('front/pages/users/request_reset_password.html.twig');
     }
 }

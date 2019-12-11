@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ListenLaterService;
+use App\Entity\Podcast;
 
 class ListenLaterController extends AbstractController
 {
@@ -18,15 +19,13 @@ class ListenLaterController extends AbstractController
     }
 
     /**
-     * @Route("/listen_later/", name="listen_later",  methods={"POST"})
+     * @Route("/listen_later/{podcast}", name="listen_later",  methods={"POST"})
      */
-    public function manageAction(Request $request)
+    public function manageAction(Request $request, Podcast $podcast)
     {
-        $podcast_id = $request->get('podcast_id');
-        $user_id = $request->get('user_id');
         $action = $request->get('action');
 
-        $this->listenLaterService->manage($podcast_id, $user_id, $action);
+        $this->listenLaterService->manage($podcast, $action);
 
         return new Response();
     }

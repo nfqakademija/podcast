@@ -22,7 +22,7 @@
         </div>
 
         <div class="tab-pane fade" id="tab3-4">
-            {{ include('front/pages/users/_panel_form.html.twig') }}
+            {{ render(controller('App\\Controller\\UsersController::updateUserProfile')) }}
         </div>
 
     </div>
@@ -35,7 +35,7 @@
 {% endblock %}
 
 {% block javascript %}
-{{ encore_entry_script_tags('select2') }}
+{{ encore_entry_script_tags('select22') }}
 {{ encore_entry_script_tags('custom_js') }}
 {{ encore_entry_script_tags('listen_later') }}
 {% endblock %}
