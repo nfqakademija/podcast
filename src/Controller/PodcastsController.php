@@ -136,8 +136,8 @@ class PodcastsController extends AbstractController
      */
     public function trimSlug(SlugService $slugService)
     {
-       $slugService->makeSlugs();
+        $slugService->makeSlugs();
 
-       dd('done');
+        dd('done');
     }
 }
