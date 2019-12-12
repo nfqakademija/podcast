@@ -79,7 +79,7 @@ class SubscriberController extends AbstractController
     }
 
     /**
-     * @Route("prenumeracijos_atsisakymas/{unsubscribeToken}", name="unsubscribe")
+     * @Route("prenumeratos_atsisakymas/{unsubscribeToken}", name="unsubscribe")
      */
     public function deleteSubscriber(Subscriber $subscriber)
     {

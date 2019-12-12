@@ -3,6 +3,8 @@
 <p>Naujausi podkastai ({{ podcasts|length}})</p>
 {% for podcast in podcasts %}
     <div>
+        <a href="{{ url('podcasts_by_source', {slug: podcast.source.slug}) }}">{{ podcast.source.name}}</a>:
+              
         <b><a href="{{ url('single_podcast', {slug: podcast.slug}) }}" >{{ podcast.title}}</a></b>
          <p> {{ podcast.description }}</p>
     </div>

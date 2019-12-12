@@ -35,7 +35,8 @@
         </div>
         <!--/column -->
         <div class="space20 visible-sm clearfix"></div>
-        <div class="col-md-7"> <span class="category"> <a href="{{ podcast.source.url}}" class="" target="_blank">
+        <div class="col-md-7"> <span class="category"> 
+            <a href="{{ url('podcasts_by_source', {slug: podcast.source.slug}) }}" target="_blank">
               {{ podcast.source.name}} </a></span>
           <div class="post-content">
             <h3 class="post-title"><a href="{{ path('single_podcast', {slug: podcast.slug}) }}">{{ podcast.title}}</a>
