@@ -5,19 +5,17 @@
     <h3>Jeigu turite paskyrą prisijunkite</h3>
     <form method="post">
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
         <div class="form-group">
             <input type="email" class="form-control" name="username" placeholder="El. paštas">
         </div>
-        <!-- /.form-group -->
+
         <div class="form-group">
             <input type="password" name="password" class="form-control" placeholder="Slaptažodis" required>
         </div>
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
-        <!-- /.form-group -->
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
@@ -27,13 +25,11 @@
                             <span>
                                 <!-- fake checkbox --></span> <span class="wrapped-label">Prisiminti</span> </label>
                     </div>
-                    <!-- /.checkbox -->
                 </div>
-                <!-- /.form-group -->
             </div>
-            <!--/column -->
-            <div class="col-sm-6 text-right"><a class="hover" href="{{ path('app_register') }}">Registracija</a> <a href="{{ path('recover_password') }}" class="hover">Pamiršai slaptažodį?</a> </div>
-            <!--/column -->
+            <div class="col-sm-6 text-right"><a class="hover" href="{{ path('app_register') }}">Registracija</a> <a
+                    href="{{ path('recover_password') }}" class="hover">Pamiršai slaptažodį?</a> </div>
+
         </div>
         <button type="submit" class="btn btn-rounded">Prisijungti</button>
     </form>

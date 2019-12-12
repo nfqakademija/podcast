@@ -8,10 +8,9 @@
                 {{ podcast.source.name}} </a></span>
               <div class="post-content">
                 <h1 class="post-title">{{ podcast.title }}</h1>
-                <div class="meta"><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span>
+                <div><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span>
                   <span class="author"> <a href="{{ podcast.source.url}}" class="bypostauthor" target="_blank">
                                 {{ podcast.source.name}} </a></span>
-                  {# <span class="comments"><a href="#">5 Comments</a></span> #}
                 </div>
                 {% if podcast.audio != null %}
                 <p>
@@ -47,11 +46,6 @@
                 <!-- /.tiles -->                
                 <div class="clearfix"></div>
 
-                <!-- <a href="#" class="btn btn-rounded btn-icon btn-icon-left share-facebook goodshare" data-type="fb">
-                  <i class="et-facebook"></i>Share on Facebook</a> 
-                  <a href="#" class="btn btn-rounded  btn-icon btn-icon-left share-twitter goodshare" data-type="tw">
-                    <i class="et-twitter"></i>Share on Twitter</a> <a href="#" class="btn btn-rounded  btn-icon btn-icon-left share-pinterest goodshare" data-type="pt">
-                      <i class="et-pinterest"></i>Share on Pinterest</a>  -->
               </div>
               <!-- /.post-content --> 
               

@@ -16,14 +16,15 @@
         <li><i class="et-users"></i>Eligijus (mentorius)</li>
     </ul>
 </div>
-<!-- /column -->
+
 <div class="space30 hidden-xs hidden-md hidden-lg"></div>
 <div class="col-md-6">
     <h3>Apie projektą</h3>
     <p>
         Dabar labai populiarūs podkastai. Apie krepšinį ne išimtis. Mūsų projektas surenka visus su krepšiniu susijusius
-        podkastus, diskusijas (iš Youtube) į vieną vietą. Jums nebereikės prisiminti daugybės skirtingų puslapių, viskas yra
-        viename puslapyje - <a href="https://podcast.projektai.nfqakademija.lt" target="_blank">Krepšinio podcastai</a>.
+        podkastus, diskusijas (iš Youtube) į vieną vietą. Jums nebereikės prisiminti daugybės skirtingų puslapių, juos
+        visus nuolat lankyti ir sekti, viskas yra viename puslapyje -
+        <a href="https://podcast.projektai.nfqakademija.lt" target="_blank">Krepšinio podcastai</a>.
     </p>
     <h5>Funkcijos</h5>
     <ul class="icon-list list-blue about-project">
@@ -40,10 +41,9 @@
     <h5>Šaltiniai</h5>
     <ul class="icon-list list-green about-project">
         {% for source in sources|sort %}
-        <li><i class="et-chevron-right"></i>{{ source.name}}</li>
+        <li><i class="et-chevron-right"></i><a href="{{ path('podcasts_by_source', {slug: source.slug}) }}" class="">{{ source.name}}</a></li>
         {% endfor %}
     </ul>
 </div>
-<!-- /column -->
 
 {% endblock %}

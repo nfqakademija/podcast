@@ -5,9 +5,7 @@
             <div class="form-group">
                 <select class="form-control select2" multiple="multiple" name='tags[]'>
                     {% for tag in tags %}
-        {#            <option selected="selected">nba</option>#}
                     <option selected="selected">{{ tag.tag }}</option>
-        {#            <option selected="selected">siauliai</option>#}
                     {% endfor %}
                 </select>
             </div>

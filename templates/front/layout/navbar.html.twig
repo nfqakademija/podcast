@@ -1,70 +1,75 @@
-  <nav class="navbar">
-    <div class="container">
-      <div class="flex-it">
-        <div class="navbar-header">
-          <div class="navbar-brand"><a href="{{ url('podcasts') }}"><div class="icon-img icon-img-m"><img src="{{asset('/images/lulu-headphones.png')}}" class="icon-lulu" alt="" /></div></a></div>
-          <div class="nav-bars-wrapper">
-            <div class="nav-bars-inner">
-              <div class="nav-bars" data-toggle="collapse" data-target=".navbar-collapse"><span></span></div>
-            </div>
+<nav class="navbar">
+  <div class="container">
+    <div class="flex-it">
+      <div class="navbar-header">
+        <div class="navbar-brand"><a href="{{ url('podcasts') }}">
+            <div class="icon-img icon-img-m"><img src="{{asset('/images/lulu-headphones.png')}}" class="icon-lulu"
+                alt="" /></div>
+          </a></div>
+        <div class="nav-bars-wrapper">
+          <div class="nav-bars-inner">
+            <div class="nav-bars" data-toggle="collapse" data-target=".navbar-collapse"><span></span></div>
           </div>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="mega-menu"><a href="{{ url('podcasts') }}">Podkastai</a>
- 
-            </li>
-            <li><a href="{{ url('about_project') }}">Apie projektą</a>
-              
-            </li>
-
-            {% if is_granted('ROLE_ADMIN') %}
-              <li><a href="{{ url('easyadmin') }}">Administratoriui</a></li>
-            {% endif %}
-
-            {% if app.user %}
-            <li><a href="{{ url('user_panel') }}">
-            {% if app.user.fullName is null or app.user.fullName is empty %}
-              {{ app.user.username }}
-            {% else %}
-              {{ app.user.fullName }}
-            {% endif %}
-            </a></li>
-              <li><a href="{{ url('app_logout') }}">Atsijungti</a></li>
-            {% else %}
-              <li><a href="{{ url('app_login') }}">Prisijungti/Registruotis</a></li>
-            {% endif %}
-
-             <li>
-              <a href="{{ url('rss_feed') }}"><i class="et-rss"> </i></a>
-            </li>
-           
-          </ul>
-          <!--/.navbar-nav --> 
-        </div>
-        <!--/.nav-collapse -->
-        <div class="navbar-other">
-          <ul class="nav">
-            <li>
-              <div class="btn-group btn-search"> <a href="#" data-toggle="dropdown" class="nav-link"><i class="et-magnifying-glass"></i></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <form class="search-form" action="{{ path('search_podcasts') }}">
-                    <div class="form-group mb-0">
-                      <input type="text" name="q" class="form-control" placeholder="Ieškok">
-                    </div>
-                    <!-- /.form-group -->
-                  </form>
-                  <!-- /.search-form --> 
-                </div>
-                <!-- /.dropdown-menu --> 
-              </div>
-              <!-- /.btn-group --></li>
-          </ul>
-        </div>
-        <!-- /.navbar-other --> 
       </div>
-      <!--/.flex-it --> 
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="mega-menu"><a href="{{ url('podcasts') }}">Podkastai</a>
+
+          </li>
+          <li><a href="{{ url('about_project') }}">Apie projektą</a>
+
+          </li>
+
+          {% if is_granted('ROLE_ADMIN') %}
+          <li><a href="{{ url('easyadmin') }}">Administratoriui</a></li>
+          {% endif %}
+
+          {% if app.user %}
+          <li><a href="{{ url('user_panel') }}">
+              {% if app.user.fullName is null or app.user.fullName is empty %}
+              {{ app.user.username }}
+              {% else %}
+              {{ app.user.fullName }}
+              {% endif %}
+            </a></li>
+          <li><a href="{{ url('app_logout') }}">Atsijungti</a></li>
+          {% else %}
+          <li><a href="{{ url('app_login') }}">Prisijungti/Registruotis</a></li>
+          {% endif %}
+
+          <li>
+            <a href="{{ url('rss_feed') }}"><i class="et-rss"> </i></a>
+          </li>
+
+        </ul>
+        <!--/.navbar-nav -->
+      </div>
+      <!--/.nav-collapse -->
+      <div class="navbar-other">
+        <ul class="nav">
+          <li>
+            <div class="btn-group btn-search"> <a href="#" data-toggle="dropdown" class="nav-link"><i
+                  class="et-magnifying-glass"></i></a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <form class="search-form" action="{{ path('search_podcasts') }}">
+                  <div class="form-group mb-0">
+                    <input type="text" name="q" class="form-control" placeholder="Ieškok">
+                  </div>
+                  <!-- /.form-group -->
+                </form>
+                <!-- /.search-form -->
+              </div>
+              <!-- /.dropdown-menu -->
+            </div>
+            <!-- /.btn-group -->
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-other -->
     </div>
-    <!--/.container --> 
-  </nav>
-  <!--/.navbar -->
+    <!--/.flex-it -->
+  </div>
+  <!--/.container -->
+</nav>
+<!--/.navbar -->
