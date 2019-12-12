@@ -12,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(
  *     indexes={
  *          @ORM\Index(name="idx_title", columns={"title"}),
+ *          @ORM\Index(name="idx_slug", columns={"slug"}),
  *          @ORM\Index(name="idx_published_at", columns={"published_at"})
  *     }
  * )
