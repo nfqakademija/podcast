@@ -9,7 +9,7 @@
     </li>
     {% for source in sources %}
     <li>
-      <a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="">{{ source.name}}</a>
+      <a href="{{ path('podcasts_by_source', {slug: source.slug}) }}" class="">{{ source.name}}</a>
     </li>
     {% endfor %}
   </ul>

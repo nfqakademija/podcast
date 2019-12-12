@@ -41,7 +41,7 @@
     <h5>Šaltiniai</h5>
     <ul class="icon-list list-green about-project">
         {% for source in sources|sort %}
-        <li><i class="et-chevron-right"></i><a href="{{ path('podcasts_by_source', {source: source.id}) }}" class="">{{ source.name}}</a></li>
+        <li><i class="et-chevron-right"></i><a href="{{ path('podcasts_by_source', {slug: source.slug}) }}" class="">{{ source.name}}</a></li>
         {% endfor %}
     </ul>
 </div>

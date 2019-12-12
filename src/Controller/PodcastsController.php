@@ -9,7 +9,9 @@ use App\Entity\Tag;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\PodcastRepository;
+use App\Service\SlugService;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,7 +61,7 @@ class PodcastsController extends AbstractController
     }
 
     /**
-     * @Route("podkastai/{source}/{page}", name="podcasts_by_source", defaults={"page":1})
+     * @Route("podkastai/{slug}/{page}", name="podcasts_by_source", defaults={"page":1})
      */
     public function showPodcastsBySource(Source $source, $page)
     {
@@ -70,7 +72,7 @@ class PodcastsController extends AbstractController
     }
 
     /**
-     * @Route("podkastas/{podcast}/", name="single_podcast")
+     * @Route("podkastas/{slug}/", name="single_podcast")
      */
     public function showSinglePodcast(
         Podcast $podcast,
@@ -92,7 +94,7 @@ class PodcastsController extends AbstractController
             $this->addFlash('success', 'Naujas komentaras pridėtas.');
 
             return $this->redirectToRoute('single_podcast', [
-                'podcast' => $podcast->getId()
+                'podcast' => $podcast->getSlug()
             ]);
         }
 
@@ -104,7 +106,7 @@ class PodcastsController extends AbstractController
     }
 
     /**
-     * @Route("tagai/{tag}/{page}", name="podcasts_by_tag", defaults={"page":1})
+     * @Route("tagai/{slug}/{page}", name="podcasts_by_tag", defaults={"page":1})
      */
     public function showPodcastsByTag(Tag $tag, $page)
     {
@@ -128,5 +130,15 @@ class PodcastsController extends AbstractController
             'search' => true,
             'podcastsLater' => $this->listenLaterService->getPodcasts()
         ]);
+    }
+
+    /**
+     * @Route("/sluggable/make/slugs")
+     */
+    public function trimSlug(SlugService $slugService)
+    {
+        $slugService->makeSlugs();
+
+        dd('done');
     }
 }
