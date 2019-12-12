@@ -91,16 +91,6 @@ class UsersController extends AbstractController
                 $this->addFlash('info', 'Atnaujinus el. paštą būtinas patvirtinimas');
             }
 
-            if ($form->get('username')->getData()) {
-                if ($oldEmail !== $form->get('username')->getData()) {
-                    $user->setUsername($form->get('username')->getData());
-                    $user->setIsConfirmed(false);
-                    $user->setConfirmationToken($this->tokenGenerator->getRandomSecureToken(100));
-                    $this->mailService->sendVerification($user);
-                    $this->addFlash('info', 'Atnaujinus el. paštą būtinas patvirtinimas');
-                }
-            }
-
             $this->entityManager->flush();
             $this->addFlash('success', 'Vartotojo duomenys atnaujinti');
 
