@@ -11,7 +11,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  * @ORM\Table(
  *     indexes={
- *          @ORM\Index(name="idx_tag", columns={"tag"})
+ *          @ORM\Index(name="idx_tag", columns={"tag"}),
+ *          @ORM\Index(name="idx_slug", columns={"slug"})
  *     }
  * )
  */
