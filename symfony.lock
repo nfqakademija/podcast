@@ -142,6 +142,9 @@
     "phpstan/phpstan": {
         "version": "0.12.2"
     },
+    "phpstan/phpstan-symfony": {
+        "version": "0.12.1"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
