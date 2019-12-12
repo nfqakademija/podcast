@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
@@ -37,6 +38,12 @@ class Tag
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="tags")
      */
     private $users;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
+     * @Gedmo\Slug(fields={"tag"})
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -116,6 +123,18 @@ class Tag
             $this->users->removeElement($user);
             $user->removeTag($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -90,6 +90,12 @@ class Source
      */
     private $sourceType;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->podcasts = new ArrayCollection();
@@ -276,6 +282,18 @@ class Source
     public function setSourceType(?string $sourceType): self
     {
         $this->sourceType = $sourceType;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

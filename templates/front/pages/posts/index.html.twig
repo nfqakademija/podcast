@@ -37,7 +37,7 @@
                 <div class="space20 visible-sm clearfix"></div>
                 <div class="col-md-7"> <span class="category"> <a href="{{ podcast.source.url}}" class="" target="_blank"> {{ podcast.source.name}} </a></span>
                   <div class="post-content">
-                    <h3 class="post-title"><a href="{{ path('single_podcast', {podcast: podcast.id}) }}" >{{ podcast.title}}</a></h3>
+                    <h3 class="post-title"><a href="{{ path('single_podcast', {podcastSlug: podcast.slug}) }}" >{{ podcast.title}}</a></h3>
                     <div class="meta1"><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span>
                         {# <span class="comments"><a href="#">5 Comments</a></span> #}
                         {% if app.user %}
