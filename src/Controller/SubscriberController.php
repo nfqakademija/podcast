@@ -48,7 +48,7 @@ class SubscriberController extends AbstractController
             $this->entityManager->persist($subscriber);
             $this->entityManager->flush();
 
-            $this->addFlash('success', 'El. pašto patvirtinimo laiškas išsiūstas!');
+            $this->addFlash('success', 'El. pašto patvirtinimo laiškas išsiųstas!');
 
             return $this->redirectToRoute('podcasts');
         }

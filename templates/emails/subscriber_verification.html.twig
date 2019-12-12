@@ -1,50 +1,62 @@
-<html>
-    <head>
-        <style>
-            .backgorund{
-                background: #F0F2F5;
-                padding: 50px;
-                font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
-                text-align: center;
-            }
-            .block{
-                background: #FFFFFF;
-                padding: 50px;
-                box-shadow: 1px 1px 4px #a5a2a1;
-            }
-            .block p{
-                color: #a5a2a1 ;
-            }
-            .verify{
-                display: inline-block;
-                padding: 20px 40px;
-                background: #5CAF38;
-                color: #ffffff !important;
-                border-radius: 5px;
-                text-decoration: none;
-                font-weight: bold;
-            }
-            .verify:link, .verify:visited, .verify:active{
-                background: #519b32;
-                text-decoration: none;
-            }
-            .verify:hover{
-                background: #519b32;
-            }
-            p.url{
-                color: #0EA3FB;
-                font-weight: bold;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="backgorund">
-            <div class="block">
-                <h1>Prašome patvirtinti el. pašto adresą</h1>
-                <a href="{{ url(path, {'confirmationToken': token} ) }}" class="verify">Patvirtinti el. paštą</a>
-                <p>Arba naršyklės lange atverkite šią nuorodą:</p>
-                <p class="url">{{ url(path, {'confirmationToken': token}) }}</p>
-            </div>
+<!DOCTYPE html>
+<html lang="lt">
+
+<head>
+    <style>
+        .backgorund {
+            background: #F0F2F5;
+            padding: 50px;
+            font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-align: center;
+        }
+
+        .block {
+            background: #FFFFFF;
+            padding: 50px;
+            box-shadow: 1px 1px 4px #a5a2a1;
+        }
+
+        .block p {
+            color: #a5a2a1;
+        }
+
+        .verify {
+            display: inline-block;
+            padding: 20px 40px;
+            background: rgb(10, 51, 235);
+            color: #ffffff !important;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .verify:link,
+        .verify:visited,
+        .verify:active {
+            background: #0947f1;
+            text-decoration: none;
+        }
+
+        .verify:hover {
+            background: #171bf0;
+        }
+
+        p.url {
+            color: #0EA3FB;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="backgorund">
+        <div class="block">
+            <h1>Prašome patvirtinti el. pašto adresą</h1>
+            <a href="{{ url(path, {'confirmationToken': token} ) }}" class="verify">Patvirtinti el. paštą</a>
+            <p>Arba naršyklės lange atverkite šią nuorodą:</p>
+            <p class="url">{{ url(path, {'confirmationToken': token}) }}</p>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
