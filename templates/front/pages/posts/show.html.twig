@@ -4,13 +4,12 @@
  <div class="col-sm-8">
           <div class="blog classic-view single">
             <div class="post">
-              <span class="category"><a href="{{ podcast.source.url}}" class="label bg-lime" target="_blank">
+              <span class="category"><a href="{{ url('podcasts_by_source', {slug: podcast.source.slug}) }}" class="label bg-lime" target="_blank">
                 {{ podcast.source.name}} </a></span>
               <div class="post-content">
                 <h1 class="post-title">{{ podcast.title }}</h1>
                 <div><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span>
-                  <span class="author"> <a href="{{ podcast.source.url}}" class="bypostauthor" target="_blank">
-                                {{ podcast.source.name}} </a></span>
+                 
                 </div>
                 {% if podcast.audio != null %}
                 <p>
