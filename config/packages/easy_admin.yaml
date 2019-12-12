@@ -3,7 +3,7 @@ easy_admin:
     design:
         assets:
             css:
-                - 'build/app.css'
+                - 'build/style.css'
         brand_color: '#000'
     list:
         actions: ['show']

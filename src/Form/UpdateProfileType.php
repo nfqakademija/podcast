@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -11,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Unique;
 
 class UpdateProfileType extends AbstractType
 {
@@ -22,9 +24,8 @@ class UpdateProfileType extends AbstractType
                 'attr' => ['placeholder' => 'Pilnas Vardas']
             ])
             ->add('username', TextType::class, [
-//                'mapped' => false,
                 'label' => 'El. paštas',
-                'attr' => ['placeholder' => 'Naujas elektroninis paštas']
+                'attr' => ['placeholder' => 'Naujas elektroninis paštas'],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
