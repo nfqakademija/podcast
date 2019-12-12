@@ -34,8 +34,7 @@
     <h5 class="widget-title">Tagai</h5>
     <ul class="list-inline">
       {% for tag in tags %}
-      <li><a href="{{ path('podcasts_by_tag', {tag: tag.id}) }}" style="font-size: 8pt;"
-          aria-label="Boat (1 item)">{{ tag.tag}}</a></li>
+      <li><a href="{{ path('podcasts_by_tag', {tag: tag.id}) }}" >{{ tag.tag}}</a></li>
       {% endfor %}
     </ul>
   </div>
