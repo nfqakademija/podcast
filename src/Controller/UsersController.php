@@ -76,30 +76,38 @@ class UsersController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        $oldEmail = $user->getEmail();
-        $form = $this->createForm(UpdateProfileType::class, $user, [
-            'action' => $this->generateUrl('update_user_credentials')
-        ]);
+        $oldEmail = $user->getUsername();
+        $form = $this->createForm(UpdateProfileType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('plainPassword')->getData()) {
                 $user->setPassword($passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData()));
             }
-            if ($oldEmail !== $user->getEmail()) {
+            if ($oldEmail !== $user->getUsername()) {
                 $user->setIsConfirmed(false);
                 $user->setConfirmationToken($this->tokenGenerator->getRandomSecureToken(100));
                 $this->mailService->sendVerification($user);
                 $this->addFlash('info', 'Atnaujinus el. paštą būtinas patvirtinimas');
             }
 
+            if ($form->get('username')->getData()) {
+                if ($oldEmail !== $form->get('username')->getData()) {
+                    $user->setUsername($form->get('username')->getData());
+                    $user->setIsConfirmed(false);
+                    $user->setConfirmationToken($this->tokenGenerator->getRandomSecureToken(100));
+                    $this->mailService->sendVerification($user);
+                    $this->addFlash('info', 'Atnaujinus el. paštą būtinas patvirtinimas');
+                }
+            }
+
             $this->entityManager->flush();
             $this->addFlash('success', 'Vartotojo duomenys atnaujinti');
 
-            return $this->redirectToRoute('user_panel');
+            return $this->redirectToRoute('update_user_credentials');
         }
 
-        return $this->render('front/pages/users/_panel_form.html.twig', [
+        return $this->render('front/pages/users/user_profile_update.html.twig', [
             'form' => $form->createView(),
         ]);
     }
