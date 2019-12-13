@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-    <div class="tab-content text-center listen-later">
+    <div class="tab-content text-center listen-later like">
         {{ include('front/pages/users/_panel_menu.html.twig') }}
 
         <div class="tab-pane fade in active" id="tab3-1">
@@ -38,4 +38,5 @@
 {{ encore_entry_script_tags('select22') }}
 {{ encore_entry_script_tags('custom_js') }}
 {{ encore_entry_script_tags('listen_later') }}
+{{ encore_entry_script_tags('like_podcast') }}
 {% endblock %}

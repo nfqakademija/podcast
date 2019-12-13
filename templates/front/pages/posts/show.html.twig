@@ -2,14 +2,32 @@
 
 {% block content %}
  <div class="col-sm-8">
-          <div class="blog classic-view single">
+          <div class="blog classic-view single listen-later like">
             <div class="post">
               <span class="category"><a href="{{ url('podcasts_by_source', {slug: podcast.source.slug}) }}" class="label bg-lime" target="_blank">
                 {{ podcast.source.name}} </a></span>
               <div class="post-content">
                 <h1 class="post-title">{{ podcast.title }}</h1>
                 <div><span class="date">{{ podcast.publishedAt|date("M d, Y") }}</span>
-                 
+                  {% if app.user %}
+              |
+                  {% if podcast.id in podcastsLater %}
+                  <i class="et-beamed-note note-color remove" data-podcast-id="{{ podcast.id }}"
+                    data-url="{{ url('listen_later', {podcast: podcast.id}) }}"> </i>
+                  {% else %}
+                  <i class="et-beamed-note add" data-podcast-id="{{ podcast.id }}"
+                    data-url="{{ url('listen_later', {podcast: podcast.id}) }}"> </i>
+                  {% endif %}
+                  |
+                  {% if podcast.id in likedPodcasts %}
+                  <i class="et-heart heart-color remove-like"
+                    data-url="{{ url('like_podcast', {podcast: podcast.id}) }}"> </i>
+                  {% else %}
+                  <i class="et-heart-outlined add-like"
+                    data-url="{{ url('like_podcast', {podcast: podcast.id}) }}"> </i>
+                  {% endif %}
+
+                  {% endif %}
                 </div>
                 {% if podcast.audio != null %}
                 <p>
@@ -27,18 +45,7 @@
                   </iframe>
                 </div>
                 {% endif %}
-                <p> {{ podcast.description }}</p>
-                {% if app.user %}
-                <div class="pull-left">
-
-                        <button href="#" class="btn btn-rounded btn-icon btn-icon-left btn-like {% if app.user.isLike(podcast) %}active{% endif %}" onclick="toogle(this)">
-                            <span class="counter counter-left ">
-                                {{ podcast.likesByUser|length }}
-                            </span>
-                            <i class="et-thumbs-up"></i>Patinka
-                        </button>
-                </div>
-                {% endif %}
+                <p> {{ podcast.description }}</p>     
 
                 <div class="space10"></div>
      
@@ -72,30 +79,6 @@
 {% endblock %}
 
 {% block javascript %}
-{% if app.user %}
-<script
-    src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"
-    >
-</script>
-    <script>
-
-        function toogle(item)
-        {
-            $.get( "{{ path('like', {'podcast': podcast.id}) }}", function( data ) {
-
-
-                if (data.likes) {
-                    item.classList.add('active');
-                    $('.counter', item).html(data.countLikes);
-                } else {
-                    item.classList.remove('active');
-                    $('.counter', item).html(data.countLikes);
-                }
-
-            });
-        }
-    </script>
-{% endif %}
+{{ encore_entry_script_tags('listen_later') }}
+{{ encore_entry_script_tags('like_podcast') }}
 {% endblock %}

@@ -1,12 +1,34 @@
 <h3>Jūsų mėgstamiausi podkastai</h3>
-<ul class="icon-list list-green">
+<ul class="icon-list">
     {% if likedPodcasts|length > 0 %}
     {% for podcast in likedPodcasts %}
-    <li><i class="et-chevron-right"></i> {{ podcast.title }}
-        <p><audio controls class="entry-read-more1">
-                <source src="{{ podcast.audio}}" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio></p>
+    <li>
+        <h5><i class="et-chevron-right"></i>
+            {% if podcast.id in likedPodcastsIds %}
+            <i class="et-heart heart-color remove-like" data-url="{{ url('like_podcast', {podcast: podcast.id}) }}">
+            </i>
+            {% else %}
+            <i class="et-heart-outlined add-like" data-url="{{ url('like_podcast', {podcast: podcast.id}) }}"> </i>
+            {% endif %}
+
+            {{ podcast.title }}</h5>
+        <p>
+            {% if podcast.audio != null %}
+            <p>
+                <audio controls class="entry-read-more1">
+                    <source src="{{ podcast.audio}}" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+            </p>
+            {% endif %}
+            {% if podcast.video != null %}
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ podcast.video }}" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope;" allowfullscreen>
+                </iframe>
+            </div>
+            {% endif %}
+        </p>
     </li>
     {% endfor %}
     {% else %}

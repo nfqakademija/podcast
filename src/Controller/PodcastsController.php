@@ -9,6 +9,7 @@ use App\Entity\Tag;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\PodcastRepository;
+use App\Service\LikePodcastService;
 use App\Service\SlugService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,10 +23,14 @@ class PodcastsController extends AbstractController
 
     private $listenLaterService;
 
-    public function __construct(PodcastRepository $podcastRepository, ListenLaterService $listenLaterService)
-    {
+    public function __construct(
+        PodcastRepository $podcastRepository,
+        ListenLaterService $listenLaterService,
+        LikePodcastService $likePodcast
+    ) {
         $this->podcastRepository = $podcastRepository;
         $this->listenLaterService = $listenLaterService;
+        $this->likePodcast = $likePodcast;
     }
 
     /**
@@ -35,7 +40,8 @@ class PodcastsController extends AbstractController
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->getAllPodcastsPaginated($page),
-            'podcastsLater' => $this->listenLaterService->getPodcasts()
+            'podcastsLater' => $this->listenLaterService->getPodcasts(),
+            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
         ]);
     }
 
@@ -55,7 +61,8 @@ class PodcastsController extends AbstractController
 
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByType($type, $page),
-            'podcastsLater' => $this->listenLaterService->getPodcasts()
+            'podcastsLater' => $this->listenLaterService->getPodcasts(),
+            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
         ]);
     }
 
@@ -66,7 +73,8 @@ class PodcastsController extends AbstractController
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
-            'podcastsLater' => $this->listenLaterService->getPodcasts()
+            'podcastsLater' => $this->listenLaterService->getPodcasts(),
+            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
         ]);
     }
 
@@ -101,6 +109,8 @@ class PodcastsController extends AbstractController
             'podcast' => $podcast,
             'comments' => $commentRepository->getAllCommentsByPodcast($podcast),
             'form' => $form->createView(),
+            'podcastsLater' => $this->listenLaterService->getPodcasts(),
+            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
         ]);
     }
 
@@ -111,7 +121,8 @@ class PodcastsController extends AbstractController
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByTag($tag, $page),
-            'podcastsLater' => $this->listenLaterService->getPodcasts()
+            'podcastsLater' => $this->listenLaterService->getPodcasts(),
+            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
         ]);
     }
 
@@ -127,7 +138,8 @@ class PodcastsController extends AbstractController
             'podcasts' => $podcasts,
             'podcastsCount' => $this->podcastRepository->getSearchResultsCount($query),
             'search' => true,
-            'podcastsLater' => $this->listenLaterService->getPodcasts()
+            'podcastsLater' => $this->listenLaterService->getPodcasts(),
+            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
         ]);
     }
 

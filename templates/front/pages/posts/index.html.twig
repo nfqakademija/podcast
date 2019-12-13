@@ -13,7 +13,7 @@
     Ieškojote: <strong>{{ app.request.get('q') }}</strong>. Rasta: <strong>{{ podcastsCount }}</strong>.
   </div>
   {% endif %}
-  <div class="blog list-view listen-later">
+  <div class="blog list-view listen-later like">
     {% for podcast in podcasts %}
     <div class="post">
       <div class="row">
@@ -52,7 +52,14 @@
                 data-url="{{ url('listen_later', {podcast: podcast.id}) }}"> </i>
               {% endif %}
               |
-              <i class="et-heart-outlined"> </i> {{ podcast.likesByUser|length }}
+              {% if podcast.id in likedPodcasts %}
+              <i class="et-heart heart-color remove-like"
+                data-url="{{ url('like_podcast', {podcast: podcast.id}) }}"> </i>
+              {% else %}
+              <i class="et-heart-outlined add-like"
+                data-url="{{ url('like_podcast', {podcast: podcast.id}) }}"> </i>
+              {% endif %}
+
               {% endif %}
             </div>
             {% if podcast.audio != null %}
@@ -90,5 +97,6 @@
 
 {% block javascript %}
 {{ encore_entry_script_tags('listen_later') }}
+{{ encore_entry_script_tags('like_podcast') }}
 {{ encore_entry_script_tags('recliner') }}
 {% endblock %}
