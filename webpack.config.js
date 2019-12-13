@@ -43,6 +43,7 @@ Encore
     .addEntry('bootstrap', './assets/js/bootstrap.js')
     .addEntry('bootstrap_css', './assets/js/bootstrap_css2.js')
     .addEntry('recliner', ['./assets/js/recliner.min.js', './assets/js/recliner.custom.js'])
+    .addEntry('like_podcast', './assets/js/like_podcast.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ListenLaterService;
+use App\Service\LikePodcastService;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -33,12 +34,14 @@ class UsersController extends AbstractController
         MailService $mailService,
         EntityManagerInterface $entityManager,
         ListenLaterService $listenLaterService,
-        TokenGenerator $tokenGenerator
+        TokenGenerator $tokenGenerator,
+        LikePodcastService $likePodcast
     ) {
         $this->mailService = $mailService;
         $this->entityManager = $entityManager;
         $this->listenLaterService = $listenLaterService;
         $this->tokenGenerator = $tokenGenerator;
+        $this->likePodcast = $likePodcast;
     }
 
     /**
@@ -65,7 +68,8 @@ class UsersController extends AbstractController
             'tags' => $userTags,
             'listenLaterPodcasts' => $listenLaterPodcasts,
             'likedPodcasts' => $likedPodcasts,
-            'podcastsLater' => $this->listenLaterService->getPodcasts()
+            'podcastsLater' => $this->listenLaterService->getPodcasts(),
+            'likedPodcastsIds' => $this->likePodcast->getLikedPodcasts()
         ]);
     }
 
@@ -146,7 +150,7 @@ class UsersController extends AbstractController
         $this->entityManager->flush();
 
         $isLike = $user->isLike($podcast);
-        $countLikes = count($podcast->getLikesByUser()??[]);
+        $countLikes = count($podcast->getLikesByUser() ?? []);
 
         return $this->json(['likes' => $isLike, 'countLikes' => $countLikes]);
     }
@@ -159,6 +163,16 @@ class UsersController extends AbstractController
         $action = $request->get('action');
 
         $this->listenLaterService->manage($podcast, $action);
+
+        return new Response();
+    }
+
+    /**
+     * @Route("/like_podcast/{podcast}", name="like_podcast",  methods={"POST"})
+     */
+    public function manageLikeOnPodcast(Request $request, Podcast $podcast)
+    {
+        $this->likePodcast->manage($podcast);
 
         return new Response();
     }
