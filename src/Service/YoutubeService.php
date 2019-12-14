@@ -5,6 +5,7 @@ namespace App\Service;
 
 use App\Entity\Podcast;
 use App\Entity\Source;
+use App\Entity\Tag;
 use App\Repository\PodcastRepository;
 
 use App\Repository\SourceRepository;
@@ -14,20 +15,47 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\HttpClient;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Throwable;
 
 class YoutubeService
 {
+    /**
+     * @var HttpClientInterface
+     */
     private $httpClient;
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+    /**
+     * @var PodcastRepository
+     */
     private $podcastRepository;
+    /**
+     * @var SourceRepository
+     */
     private $sourceRepository;
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
+    /**
+     * @var TaggingService
+     */
     private $taggingService;
-
-    private $requestUrl;
-    private $apiCode;
+    /**
+     * @var TagRepository
+     */
     private $tagRepository;
+    /**
+     * @var string
+     */
+    private $requestUrl;
+    /**
+     * @var string
+     */
+    private $apiCode;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -36,8 +64,8 @@ class YoutubeService
         LoggerInterface $logger,
         TaggingService $taggingService,
         TagRepository $tagRepository,
-        $requestUrl,
-        $apiCode
+        string $requestUrl,
+        string $apiCode
     ) {
         $this->httpClient = HttpClient::create();
         $this->entityManager = $entityManager;
@@ -50,15 +78,19 @@ class YoutubeService
         $this->apiCode = $apiCode;
     }
 
+    /**
+     * @param Source[] $listOfSources
+     * @return bool
+     */
     public function importDataFromYoutube(array $listOfSources): bool
     {
-
+        /** @var Tag[] $tags */
         $tags = $this->tagRepository->findAll();
         /** @var Source $source */
         foreach ($listOfSources as $source) {
             $playlist = false;
-            if (preg_match('~playlist\?list=~', $source->getUrl())) {
-                $content = $this->getDataFromPlaylist($source->getUrl());
+            if (preg_match('~playlist\?list=~', $source->getUrl()??'')) {
+                $content = $this->getDataFromPlaylist($source->getUrl()??'');
                 $playlist = true;
             } else {
                 $content = $this->getDataFromChannel($source);
@@ -103,10 +135,18 @@ class YoutubeService
         return true;
     }
 
-    private function getDataFromPlaylist($url): array
+    /**
+     * @param string $url
+     * @return array[]
+     */
+    private function getDataFromPlaylist(string $url): array
     {
         $parts = parse_url($url);
-        parse_str($parts['query'], $query);
+        if ($parts) {
+            parse_str($parts['query'], $query);
+        } else {
+            $query = [];
+        }
         try {
             $response = $this->httpClient->request('GET', $this->requestUrl . 'playlistItems', [
                 'query' => [
@@ -129,6 +169,10 @@ class YoutubeService
         }
     }
 
+    /**
+     * @param Source $source
+     * @return array[]
+     */
     private function getDataFromChannel(Source $source): array
     {
         $channelId = $this->getChannelId($source);
@@ -155,7 +199,11 @@ class YoutubeService
         }
     }
 
-    private function isVideoExists($videoId): bool
+    /**
+     * @param string $videoId
+     * @return bool
+     */
+    private function isVideoExists(string $videoId): bool
     {
         if (empty($this->podcastRepository->findOneBy([
             'video' => $videoId
@@ -168,9 +216,13 @@ class YoutubeService
 
     private function getChannelId(Source $source): string
     {
-        $sourceExploded = explode('/', $source->getUrl());
+        $sourceExploded = explode('/', $source->getUrl()??'');
+        $channelId = end($sourceExploded);
+        if (!$channelId) {
+            return '';
+        }
         if ($sourceExploded[count($sourceExploded)-2] === 'user') {
-            $channelId =  $this->getChannelIdByUser(end($sourceExploded));
+            $channelId =  $this->getChannelIdByUser($channelId);
             if (!empty($channelId)) {
                 $source->setUrl('https://www.youtube.com/channel/'.$channelId);
                 $this->entityManager->persist($source);
@@ -181,7 +233,7 @@ class YoutubeService
                 return '';
             }
         } else {
-            return end($sourceExploded);
+            return $channelId;
         }
     }
 
@@ -205,11 +257,14 @@ class YoutubeService
             return $content['items'][0]['id'];
         } catch (Throwable $e) {
             $this->logger->error($e);
-            return false;
+            return '';
         }
     }
 
-
+    /**
+     * @param Podcast $podcast
+     * @param Tag[] $tags
+     */
     private function addTags(Podcast $podcast, $tags): void
     {
         $matchedTags = $this->taggingService->findTagsInPodcast($podcast, $tags);
