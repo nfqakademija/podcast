@@ -3,8 +3,6 @@
 
 namespace App\Service;
 
-use App\Entity\Podcast;
-use App\Entity\Subscriber;
 use App\Entity\User;
 use App\Interfaces\MailableEntity;
 use App\Repository\PodcastRepository;
@@ -17,6 +15,9 @@ use Swift_Mailer;
 use Swift_Message;
 use Throwable;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class MailService
 {
@@ -25,6 +26,7 @@ class MailService
     private const NEWSLETTER_SUBJECT_LINE = 'Nauji podkastai';
     private const CONFIRMATION_SUBJECT_LINE = 'El. pašto patvirtinimas';
     private const RESET_PASSWORD_SUBJECT_LINE = 'Slaptažodžio atkūrimas';
+    private const CRAWLER_FAIL_NOTIFICATION_SUBJECT_LINE = 'Kažkas blogai su šaltiniu';
 
     /**
      * @var Swift_Mailer
@@ -164,9 +166,9 @@ class MailService
 
     /**
      * @param User $user
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function sendPasswordResetEmail(User $user): void
     {
@@ -177,6 +179,14 @@ class MailService
                 'user' => $user
             ])
         );
+    }
+
+    public function sendCrawlerFailNotificationToAdmins(string $source, string $message)
+    {
+        $admins = $this->userRepository->findAllMailableAdmins();
+        foreach ($admins as $admin) {
+            $this->sendMessage($admin, self::CRAWLER_FAIL_NOTIFICATION_SUBJECT_LINE, $message);
+        }
     }
 
     /**

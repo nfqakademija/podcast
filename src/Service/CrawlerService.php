@@ -20,13 +20,45 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CrawlerService
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+
+    /**
+     * @var PodcastRepository
+     */
     private $podcastRepository;
+
+    /**
+     * @var TagRepository
+     */
     private $tagRepository;
+
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
+
+    /**
+     * @var HttpClientInterface
+     */
     private $client;
+
+    /**
+     * @var SourceRepository
+     */
     private $sourceRepository;
+
+    /**
+     * @var TaggingService
+     */
     private $taggingService;
+
+    /**
+     * @var MailService
+     */
+    private $mailService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -35,7 +67,8 @@ class CrawlerService
         LoggerInterface $logger,
         HttpClientInterface $client,
         SourceRepository $sourceRepository,
-        TaggingService $taggingService
+        TaggingService $taggingService,
+        MailService $mailService
     ) {
         $this->entityManager = $entityManager;
         $this->podcastRepository = $podcastRepository;
@@ -44,6 +77,7 @@ class CrawlerService
         $this->client = $client;
         $this->sourceRepository = $sourceRepository;
         $this->taggingService = $taggingService;
+        $this->mailService = $mailService;
     }
 
     /**
@@ -69,7 +103,9 @@ class CrawlerService
                 $podcasts[$source->getName()] =
                     $this->createNewPodcastsFromCrawler($html, $source, $existingPodcasts);
             } catch (Exception $e) {
-                $this->logger->error('Something wrong with '.$source->getName() .': '.$e->getMessage());
+                $error = 'Something wrong with '.$source->getName() .': '.$e->getMessage();
+                $this->logger->error($error);
+                $this->mailService->sendCrawlerFailNotificationToAdmins($source->getName(), $error);
             }
         }
 

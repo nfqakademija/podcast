@@ -83,7 +83,7 @@ class Podcast
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="podcast")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="podcast", cascade={"remove"})
      */
     private $comments;
 
