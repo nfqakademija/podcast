@@ -42,6 +42,5 @@ class TagRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult();
-
     }
 }
