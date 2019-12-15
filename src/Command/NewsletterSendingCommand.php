@@ -7,6 +7,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class NewsletterSendingCommand extends Command
 {
@@ -18,11 +19,16 @@ class NewsletterSendingCommand extends Command
      * @var MailService
      */
     private $mailService;
+    /**
+     * @var RouterInterface
+     */
+    private $router;
 
-    public function __construct(MailService $mailService)
+    public function __construct(MailService $mailService, RouterInterface $router)
     {
         parent::__construct();
         $this->mailService = $mailService;
+        $this->router = $router;
     }
 
     protected function configure()
@@ -38,6 +44,12 @@ class NewsletterSendingCommand extends Command
             $output->writeln('The command is already running in another process.');
 
             return 0;
+        }
+
+        if (getenv('DOMAIN')) {
+            $context = $this->router->getContext();
+            $context->setHost(getenv('DOMAIN'));
+            $context->setScheme('https');
         }
 
         $output->writeln([

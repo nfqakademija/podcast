@@ -31,7 +31,15 @@ class TagRepository extends ServiceEntityRepository
             ->andWhere('u = :user')
             ->setParameter('user', $user)
             ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getTenOldestTags()
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.id', 'ASC')
+            ->setMaxResults(10)
             ->getQuery()
             ->getResult();
     }

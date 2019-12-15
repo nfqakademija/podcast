@@ -10,7 +10,6 @@ use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\PodcastRepository;
 use App\Service\LikePodcastService;
-use App\Service\SlugService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,38 +18,48 @@ use App\Service\ListenLaterService;
 
 class PodcastsController extends AbstractController
 {
+    /**
+     * @var PodcastRepository
+     */
     private $podcastRepository;
 
+    /**
+     * @var ListenLaterService
+     *
+     */
     private $listenLaterService;
+    /**
+     * @var LikePodcastService
+     */
+    private $likePodcastService;
 
     public function __construct(
         PodcastRepository $podcastRepository,
         ListenLaterService $listenLaterService,
-        LikePodcastService $likePodcast
+        LikePodcastService $likePodcastService
     ) {
         $this->podcastRepository = $podcastRepository;
         $this->listenLaterService = $listenLaterService;
-        $this->likePodcast = $likePodcast;
+        $this->likePodcastService = $likePodcastService;
     }
 
     /**
      * @Route("/{page}", name="podcasts", defaults={"page":1}, requirements={"page"="\d+"})
      */
-    public function frontPage($page)
+    public function frontPage(int $page)
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->getAllPodcastsPaginated($page),
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
-            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
+            'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
         ]);
     }
 
     /**
      * @Route("podkastai/tipas/{type}/{page}", name="podcasts_by_type", defaults={"page":1})
      */
-    public function showPodcastsByType($type, $page)
+    public function showPodcastsByType(string $type, int $page)
     {
-
         if ($type == 'video' || $type == 'audio') {
             if ($type == 'video') {
                 $type = 'Youtube';
@@ -62,19 +71,19 @@ class PodcastsController extends AbstractController
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByType($type, $page),
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
-            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
+            'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
         ]);
     }
 
     /**
      * @Route("podkastai/{slug}/{page}", name="podcasts_by_source", defaults={"page":1})
      */
-    public function showPodcastsBySource(Source $source, $page)
+    public function showPodcastsBySource(Source $source, int $page)
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
-            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
+            'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
         ]);
     }
 
@@ -101,7 +110,7 @@ class PodcastsController extends AbstractController
             $this->addFlash('success', 'Naujas komentaras pridėtas.');
 
             return $this->redirectToRoute('single_podcast', [
-                'podcast' => $podcast->getSlug()
+                'slug' => $podcast->getSlug()
             ]);
         }
 
@@ -110,26 +119,26 @@ class PodcastsController extends AbstractController
             'comments' => $commentRepository->getAllCommentsByPodcast($podcast),
             'form' => $form->createView(),
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
-            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
+            'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
         ]);
     }
 
     /**
      * @Route("tagai/{slug}/{page}", name="podcasts_by_tag", defaults={"page":1})
      */
-    public function showPodcastsByTag(Tag $tag, $page)
+    public function showPodcastsByTag(Tag $tag, int $page)
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByTag($tag, $page),
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
-            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
+            'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
         ]);
     }
 
     /**
      * @Route("/paieska/{page}", name="search_podcasts", defaults={"page":1})
      */
-    public function searchPodcasts(Request $request, $page)
+    public function searchPodcasts(Request $request, int $page)
     {
         $query = $request->get('q');
         $podcasts = $this->podcastRepository->searchPodcasts($query, $page);
@@ -139,17 +148,7 @@ class PodcastsController extends AbstractController
             'podcastsCount' => $this->podcastRepository->getSearchResultsCount($query),
             'search' => true,
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
-            'likedPodcasts' => $this->likePodcast->getLikedPodcasts()
+            'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
         ]);
-    }
-
-    /**
-     * @Route("/sluggable/make/slugs")
-     */
-    public function trimSlug(SlugService $slugService)
-    {
-        $slugService->makeSlugs();
-
-        dd('done');
     }
 }

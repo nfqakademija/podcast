@@ -51,7 +51,7 @@ class PublicController extends AbstractController
     public function getNavigationBar(TagRepository $tagRepository)
     {
         return $this->render('front/layout/sidebar.html.twig', [
-            'tags' => $tagRepository->findAll(),
+            'tags' => $tagRepository->getTenOldestTags(),
             'audioCount' => $this->podcastRepository->getPodcastsCountByType(Podcast::TYPES['TYPE_AUDIO']),
             'videoCount' => $this->podcastRepository->getPodcastsCountByType(Podcast::TYPES['TYPE_VIDEO']),
         ]);
