@@ -32,7 +32,8 @@
         "doctrine/doctrine-fixtures-bundle": "^3.2",
         "phpstan/phpstan-symfony": "^0.12.1",
         "squizlabs/php_codesniffer": "^3.5",
-        "symfony/maker-bundle": "^1.13"
+        "symfony/maker-bundle": "^1.13",
+        "symfony/phpunit-bridge": "^5.0"
     },
     "config": {
         "preferred-install": {

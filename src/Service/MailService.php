@@ -20,7 +20,6 @@ use Twig\Environment;
 
 class MailService
 {
-
     private const FROM_EMAIL = 'krepsinio.podcast@gmail.com';
     private const FROM_NAME = 'Krepšinio podcastai';
     private const NEWSLETTER_SUBJECT_LINE = 'Nauji podkastai';

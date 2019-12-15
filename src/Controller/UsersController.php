@@ -25,10 +25,30 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UsersController extends AbstractController
 {
+    /**
+     * @var MailService
+     */
     private $mailService;
+
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+
+    /**
+     * @var ListenLaterService
+     */
     private $listenLaterService;
+
+    /**
+     * @var TokenGenerator
+     */
     private $tokenGenerator;
+
+    /**
+     * @var LikePodcastService
+     */
+    private $likePodcast;
 
     public function __construct(
         MailService $mailService,

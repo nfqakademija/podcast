@@ -239,7 +239,6 @@ class YoutubeService
 
     private function getChannelIdByUser(string $username): string
     {
-
         try {
             $response = $this->httpClient->request('GET', $this->requestUrl . 'channels', [
                 'query' => [
