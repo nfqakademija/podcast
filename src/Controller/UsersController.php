@@ -112,7 +112,7 @@ class UsersController extends AbstractController
                 $user->setIsConfirmed(false);
                 $user->setConfirmationToken($this->tokenGenerator->getRandomSecureToken(100));
                 $this->mailService->sendVerification($user);
-                $this->addFlash('info', 'Atnaujinus el. paštą būtinas patvirtinimas');
+                $this->addFlash('info', 'Jums išsiūstas el. pašto patvirtinimas');
             }
 
             $this->entityManager->flush();
