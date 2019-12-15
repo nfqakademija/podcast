@@ -38,4 +38,13 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllMailableAdmins()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles like :roleAdmin')
+            ->setParameter('roleAdmin', '%ROLE_ADMIN%')
+            ->getQuery()
+            ->getResult();
+    }
 }
