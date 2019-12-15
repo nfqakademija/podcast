@@ -54,8 +54,8 @@ class TaggingService
                 $tagName = (substr($tagName, 0, strlen($tagName) - 2));
             }
 
-            if (strpos($podcast->getTitle(), $tagName) !== false
-                || strpos($podcast->getDescription(), $tagName) ==! false) {
+            if (stripos($podcast->getTitle(), $tagName) !== false
+                || stripos($podcast->getDescription(), $tagName) ==! false) {
                 $podcastTags[] = $tag;
             }
         }
