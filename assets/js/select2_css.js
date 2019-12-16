@@ -1,1 +1,1 @@
-require('../css/select2.css');
+require('../css/select2.scss');
