@@ -9,10 +9,10 @@
           <div class="message-inner">
             <div class="info">
               <h5><a href="#">
-              {% if app.user.fullName is null or app.user.fullName is empty %}
-               {{ app.user.username }}
+              {% if comment.user.fullName is null %}
+               {{ comment.user.username }}
               {% else %}
-                {{ app.user.fullName }}
+                {{ comment.user.fullName }}
               {% endif %}
               </a></h5>
               <div class="meta"> <span class="date">{{ comment.createdAt|date}}</span></div>

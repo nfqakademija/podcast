@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Podcast;
 use App\Entity\Tag;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -21,6 +22,7 @@ class TagRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param User $user
      * @return Tag[] Returns an array of Tag objects
      */
     public function findTagsByUser(User $user)
@@ -35,7 +37,10 @@ class TagRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getTenOldestTags()
+    /**
+     * @return Podcast[]|null
+     */
+    public function getTenOldestTags(): ?array
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.id', 'ASC')

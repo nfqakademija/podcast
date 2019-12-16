@@ -7,8 +7,11 @@ use App\Entity\Source;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Exception;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Validator\Constraints\Date;
 
@@ -28,6 +31,10 @@ class PodcastRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
+    /**
+     * @param $page
+     * @return PaginationInterface
+     */
     public function getAllPodcastsPaginated($page)
     {
         $query = $this->createQueryBuilder('p')
@@ -40,6 +47,11 @@ class PodcastRepository extends ServiceEntityRepository
         return $this->paginator->paginate($query, $page, 10);
     }
 
+    /**
+     * @param Source $source
+     * @param $page
+     * @return PaginationInterface
+     */
     public function findAllPaginatedPodcastsBySource(Source $source, $page)
     {
         $query = $this->createQueryBuilder('p')
@@ -53,6 +65,11 @@ class PodcastRepository extends ServiceEntityRepository
         return $this->paginator->paginate($query, $page, 10);
     }
 
+    /**
+     * @param Tag $tag
+     * @param $page
+     * @return PaginationInterface
+     */
     public function findAllPaginatedPodcastsByTag(Tag $tag, $page)
     {
         $query = $this->createQueryBuilder('p')
@@ -66,6 +83,11 @@ class PodcastRepository extends ServiceEntityRepository
         return $this->paginator->paginate($query, $page, 10);
     }
 
+    /**
+     * @param $searchString
+     * @param $page
+     * @return PaginationInterface
+     */
     public function searchPodcasts($searchString, $page)
     {
         $qb = $this->getSearchResultsQueryBuilder($searchString);
@@ -79,6 +101,12 @@ class PodcastRepository extends ServiceEntityRepository
         return $this->paginator->paginate($query, $page, 10);
     }
 
+    /**
+     * @param string $searchString
+     * @return mixed
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
     public function getSearchResultsCount(string $searchString)
     {
         return $this->getSearchResultsQueryBuilder($searchString)
@@ -118,6 +146,12 @@ class PodcastRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    /**
+     * @param string $type
+     * @return int
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
     public function getPodcastsCountByType(string $type): int
     {
         return $this->createQueryBuilder('p')
@@ -128,6 +162,11 @@ class PodcastRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    /**
+     * @param $type
+     * @param $page
+     * @return PaginationInterface
+     */
     public function findAllPaginatedPodcastsByType($type, $page)
     {
         $qb = $this->createQueryBuilder('p')
@@ -141,7 +180,11 @@ class PodcastRepository extends ServiceEntityRepository
         return $this->paginator->paginate($qb, $page, 10);
     }
 
-    public function findAllPodcastsByLimit(int $limit): array
+    /**
+     * @param int $limit
+     * @return Podcast[]|null
+     */
+    public function findAllPodcastsByLimit(int $limit): ?array
     {
         $query = $this->createQueryBuilder('p')
             ->orderBy('p.publishedAt', 'DESC')
@@ -151,7 +194,11 @@ class PodcastRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findPodcastById(int $podcast_id): array
+    /**
+     * @param int $podcast_id
+     * @return Podcast[]|null
+     */
+    public function findPodcastById(int $podcast_id): ?array
     {
         $query = $this->createQueryBuilder('p')
             ->where('p.id = :podcast_id')

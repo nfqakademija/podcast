@@ -10,9 +10,24 @@ use App\Entity\Podcast;
 
 class LikePodcastService
 {
+    /**
+     * @var PodcastRepository
+     */
     private $podcastRepository;
+
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
+
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+
+    /**
+     * @var Security
+     */
     private $security;
 
     public function __construct(
@@ -27,6 +42,9 @@ class LikePodcastService
         $this->security = $security;
     }
 
+    /**
+     * @param Podcast $podcast
+     */
     public function manage(Podcast $podcast): void
     {
         $user = $this->security->getUser();

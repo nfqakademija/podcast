@@ -19,6 +19,7 @@ class NewsletterSendingCommand extends Command
      * @var MailService
      */
     private $mailService;
+
     /**
      * @var RouterInterface
      */

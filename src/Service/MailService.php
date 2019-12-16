@@ -81,6 +81,13 @@ class MailService
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @param MailableEntity $mailableEntity
+     * @return bool
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
     public function sendVerification(MailableEntity $mailableEntity): bool
     {
         if ($mailableEntity instanceof User) {
@@ -181,12 +188,21 @@ class MailService
         );
     }
 
-    public function sendCrawlerFailNotificationToAdmins(string $source, string $message)
+    /**
+     * @param string $source
+     * @param string $message
+     * @return bool
+     */
+    public function sendCrawlerFailNotificationToAdmins(string $source, string $message): bool
     {
         $admins = $this->userRepository->findAllMailableAdmins();
-        foreach ($admins as $admin) {
-            $this->sendMessage($admin, self::CRAWLER_FAIL_NOTIFICATION_SUBJECT_LINE, $message);
+        if ($admins) {
+            foreach ($admins as $admin) {
+                $this->sendMessage($admin, self::CRAWLER_FAIL_NOTIFICATION_SUBJECT_LINE, $message);
+            }
+            return true;
         }
+        return false;
     }
 
     /**

@@ -21,13 +21,16 @@ class CommentRepository extends ServiceEntityRepository
     }
 
     /**
-    * @return Comment[] Returns an array of Comment objects
-    */
+     * @param Podcast $podcast
+     * @return Comment[] Returns an array of Comment objects
+     */
     public function getAllCommentsByPodcast(Podcast $podcast)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.podcast = :val')
-            ->setParameter('val', $podcast)
+            ->innerJoin('c.user', 'u')
+            ->addSelect('u')
+            ->andWhere('c.podcast = :podcast')
+            ->setParameter('podcast', $podcast)
             ->orderBy('c.createdAt', 'DESC')
             ->getQuery()
             ->getResult()

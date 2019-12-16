@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -66,6 +67,10 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/vartotojo_panele", name="user_panel")
+     * @param Request $request
+     * @param TagRepository $tagRepository
+     * @param TaggingService $taggingService
+     * @return RedirectResponse|Response
      */
     public function showUserPanel(Request $request, TagRepository $tagRepository, TaggingService $taggingService)
     {
@@ -95,6 +100,9 @@ class UsersController extends AbstractController
 
     /**
      * @Route("atnaujinti_vartotoja", name="update_user_credentials")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return RedirectResponse|Response
      */
     public function updateUserProfile(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -128,6 +136,7 @@ class UsersController extends AbstractController
 
     /**
      * @Route("ijungti_pranesimus", name="enable_mailing_by_tags")
+     * @return RedirectResponse
      */
     public function enableMailingByUserTags()
     {
@@ -143,6 +152,7 @@ class UsersController extends AbstractController
 
     /**
      * @Route("isjungti_pranesimus", name="disable_mailing_by_tags")
+     * @return RedirectResponse
      */
     public function disableMailingByUserTags()
     {
@@ -158,7 +168,6 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/like/{podcast}", name="like")
-     *
      * @param Podcast $podcast
      * @return JsonResponse
      */
@@ -177,6 +186,9 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/listen_later/{podcast}", name="listen_later",  methods={"POST"})
+     * @param Request $request
+     * @param Podcast $podcast
+     * @return Response
      */
     public function addPodcastToListenLaterPlaylist(Request $request, Podcast $podcast)
     {
@@ -189,6 +201,9 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/like_podcast/{podcast}", name="like_podcast",  methods={"POST"})
+     * @param Request $request
+     * @param Podcast $podcast
+     * @return Response
      */
     public function manageLikeOnPodcast(Request $request, Podcast $podcast)
     {

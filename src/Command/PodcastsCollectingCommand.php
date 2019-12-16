@@ -15,14 +15,17 @@ class PodcastsCollectingCommand extends Command
     use LockableTrait;
 
     protected static $defaultName = 'collect-podcasts';
+
     /**
      * @var SourceRepository
      */
     private $sourceRepository;
+
     /**
      * @var YoutubeService
      */
     private $youtubeApiService;
+
     /**
      * @var CrawlerService
      */
