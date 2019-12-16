@@ -3,7 +3,6 @@
 
 namespace App\Twig;
 
-
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
 use Twig\Extension\AbstractExtension;
