@@ -59,7 +59,15 @@
 
             <div class="clearfix"></div>
               {% if app.user %}
-                {{ include('front/pages/podcasts/_comment_box.html.twig') }}
+                  {% if app.user.isConfirmed %}
+                      {{ include('front/pages/podcasts/_comment_box.html.twig') }}
+                  {% else %}
+                      <hr />
+                      <div class="alert bg alert-info">
+                          <h3>Tik aktyvuoti vartotojai gali rašyti komentarus. Patvirtink el. paštą</h3>
+                      </div>
+                  {% endif %}
+
               {% endif %}
 
               {% if comments|length > 0 %}
