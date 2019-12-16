@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class XmlService
 {
@@ -11,9 +12,15 @@ class XmlService
      */
     private $serializer;
 
-    public function __construct(SerializerInterface $serializer)
+    /**
+     * @var UrlGeneratorInterface
+     */
+    private $router;
+
+    public function __construct(SerializerInterface $serializer, UrlGeneratorInterface $router)
     {
         $this->serializer = $serializer;
+        $this->router = $router;
     }
 
     /**
@@ -24,18 +31,27 @@ class XmlService
     {
         $items = [];
         foreach ($podcasts as $podcast) {
-            $title = $this->xmlEscape($podcast->getTitle());
-            $url = $this->xmlEscape('https://podcast.projektai.nfqakademija.lt/podkastas/' . $podcast->getId());
-            $description = $this->xmlEscape($podcast->getDescription());
+            $title = htmlspecialchars($podcast->getTitle());
+            $url = $this->router->generate(
+                'single_podcast',
+                [
+                    'slug' => $podcast->getSlug(),
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+            $url = htmlspecialchars($url);
+            $description = htmlspecialchars($podcast->getDescription());
             $pubDate = $podcast->getPublishedAt()->format('D, d M Y H:i:s T');
             $item = ['item' =>
             ['title' => $title, 'link' => $url, 'description' => $description, 'pubDate' => $pubDate]];
             $items[] = $item;
         }
 
+        $homeUrl = $this->router->generate('podcasts', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
         $array = ['channel' => [
             'title' => ['Krepšinio podcastai'],
-            'link' => 'https://podcast.projektai.nfqakademija.lt',
+            'link' => $homeUrl,
             'description' => 'Krepšinio podkastai, pokalbiai, diskusijos',
             'language' => 'en-us',
             $items
@@ -46,18 +62,5 @@ class XmlService
         $xml = $this->serializer->encode($array, 'xml', $context);
 
         return $xml;
-    }
-
-    /**
-     * @param string|null $string
-     * @return string
-     */
-    private function xmlEscape(?string $string): string
-    {
-        return str_replace(
-            array('&', '<', '>', '\'', '"'),
-            array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;'),
-            $string
-        );
     }
 }
