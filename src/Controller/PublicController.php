@@ -23,6 +23,8 @@ class PublicController extends AbstractController
      */
     private $podcastRepository;
 
+    private const LIMIT__OF_RSS_PODCASTS = 20;
+
     public function __construct(SourceRepository $sourceRepository, PodcastRepository $podcastRepository)
     {
         $this->sourceRepository = $sourceRepository;
@@ -47,8 +49,7 @@ class PublicController extends AbstractController
      */
     public function getRssFeed(XmlService $xmlService): Response
     {
-        $limit = 20;
-        $podcasts = $this->podcastRepository->findAllPodcastsByLimit($limit);
+        $podcasts = $this->podcastRepository->findAllPodcastsByLimit(self::LIMIT__OF_RSS_PODCASTS);
 
         $response = new Response();
         $response->headers->set("Content-type", "text/xml");
