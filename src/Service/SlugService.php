@@ -14,14 +14,17 @@ class SlugService
      * @var SourceRepository
      */
     private $sourceRepository;
+
     /**
      * @var EntityManagerInterface
      */
     private $entityManager;
+
     /**
      * @var TagRepository
      */
     private $tagRepository;
+
     /**
      * @var PodcastRepository
      */

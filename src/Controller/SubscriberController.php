@@ -8,14 +8,22 @@ use App\Service\MailService;
 use App\Service\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SubscriberController extends AbstractController
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
+    /**
+     * @var TokenGenerator
+     */
     private $tokenGenerator;
 
     public function __construct(EntityManagerInterface $entityManager, TokenGenerator $tokenGenerator)
@@ -26,6 +34,8 @@ class SubscriberController extends AbstractController
 
     /**
      * @Route("prenumeruoti", name="new_subscriber")
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function createSubscriber(Request $request)
     {
@@ -60,6 +70,8 @@ class SubscriberController extends AbstractController
 
     /**
      * @Route("prenumeratorius/patvirtinimas/{confirmationToken}", name="confirm_subscriber")
+     * @param Subscriber $subscriber
+     * @return Response|NotFoundHttpException
      */
     public function confirmSubscriber(Subscriber $subscriber)
     {
@@ -80,6 +92,8 @@ class SubscriberController extends AbstractController
 
     /**
      * @Route("prenumeratos_atsisakymas/{unsubscribeToken}", name="unsubscribe")
+     * @param Subscriber $subscriber
+     * @return Response|NotFoundHttpException
      */
     public function deleteSubscriber(Subscriber $subscriber)
     {
@@ -91,15 +105,5 @@ class SubscriberController extends AbstractController
         }
 
         return $this->createNotFoundException();
-    }
-
-    /**
-     * @Route("daily-newsletter", name="daily_newsletter")
-     */
-    public function sendDailyNewsletter(MailService $mailService)
-    {
-        $mailService->sendDailyNewsletterToSubscribers();
-
-        return new Response('sent');
     }
 }

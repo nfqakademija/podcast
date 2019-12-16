@@ -8,7 +8,10 @@ use App\Security\LoginFormAuthenticator;
 use App\Service\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
@@ -24,6 +27,12 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("/registracija", name="app_register")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param LoginFormAuthenticator $authenticator
+     * @param TokenGenerator $tokenGenerator
+     * @return RedirectResponse|Response|null
      */
     public function register(
         Request $request,
@@ -41,7 +50,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -52,8 +60,6 @@ class RegistrationController extends AbstractController
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
-
-            // do anything else you need here, like send an email
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
@@ -71,6 +77,8 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route("patvirtinimas/{confirmationToken}", name="confirm_user")
+     * @param User $user
+     * @return Response|NotFoundHttpException
      */
     public function confirmUser(User $user)
     {
@@ -85,6 +93,6 @@ class RegistrationController extends AbstractController
             ]);
         }
 
-        $this->createNotFoundException();
+        return $this->createNotFoundException();
     }
 }

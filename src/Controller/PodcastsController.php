@@ -11,8 +11,11 @@ use App\Repository\CommentRepository;
 use App\Repository\PodcastRepository;
 use App\Service\LikePodcastService;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ListenLaterService;
 
@@ -28,6 +31,7 @@ class PodcastsController extends AbstractController
      *
      */
     private $listenLaterService;
+
     /**
      * @var LikePodcastService
      */
@@ -45,8 +49,10 @@ class PodcastsController extends AbstractController
 
     /**
      * @Route("/{page}", name="podcasts", defaults={"page":1}, requirements={"page"="\d+"})
+     * @param int $page
+     * @return Response
      */
-    public function frontPage(int $page)
+    public function frontPage(int $page): Response
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->getAllPodcastsPaginated($page),
@@ -57,15 +63,19 @@ class PodcastsController extends AbstractController
 
     /**
      * @Route("podkastai/tipas/{type}/{page}", name="podcasts_by_type", defaults={"page":1})
+     * @param string $type
+     * @param int $page
+     * @return Response
+     * @throws Exception
      */
-    public function showPodcastsByType(string $type, int $page)
+    public function showPodcastsByType(string $type, int $page): Response
     {
         if ($type == 'video' || $type == 'audio') {
             if ($type == 'video') {
                 $type = 'Youtube';
             }
         } else {
-            throw new \Exception('Kažkas bandote rankom vesti reikšmę, reikia spausti tik nuorodas.');
+            throw new Exception('Kažkas bandote rankom vesti reikšmę, reikia spausti tik nuorodas.');
         }
 
         return $this->render('front/pages/posts/index.html.twig', [
@@ -77,8 +87,11 @@ class PodcastsController extends AbstractController
 
     /**
      * @Route("podkastai/{slug}/{page}", name="podcasts_by_source", defaults={"page":1})
+     * @param Source $source
+     * @param int $page
+     * @return Response
      */
-    public function showPodcastsBySource(Source $source, int $page)
+    public function showPodcastsBySource(Source $source, int $page): Response
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
@@ -89,6 +102,11 @@ class PodcastsController extends AbstractController
 
     /**
      * @Route("podkastas/{slug}/", name="single_podcast")
+     * @param Podcast $podcast
+     * @param EntityManagerInterface $entityManager
+     * @param CommentRepository $commentRepository
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function showSinglePodcast(
         Podcast $podcast,
@@ -125,8 +143,11 @@ class PodcastsController extends AbstractController
 
     /**
      * @Route("tagai/{slug}/{page}", name="podcasts_by_tag", defaults={"page":1})
+     * @param Tag $tag
+     * @param int $page
+     * @return Response
      */
-    public function showPodcastsByTag(Tag $tag, int $page)
+    public function showPodcastsByTag(Tag $tag, int $page): Response
     {
         return $this->render('front/pages/posts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByTag($tag, $page),
@@ -137,8 +158,11 @@ class PodcastsController extends AbstractController
 
     /**
      * @Route("/paieska/{page}", name="search_podcasts", defaults={"page":1})
+     * @param Request $request
+     * @param int $page
+     * @return Response
      */
-    public function searchPodcasts(Request $request, int $page)
+    public function searchPodcasts(Request $request, int $page): Response
     {
         $query = $request->get('q');
         $podcasts = $this->podcastRepository->searchPodcasts($query, $page);

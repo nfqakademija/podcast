@@ -11,9 +11,22 @@ use App\Entity\Podcast;
 
 class ListenLaterService
 {
+    /**
+     * @var PodcastRepository
+     */
     private $podcastRepository;
+
+    /**
+     * @var UserRepository
+     */
     private $userRepository;
+
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+
+    /** @var Security  */
     private $security;
 
     public function __construct(
@@ -28,6 +41,10 @@ class ListenLaterService
         $this->security = $security;
     }
 
+    /**
+     * @param Podcast $podcast
+     * @param string $action
+     */
     public function manage(Podcast $podcast, string $action): void
     {
         $user = $this->security->getUser();

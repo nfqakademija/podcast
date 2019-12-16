@@ -13,8 +13,14 @@ use App\Repository\SourceRepository;
 
 class PublicController extends AbstractController
 {
+    /**
+     * @var SourceRepository
+     */
     private $sourceRepository;
 
+    /**
+     * @var PodcastRepository
+     */
     private $podcastRepository;
 
     public function __construct(SourceRepository $sourceRepository, PodcastRepository $podcastRepository)
@@ -25,8 +31,9 @@ class PublicController extends AbstractController
 
     /**
      * @Route("/apie_projekta", name="about_project")
+     * @return Response
      */
-    public function aboutPage()
+    public function aboutPage(): Response
     {
         return $this->render('front/pages/about/index.html.twig', [
             'sources' => $this->sourceRepository->findAll(),
@@ -35,8 +42,10 @@ class PublicController extends AbstractController
 
     /**
      * @Route("/rss", name="rss_feed")
+     * @param XmlService $xmlService
+     * @return Response
      */
-    public function getRssFeed(XmlService $xmlService)
+    public function getRssFeed(XmlService $xmlService): Response
     {
         $limit = 20;
         $podcasts = $this->podcastRepository->findAllPodcastsByLimit($limit);
@@ -48,7 +57,11 @@ class PublicController extends AbstractController
         return $response;
     }
 
-    public function getNavigationBar(TagRepository $tagRepository)
+    /**
+     * @param TagRepository $tagRepository
+     * @return Response
+     */
+    public function getNavigationBar(TagRepository $tagRepository): Response
     {
         return $this->render('front/layout/sidebar.html.twig', [
             'tags' => $tagRepository->getTenOldestTags(),
@@ -57,14 +70,20 @@ class PublicController extends AbstractController
         ]);
     }
 
-    public function getSourcesSection()
+    /**
+     * @return Response
+     */
+    public function getSourcesSection(): Response
     {
         return $this->render('front/pages/posts/_sources_sidebar.html.twig', [
             'sources' => $this->sourceRepository->findAll()
         ]);
     }
 
-    public function getSourcesSectionForMobile()
+    /**
+     * @return Response
+     */
+    public function getSourcesSectionForMobile(): Response
     {
         return $this->render('front/pages/posts/_sources_mobile.html.twig', [
             'sources' => $this->sourceRepository->findAll()

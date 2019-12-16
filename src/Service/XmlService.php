@@ -6,6 +6,9 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class XmlService
 {
+    /**
+     * @var SerializerInterface
+     */
     private $serializer;
 
     public function __construct(SerializerInterface $serializer)
@@ -13,6 +16,10 @@ class XmlService
         $this->serializer = $serializer;
     }
 
+    /**
+     * @param array $podcasts
+     * @return mixed
+     */
     public function generate(array $podcasts)
     {
         $items = [];
@@ -41,6 +48,10 @@ class XmlService
         return $xml;
     }
 
+    /**
+     * @param string|null $string
+     * @return string
+     */
     private function xmlEscape(?string $string): string
     {
         return str_replace(

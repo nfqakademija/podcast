@@ -9,14 +9,22 @@ use App\Service\MailService;
 use App\Service\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -26,6 +34,8 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/prisijungimas", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -54,6 +64,10 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/reset-password/{passwordResetToken}", name="reset_password")
+     * @param User $user
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return RedirectResponse|Response|NotFoundHttpException
      */
     public function resetUserPassword(
         User $user,
@@ -90,6 +104,14 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("slaptazodzio-atkurimas", name="recover_password", methods={"GET", "POST"})
+     * @param UserRepository $userRepository
+     * @param Request $request
+     * @param TokenGenerator $tokenGenerator
+     * @param MailService $mailService
+     * @return RedirectResponse|Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function sendResetPasswordEmail(
         UserRepository $userRepository,
