@@ -76,7 +76,7 @@ class PublicController extends AbstractController
      */
     public function getSourcesSection(): Response
     {
-        return $this->render('front/pages/posts/_sources_sidebar.html.twig', [
+        return $this->render('front/pages/podcasts/_sources_sidebar.html.twig', [
             'sources' => $this->sourceRepository->findAll()
         ]);
     }
@@ -86,7 +86,7 @@ class PublicController extends AbstractController
      */
     public function getSourcesSectionForMobile(): Response
     {
-        return $this->render('front/pages/posts/_sources_mobile.html.twig', [
+        return $this->render('front/pages/podcasts/_sources_mobile.html.twig', [
             'sources' => $this->sourceRepository->findAll()
         ]);
     }

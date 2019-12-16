@@ -54,7 +54,7 @@ class PodcastsController extends AbstractController
      */
     public function frontPage(int $page): Response
     {
-        return $this->render('front/pages/posts/index.html.twig', [
+        return $this->render('front/pages/podcasts/index.html.twig', [
             'podcasts' => $this->podcastRepository->getAllPodcastsPaginated($page),
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
             'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
@@ -78,7 +78,7 @@ class PodcastsController extends AbstractController
             throw new Exception('Kažkas bandote rankom vesti reikšmę, reikia spausti tik nuorodas.');
         }
 
-        return $this->render('front/pages/posts/index.html.twig', [
+        return $this->render('front/pages/podcasts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByType($type, $page),
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
             'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
@@ -93,7 +93,7 @@ class PodcastsController extends AbstractController
      */
     public function showPodcastsBySource(Source $source, int $page): Response
     {
-        return $this->render('front/pages/posts/index.html.twig', [
+        return $this->render('front/pages/podcasts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsBySource($source, $page),
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
             'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
@@ -132,7 +132,7 @@ class PodcastsController extends AbstractController
             ]);
         }
 
-        return $this->render('front/pages/posts/show.html.twig', [
+        return $this->render('front/pages/podcasts/show.html.twig', [
             'podcast' => $podcast,
             'comments' => $commentRepository->getAllCommentsByPodcast($podcast),
             'form' => $form->createView(),
@@ -149,7 +149,7 @@ class PodcastsController extends AbstractController
      */
     public function showPodcastsByTag(Tag $tag, int $page): Response
     {
-        return $this->render('front/pages/posts/index.html.twig', [
+        return $this->render('front/pages/podcasts/index.html.twig', [
             'podcasts' => $this->podcastRepository->findAllPaginatedPodcastsByTag($tag, $page),
             'podcastsLater' => $this->listenLaterService->getPodcasts(),
             'likedPodcasts' => $this->likePodcastService->getLikedPodcasts()
@@ -167,7 +167,7 @@ class PodcastsController extends AbstractController
         $query = $request->get('q');
         $podcasts = $this->podcastRepository->searchPodcasts($query, $page);
 
-        return $this->render('front/pages/posts/index.html.twig', [
+        return $this->render('front/pages/podcasts/index.html.twig', [
             'podcasts' => $podcasts,
             'podcastsCount' => $this->podcastRepository->getSearchResultsCount($query),
             'search' => true,
