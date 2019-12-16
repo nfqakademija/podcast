@@ -145,7 +145,7 @@ class UsersController extends AbstractController
         $user->setIsSubscriber(true);
         $this->entityManager->flush();
 
-        $this->addFlash('success', 'Nuo šiol galite susikurti suasmenintus naujienlaiškius');
+        $this->addFlash('success', 'Nuo šiol galite gauti naujienlaiškius pagal tagus.');
 
         return $this->redirectToRoute('user_panel');
     }
@@ -161,27 +161,9 @@ class UsersController extends AbstractController
         $user->setIsSubscriber(false);
         $this->entityManager->flush();
 
-        $this->addFlash('success', 'Naujienlaiškių siuntimas jums išjungtas');
+        $this->addFlash('success', 'Naujienlaiškių siuntimas jums išjungtas.');
 
         return $this->redirectToRoute('user_panel');
-    }
-
-    /**
-     * @Route("/like/{podcast}", name="like")
-     * @param Podcast $podcast
-     * @return JsonResponse
-     */
-    public function toggleLike(Podcast $podcast)
-    {
-        $user = $this->getUser();
-        $user->toogleLike($podcast);
-
-        $this->entityManager->flush();
-
-        $isLike = $user->isLike($podcast);
-        $countLikes = count($podcast->getLikesByUser() ?? []);
-
-        return $this->json(['likes' => $isLike, 'countLikes' => $countLikes]);
     }
 
     /**
