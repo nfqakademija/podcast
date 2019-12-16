@@ -7,6 +7,7 @@ use App\Form\SubscriberType;
 use App\Service\MailService;
 use App\Service\TokenGenerator;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +37,7 @@ class SubscriberController extends AbstractController
      * @Route("prenumeruoti", name="new_subscriber")
      * @param Request $request
      * @return RedirectResponse|Response
+     * @throws Exception
      */
     public function createSubscriber(Request $request)
     {
@@ -72,6 +74,7 @@ class SubscriberController extends AbstractController
      * @Route("prenumeratorius/patvirtinimas/{confirmationToken}", name="confirm_subscriber")
      * @param Subscriber $subscriber
      * @return Response|NotFoundHttpException
+     * @throws Exception
      */
     public function confirmSubscriber(Subscriber $subscriber)
     {
@@ -87,13 +90,13 @@ class SubscriberController extends AbstractController
             ]);
         }
 
-        return $this->createNotFoundException();
+        throw $this->createNotFoundException();
     }
 
     /**
      * @Route("prenumeratos_atsisakymas/{unsubscribeToken}", name="unsubscribe")
      * @param Subscriber $subscriber
-     * @return Response|NotFoundHttpException
+     * @return Response
      */
     public function deleteSubscriber(Subscriber $subscriber)
     {
@@ -104,6 +107,6 @@ class SubscriberController extends AbstractController
             return $this->render('emails/unsubscribe.html.twig');
         }
 
-        return $this->createNotFoundException();
+        throw $this->createNotFoundException();
     }
 }

@@ -1,12 +1,35 @@
 easy_admin:
-    site_name: Administratoriaus panelė
+    user:
+        name_property_path: 'fullName'
+
     design:
-        assets:
-            css:
-                - 'build/style.css'
-        brand_color: '#000'
+        menu:
+            - { label: 'Eiti į vartotojo paskyrą', route: 'user_panel', icon: 'hand-point-left' }
+            - Podcast
+            - Source
+            - User
+            - Tag
+            - Subscriber
+            - Comment
+
+    site_name: Administratoriaus paskyra
+
     list:
-        actions: ['show']
+        actions:
+        - { name: 'new', label: Pridėti, icon: 'plus-circle', title: 'Pridėti' }
+        - { name: 'show', label: false, icon: 'eye', title: 'Rodyti' }
+        - { name: 'edit', label: false, icon: 'edit', title: 'Redaguoti' }
+        - { name: 'delete',  label: false, icon: 'trash', title: 'Ištrinti' }
+        - { name: 'search', label: 'Ieškoti' }
+
+    show:
+        actions:
+        - { name: 'delete',  label: false, icon: 'trash', title: 'Ištrinti' }
+        - { name: 'edit', label: false, icon: 'edit', title: 'Redaguoti' }
+    edit:
+        actions:
+        - { name: 'delete',  label: 'Ištrinti' }
+
     entities:
         # List the entity class name you want to manage
         Podcast:
@@ -19,14 +42,20 @@ easy_admin:
                     - { property: title, label: "Antraštė" }
                     - { property: description, label: "Aprašymas" }
                     - { property: image, label: "Paveikslėlis", type: image, sortable: false }
-                    - { property: likesByUser, label: "Podkastas patiko", sortable: true }
+                    - { property: likesByUser, label: "Pamėgtas", sortable: true }
                     - { property: publishedAt, label: "Publikuotas", type: date }
                     - { property: createdAt, label: "Išasugotas", type: date }
             edit:
                 fields:
-                    - { property: image, label: "Paveiksėlis"}
-#            search:
-#                title: Rasti rezultatai
+                    - { property: title, label: "Antraštė" }
+                    - { property: description, label: "Aprašymas" }
+            show:
+                fields:
+                    - { property: title, label: "Antraštė" }
+                    - { property: description, label: "Aprašymas" }
+            search:
+                title: Rasti rezultatai
+            disabled_actions: ['new']
         Source:
             class: App\Entity\Source
             label: Šaltiniai
@@ -56,6 +85,7 @@ easy_admin:
                         type_options:
                             choices: {'Audio': 'Audio', 'Youtube': 'Youtube'}
                             placeholder: 'Pasirinkite tipą'
+            disabled_actions: ['show']
         User:
             class: App\Entity\User
             label: Vartotojai
@@ -64,19 +94,23 @@ easy_admin:
                     - { property: username, label: 'El paštas' }
                     - { property: fullName, label: 'Pilnas Vardas' }
                     - { property: createdAt, label: 'Registracijos data', type: date }
-                    - { property: isConfirmed, label: 'Aktyvuotas vartotojas', type: boolean }
+                    - { property: isConfirmed, label: 'Aktyvuotas vartotojas', type: toggle }
+                    - { property: roles, label: 'Rolės', template: 'front/pages/users/_roles.html.twig'}
             show:
                 fields:
                     - { property: username, label: 'El paštas' }
                     - { property: fullName, label: 'Pilnas Vardas' }
-            edit:
-                fields:
-                    - { property: username, label: 'El paštas' }
-                    - { property: password, label: 'Slaptažodis', type: password, value: password }
-                    - { property: fullName, label: 'Pilnas Vardas' }
+                    - { property: createdAt, label: 'Registracijos data', type: date }
+                    - { property: isConfirmed, label: 'Aktyvuotas vartotojas', type: toggle }
+                actions: ['-delete']
+            disabled_actions: ['edit', 'new']
         Tag:
             class: App\Entity\Tag
             label: Raktažodžiai
+            edit:
+                fields:
+                    - { property: tag, label: 'Raktažodis' }
+                    - { property: slug, label: 'Naršyklės url' }
         Subscriber:
             class: App\Entity\Subscriber
             label: Prenumeratoriai
@@ -84,8 +118,9 @@ easy_admin:
                 fields:
                     - id
                     - { property: email, type: email, label: "El. paštas"}
-                    - { property: isConfirmed, type: boolean, label: "Aktyvuotas" }
+                    - { property: isConfirmed, type: toggle, label: "Aktyvuotas" }
                     - { property: createdAt, label: Sukurtas, type: date }
+            disabled_actions: ['new']
 
         Comment:
             class: App\Entity\Comment
@@ -96,3 +131,10 @@ easy_admin:
                     - { property: body, label: 'Komentaras', type: text }
                     - { property: user, label: 'Autorius' }
                     - { property: podcast, label: 'Podkastas', type: string }
+            show:
+                fields:
+                    - id
+                    - { property: body, label: 'Komentaras', type: text }
+                    - { property: user, label: 'Autorius' }
+                    - { property: podcast, label: 'Podkastas', type: string }
+            disabled_actions: ['edit', 'new']
