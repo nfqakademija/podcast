@@ -67,11 +67,12 @@
                           <h3>Tik aktyvuoti vartotojai gali rašyti komentarus. Patvirtink el. paštą</h3>
                       </div>
                   {% endif %}
+
               {% endif %}
 
               {% if comments|length > 0 %}
               <hr />
-                {{ include('front/pages/posts/_comments.html.twig') }}
+                {{ include('front/pages/podcasts/_comments.html.twig') }}
               {% endif %}
             
           </div>
