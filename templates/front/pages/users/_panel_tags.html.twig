@@ -15,12 +15,12 @@
         <a href="{{ path('disable_mailing_by_tags') }}">Išjungti pranešimus</a>
     {% else %}
         <div class="alert bg alert-info">
-            <h3>Jeigu norite gauti naujienlaiškius su jūsų pasirinkimus atitinkančiais podkastais, įjunkite pranešimus</h3>
+            <h3>Jeigu norite gauti naujienlaiškius pagal jūsų pasirinktus tagus, prašau įjunkite pranešimus</h3>
         </div>
         <a href="{{ path('enable_mailing_by_tags') }}" class="btn btn-info">Įjungti pranešimus</a>
     {% endif %}
 {% else %}
     <div class="alert bg alert-info">
-        <h3>Patvirtink savo el. paštą, kad galėtum gauti naujienlaiškius pagal savo kriterijus</h3>
+        <h3>Patvirtinkite savo el. paštą, kad galėtumėte gauti naujienlaiškius pagal pasirinktus tagus.</h3>
     </div>
 {% endif %}
