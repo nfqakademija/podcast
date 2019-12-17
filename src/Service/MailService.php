@@ -23,6 +23,7 @@ class MailService
     private const FROM_EMAIL = 'krepsinio.podcast@gmail.com';
     private const FROM_NAME = 'Krepšinio podcastai';
     private const NEWSLETTER_SUBJECT_LINE = 'Nauji podkastai';
+    private const CUSTOM_NEWSLETTER_SUBJECT_LINE = 'Nauji podkastai pagal jūsų tagus';
     private const CONFIRMATION_SUBJECT_LINE = 'El. pašto patvirtinimas';
     private const RESET_PASSWORD_SUBJECT_LINE = 'Slaptažodžio atkūrimas';
     private const CRAWLER_FAIL_NOTIFICATION_SUBJECT_LINE = 'Kažkas blogai su šaltiniu';
@@ -114,7 +115,7 @@ class MailService
     {
         $matchingUsers = $this->userRepository->getAllUsersWithTagsAndDailyPodcasts();
         $today = date("Y-m-d");
-        $subjectLine = self::NEWSLETTER_SUBJECT_LINE . ' ' . $today;
+        $subjectLine = self::CUSTOM_NEWSLETTER_SUBJECT_LINE . ' ' . $today;
 
         if ($matchingUsers) {
             foreach ($matchingUsers as $user) {
@@ -131,6 +132,8 @@ class MailService
                     $subjectLine,
                     $this->twig->render('emails/daily_podcasts.html.twig', [
                         'podcasts' => $podcasts,
+                        'user' => $user,
+                        'tags' => $user->getTags()
                     ])
                 );
             }
