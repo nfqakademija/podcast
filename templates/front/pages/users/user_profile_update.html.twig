@@ -1,35 +1,33 @@
 {% extends 'front/layout/main.html.twig' %}
 
 {% block custom_css %}
-    {{ encore_entry_link_tags('select2_css') }}
+{{ encore_entry_link_tags('select2_css') }}
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <div class="tab-content text-center">
-            <ul class="nav nav-tabs nav-tabs-lined nav-tabs-lined-top flex-center">
-                <li><a href="{{ path('user_panel') }}">
-                        <div class="icon-img icon-img-m"><img src="{{ asset('/images/wrench.png')}}"
-                                                              class="icon-lulu" alt="" /></div>
-                        <h5 class="mb-0">Eiti į pranešimų nustatymus</h5>
-                    </a></li>
-            </ul>
+<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+    <div class="tab-content text-center">
+        <ul class="nav nav-tabs nav-tabs-lined nav-tabs-lined-top flex-center">
+            <li><a href="{{ path('user_panel') }}">
+                    <div class="icon-img icon-img-m"><img src="{{ asset('/images/wrench.png')}}" class="icon-lulu"
+                            alt="" /></div>
+                    <h5 class="mb-0">Eiti į pranešimų nustatymus</h5>
+                </a></li>
+        </ul>
 
+        <div>
+            <h3>Galite pasikeisti paskyros nustatymus</h3>
 
-            <div>
-                <h3>Galite pasikeisti paskyros nustatymus</h3>
-
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <button type="submit" class="btn btn-rounded">Saugoti pakeitimus</button>
-                {{ form_end(form) }}
-            </div>
-
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-rounded">Saugoti pakeitimus</button>
+            {{ form_end(form) }}
         </div>
-
-        <div class="space10"></div>
 
     </div>
 
+    <div class="space10"></div>
+
+</div>
 
 {% endblock %}
