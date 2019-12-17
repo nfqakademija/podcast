@@ -1,8 +1,8 @@
 /*-------------------------------------------------------------------------------------
-Theme Name:	crea;tink
-Theme URI: 	http://themes.iki-bir.com/creatink
-Version:	1.0.1
-Author:		elemis
+Theme Name: crea;tink
+Theme URI:  http://themes.iki-bir.com/creatink
+Version:    1.0.1
+Author:     elemis
 
 01. RESET
 02. GENERAL
@@ -13,7 +13,7 @@ Author:		elemis
 07. STICKY HEADER
 08. HAMBURGER MENU ICON
 09. BUTTON
-10. SLIDER REVOLUTION 
+10. SLIDER REVOLUTION
 11. SLICK
 12. FOTORAMA
 13. COLLAGE
@@ -59,7 +59,7 @@ Author:		elemis
 53. RESPONSIVE
 -------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------*/
-/*	01. RESET
+/*  01. RESET
 /*-----------------------------------------------------------------------------------*/
 
 *,
@@ -106,7 +106,7 @@ iframe {
     color: #404040;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	02. GENERAL
+/*  02. GENERAL
 /*-----------------------------------------------------------------------------------*/
 
 body {
@@ -375,11 +375,11 @@ h6 {
     margin-bottom: 20px;
 }
 .title-color {
-	font-size: 14px;
-	line-height: 24px;
-	letter-spacing: 1.5px;
-	font-weight: 500;
-	text-transform: uppercase;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 .lead {
     font-size: 22px;
@@ -421,7 +421,7 @@ footer.dark-wrapper,
     background: #232323;
 }
 .sub-footer .container-fluid {
-	width: 100%;
+    width: 100%;
 }
 footer.footer-bg {
     background-repeat: no-repeat !important;
@@ -446,8 +446,8 @@ footer.footer-bg3 {
     background: #4c98c9;
 }
 .gradient-wrapper {
-	background-color: #3c9dda;
-	background-image: linear-gradient(90deg, #a65ccd 0%, #3c9dda 100%);
+    background-color: #3c9dda;
+    background-image: linear-gradient(90deg, #a65ccd 0%, #3c9dda 100%);
 }
 .parallax.pattern {
     background-size: auto !important;
@@ -604,7 +604,7 @@ acronym[title] {
     color: #FFF !important;
 }
 .map-full {
-	height: 100%;
+    height: 100%;
 }
 .image-block-wrapper {
     padding: 0px;
@@ -641,22 +641,22 @@ acronym[title] {
     padding-right: 30px;
 }
 .split-layout .content-left {
-	background-color: transparent;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 /* .split-layout.bg1 .content-left {
-	background-image: url(style/images/art/resume-bg.jpg);
+    background-image: url(style/images/art/resume-bg.jpg);
 }
 .split-layout.bg2 .content-left {
-	background-image: url(style/images/art/uc-bg.jpg);
+    background-image: url(style/images/art/uc-bg.jpg);
 } */
 .split-layout .inner {
-	padding: 90px;
+    padding: 90px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	03. FLEX & ALIGN
+/*  03. FLEX & ALIGN
 /*-----------------------------------------------------------------------------------*/
 
 .center-box {
@@ -740,7 +740,7 @@ acronym[title] {
             transform: translateX(-50%);
 }
 /*-----------------------------------------------------------------------------------*/
-/*	04. HEADER
+/*  04. HEADER
 /*-----------------------------------------------------------------------------------*/
 
 .navbar {
@@ -758,8 +758,8 @@ acronym[title] {
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .navbar.dark-wrapper {
-	-webkit-box-shadow: none;
-	box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 .navbar.absolute {
     position: absolute;
@@ -926,7 +926,7 @@ a.has-submenu {
     right: 10px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	05. MEGA MENU
+/*  05. MEGA MENU
 /*-----------------------------------------------------------------------------------*/
 
 .navbar-nav,
@@ -940,7 +940,7 @@ a.has-submenu {
     max-width: none !important;
 }
 /*-----------------------------------------------------------------------------------*/
-/* 	06. DROPDOWN
+/*  06. DROPDOWN
 /*-----------------------------------------------------------------------------------*/
 
 .nav .open > a,
@@ -1021,7 +1021,7 @@ a.has-submenu {
     right: 28px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	07. STICKY HEADER
+/*  07. STICKY HEADER
 /*-----------------------------------------------------------------------------------*/
 
 .navbar.fixed {
@@ -1047,10 +1047,10 @@ a.has-submenu {
     background: rgba(255, 255, 255, 0.9)
 }
 .navbar.fixed.nav-wrapper-dark {
-	background: #272727;
+    background: #272727;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	08. HAMBURGER MENU ICON
+/*  08. HAMBURGER MENU ICON
 /*-----------------------------------------------------------------------------------*/
 
 .nav-bars {
@@ -1077,8 +1077,8 @@ a.has-submenu {
     pointer-events: all;
 }
 .navbar.center.no-logo .nav-bars {
-	float: none;
-	margin: 0 auto;
+    float: none;
+    margin: 0 auto;
 }
 .nav-bars:focus {
     outline: none
@@ -1152,7 +1152,7 @@ a.has-submenu {
        transition-delay: 0s, 0.3s;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	09. BUTTON
+/*  09. BUTTON
 /*-----------------------------------------------------------------------------------*/
 
 .btn {
@@ -1592,7 +1592,7 @@ a.has-submenu {
     font-size: 25px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	10. SLIDER REVOLUTION 
+/*  10. SLIDER REVOLUTION
 /*-----------------------------------------------------------------------------------*/
 
 .rev_slider_wrapper {
@@ -1652,10 +1652,10 @@ a.has-submenu {
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 .tp-caption.start-boxshadow {
-	box-shadow: 1px 1px 0 0 #1c1c1c, 2px 2px 0 0 #1c1c1c, 3px 3px 0 0 #1c1c1c, 4px 4px 0 0 #1c1c1c, 5px 5px 0 0 #1c1c1c, 6px 6px 0 0 #1c1c1c;
+    box-shadow: 1px 1px 0 0 #1c1c1c, 2px 2px 0 0 #1c1c1c, 3px 3px 0 0 #1c1c1c, 4px 4px 0 0 #1c1c1c, 5px 5px 0 0 #1c1c1c, 6px 6px 0 0 #1c1c1c;
 }
 .tp-caption.caption-bg {
-	padding: 15px;
+    padding: 15px;
 }
 .tp-dottedoverlay.darkoverlay {
     background: rgba(48, 48, 48, 0.6)
@@ -1681,18 +1681,18 @@ a.has-submenu {
 }
 .tp-safarifix {transform-style: flat !important; }
 /*-----------------------------------------------------------------------------------*/
-/*	11. SLICK
+/*  11. SLICK
 /*-----------------------------------------------------------------------------------*/
 
 .var-slick img {
-	height: 550px;
-	width: auto !important;
+    height: 550px;
+    width: auto !important;
 }
 .var-slick.h500 img {
-	height: 500px;
+    height: 500px;
 }
 .var-slick.vh100 img {
-	height: calc(100vh - 181px);
+    height: calc(100vh - 181px);
 }
 .slick-wrapper {
     position: relative;
@@ -1897,64 +1897,64 @@ a.has-submenu {
     pointer-events: all;
 }
 .slick .item .link-wrapper {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
 }
 .slick .item .link-wrapper .link {
-	position: absolute;
-	display: block;
-	bottom: 15px;
-	right: 15px;
-	width: 40px;
-	height: 40px;
-	display: table;
-	text-align: center;	
+    position: absolute;
+    display: block;
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    display: table;
+    text-align: center;
 }
 .slick .item .link-wrapper .link a {
-	display: table-cell;
-	vertical-align: middle;
-	background: rgba(0, 0, 0, 0.5);
-	width: 40px;
-	height: 40px;
-	border-radius: 4px;
-	-webkit-transition: all 150ms ease-in-out;
+    display: table-cell;
+    vertical-align: middle;
+    background: rgba(0, 0, 0, 0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    -webkit-transition: all 150ms ease-in-out;
     -o-transition: all 150ms ease-in-out;
     transition: all 150ms ease-in-out;
 }
 .slick .item .link-wrapper .link a:hover {
-	background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7);
 }
 .slick .item .link-wrapper .link a,
 .slick .item .link-wrapper .link a:hover {
-	color: #FFF !important;
+    color: #FFF !important;
 }
 .slick .item .link-wrapper .link a:after {
-	font-family: "Entypo";
-	content: "\e9cf";
-	font-size: 15px;
+    font-family: "Entypo";
+    content: "\e9cf";
+    font-size: 15px;
 }
 .slick .item .link-wrapper .link.lightbox a:after {
-	content: "\e9f8";
+    content: "\e9f8";
 }
 .slick .item .link-wrapper .link.dark-bg a {
-	background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
 }
 .slick .item .link-wrapper .link.dark-bg a:hover {
-	background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7);
 }
 .slick .item .link-wrapper .link.light-bg a {
-	background: rgba(255,255,255, 0.8);
+    background: rgba(255,255,255, 0.8);
     color: rgba(0,0,0, 0.65) !important;
 }
 .slick .item .link-wrapper .link.light-bg a:hover {
-	background: rgba(255,255,255, 1);
+    background: rgba(255,255,255, 1);
     color: rgba(0,0,0, 0.65) !important;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	12. FOTORAMA
+/*  12. FOTORAMA
 /*-----------------------------------------------------------------------------------*/
 
 .fotorama__wrap {
@@ -2019,7 +2019,7 @@ a.has-submenu {
     content: '\e92a';
 }
 .nav-bg .fotorama__arr--prev,
-.nav-bg .fotorama__arr--next {    
+.nav-bg .fotorama__arr--next {
     border-radius: 4px;
     font-size: 30px;
 }
@@ -2128,7 +2128,7 @@ a.has-submenu {
             box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 /*-----------------------------------------------------------------------------------*/
-/*	13. COLLAGE
+/*  13. COLLAGE
 /*-----------------------------------------------------------------------------------*/
 
 .collage-wrapper {
@@ -2165,7 +2165,7 @@ a.has-submenu {
     margin-left: -10px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	14. ISOTOPE
+/*  14. ISOTOPE
 /*-----------------------------------------------------------------------------------*/
 
 .isotope-filter ul {
@@ -2209,7 +2209,7 @@ a.has-submenu {
     height: 400px
 }
 /*-----------------------------------------------------------------------------------*/
-/*	15. PORTFOLIO
+/*  15. PORTFOLIO
 /*-----------------------------------------------------------------------------------*/
 
 .portfolio .post-content,
@@ -2285,7 +2285,7 @@ a.has-submenu {
     margin-bottom: 0
 }
 /*-----------------------------------------------------------------------------------*/
-/*	16. BLOG
+/*  16. BLOG
 /*-----------------------------------------------------------------------------------*/
 
 .blog:not(.start) .box.bg-white:hover {
@@ -2323,7 +2323,7 @@ a.has-submenu {
     margin-bottom: 20px;
 }
 .grid-view.magazine .post figure {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 .post .category,
 .item .category {
@@ -2464,7 +2464,7 @@ span.category em {
     left: 0;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	17. WIDGETS
+/*  17. WIDGETS
 /*-----------------------------------------------------------------------------------*/
 
 .sidebox {
@@ -2509,11 +2509,11 @@ footer .inner:not(.display-block) {
     display: table;
 }
 .sub-footer {
-	display: table;
-	width: 100%;
+    display: table;
+    width: 100%;
 }
 .sub-footer p {
-	margin: 0;
+    margin: 0;
 }
 .cell,
 footer .inner .cell {
@@ -2524,7 +2524,7 @@ footer p {
     margin: 0;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	18. COMMENTS
+/*  18. COMMENTS
 /*-----------------------------------------------------------------------------------*/
 
 #comments {
@@ -2590,7 +2590,7 @@ footer p {
     display: inline
 }
 /*-----------------------------------------------------------------------------------*/
-/*	19. LISTS
+/*  19. LISTS
 /*-----------------------------------------------------------------------------------*/
 
 ul,
@@ -2678,7 +2678,7 @@ ol {
     margin-bottom: 5px
 }
 /*-----------------------------------------------------------------------------------*/
-/*	20. FEATURE
+/*  20. FEATURE
 /*-----------------------------------------------------------------------------------*/
 
 .icon {
@@ -2744,12 +2744,12 @@ ol {
     color: #4c98c9
 }
 .text-gradient {
-	background: #3c9dda;
-	background: -webkit-linear-gradient(to bottom, #a65ccd, #3c9dda);  
-	background: linear-gradient(to bottom, #a65ccd, #3c9dda); 
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	padding-left: 1px;
+    background: #3c9dda;
+    background: -webkit-linear-gradient(to bottom, #a65ccd, #3c9dda);
+    background: linear-gradient(to bottom, #a65ccd, #3c9dda);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-left: 1px;
 }
 .icon-border {
     width: 64px;
@@ -2785,17 +2785,17 @@ ol {
     vertical-align: middle;
 }
 .icon .date {
-	font-weight: 500;
+    font-weight: 500;
 }
 .icon .date .month {
-	font-size: 15px;
-	display: block;
-	margin-bottom: 1px;
-	text-transform: uppercase;
+    font-size: 15px;
+    display: block;
+    margin-bottom: 1px;
+    text-transform: uppercase;
 }
 .icon .date .year {
-	font-size: 13px;
-	display: block;
+    font-size: 13px;
+    display: block;
 }
 .feature {
     position: relative;
@@ -2834,7 +2834,7 @@ ol {
     left: auto;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	21. BOX
+/*  21. BOX
 /*-----------------------------------------------------------------------------------*/
 
 .box {
@@ -2850,30 +2850,30 @@ ol {
     padding: 40px;
 }
 .blog.newspaper .box.border {
-	padding: 45px;
+    padding: 45px;
 }
 .box.bg-opacity {
-	padding: 60px;
-	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-	        box-shadow: 0 0 2px rgba(0, 0, 0, 0.1)
+    padding: 60px;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.1)
 }
 .box.color-box {
-	padding: 60px;
+    padding: 60px;
 }
 .box.no-radius,
 .box.bg-opacity,
 .box.bg-opacity-dark {
-	border-radius: 0;
+    border-radius: 0;
 }
 .box.bg-opacity-dark {
-	padding: 60px;
+    padding: 60px;
 }
 .box.bg-opacity .rev_slider_container,
 .box.bg-opacity-dark .rev_slider_container {
     margin: -60px -60px 0 -60px;
 }
 .box.border {
-	background: none;
+    background: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .box.bg-white {
@@ -2895,7 +2895,7 @@ ol {
     margin-bottom: 20px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	22. DISC
+/*  22. DISC
 /*-----------------------------------------------------------------------------------*/
 
 .discs {
@@ -2939,7 +2939,7 @@ ol {
             flex-direction: column
 }
 /*-----------------------------------------------------------------------------------*/
-/*	23. TILES
+/*  23. TILES
 /*-----------------------------------------------------------------------------------*/
 
 .no-gutter,
@@ -3039,7 +3039,7 @@ ol {
     height: auto;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	25. MODAL
+/*  25. MODAL
 /*-----------------------------------------------------------------------------------*/
 
 .modal-content {
@@ -3101,7 +3101,7 @@ ol {
             transform: translateY(0);
 }
 /*-----------------------------------------------------------------------------------*/
-/*	26. VIDEO PARALLAX
+/*  26. VIDEO PARALLAX
 /*-----------------------------------------------------------------------------------*/
 
 .video-parallax video {
@@ -3142,7 +3142,7 @@ video::-webkit-media-controls {
     display: none !important
 }
 /*-----------------------------------------------------------------------------------*/
-/*	27. TABS
+/*  27. TABS
 /*-----------------------------------------------------------------------------------*/
 
 .nav-tabs {
@@ -3234,7 +3234,7 @@ video::-webkit-media-controls {
     padding: 15px 20px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	28. ACCORDION / COLLAPSE
+/*  28. ACCORDION / COLLAPSE
 /*-----------------------------------------------------------------------------------*/
 
 .panel-group .panel-heading {
@@ -3354,7 +3354,7 @@ video::-webkit-media-controls {
     padding-bottom: 0;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	29. TIMELINE
+/*  29. TIMELINE
 /*-----------------------------------------------------------------------------------*/
 
 .timeline {
@@ -3402,9 +3402,9 @@ video::-webkit-media-controls {
             transform: translateX(-50%);
 }
 .timeline.dot .timeline-icon:before {
-	content: "";
-	position: absolute;
-	background: #4c98c9;
+    content: "";
+    position: absolute;
+    background: #4c98c9;
     width: 15px;
     height: 15px;
     max-width: 15px;
@@ -3418,7 +3418,7 @@ video::-webkit-media-controls {
     width: 42%;
 }
 .timeline.dot .timeline-content {
-	width: 45%;
+    width: 45%;
 }
 .timeline-content.box-arrow.left {
     float: right
@@ -3463,7 +3463,7 @@ video::-webkit-media-controls {
     border-bottom: 10px solid #FFF;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	30. PROGRESS
+/*  30. PROGRESS
 /*-----------------------------------------------------------------------------------*/
 
 .circle {
@@ -3545,7 +3545,7 @@ video::-webkit-media-controls {
     height: 10px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	31. DIAL
+/*  31. DIAL
 /*-----------------------------------------------------------------------------------*/
 
 .dial {
@@ -3622,7 +3622,7 @@ ul.dial li:first-child .dial-item-info {
     display: block;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	32. TOOLTIP
+/*  32. TOOLTIP
 /*-----------------------------------------------------------------------------------*/
 
 .tooltip {
@@ -3655,7 +3655,7 @@ ul.dial li:first-child .dial-item-info {
     border-bottom-color: #4c98c9
 }
 /*-----------------------------------------------------------------------------------*/
-/*	33. POPOVER
+/*  33. POPOVER
 /*-----------------------------------------------------------------------------------*/
 
 .popover {
@@ -3694,7 +3694,7 @@ ul.dial li:first-child .dial-item-info {
     outline: 0;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	34. PAGINATION
+/*  34. PAGINATION
 /*-----------------------------------------------------------------------------------*/
 
 .pagination {
@@ -3786,7 +3786,7 @@ ul.dial li:first-child .dial-item-info {
     border-bottom-right-radius: 4px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	35. PLYR
+/*  35. PLYR
 /*-----------------------------------------------------------------------------------*/
 
 .plyr {
@@ -3806,7 +3806,7 @@ ul.dial li:first-child .dial-item-info {
     background: rgba(0, 0, 0, 0.06);
 }
 /*-----------------------------------------------------------------------------------*/
-/*	36. COUNTER
+/*  36. COUNTER
 /*-----------------------------------------------------------------------------------*/
 
 .counter h3 {
@@ -3821,7 +3821,7 @@ ul.dial li:first-child .dial-item-info {
     font-size: 15px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	37. COUNTDOWN
+/*  37. COUNTDOWN
 /*-----------------------------------------------------------------------------------*/
 
 .countdown h3 {
@@ -3836,7 +3836,7 @@ ul.dial li:first-child .dial-item-info {
     margin: 0;
 }
 /*-----------------------------------------------------------------------------------*/
-/* 	38. PRICING
+/*  38. PRICING
 /*-----------------------------------------------------------------------------------*/
 
 .panel.pricing {
@@ -3932,7 +3932,7 @@ ul.dial li:first-child .dial-item-info {
     border: 0;
 }
 /*-----------------------------------------------------------------------------------*/
-/* 	39. TABLES
+/*  39. TABLES
 /*-----------------------------------------------------------------------------------*/
 
 .table th {
@@ -3978,7 +3978,7 @@ ul.dial li:first-child .dial-item-info {
     border-color: 1px solid rgba(0, 0, 0, 0.1);
 }
 /*-----------------------------------------------------------------------------------*/
-/*	40. LIGHTGALLERY
+/*  40. LIGHTGALLERY
 /*-----------------------------------------------------------------------------------*/
 
 .lg-backdrop {
@@ -4030,7 +4030,7 @@ ul.dial li:first-child .dial-item-info {
     margin: 0;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	41. FORMS
+/*  41. FORMS
 /*-----------------------------------------------------------------------------------*/
 
 select {
@@ -4382,7 +4382,7 @@ input[type="checkbox"]:checked + span::after {
     width: calc(100% - 76px) !important;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	42. RATING
+/*  42. RATING
 /*-----------------------------------------------------------------------------------*/
 
 .ratings {
@@ -4425,7 +4425,7 @@ input[type="checkbox"]:checked + span::after {
     content: "\ea1d\ea1d\ea1d\ea1d";
 }
 /*-----------------------------------------------------------------------------------*/
-/*	43. SCROLL ANIMATIONS
+/*  43. SCROLL ANIMATIONS
 /*-----------------------------------------------------------------------------------*/
 
 .code {
@@ -4443,7 +4443,7 @@ input[type="checkbox"]:checked + span::after {
     margin: 0;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	44. SOCIAL ICONS
+/*  44. SOCIAL ICONS
 /*-----------------------------------------------------------------------------------*/
 
 .social {
@@ -5017,7 +5017,7 @@ a.color-s-youko:hover,
     background: #4c9ec6;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	45. FONT ICONS
+/*  45. FONT ICONS
 /*-----------------------------------------------------------------------------------*/
 
 .glyphs.css-mapping {
@@ -5059,11 +5059,11 @@ a.color-s-youko:hover,
 }
 @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
     img.icon-lulu {
-		image-rendering: -webkit-optimize-contrast;
-	}
+        image-rendering: -webkit-optimize-contrast;
+    }
 }
 /*-----------------------------------------------------------------------------------*/
-/*	46. COLORS
+/*  46. COLORS
 /*-----------------------------------------------------------------------------------*/
 
 .bg-white {
@@ -5134,7 +5134,7 @@ a.color-s-youko:hover,
     color: #707070;
 }
 .text-color {
-	 color: #4c98c9;
+     color: #4c98c9;
 }
 .color-blue,
 .list-blue > li:before,
@@ -5437,7 +5437,7 @@ a.color-s-youko:hover,
     border-color: #7bc4e6
 }
 /*-----------------------------------------------------------------------------------*/
-/*	47. OVERLAY
+/*  47. OVERLAY
 /*-----------------------------------------------------------------------------------*/
 
 .overlay {
@@ -5833,7 +5833,7 @@ figure.overlay img {
     background: rgba(0,0,0, 0.7);
 }
 /*-----------------------------------------------------------------------------------*/
-/*	48. COCOEN
+/*  48. COCOEN
 /*-----------------------------------------------------------------------------------*/
 
 .cocoen-drag::before,
@@ -5862,7 +5862,7 @@ figure.overlay img {
     margin-left: -4px;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	49. SHOP
+/*  49. SHOP
 /*-----------------------------------------------------------------------------------*/
 
 .badge {
@@ -5905,7 +5905,7 @@ figure.overlay img {
     position: relative;
 }
 /*-----------------------------------------------------------------------------------*/
-/*	50. PAGE LOADING
+/*  50. PAGE LOADING
 /*-----------------------------------------------------------------------------------*/
 
 .page-loading {
@@ -5974,7 +5974,7 @@ figure.overlay img {
     }
 }
 /*-----------------------------------------------------------------------------------*/
-/*	51. GO TO TOP
+/*  51. GO TO TOP
 /*-----------------------------------------------------------------------------------*/
 
 #scrollUp {
@@ -5996,7 +5996,7 @@ figure.overlay img {
     background: rgba(76, 152, 201, 1);
 }
 /*-----------------------------------------------------------------------------------*/
-/*	52. INVERSE TEXT
+/*  52. INVERSE TEXT
 /*-----------------------------------------------------------------------------------*/
 
 .inverse-text,
@@ -6026,18 +6026,18 @@ figure.overlay img {
     color: #FFF !important
 }
 @media (min-width: 992px) {
-	.inverse-text .navbar-nav > li:not(.active) > a:not(.highlighted) {
-		color: #FFF !important
-	}
-	.inverse-text .navbar-nav > li:not(.active) > a:not(.highlighted):hover,
-	.inverse-text .navbar-nav > li > a:hover {
-		color: #4c98c9 !important
-	}
+    .inverse-text .navbar-nav > li:not(.active) > a:not(.highlighted) {
+        color: #FFF !important
+    }
+    .inverse-text .navbar-nav > li:not(.active) > a:not(.highlighted):hover,
+    .inverse-text .navbar-nav > li > a:hover {
+        color: #4c98c9 !important
+    }
 }
 @media (max-width: 991px) {
-	.inverse-text .navbar-nav > li > a:not(.highlighted) {
-		color: #ccc !important
-	}
+    .inverse-text .navbar-nav > li > a:not(.highlighted) {
+        color: #ccc !important
+    }
 }
 .inverse-text.dark-wrapper,
 .inverse-text.dark-wrapper li,
@@ -6309,47 +6309,47 @@ figure.overlay img {
     background: none
 }
 /*-----------------------------------------------------------------------------------*/
-/*	33. BOX LAYOUT
+/*  33. BOX LAYOUT
 /*-----------------------------------------------------------------------------------*/
-@media (min-width: 1270px) { 
-	.box-layout {
-	    padding: 50px 0;
-	    position: relative;
-	    background: transparent repeat;	    
-	}
-	/* .box-layout.bg1 {
-	    background-image: url(style/images/art/pattern3.jpg);	    
-	}
-	.box-layout.bg2 {
-	    background-image: url(style/images/art/pattern4.jpg);	    
-	} */
-	.box-layout .content-wrapper {
-	    background: #f6f7f8;
-	}
-	.box-layout .content-wrapper,
-	.box-layout footer {
-	    width: 1270px !important;
-	    margin: 0 auto;
-	}
-	.box-layout .content-wrapper,
-	.box-layout footer {
-	    -webkit-box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.1);
-	            box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.1);
-	}
+@media (min-width: 1270px) {
+    .box-layout {
+        padding: 50px 0;
+        position: relative;
+        background: transparent repeat;
+    }
+    /* .box-layout.bg1 {
+        background-image: url(style/images/art/pattern3.jpg);
+    }
+    .box-layout.bg2 {
+        background-image: url(style/images/art/pattern4.jpg);
+    } */
+    .box-layout .content-wrapper {
+        background: #f6f7f8;
+    }
+    .box-layout .content-wrapper,
+    .box-layout footer {
+        width: 1270px !important;
+        margin: 0 auto;
+    }
+    .box-layout .content-wrapper,
+    .box-layout footer {
+        -webkit-box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.1);
+                box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.1);
+    }
 }
 /*-----------------------------------------------------------------------------------*/
-/*	53. RESPONSIVE
+/*  53. RESPONSIVE
 /*-----------------------------------------------------------------------------------*/
 @media (min-width: 1200px) {
-	.rev_slider_wrapper.fullscreen-container {
-	    min-height: 500px;
-	}
-	.rev_slider_wrapper.fullwidth-container {
-	    min-height: 500px;
-	}
-	.rev_slider_wrapper.autowidth-container {
-	    min-height: 500px;
-	}
+    .rev_slider_wrapper.fullscreen-container {
+        min-height: 500px;
+    }
+    .rev_slider_wrapper.fullwidth-container {
+        min-height: 500px;
+    }
+    .rev_slider_wrapper.autowidth-container {
+        min-height: 500px;
+    }
 }
 @media (max-width: 1199px) {
     body:not(.onepage) .banner--stick {
@@ -6372,10 +6372,10 @@ figure.overlay img {
     }
     .var-slick img {
         height: 450px !important;
-    }		    
-	.var-slick.vh100 img {
-		height: calc(100vh - 181px) !important;
-	}
+    }
+    .var-slick.vh100 img {
+        height: calc(100vh - 181px) !important;
+    }
 }
 @media (min-width: 992px) {
     .navbar .navbar-collapse {
@@ -6437,8 +6437,8 @@ figure.overlay img {
         background: none;
     }
     .navbar:not(.fixed) .nav-wrapper .bordered {
-	    border-top: 1px solid rgba(0, 0, 0, 0.1);
-	    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
     .navbar .navbar-header {
         height: auto;
@@ -6468,7 +6468,7 @@ figure.overlay img {
     }
     .navbar .navbar-other .nav > li {
         margin: 0 0 0 20px;
-    }   
+    }
     .navbar.inverse-text:not(.fixed) .navbar-other .badge-s {
         background: #FFF !important;
         color: #404040 !important;
@@ -6595,16 +6595,16 @@ figure.overlay img {
         left: 0;
         width: 100%;
         height: 100%;
-		pointer-events: none;
+        pointer-events: none;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-		-webkit-box-align: center;
-		    -ms-flex-align: center;
-		        align-items: center;
-		-webkit-box-pack: center;
-		    -ms-flex-pack: center;
-		        justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
     }
     .navbar.center:not(.wide) .flex-it .align-center > * {
         pointer-events: all;
@@ -6618,15 +6618,15 @@ figure.overlay img {
         padding-left: 15px;
     }
     .navbar .navbar-nav > li > a.highlighted {
-	    color: #4c98c9
-	}   
-	.navbar.alt-hover:not(.fixed) .navbar-nav > li > a:focus,
-	.navbar.alt-hover:not(.fixed) .nav > li > a:hover,
-	.navbar.alt-hover:not(.fixed) .nav > li.active > a,
-	.navbar.alt-hover:not(.fixed) .navbar-other a.nav-link:hover,
-	.navbar.alt-hover:not(.fixed) .navbar-nav > li > a.highlighted {
-	    color: #202020 !important
-	}
+        color: #4c98c9
+    }
+    .navbar.alt-hover:not(.fixed) .navbar-nav > li > a:focus,
+    .navbar.alt-hover:not(.fixed) .nav > li > a:hover,
+    .navbar.alt-hover:not(.fixed) .nav > li.active > a,
+    .navbar.alt-hover:not(.fixed) .navbar-other a.nav-link:hover,
+    .navbar.alt-hover:not(.fixed) .navbar-nav > li > a.highlighted {
+        color: #202020 !important
+    }
 }
 @media (max-width: 991px) {
     .navbar:not(.banner--clone) .navbar-collapse {
@@ -6685,14 +6685,14 @@ figure.overlay img {
         vertical-align: middle;
     }
     .navbar .navbar-header .navbar-other {
-        display: table-cell;        
+        display: table-cell;
         display: none;
         vertical-align: middle;
         width: 97px;
         padding-top: 4px;
     }
     .navbar.extended.center .header-top {
-	    display: none;
+        display: none;
     }
     .navbar .navbar-header .navbar-other .nav > li {
         display: table-cell;
@@ -6757,7 +6757,7 @@ figure.overlay img {
         height: 400px;
     }
     .map-full {
-	    height: 400px;
+        height: 400px;
     }
     .row-eq-height-map {
         display: block;
@@ -6830,12 +6830,12 @@ figure.overlay img {
         -webkit-box-flex: 1;
                 flex: 1 1 auto;
     }
-	.var-slick img {
-		height: 400px !important;
-	}		    
-	.var-slick.vh100 img {
-		height: calc(100vh - 181px) !important;
-	}
+    .var-slick img {
+        height: 400px !important;
+    }
+    .var-slick.vh100 img {
+        height: calc(100vh - 181px) !important;
+    }
 }
 @media (max-width: 767px) {
     .text-center-xs {
@@ -7108,75 +7108,75 @@ figure.overlay img {
     }
     .box.bg-opacity,
     .box.bg-opacity-dark {
-		padding: 30px;
-	}
-	.box.bg-opacity .rev_slider_container,
-	.box.bg-opacity-dark .rev_slider_container {
-	    margin: -30px -30px 0 -30px;
-	}
-	.var-slick img {
-		height: 250px !important;
-	}		    
-	.var-slick.vh100 img {
-		height: calc(100vh - 181px) !important;
-	}
+        padding: 30px;
+    }
+    .box.bg-opacity .rev_slider_container,
+    .box.bg-opacity-dark .rev_slider_container {
+        margin: -30px -30px 0 -30px;
+    }
+    .var-slick img {
+        height: 250px !important;
+    }
+    .var-slick.vh100 img {
+        height: calc(100vh - 181px) !important;
+    }
 }
 @media (min-width: 1450px) {
-	.split-layout .inner {
-		padding: 90px 100px;
-	}
+    .split-layout .inner {
+        padding: 90px 100px;
+    }
 }
 @media (min-width: 1281px) {
-	.split-layout .content-wrapper {
-		position:relative;
-		width:100%;
-	}
-	.split-layout .content-left {
-		width:40%;
-		height: 100vh;
-		position: fixed;
-		max-height: 100vh;
-		overflow: hidden;
-	}
-	.split-layout .content-right {
-		margin-left: 40%;
-	}
-	.split-layout .site-name {
-		bottom: 100px;
-	}	
-	main {
-	    width: 100%;
-	    height: calc(100vh - 445px);
-	    margin: 0;
-	}
-	main.full {
-		height: 100vh;
-	}
-	.vm-text {
-	    display: table;
-	    width: 100%;
-	    height: 100%;
-	}
-	.vm-text .vm-text-inner {
-	    display: table-cell;
-	    vertical-align: middle;
-	}
+    .split-layout .content-wrapper {
+        position:relative;
+        width:100%;
+    }
+    .split-layout .content-left {
+        width:40%;
+        height: 100vh;
+        position: fixed;
+        max-height: 100vh;
+        overflow: hidden;
+    }
+    .split-layout .content-right {
+        margin-left: 40%;
+    }
+    .split-layout .site-name {
+        bottom: 100px;
+    }
+    main {
+        width: 100%;
+        height: calc(100vh - 445px);
+        margin: 0;
+    }
+    main.full {
+        height: 100vh;
+    }
+    .vm-text {
+        display: table;
+        width: 100%;
+        height: 100%;
+    }
+    .vm-text .vm-text-inner {
+        display: table-cell;
+        vertical-align: middle;
+    }
 }
 @media (max-width: 1280px) {
-	.split-layout .content-left {
-		height: 500px;
-		position: relative;
-	}
-	.split-layout .site-name {
-		height: 100%;
-		position: relative;
-		display: table;
-	}
-	.split-layout .site-name-inner {
-		display: table-cell;
-		vertical-align: middle;
-	}
-	.split-layout [class*="col-"][class*="lp"] {
+    .split-layout .content-left {
+        height: 500px;
+        position: relative;
+    }
+    .split-layout .site-name {
+        height: 100%;
+        position: relative;
+        display: table;
+    }
+    .split-layout .site-name-inner {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .split-layout [class*="col-"][class*="lp"] {
         padding-left: 15px;
     }
     .split-layout [class*="col-"][class*="rp"] {
@@ -7184,15 +7184,15 @@ figure.overlay img {
     }
 }
 @media (max-width: 767px) {
-	.split-layout .content-left {
-		height: 300px;
-	}
-	.split-layout .inner {
-		padding: 60px 20px;
-	}
+    .split-layout .content-left {
+        height: 300px;
+    }
+    .split-layout .inner {
+        padding: 60px 20px;
+    }
 }
 /*-----------------------------------------------------------------------------------*/
-/*	STYLE TOGGLE
+/*  STYLE TOGGLE
 /*-----------------------------------------------------------------------------------*/
 
 .style-toggle-wrapper {

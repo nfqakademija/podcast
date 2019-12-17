@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     $(".lazy").recliner({
         attrib: "data-src", // selector for attribute containing the media src
         throttle: 300,      // millisecond interval at which to process events
