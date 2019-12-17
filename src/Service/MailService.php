@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Service;
 
 use App\Entity\User;
@@ -115,7 +114,7 @@ class MailService
     {
         $matchingUsers = $this->userRepository->getAllUsersWithTagsAndDailyPodcasts();
         $today = date("Y-m-d");
-        $subjectLine = self::NEWSLETTER_SUBJECT_LINE .' ' . $today;
+        $subjectLine = self::NEWSLETTER_SUBJECT_LINE . ' ' . $today;
 
         if ($matchingUsers) {
             foreach ($matchingUsers as $user) {
@@ -151,7 +150,7 @@ class MailService
         $subscribers = $this->subscriberRepository->findBy(['isConfirmed' => true]);
         $newPodcasts = $this->podcastRepository->findAllTodaysNewPodcasts();
         $today = date("Y-m-d");
-        $subjectLine = self::NEWSLETTER_SUBJECT_LINE .' ' . $today;
+        $subjectLine = self::NEWSLETTER_SUBJECT_LINE . ' ' . $today;
 
         if ($newPodcasts && $subscribers) {
             foreach ($subscribers as $subscriber) {

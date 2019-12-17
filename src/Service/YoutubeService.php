@@ -1,13 +1,11 @@
 <?php
 
-
 namespace App\Service;
 
 use App\Entity\Podcast;
 use App\Entity\Source;
 use App\Entity\Tag;
 use App\Repository\PodcastRepository;
-
 use App\Repository\SourceRepository;
 use App\Repository\TagRepository;
 use DateTime;
@@ -89,8 +87,8 @@ class YoutubeService
         /** @var Source $source */
         foreach ($listOfSources as $source) {
             $playlist = false;
-            if (preg_match('~playlist\?list=~', $source->getUrl()??'')) {
-                $content = $this->getDataFromPlaylist($source->getUrl()??'');
+            if (preg_match('~playlist\?list=~', $source->getUrl() ?? '')) {
+                $content = $this->getDataFromPlaylist($source->getUrl() ?? '');
                 $playlist = true;
             } else {
                 $content = $this->getDataFromChannel($source);
@@ -107,8 +105,8 @@ class YoutubeService
                             continue;
                         }
                     }
-                    if (($video['snippet']['liveBroadcastContent']??'none') == 'none'
-                        && !$this->isVideoExists($videoId??$video['id']['videoId'])
+                    if (($video['snippet']['liveBroadcastContent'] ?? 'none') == 'none'
+                        && !$this->isVideoExists($videoId ?? $video['id']['videoId'])
                     ) {
                         $podcast = new Podcast();
 
@@ -118,7 +116,7 @@ class YoutubeService
                         $podcast->setTitle($video['snippet']['title']);
                         $podcast->setImage(end($video['snippet']['thumbnails'])['url']);
                         $podcast->setCreatedAt(new DateTime('now'));
-                        $podcast->setVideo($videoId??$video['id']['videoId']);
+                        $podcast->setVideo($videoId ?? $video['id']['videoId']);
                         $podcast->setType(Podcast::TYPES['TYPE_VIDEO']);
 
                         $this->addTags($podcast, $tags);
@@ -207,7 +205,8 @@ class YoutubeService
     {
         if (empty($this->podcastRepository->findOneBy([
             'video' => $videoId
-        ]))) {
+            ]))
+        ) {
             return false;
         } else {
             return true;
@@ -216,15 +215,15 @@ class YoutubeService
 
     private function getChannelId(Source $source): string
     {
-        $sourceExploded = explode('/', $source->getUrl()??'');
+        $sourceExploded = explode('/', $source->getUrl() ?? '');
         $channelId = end($sourceExploded);
         if (!$channelId) {
             return '';
         }
-        if ($sourceExploded[count($sourceExploded)-2] === 'user') {
+        if ($sourceExploded[count($sourceExploded) - 2] === 'user') {
             $channelId =  $this->getChannelIdByUser($channelId);
             if (!empty($channelId)) {
-                $source->setUrl('https://www.youtube.com/channel/'.$channelId);
+                $source->setUrl('https://www.youtube.com/channel/' . $channelId);
                 $this->entityManager->persist($source);
                 $this->entityManager->flush();
 
