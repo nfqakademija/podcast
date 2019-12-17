@@ -103,7 +103,7 @@ class CrawlerService
                 $podcasts[$source->getName()] =
                     $this->createNewPodcastsFromCrawler($html, $source, $existingPodcasts);
             } catch (Exception $e) {
-                $error = 'Something wrong with '.$source->getName() .': '.$e->getMessage();
+                $error = 'Something wrong with ' . $source->getName() . ': ' . $e->getMessage();
                 $this->logger->error($error);
                 $this->mailService->sendCrawlerFailNotificationToAdmins($source->getName(), $error);
             }
@@ -194,7 +194,8 @@ class CrawlerService
         foreach ($existingPodcasts as $existingPodcast) {
             if ($existingPodcast->getTitle() === $newPodcast->getTitle() &&
                 $existingPodcast->getPublishedAt()->format('Y-m-d')
-                === $newPodcast->getPublishedAt()->format('Y-m-d')) {
+                === $newPodcast->getPublishedAt()->format('Y-m-d')
+            ) {
                 return false;
             }
         }
@@ -223,7 +224,7 @@ class CrawlerService
         $dateArray = date_parse($date);
 
         if ($dateArray['year'] !== false && $dateArray['month'] !== false && $dateArray['day'] !== false) {
-            $newDate = new DateTime($dateArray['year']. '/'.$dateArray['month']. '/' . $dateArray['day']);
+            $newDate = new DateTime($dateArray['year'] . '/' . $dateArray['month'] . '/' . $dateArray['day']);
         } else {
             $newDate = (new DateTime(date('Y-m-d')));
         }

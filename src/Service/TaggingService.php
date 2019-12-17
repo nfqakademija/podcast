@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Service;
 
 use App\Entity\Podcast;
@@ -55,7 +54,8 @@ class TaggingService
             }
 
             if (stripos($podcast->getTitle(), $tagName) !== false
-                || stripos($podcast->getDescription(), $tagName) ==! false) {
+                || stripos($podcast->getDescription(), $tagName) == ! false
+            ) {
                 $podcastTags[] = $tag;
             }
         }
